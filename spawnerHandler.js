@@ -7,19 +7,23 @@ module.exports = {
 
         if (spawn) {
 
-            var minimumNumberOfHarvesters = 2;
-            var minimumNumberOfCarriers = 2;
+            var minimumNumberOfHarvesters = 4;
+            var minimumNumberOfCarriers = 3;
             var minimumNumberOfDistributors = 2;
             var minimumNumberOfUpgraders = 3;
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfWallRepairers = 1;
 
-            var numberOfSources = room.find(FIND_SOURCES);
+            var numberOfSources = room.find(FIND_SOURCES).length;
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room
             && c.getActiveBodyParts(WORK) >= 5);
 
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
+            }
+
+            if (!room.storage) {
+                minimumNumberOfCarriers = 0;
             }
 
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room);

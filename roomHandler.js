@@ -9,9 +9,9 @@ module.exports = {
         if (underAttack) {
             defenceHandler.run(room, allyUsername);
         }
-        else {
+        //else {
             spawnerHandler.run(room);
             creepHandler.run(room);
-        }
+        //}
     }
 };
