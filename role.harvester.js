@@ -33,13 +33,9 @@ module.exports = {
         }
         else {
 
-            //if no source in memory find one
-            if (!creep.memory.source) {
                 var source = this.findSource(room, creep);
-                creep.memory.source = source;
-            }
 
-            if (creep.memory.source) {
+            if (source) {
                 if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(source);
                 }
@@ -75,9 +71,6 @@ module.exports = {
             else {
                 return false;
             }
-        }
-        else {
-            creep.moveTo(creep.memory.source.id)
         }
     }
 };
