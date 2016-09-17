@@ -8,11 +8,11 @@ module.exports = {
         if (spawn) {
 
             var minimumNumberOfHarvesters = 4;
-            var minimumNumberOfCarriers = 3;
-            var minimumNumberOfDistributors = 2;
+            var minimumNumberOfCarriers = 2;
+            var minimumNumberOfDistributors = 1;
             var minimumNumberOfUpgraders = 3;
             var minimumNumberOfBuilders = 1;
-            var minimumNumberOfWallRepairers = 1;
+            var minimumNumberOfDefenceManagers = 1;
 
             var numberOfSources = room.find(FIND_SOURCES).length;
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room
@@ -31,7 +31,7 @@ module.exports = {
             var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room);
             var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.room == room);
             var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room);
-            var numberOfWallRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room);
+            var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -61,7 +61,7 @@ module.exports = {
                 else if (numberOfBuilders < minimumNumberOfBuilders) {
                     name = spawn.createCustomCreep(room, energy, 'builder', amountToSave);
                 }
-                else if (numberOfWallRepairers < minimumNumberOfWallRepairers) {
+                else if (minimumNumberOfDefenceManagers < minimumNumberOfDefenceManagers) {
                     name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
                 }
 
