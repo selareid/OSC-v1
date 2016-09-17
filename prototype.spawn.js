@@ -16,7 +16,7 @@ module.exports = function () {
                 for (let i = 0; i < numberOfParts; i++) {
                     body.push(WORK);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'distributor') {
                 numberOfParts = Math.floor(((energy - (energy * amountToSave))-100) / 150);
@@ -26,7 +26,7 @@ module.exports = function () {
                     body.push(CARRY);
                     body.push(MOVE);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'carrier') {
                 numberOfParts = Math.floor(((energy - (energy * amountToSave))-100) / 150);
@@ -36,7 +36,7 @@ module.exports = function () {
                     body.push(CARRY);
                     body.push(MOVE);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'upgrader') {
                 numberOfParts = Math.floor(((energy - (energy * amountToSave))-50) / 100);
@@ -45,7 +45,7 @@ module.exports = function () {
                     body.push(WORK);
                     body.push(CARRY);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'builder') {
                 numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
@@ -55,7 +55,7 @@ module.exports = function () {
                     body.push(CARRY);
                     body.push(MOVE);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'defenceManager') {
                 numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
@@ -65,7 +65,7 @@ module.exports = function () {
                     body.push(CARRY);
                     body.push(MOVE);
                 }
-                return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else {
                 return 'SPAWNING ERROR';
