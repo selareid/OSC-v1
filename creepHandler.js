@@ -18,7 +18,7 @@ module.exports = {
                 roleCarrier.run(room, creep);
             }
             else {
-                creep.say('', true);
+                creep.say('ERROR!!!', true);
                 console.log('Unknown Creep Role ' + creep.memory.role);
             }
 

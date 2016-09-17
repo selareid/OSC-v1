@@ -9,7 +9,7 @@ module.exports = {
 
         if (creep.memory.working == true) {
 
-            var storage = room.room.storage;
+            var storage = room.storage;
 
             if (storage) {
                 if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -17,6 +17,7 @@ module.exports = {
                 }
             }
             else {
+                creep.say('ERROR!!!', true);
                 console.log('Creep ' + creep + ' could not find structure storage in room ' + room);
             }
         }
