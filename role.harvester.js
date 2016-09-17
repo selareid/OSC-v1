@@ -57,9 +57,7 @@ module.exports = {
 
         for (let harvesterName in harvesters) {
             let harvester = Game.creeps[harvesterName];
-            if (harvester.memory.source) {
-                takenSources.push(creep.memory.source);
-            }
+                takenSources.push(harvester.memory.source);
         }
 
         for (let source in sourcesInRoom) {
