@@ -12,9 +12,9 @@ module.exports = {
             let creep = Game.creeps[name];
 
             if (!creep.memory.room) {
-                creep.memory.room = Game.rooms[creep.room];
+                creep.memory.room = Game.rooms[creep.room.name];
             }
-            else if (creep.memory.room = room) {
+            else if (creep.memory.room == room) {
 
                 if (creep.memory.role == 'harvester') {
                     roleHarvester.run(room, creep);
