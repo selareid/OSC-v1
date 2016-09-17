@@ -49,8 +49,8 @@
       <file leaf-file-name="spawnerHandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spawnerHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -167,12 +167,12 @@
       <workItem from="1473990456580" duration="11859000" />
       <workItem from="1474055068851" duration="17752000" />
       <workItem from="1474083590378" duration="9115000" />
-      <workItem from="1474093257715" duration="3482000" />
+      <workItem from="1474093257715" duration="3550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42208000" />
+    <option name="totallyTimeSpent" value="42276000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="500" y="172" width="1418" height="830" extended-state="0" />
@@ -355,8 +355,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spawnerHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
           <folding />
         </state>
       </provider>

@@ -11,8 +11,8 @@ module.exports = {
             var minimumNumberOfCarriers = 4;
             var minimumNumberOfDistributors = 2;
             var minimumNumberOfUpgraders = 3;
-            var minimumNumberOfBuilders = 1;
-            var minimumNumberOfDefenceManagers = 1;
+            var minimumNumberOfBuilders = 2;
+            var minimumNumberOfDefenceManagers = 2;
 
             var numberOfSources = room.find(FIND_SOURCES).length;
 
