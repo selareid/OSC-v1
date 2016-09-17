@@ -48,7 +48,7 @@ module.exports = {
 
     findSource: function (room, creep) {
 
-        var sourcesInRoom = room.find(FIND_SOURCES);
+        var sourcesInRoom = room.find(FIND_SOURCES_ACTIVE);
         var sourcesNotAvailable = [];
 
         for (let source_it in sourcesInRoom) {
@@ -61,7 +61,7 @@ module.exports = {
             }
         }
 
-        return creep.findClosestByRange(FIND_SOURCES);
+        return creep.findClosestByRange(FIND_SOURCES_ACTIVE);
 
     },
 
