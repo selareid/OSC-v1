@@ -53,7 +53,7 @@ module.exports = {
         var foundSource;
         var sourcesInRoom = room.find(FIND_SOURCES);
         var takenSources = [];
-        var harvestersOfRoom = _.filter(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room);
+        var harvestersOfRoom = _.filter(Game.creeps, (c) => c.memory.role == 'harvester');
 
         for (let harvester in harvestersOfRoom) {
             if (harvester.memory.source) {
