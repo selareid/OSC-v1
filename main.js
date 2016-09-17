@@ -13,8 +13,8 @@ module.exports.loop = function () {
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
 
-        if (!creep.memory.room.name) {
-            creep.memory.room.name = creep.room.name;
+        if (!creep.memory.room) {
+            creep.memory.room = creep.room.name;
         }
     }
 
