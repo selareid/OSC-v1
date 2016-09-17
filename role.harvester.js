@@ -1,48 +1,55 @@
+var roleEmergencyHarvester = require ('role.emergencyHarvester');
+
 module.exports = {
     run: function (room, creep) {
+        var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
+        if (numberOfDistributors <= 0) {
 
-        //changes state
-        if (creep.memory.working == true && creep.carry.energy == 0) {
-            creep.memory.working = false;
         }
-        else if (creep.memory.working == false && creep.carry.energy >= creep.carryCapacity) {
-            creep.memory.working = true;
-        }
+        else {
+            //changes state
+            if (creep.memory.working == true && creep.carry.energy == 0) {
+                creep.memory.working = false;
+            }
+            else if (creep.memory.working == false && creep.carry.energy >= creep.carryCapacity) {
+                creep.memory.working = true;
+            }
 
-        // if working if true do stuff or else mine
-        if (creep.memory.working == true) {
-            var doThis = this.checkContainerBuilt(room, creep);
+            // if working if true do stuff or else mine
+            if (creep.memory.working == true) {
+                var doThis = this.checkContainerBuilt(room, creep);
 
-            //if container found put transfer energy to container if container full drop energy
-            if (doThis) {
-                var container = creep.findInRange((FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                    && s.store < s.storeCapacity
-                }), 1)[0];
+                //if container found put transfer energy to container if container full drop energy
+                if (doThis) {
+                    var container = creep.findInRange((FIND_STRUCTURES, {
+                        filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                        && s.store < s.storeCapacity
+                    }), 1)[0];
 
-                if (container) {
-                    creep.transfer(container, RESOURCE_ENERGY);
+                    if (container) {
+                        creep.transfer(container, RESOURCE_ENERGY);
+                    }
+                    else {
+                        creep.drop(RESOURCE_ENERGY);
+                    }
                 }
                 else {
-                    creep.drop(RESOURCE_ENERGY);
+                    if (room.createConstructionSite(creep.pos) != 0) {
+                        creep.drop(RESOURCE_ENERGY);
+                    }
                 }
             }
             else {
-                if (room.createConstructionSite(creep.pos) != 0) {
-                    creep.drop(RESOURCE_ENERGY);
-                }
-            }
-        }
-        else {
 
                 var source = this.findSource(room, creep);
 
-            if (source) {
-                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
+                if (source) {
+                    if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(source);
+                    }
                 }
-            }
 
+            }
         }
     },
 
@@ -74,5 +81,6 @@ module.exports = {
                 return false;
             }
         }
+
     }
 };
