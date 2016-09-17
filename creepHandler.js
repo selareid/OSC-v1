@@ -11,10 +11,7 @@ module.exports = {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
 
-            if (!creep.memory.room.name) {
-                creep.memory.room.name = creep.room.name;
-            }
-            else if (creep.memory.room == room) {
+            if (creep.memory.room == room) {
 
                 if (creep.memory.role == 'harvester') {
                     roleHarvester.run(room, creep);

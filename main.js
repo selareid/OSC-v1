@@ -10,6 +10,14 @@ module.exports.loop = function () {
         }
     }
 
+    for (let name in Game.creeps) {
+        let creep = Game.creeps[name];
+
+        if (!creep.memory.room.name) {
+            creep.memory.room.name = creep.room.name;
+        }
+    }
+
     for (let room_it in Game.rooms) {
         var room = Game.rooms[room_it];
         var spawn = room.find(FIND_MY_SPAWNS)[0];

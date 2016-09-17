@@ -15,6 +15,7 @@ module.exports = {
             var minimumNumberOfDefenceManagers = 1;
 
             var numberOfSources = room.find(FIND_SOURCES).length;
+
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room.name == room.name
             && c.getActiveBodyParts(WORK) >= 5);
 
