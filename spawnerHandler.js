@@ -31,7 +31,7 @@ module.exports = {
             var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room);
             var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.room == room);
             var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room);
-            var numberOfWallRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'wallRepairer' && c.memory.room == room);
+            var numberOfWallRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -62,7 +62,7 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, 'builder', amountToSave);
                 }
                 else if (numberOfWallRepairers < minimumNumberOfWallRepairers) {
-                    name = spawn.createCustomCreep(room, energy, 'wallRepairer', amountToSave);
+                    name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
                 }
 
                 if (name != undefined && -4 && -6) {

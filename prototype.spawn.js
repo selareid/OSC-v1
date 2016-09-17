@@ -57,7 +57,7 @@ module.exports = function () {
                 }
                 return this.createCreep(body, undefined, {role: roleName, room: room, working: false});
             }
-            else if (roleName == 'wallRepairer') {
+            else if (roleName == 'defenceManager') {
                 numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
 
                 for (let i = 0; i < numberOfParts; i++) {

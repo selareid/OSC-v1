@@ -32,7 +32,7 @@ module.exports = {
                     }
                     else {
                         creep.say('BORED', true);
-                        console.log('');
+                        console.log('')
                     }
                 }
             }
