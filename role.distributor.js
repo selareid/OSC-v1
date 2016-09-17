@@ -59,7 +59,7 @@ module.exports = {
     },
 
     findContainer: function (room, creep) {
-        var container = creep.findClosestByRange(FIND_STRUCTURES, {
+        var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (s) => s.structureType == STRUCTURE_CONTAINER
             && s.store > 0
         });
@@ -73,12 +73,12 @@ module.exports = {
     },
 
     findSpawn: function (room, creep) {
-        var spawn = creep.findClosestByRange(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
+        var spawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
         return spawn;
     },
 
     findExtension: function (room, creep) {
-        var extension = creep.findClosestByRange(FIND_MY_STRUCTURES, {
+        var extension = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
             filter: (s) => s.structureType == STRUCTURE_EXTENSION
             && s.energy < s.energyCapacity
         });

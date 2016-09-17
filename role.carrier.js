@@ -42,7 +42,7 @@ module.exports = {
     },
 
     findDroppedEnergy: function (room, creep) {
-        var droppedEnergy = creep.find(FIND_DROPPED_ENERGY);
+        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
         if (droppedEnergy) {
             return droppedEnergy;
         }
@@ -53,7 +53,7 @@ module.exports = {
     },
 
     findContainers: function (room, creep) {
-        var container = creep.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER
+        var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER
         && s.store < s.storeCapacity});
         if (container) {
             return container;

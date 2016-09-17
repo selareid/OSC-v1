@@ -46,7 +46,7 @@ module.exports = {
     },
 
     findContainer: function (room, creep) {
-        var container = creep.findClosestByRange(FIND_STRUCTURES, {
+        var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (s) => s.structureType == STRUCTURE_CONTAINER
             && s.store > 0
         });
@@ -64,7 +64,7 @@ module.exports = {
     },
 
     findStructureToBuild: function (room, creep) {
-        var structureToRepair = creep.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
+        var structureToRepair = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
         return structureToRepair;
     }
 };

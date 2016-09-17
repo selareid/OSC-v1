@@ -71,14 +71,14 @@ module.exports = {
             return foundSource;
         }
         else {
-            return creep.findClosestByPath(FIND_SOURCES);
+            return creep.pos.findClosestByPath(FIND_SOURCES);
         }
 
     },
 
     checkContainerBuilt: function (room, creep) {
         if (creep.findInRange(FIND_SOURCES, 1)[0]) {
-            if (creep.findInRange((FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), 1)[0]) {
+            if (creep.pos.findInRange((FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), 1)[0]) {
                 return true;
             }
             else {
