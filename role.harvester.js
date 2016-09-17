@@ -77,7 +77,7 @@ module.exports = {
             }
         }
         else {
-            creep.moveTo(creep.memory.source)
+            creep.moveTo(creep.memory.source.id)
         }
     }
 };
