@@ -28,7 +28,9 @@ module.exports = {
                 }
             }
             else {
-                room.createConstructionSite(creep.pos)
+                if (room.createConstructionSite(creep.pos) == -10) {
+                    creep.drop(RESOURCE_ENERGY);
+                }
             }
         }
         else {
