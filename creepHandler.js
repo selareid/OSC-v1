@@ -1,5 +1,6 @@
 var roleHarvester = require ('role.harvester');
 var roleCarrier = require ('role.carrier');
+var roleDistributor = require ('role.distributor');
 
 module.exports = {
     run: function (room) {
@@ -16,6 +17,9 @@ module.exports = {
             }
             else if (creep.memory.role == 'carrier') {
                 roleCarrier.run(room, creep);
+            }
+            else if (creep.memory.role == 'distributor') {
+                roleDistributor.run(room, creep);
             }
             else {
                 creep.say('ERROR!!!', true);
