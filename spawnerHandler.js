@@ -22,7 +22,7 @@ module.exports = {
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
             }
-            
+
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
             }
@@ -34,12 +34,12 @@ module.exports = {
             var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room.name);
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
 
-            console.log('Harvesters ' + numberOfHarvesters);
-            console.log('Carriers ' + numberOfCarriers);
-            console.log('Distributors ' + numberOfDistributors);
-            console.log('Upgraders ' + numberOfUpgraders);
-            console.log('Builders ' + numberOfBuilders);
-            console.log('Defence Managers ' + numberOfDefenceManagers);
+            // console.log('Harvesters ' + numberOfHarvesters);
+            // console.log('Carriers ' + numberOfCarriers);
+            // console.log('Distributors ' + numberOfDistributors);
+            // console.log('Upgraders ' + numberOfUpgraders);
+            // console.log('Builders ' + numberOfBuilders);
+            // console.log('Defence Managers ' + numberOfDefenceManagers);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
