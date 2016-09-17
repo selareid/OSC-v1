@@ -53,7 +53,8 @@ module.exports = {
         var sourcesInRoom = room.find(FIND_SOURCES);
         var sourcesNotAvailable = [];
 
-        for (let source in sourcesInRoom) {
+        for (let source_it in sourcesInRoom) {
+            let source = sourcesInRoom[source_it];
             if (source.pos.findInRange(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester'})[0]) {
                 sourcesNotAvailable.push(source);
             }
