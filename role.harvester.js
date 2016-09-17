@@ -56,7 +56,7 @@ module.exports = {
         var harvesters = _.filter(Game.creeps, (c) => c.memory.role == 'harvester');
 
         for (let harvesterName in harvesters) {
-            let harvester = Game.creeps[harvesterName];
+            let harvester = harvesterName.name;
                 takenSources.push(harvester.memory.source);
         }
 
