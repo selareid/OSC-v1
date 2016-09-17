@@ -11,8 +11,8 @@ module.exports = {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
 
-            if (!creep.memory.room) {
-                creep.memory.room = Game.rooms[creep.room.name];
+            if (!creep.memory.room.name) {
+                creep.memory.room.name = creep.room.name;
             }
             else if (creep.memory.room == room) {
 
