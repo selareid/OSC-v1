@@ -36,6 +36,7 @@ module.exports = {
                 else {
                     creep.say('ERROR!!!', true);
                     console.log('Unknown Creep Role ' + creep.memory.role);
+                    creep.memory.role = 'harvester';
                 }
             }
         }
