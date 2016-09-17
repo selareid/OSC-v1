@@ -53,7 +53,7 @@ module.exports = {
 
         for (let source_it in sourcesInRoom) {
             let source = sourcesInRoom[source_it];
-            if (source.pos.findInRange(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester'})[0]) {
+            if (source.pos.findInRange(FIND_MY_CREEPS, 0, {filter: (c) => c.memory.role == 'harvester'})[0]) {
                 sourcesNotAvailable.push(source);
             }
             else {

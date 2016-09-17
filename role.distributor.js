@@ -40,22 +40,43 @@ module.exports = {
         }
         else {
 
+
+
             var storage = room.storage;
-            if (storage && storage.store[RESOURCE_ENERGY] > 0) {
+            if (storage.store[RESOURCE_ENERGY] > 50) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(storage)
                 }
             }
             else {
-                var container = this.findContainer(room, creep);
-                if (container) {
-                    if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(container)
+                var droppedenergy = this.findDroppedEnergy(room, creep);
+                if (droppedenergy) {
+                    if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedenergy)
+                    }
+                }
+                else {
+                    var container = this.findContainer(room, creep);
+                    if (container) {
+                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(container)
+                        }
                     }
                 }
             }
 
         }
+    },
+
+    findDroppedEnergy: function (room, creep) {
+        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+        if (droppedEnergy) {
+            return droppedEnergy;
+        }
+        else {
+            return undefined;
+        }
+
     },
 
     findContainer: function (room, creep) {
