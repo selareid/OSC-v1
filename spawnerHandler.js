@@ -8,8 +8,8 @@ module.exports = {
         if (spawn) {
 
             var minimumNumberOfHarvesters = 4;
-            var minimumNumberOfCarriers = 2;
-            var minimumNumberOfDistributors = 1;
+            var minimumNumberOfCarriers = 4;
+            var minimumNumberOfDistributors = 2;
             var minimumNumberOfUpgraders = 3;
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfDefenceManagers = 1;
