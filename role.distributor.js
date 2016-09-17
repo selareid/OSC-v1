@@ -41,7 +41,6 @@ module.exports = {
         else {
 
 
-
             var storage = room.storage;
             if (storage.store[RESOURCE_ENERGY] > 50) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -49,17 +48,17 @@ module.exports = {
                 }
             }
             else {
-                var droppedenergy = this.findDroppedEnergy(room, creep);
-                if (droppedenergy) {
-                    if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(droppedenergy)
+                var container = this.findContainer(room, creep);
+                if (container) {
+                    if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(container);
                     }
                 }
                 else {
-                    var container = this.findContainer(room, creep);
-                    if (container) {
-                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+                    var droppedenergy = this.findDroppedEnergy(room, creep);
+                    if (droppedenergy) {
+                        if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(droppedenergy);
                         }
                     }
                 }
@@ -107,7 +106,7 @@ module.exports = {
     },
 
     findTower: function (room) {
-        var tower = _.min(room.find(FIND_MY_STRUCTURES, {filter:{structureType:STRUCTURE_TOWER}}), s.energy < s.energyCapacity);
+        var tower = _.min(room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}), s.energy < s.energyCapacity);
         return tower;
     }
 };
