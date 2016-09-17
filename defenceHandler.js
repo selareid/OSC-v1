@@ -2,7 +2,7 @@ var towerHandler = require('towerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {
-        var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room));
+        var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room, allyUsername));
 
         console.log('Enemy creeps spotted in room ' + room);
         console.log('The creeps are' + hostileCreepsInRoom);

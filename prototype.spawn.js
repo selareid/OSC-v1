@@ -39,7 +39,7 @@ module.exports = function () {
                 return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
             else if (roleName == 'upgrader') {
-                numberOfParts = Math.floor(((energy - (energy * amountToSave))-50) / 100);
+                numberOfParts = Math.floor(((energy - (energy * amountToSave))-50) / 150);
                 body.push(MOVE);
                 for (let i = 0; i < numberOfParts; i++) {
                     body.push(WORK);
