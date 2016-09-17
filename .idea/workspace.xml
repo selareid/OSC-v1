@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="555453cd-a0fd-4ec1-a2aa-5006fbf69908" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/creepHandler.js" afterPath="$PROJECT_DIR$/creepHandler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.harvester.js" afterPath="$PROJECT_DIR$/role.harvester.js" />
     </list>
     <ignored path="NSC.iws" />
@@ -178,12 +177,12 @@
       <workItem from="1473990456580" duration="11859000" />
       <workItem from="1474055068851" duration="17752000" />
       <workItem from="1474083590378" duration="9115000" />
-      <workItem from="1474093257715" duration="837000" />
+      <workItem from="1474093257715" duration="904000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39563000" />
+    <option name="totallyTimeSpent" value="39630000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="500" y="173" width="1418" height="830" extended-state="0" />
