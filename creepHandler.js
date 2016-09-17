@@ -30,7 +30,7 @@ module.exports = {
                     roleBuilder.run(room, creep, percentOfDamageBeforeRepair);
                 }
                 else if (creep.memory.role == 'defenceManager') {
-                    var hitsOfDefence = 300000;
+                    var hitsOfDefence = 30000;
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
                 else {

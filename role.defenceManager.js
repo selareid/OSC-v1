@@ -60,15 +60,15 @@ module.exports = {
     },
 
     findRampart: function (room, hitsOfDefence) {
-        var rampart = _.min(room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence}), s < s.hits);
+        var rampart = room.find(FIND_STRUCTURES,
+            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence});
 
         return rampart;
     },
 
     findWall: function (room, hitsOfDefence) {
-        var wall = _.min(room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence}), s < s.hits);
+        var wall = room.find(FIND_STRUCTURES,
+            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence});
 
         return wall;
     }

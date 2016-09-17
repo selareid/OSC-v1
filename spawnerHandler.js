@@ -52,7 +52,7 @@ module.exports = {
             }
 
 
-            if (spawn.energy >= 300 && (energy - (energy * amountToSave)) >= 300) {
+            if (energy - (energy * amountToSave) >= 300) {
 
                 if (numberOfHarvesters < minimumNumberOfHarvesters) {
                     name = spawn.createCustomCreep(room, energy, 'harvester', amountToSave);
