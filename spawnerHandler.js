@@ -22,7 +22,7 @@ module.exports = {
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
             }
-
+            
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
             }
