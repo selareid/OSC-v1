@@ -50,28 +50,19 @@ module.exports = {
 
     findSource: function (room, creep) {
 
-        var foundSource;
         var sourcesInRoom = room.find(FIND_SOURCES);
-        var takenSources = [];
-        var harvesters = _.filter(Game.creeps, (c) => c.memory.role == 'harvester');
-
-        for (let harvesterName in harvesters) {
-            let harvester = harvesterName.name;
-                takenSources.push(harvester.memory.source);
-        }
+        var sourcesNotAvailable = [];
 
         for (let source in sourcesInRoom) {
-            if (!takenSources.includes(source)) {
-                foundSource = source;
+            if (source.pos.findInRange(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester'})[0]) {
+                sourcesNotAvailable.push(source);
+            }
+            else {
+                return source;
             }
         }
 
-        if (foundSource) {
-            return foundSource;
-        }
-        else {
-            return creep.pos.findClosestByPath(FIND_SOURCES);
-        }
+        return creep.findClosestByRange(FIND_SOURCES);
 
     },
 
