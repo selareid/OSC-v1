@@ -1,11 +1,14 @@
 var roleHarvester = require ('role.harvester');
 var roleCarrier = require ('role.carrier');
 var roleDistributor = require ('role.distributor');
+var roleUpgrader = require ('role.upgrader');
 
 module.exports = {
     run: function (room) {
 
-        for (let name in Game.creeps) {
+        var creepsInRoom = _.filter(Game.creeps, (c) => c.memory.room == room)
+
+        for (let name in creepsInRoom) {
             let creep = Game.creeps[name];
 
             if (!creep.memory.room) {
