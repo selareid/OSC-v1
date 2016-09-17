@@ -13,9 +13,9 @@ module.exports = {
         Game.notify('Prepare to die future self');
 
 
-        var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+        var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
-        for (let tower in towers) {
+        for (let tower of towers) {
             towerHandler.run(tower, allyUsername);
         }
 
