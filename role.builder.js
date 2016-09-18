@@ -11,12 +11,14 @@ module.exports = {
         if (creep.memory.working == true) {
             var structureToRepair = this.findStructureToRepair(room, percentOfDamageBeforeRepair);
             if (structureToRepair) {
+                creep.say('REPAIR!', true);
                 if (creep.repair(structureToRepair) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(structureToRepair);
                 }
             }
             else {
                 var structureToBuild = this.findStructureToBuild(room, creep);
+                creep.say('BUILD!', true);
                 if (structureToBuild) {
                     if (creep.build(structureToBuild) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(structureToBuild);
