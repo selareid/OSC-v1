@@ -72,7 +72,7 @@ for(let structure in structures) {
         lowestHits = structure.hits;
     }
     
-});
+};
         
         return structureToRepair;
     },
