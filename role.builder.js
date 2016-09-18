@@ -66,9 +66,9 @@ module.exports = {
         && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART});
         
         var lowest;
-        var lowestHits = Number.POSITIVE_INFINITY;
+        var lowestHits = 999999999;
 
-for(let structure in structures) {
+for(let structure of structures) {
 
     if (structure.hits < lowest) {
         lowest = structure;
