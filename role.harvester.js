@@ -42,9 +42,12 @@ module.exports = {
             else {
 
                 var source = this.findSource(room, creep);
-
+                
+                creep.say('MINE!!', true);
+                
                 if (source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                        creep.say('M2M', true);
                         creep.moveTo(source);
                     }
                 }
