@@ -74,7 +74,7 @@ for(let structure in structures) {
     
 };
         
-        return structureToRepair;
+        return lowest;
     },
 
     findStructureToBuild: function (room, creep) {
