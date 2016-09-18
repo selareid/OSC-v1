@@ -63,13 +63,13 @@ module.exports = {
         && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART});
         
         var lowest;
-        var lowest.hits = Number.POSITIVE_INFINITY;
+        var lowestHits = Number.POSITIVE_INFINITY;
 
 for(let structure in structures) {
 
     if (structure.hits < lowest) {
         lowest = structure;
-        lowest.hits = structure.hits;
+        lowestHits = structure.hits;
     }
     
 });
