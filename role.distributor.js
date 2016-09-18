@@ -1,3 +1,5 @@
+var roleCarrier = require ('role.carrier');
+
 module.exports = {
     run: function (room, creep) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
@@ -33,6 +35,7 @@ module.exports = {
                     else {
                         creep.say('BORED', true);
                         console.log('')
+                        roleCarrier.run(room, creep);
                     }
                 }
             }
