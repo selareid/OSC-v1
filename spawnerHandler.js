@@ -73,7 +73,7 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
                 }
 
-                if (name != undefined) {
+                if (name) {
                     console.log("Creating Creep " + name);
                 }
 
