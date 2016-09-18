@@ -62,7 +62,7 @@ module.exports = {
     },
 
     findStructureToRepair: function (room, percentOfDamageBeforeRepair) {
-        var structures = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.hits < (s.hitsMax*percentOfDamageBeforeRepair)
+        var structures = room.find(FIND_STRUCTURES, {filter: (s) => s.hits < (s.hitsMax*percentOfDamageBeforeRepair)
         && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART});
         
         var lowest;
