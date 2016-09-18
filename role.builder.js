@@ -27,7 +27,8 @@ module.exports = {
             }
         }
         else {
-
+            
+            creep.say('ENERGY!!', true);
             var storage = room.storage;
 
                 if (storage.store[RESOURCE_ENERGY] > 0) {
