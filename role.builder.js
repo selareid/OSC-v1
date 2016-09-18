@@ -9,7 +9,7 @@ module.exports = {
 
 
         if (creep.memory.working == true) {
-            var structureToRepair = this.findStructureToRepair(room, percentOfDamageBeforeRepair);
+            var structureToRepair = this.findStructureToRepair(room, creep, percentOfDamageBeforeRepair);
             if (structureToRepair) {
                 creep.say('REPAIR!', true);
                 if (creep.repair(structureToRepair) == ERR_NOT_IN_RANGE) {
@@ -61,23 +61,10 @@ module.exports = {
         }
     },
 
-    findStructureToRepair: function (room, percentOfDamageBeforeRepair) {
-        var structures = room.find(FIND_STRUCTURES, {filter: (s) => s.hits < (s.hitsMax*percentOfDamageBeforeRepair)
+    findStructureToRepair: function (room, creep, percentOfDamageBeforeRepair) {
+        var structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.hits < s.hitsMax
         && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART});
-        
-        var lowest;
-        var lowestHits = 999999999;
-
-for(let structure of structures) {
-
-    if (structure.hits < lowest) {
-        lowest = structure;
-        lowestHits = structure.hits;
-    }
-    
-};
-        
-        return lowest;
+        return structure;
     },
 
     findStructureToBuild: function (room, creep) {
