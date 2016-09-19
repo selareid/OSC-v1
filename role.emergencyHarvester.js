@@ -1,6 +1,6 @@
 module.exports = {
     run: function (room, creep) {
-        var spawn = creep.find(FIND_MY_SPAWNS)[0];
+        var spawn = room.find(FIND_MY_SPAWNS)[0];
 
 
         if (creep.memory.working == true && creep.carry.energy == 0) {
