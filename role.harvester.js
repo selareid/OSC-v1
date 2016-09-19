@@ -45,27 +45,33 @@ module.exports = {
 
                 creep.say('MINE!!', true);
 
-                if (source) {
+                if (!source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                         creep.say('M2M', true);
                         creep.moveTo(source);
                     }
                 }
-
             }
         }
     },
 
     findSource: function (room, creep) {
 
-        var source = creep.findClosestByRange(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 0,
-            {filter: (c) => c.name != creep.name && c.memory.role == 'harvester'})[0] == undefined});
+        var sources = room.find(FIND_SOURCES);
+        var foundSource;
 
-        if (source) {
-            return source;
+        for (let source in sources) {
+            if (!source.pos.findInRange(FIND_MY_CREEPS, 1,
+                    {filter: (c) => c.name != creep.name && c.memory.role == 'harvester'})) {
+                foundSource = source;
+            }
+        }
+
+        if (foundSource) {
+            return foundSource;
         }
         else {
-            return creep.findClosestByRange(FIND_SOURCES);
+            return creep.findClosestByPath(FIND_SOURCES);
         }
 
     },
