@@ -55,7 +55,7 @@ module.exports = {
             return source;
         }
         else {
-            return creep.findClosestByPath(FIND_SOURCES);
+            return creep.pos.findClosestByPath(FIND_SOURCES);
         }
 
     }
