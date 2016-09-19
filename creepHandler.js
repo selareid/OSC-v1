@@ -34,7 +34,7 @@ module.exports = {
                 }
                 else if (creep.memory.role == 'defenceManager') {
 
-                    var hitsOfDefence = this.getHitsOfDefence(room)
+                    var hitsOfDefence = this.getHitsOfDefence(room);
 
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
