@@ -17,10 +17,9 @@ module.exports = {
 
             // if working if true do stuff or else mine
             if (creep.memory.working == true) {
-                var doThis = this.checkContainerBuilt(room, creep);
 
                 //if container found put transfer energy to container if container full drop energy
-                if (doThis) {
+
                     var container = creep.findInRange((FIND_STRUCTURES, {
                         filter: (s) => s.structureType == STRUCTURE_CONTAINER
                         && s.store < s.storeCapacity
@@ -32,12 +31,6 @@ module.exports = {
                     else {
                         creep.drop(RESOURCE_ENERGY);
                     }
-                }
-                else {
-                    if (room.createConstructionSite(creep.pos) != 0) {
-                        creep.drop(RESOURCE_ENERGY);
-                    }
-                }
             }
             else {
 
@@ -60,7 +53,7 @@ module.exports = {
         var sources = room.find(FIND_SOURCES);
         var foundSource;
 
-        for (let source in sources) {
+        for (let source of sources) {
             if (!source.pos.findInRange(FIND_MY_CREEPS, 1,
                     {filter: (c) => c.name != creep.name && c.memory.role == 'harvester'})) {
                 foundSource = source;
@@ -72,18 +65,6 @@ module.exports = {
         }
         else {
             return creep.findClosestByPath(FIND_SOURCES);
-        }
-
-    },
-
-    checkContainerBuilt: function (room, creep) {
-        if (creep.pos.findInRange(FIND_SOURCES, 1)[0]) {
-            if (creep.pos.findInRange((FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), 1)[0]) {
-                return true;
-            }
-            else {
-                return false;
-            }
         }
 
     }
