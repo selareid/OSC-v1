@@ -20,17 +20,17 @@ module.exports = {
 
                 //if container found put transfer energy to container if container full drop energy
 
-                    var container = creep.pos.findInRange((FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                        && s.store < s.storeCapacity
-                    }), 1)[0];
+                var container = creep.pos.findInRange((FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                    && s.store < s.storeCapacity
+                }), 1)[0];
 
-                    if (container) {
-                        creep.transfer(container, RESOURCE_ENERGY);
-                    }
-                    else {
-                        creep.drop(RESOURCE_ENERGY);
-                    }
+                if (container) {
+                    creep.transfer(container, RESOURCE_ENERGY);
+                }
+                else {
+                    creep.drop(RESOURCE_ENERGY);
+                }
             }
             else {
 
@@ -50,8 +50,13 @@ module.exports = {
 
     findSource: function (room, creep) {
 
-            return creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 1, {filter: (c) => c.memory.role = 'harvester'}) == undefined});
-
+        var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 1, {filter: (c) => c.memory.role = 'harvester'}) == undefined});
+        if (source) {
+            return source;
+        }
+        else {
+            return creep.findClosestByPath(FIND_SOURCES);
+        }
 
     }
 };
