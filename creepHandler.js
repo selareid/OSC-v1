@@ -30,7 +30,16 @@ module.exports = {
                     roleBuilder.run(room, creep, percentOfDamageBeforeRepair);
                 }
                 else if (creep.memory.role == 'defenceManager') {
-                    var hitsOfDefence = 30000;
+
+                    var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| STRUCTURE_RAMPART});
+                    var allHits = [];
+
+                    for (let structure in wallsRamparts) {
+                        allHits.push(structure.hits);
+                    }
+                    var hitsOfDefence = _.min(allHits);
+
+
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
                 else {
