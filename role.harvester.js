@@ -49,23 +49,9 @@ module.exports = {
     },
 
     findSource: function (room, creep) {
+        
+            return creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, {filter: (c) => c.memory.role = 'harvester'}) == undefined});
 
-        var sources = room.find(FIND_SOURCES);
-        var foundSource;
-
-        for (let source of sources) {
-            if (!source.pos.findInRange(FIND_MY_CREEPS, 1,
-                    {filter: (c) => c.name != creep.name && c.memory.role == 'harvester'})) {
-                foundSource = source;
-            }
-        }
-
-        if (foundSource) {
-            return foundSource;
-        }
-        else {
-            return creep.pos.findClosestByPath(FIND_SOURCES);
-        }
 
     }
 };
