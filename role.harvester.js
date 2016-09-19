@@ -4,7 +4,7 @@ module.exports = {
     run: function (room, creep) {
         var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
         if (numberOfDistributors <= 0) {
-
+            roleEmergencyHarvester.run(room, creep);
         }
         else {
             //changes state
@@ -42,9 +42,9 @@ module.exports = {
             else {
 
                 var source = this.findSource(room, creep);
-                
+
                 creep.say('MINE!!', true);
-                
+
                 if (source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                         creep.say('M2M', true);
@@ -58,20 +58,15 @@ module.exports = {
 
     findSource: function (room, creep) {
 
-        var sourcesInRoom = room.find(FIND_SOURCES);
-        var sourcesNotAvailable = [];
+        var source = creep.findClosestByRange(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 0,
+            {filter: (c) => c.name != creep.name && c.memory.role == 'harvester'})[0] == undefined});
 
-        for (let source_it in sourcesInRoom) {
-            let source = sourcesInRoom[source_it];
-            if (source.pos.findInRange(FIND_MY_CREEPS, 0, {filter: (c) => c.memory.role == 'harvester'})[0]) {
-                sourcesNotAvailable.push(source);
-            }
-            else {
-                return source;
-            }
+        if (source) {
+            return source;
         }
-
-        return creep.findClosestByRange(FIND_SOURCES);
+        else {
+            return creep.findClosestByRange(FIND_SOURCES);
+        }
 
     },
 
