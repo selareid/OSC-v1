@@ -7,11 +7,12 @@ module.exports = {
 
         if (spawn) {
 
-            var minimumNumberOfHarvesters = 4;
-            var minimumNumberOfCarriers = 4;
-            var minimumNumberOfDistributors = 2;
+            var minimumNumberOfHarvesters = 6;
+            var minimumNumberOfCarriers = 2;
+            var minimumNumberOfDistributors = 1;
             var minimumNumberOfUpgraders = 3;
             var minimumNumberOfBuilders = 1;
+            var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
 
             var numberOfSources = room.find(FIND_SOURCES).length;
@@ -32,6 +33,7 @@ module.exports = {
             var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
             var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.room == room.name);
             var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room.name);
+            var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer' && c.memory.room == room.name);
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
 
             // console.log('Harvesters ' + numberOfHarvesters);
@@ -39,6 +41,7 @@ module.exports = {
             // console.log('Distributors ' + numberOfDistributors);
             // console.log('Upgraders ' + numberOfUpgraders);
             // console.log('Builders ' + numberOfBuilders);
+            // console.log('Repairer ' + numberOfRepairers);
             // console.log('Defence Managers ' + numberOfDefenceManagers);
 
             var energy = spawn.room.energyAvailable;
@@ -69,6 +72,9 @@ module.exports = {
                 else if (numberOfBuilders < minimumNumberOfBuilders) {
                     name = spawn.createCustomCreep(room, energy, 'builder', amountToSave);
                 }
+                else if (numberOfRepairers < minimumNumberOfRepairers) {
+                    name = spawn.createCustomCreep(room, energy, 'repairer', amountToSave);
+                }
                 else if (numberOfDefenceManagers < minimumNumberOfDefenceManagers) {
                     name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
                 }
@@ -84,10 +90,7 @@ module.exports = {
                 Game.notify("No harvesters in room " + room);
                 console.log("No harvesters in room " + room);
             }
-            else if (numberOfDistributors <= 0) {
-                Game.notify("No distributors in room " + room);
-                console.log("No distributors in room " + room);
-            }
+
         }
 
     }

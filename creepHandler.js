@@ -3,6 +3,7 @@ var roleCarrier = require ('role.carrier');
 var roleDistributor = require ('role.distributor');
 var roleUpgrader = require ('role.upgrader');
 var roleBuilder = require ('role.builder');
+var roleRepairer = require ('role.repairer');
 var roleDefenceManager = require ('role.defenceManager');
 
 module.exports = {
@@ -26,19 +27,14 @@ module.exports = {
                     roleUpgrader.run(room, creep);
                 }
                 else if (creep.memory.role == 'builder') {
-                    var percentOfDamageBeforeRepair = 0.8;
-                    roleBuilder.run(room, creep, percentOfDamageBeforeRepair);
+                    roleBuilder.run(room, creep);
+                }
+                else if (creep.memory.role == 'repairer') {
+                    roleRepairer.run(room, creep);
                 }
                 else if (creep.memory.role == 'defenceManager') {
 
-                    var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| STRUCTURE_RAMPART});
-                    var allHits = [];
-
-                    for (let structure in wallsRamparts) {
-                        allHits.push(structure.hits);
-                    }
-                    var hitsOfDefence = _.min(allHits);
-
+                    var hitsOfDefence = this.getHitsOfDefence(room)
 
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
@@ -49,5 +45,15 @@ module.exports = {
                 }
             }
         }
+    },
+
+    getHitsOfDefence: function (room) {
+        var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| STRUCTURE_RAMPART});
+        var allHits = [];
+
+        for (let structure in wallsRamparts) {
+            allHits.push(structure.hits);
+        }
+        return _.min(allHits);
     }
 };

@@ -26,7 +26,7 @@ module.exports.loop = function () {
         }
     }
 
-//grafana stuff
+//Grafana stuff
     if (Memory.stats == undefined) {
         Memory.stats = {}
     }
