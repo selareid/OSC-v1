@@ -50,7 +50,7 @@ module.exports = {
 
     findSource: function (room, creep) {
 
-        var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 1, {filter: (c) => c.memory.role = 'harvester'}) == undefined});
+        var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => s.pos.findInRange(FIND_MY_CREEPS, 1, {filter: (c) => c.memory.role == 'harvester'})[0] == undefined});
         if (source) {
             return source;
         }
