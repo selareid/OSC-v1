@@ -23,7 +23,7 @@ module.exports = {
 
     getHostileCreeps: function (room, allyUsername) {
         var hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => allyUsername.includes(c.owner.username) == false});
-        return hostileCreepsInRoom;
+        return hostileCreepsInRoom.owner.username;
     },
 
     isUnderAttack: function (room, allyUsername) {
