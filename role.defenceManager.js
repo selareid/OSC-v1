@@ -34,11 +34,9 @@ module.exports = {
                     creep.moveTo(storage)
                 }
             }
-
             else {
-                var container = creep.pos.findClosestByRange((FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                    && s.store > 0}));
+                var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store > 0});
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(container)
