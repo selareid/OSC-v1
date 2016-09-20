@@ -29,17 +29,17 @@ module.exports = {
 
             var storage = room.storage;
 
-                if (storage.store[RESOURCE_ENERGY] > 0) {
-                    if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(storage)
-                    }
+            if (storage && storage.store[RESOURCE_ENERGY] > 0) {
+                if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(storage)
                 }
+            }
 
             else {
-                    var container = creep.pos.findInRange((FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                        && s.store < s.storeCapacity
-                    }), 1)[0];
+                var container = creep.pos.findInRange((FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                    && s.store < s.storeCapacity
+                }), 1)[0];
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(container)
