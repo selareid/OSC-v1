@@ -33,8 +33,7 @@ module.exports = {
                         }
                     }
                     else {
-                        creep.say('CARRY', true);
-                        roleCarrier.run(room, creep);
+                        creep.say('ALLFULL!');
                     }
                 }
             }

@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="555453cd-a0fd-4ec1-a2aa-5006fbf69908" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.builder.js" afterPath="$PROJECT_DIR$/role.builder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.carrier.js" afterPath="$PROJECT_DIR$/role.carrier.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.defenceManager.js" afterPath="$PROJECT_DIR$/role.defenceManager.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.distributor.js" afterPath="$PROJECT_DIR$/role.distributor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.repairer.js" afterPath="$PROJECT_DIR$/role.repairer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.upgrader.js" afterPath="$PROJECT_DIR$/role.upgrader.js" />
     </list>
     <ignored path="NSC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.repairer.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/role.repairer.js">
+      <file leaf-file-name="role.distributor.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/role.distributor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="34" column="91" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="91" />
+            <state relative-caret-position="300">
+              <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -67,12 +62,12 @@
         <option value="$PROJECT_DIR$/role.emergencyHarvester.js" />
         <option value="$PROJECT_DIR$/defenceHandler.js" />
         <option value="$PROJECT_DIR$/spawnerHandler.js" />
-        <option value="$PROJECT_DIR$/role.distributor.js" />
         <option value="$PROJECT_DIR$/role.defenceManager.js" />
         <option value="$PROJECT_DIR$/role.carrier.js" />
         <option value="$PROJECT_DIR$/role.builder.js" />
         <option value="$PROJECT_DIR$/role.upgrader.js" />
         <option value="$PROJECT_DIR$/role.repairer.js" />
+        <option value="$PROJECT_DIR$/role.distributor.js" />
       </list>
     </option>
   </component>
@@ -226,12 +221,12 @@
       <workItem from="1474342003914" duration="1186000" />
       <workItem from="1474343546584" duration="430000" />
       <workItem from="1474351680516" duration="826000" />
-      <workItem from="1474413669201" duration="457000" />
+      <workItem from="1474413669201" duration="798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63215000" />
+    <option name="totallyTimeSpent" value="63556000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="400" y="229" width="1520" height="778" extended-state="0" />
@@ -579,26 +574,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/role.emergencyHarvester.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/role.distributor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="54" column="91" selection-start-line="54" selection-start-column="91" selection-end-line="54" selection-end-column="91" />
           <folding />
         </state>
       </provider>
@@ -645,8 +624,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/role.repairer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="34" column="91" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="91" />
+        <state relative-caret-position="238">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/role.distributor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
           <folding />
         </state>
       </provider>
