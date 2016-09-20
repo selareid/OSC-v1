@@ -5,11 +5,11 @@ module.exports = {
         var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room, allyUsername));
 
         console.log('Enemy creeps spotted in room ' + room);
-        console.log('The creeps are' + hostileCreepsInRoom);
+        console.log('The creeps are' + hostileCreepsInRoom.owner.username);
         console.log('Prepare to die future self');
 
         Game.notify('Enemy creeps spotted in room ' + room);
-        Game.notify('The creeps are' + hostileCreepsInRoom);
+        Game.notify('The creeps are' + hostileCreepsInRoom.owner.username);
         Game.notify('Prepare to die future self');
 
 
