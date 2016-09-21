@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="555453cd-a0fd-4ec1-a2aa-5006fbf69908" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.defenceManager.js" afterPath="$PROJECT_DIR$/role.defenceManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.distributor.js" afterPath="$PROJECT_DIR$/role.distributor.js" />
     </list>
     <ignored path="NSC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,18 +48,18 @@
       <file leaf-file-name="creepHandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/creepHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="690">
+              <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="role.defenceManager.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/role.defenceManager.js">
+      <file leaf-file-name="role.distributor.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/role.distributor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
+            <state relative-caret-position="208">
+              <caret line="38" column="53" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -79,7 +79,6 @@
         <option value="$PROJECT_DIR$/role.emergencyHarvester.js" />
         <option value="$PROJECT_DIR$/role.carrier.js" />
         <option value="$PROJECT_DIR$/role.harvester.js" />
-        <option value="$PROJECT_DIR$/role.distributor.js" />
         <option value="$PROJECT_DIR$/role.builder.js" />
         <option value="$PROJECT_DIR$/role.upgrader.js" />
         <option value="$PROJECT_DIR$/role.repairer.js" />
@@ -88,6 +87,7 @@
         <option value="$PROJECT_DIR$/spawnerHandler.js" />
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/role.defenceManager.js" />
+        <option value="$PROJECT_DIR$/role.distributor.js" />
       </list>
     </option>
   </component>
@@ -242,12 +242,12 @@
       <workItem from="1474343546584" duration="430000" />
       <workItem from="1474351680516" duration="826000" />
       <workItem from="1474413669201" duration="2366000" />
-      <workItem from="1474420379780" duration="1819000" />
+      <workItem from="1474420379780" duration="2347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66943000" />
+    <option name="totallyTimeSpent" value="67471000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="400" y="229" width="1520" height="778" extended-state="0" />
@@ -302,7 +302,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -577,17 +577,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/role.distributor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="53" column="91" selection-start-line="53" selection-start-column="91" selection-end-line="53" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/role.carrier.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="538">
           <caret line="45" column="107" selection-start-line="45" selection-start-column="107" selection-end-line="45" selection-end-column="107" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -644,18 +638,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/creepHandler.js">
+    <entry file="file://$PROJECT_DIR$/role.defenceManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="495">
+          <caret line="53" column="6" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/role.defenceManager.js">
+    <entry file="file://$PROJECT_DIR$/creepHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
+        <state relative-caret-position="690">
+          <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/role.distributor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="38" column="53" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
           <folding />
         </state>
       </provider>
