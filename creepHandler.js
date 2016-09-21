@@ -21,7 +21,8 @@ module.exports = {
                     roleCarrier.run(room, creep);
                 }
                 else if (creep.memory.role == 'distributor') {
-                    roleDistributor.run(room, creep);
+                    var energyOfTowers = this.getEnergyOfTower(room);
+                    roleDistributor.run(room, creep, energyOfTowers);
                 }
                 else if (creep.memory.role == 'upgrader') {
                     roleUpgrader.run(room, creep);
@@ -33,9 +34,7 @@ module.exports = {
                     roleRepairer.run(room, creep);
                 }
                 else if (creep.memory.role == 'defenceManager') {
-
                     var hitsOfDefence = this.getHitsOfDefence(room);
-
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
                 else {
@@ -55,5 +54,15 @@ module.exports = {
             allHits.push(structure.hits);
         }
         return _.min(allHits) + 1;
+    },
+
+    getEnergyOfTower: function (room) {
+        var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+        var allEnergy = [];
+
+        for (let tower of towers) {
+            allEnergy.push(tower.hits);
+        }
+        return _.min(allEnergy) + 1;
     }
 };

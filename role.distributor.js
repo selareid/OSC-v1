@@ -1,7 +1,7 @@
 var roleCarrier = require ('role.carrier');
 
 module.exports = {
-    run: function (room, creep) {
+    run: function (room, creep, energyOfTowers) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
@@ -26,7 +26,7 @@ module.exports = {
                     }
                 }
                 else {
-                    var tower = this.findTower(room);
+                    var tower = this.findTower(room, energyOfTowers);
                     if (tower) {
                         if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(tower);
@@ -98,9 +98,8 @@ module.exports = {
         return extension;
     },
 
-    findTower: function (room) {
-        //var tower = _.min(room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}}), s.energy < s.energyCapacity);
-        var tower = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < s.energyCapacity})[0];
+    findTower: function (room, energyOfTowers) {
+        var tower = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy <= energyOfTowers})[0];
         return tower;
     }
 };
