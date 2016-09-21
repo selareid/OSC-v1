@@ -1,4 +1,4 @@
-var roleEmergencyHarvester = require ('role.emergencyHarvester');
+const roleEmergencyHarvester = require ('role.emergencyHarvester');
 
 module.exports = {
     run: function (room, creep) {

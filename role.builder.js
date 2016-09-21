@@ -1,4 +1,4 @@
-var roleUpgrader = require ('role.upgrader');
+const roleUpgrader = require ('role.upgrader');
 
 module.exports = {
     run: function (room, creep) {

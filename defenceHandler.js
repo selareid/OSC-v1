@@ -1,4 +1,4 @@
-var towerHandler = require('towerHandler');
+const towerHandler = require('towerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {

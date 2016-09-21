@@ -1,6 +1,6 @@
-var creepHandler = require ('creepHandler');
-var defenceHandler = require ('defenceHandler');
-var spawnerHandler = require ('spawnerHandler');
+const creepHandler = require ('creepHandler');
+const defenceHandler = require ('defenceHandler');
+const spawnerHandler = require ('spawnerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {

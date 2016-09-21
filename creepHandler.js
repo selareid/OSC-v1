@@ -1,10 +1,10 @@
-var roleHarvester = require ('role.harvester');
-var roleCarrier = require ('role.carrier');
-var roleDistributor = require ('role.distributor');
-var roleUpgrader = require ('role.upgrader');
-var roleBuilder = require ('role.builder');
-var roleRepairer = require ('role.repairer');
-var roleDefenceManager = require ('role.defenceManager');
+const roleHarvester = require ('role.harvester');
+const roleCarrier = require ('role.carrier');
+const roleDistributor = require ('role.distributor');
+const roleUpgrader = require ('role.upgrader');
+const roleBuilder = require ('role.builder');
+const roleRepairer = require ('role.repairer');
+const roleDefenceManager = require ('role.defenceManager');
 
 module.exports = {
     run: function (room) {

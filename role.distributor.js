@@ -1,4 +1,4 @@
-var roleCarrier = require ('role.carrier');
+const roleCarrier = require ('role.carrier');
 
 module.exports = {
     run: function (room, creep, energyOfTowers) {

@@ -1,4 +1,4 @@
-var roomHandler = require ('roomHandler');
+const roomHandler = require ('roomHandler');
 
 module.exports.loop = function () {
 
