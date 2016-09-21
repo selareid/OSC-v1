@@ -4,8 +4,9 @@ var spawnerHandler = require ('spawnerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {
-
+        if (Game.time % 5 == 0) {
         var underAttack = defenceHandler.isUnderAttack(room, allyUsername);
+        }
         if (underAttack) {
             defenceHandler.run(room, allyUsername);
         }
