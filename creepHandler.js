@@ -54,6 +54,6 @@ module.exports = {
         for (let structure of wallsRamparts) {
             allHits.push(structure.hits);
         }
-        return _.min(allHits);
+        return _.min(allHits) + 1;
     }
 };
