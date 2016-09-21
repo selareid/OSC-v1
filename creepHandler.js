@@ -51,7 +51,7 @@ module.exports = {
         var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| STRUCTURE_RAMPART});
         var allHits = [];
 
-        for (let structure in wallsRamparts) {
+        for (let structure of wallsRamparts) {
             allHits.push(structure.hits);
         }
         return _.min(allHits);
