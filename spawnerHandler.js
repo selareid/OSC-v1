@@ -23,6 +23,12 @@ module.exports = {
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
             }
+            else {
+                var creepsGonnaDie = room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role = 'harvester' && c.ticksToLive <= 200})[0];
+                if (creepsGonnaDie) {
+                    minimumNumberOfHarvesters += 1;
+                }
+            }
 
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
