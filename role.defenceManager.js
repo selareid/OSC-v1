@@ -48,15 +48,15 @@ module.exports = {
 
     findRampart: function (room, hitsOfDefence) {
         var rampart = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence})[0];
+            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence});
 
-        return rampart;
+        return rampart[0];
     },
 
     findWall: function (room, hitsOfDefence) {
         var wall = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence})[0];
+            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence});
 
-        return wall;
+        return wall[0];
     }
 };
