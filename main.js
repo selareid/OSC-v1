@@ -5,10 +5,21 @@ module.exports.loop = function () {
     var allyUsername = ['BuffyNZ'];
 
     for (let name in Memory.creeps) {
-        if (Game.creeps[name] == undefined) {
+        if (!Game.creeps[name]) {
             delete Memory.creeps[name];
         }
     }
+    for (let spawn in Memory.spawns) {
+        if (!Game.spawns[spawn]) {
+            delete Memory.spawns[spawn];
+        }
+    }
+    for (let flag in Memory.flags) {
+        if (!Game.flags[flag]) {
+            delete Memory.spawns[flag];
+        }
+    }
+
 
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
