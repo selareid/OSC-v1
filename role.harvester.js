@@ -20,15 +20,17 @@ module.exports = {
 
                 //if container found put transfer energy to container if container full drop energy
 
-                var container = creep.pos.findInRange((FIND_STRUCTURES, {
+                var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                    && s.store < s.storeCapacity
-                }), 1)[0];
+                    && _.sum(s.store)
+                    < s.storeCapacity});
 
                 if (container) {
+                    creep.say('Yay!');
                     creep.transfer(container, RESOURCE_ENERGY);
                 }
                 else {
+                    creep.say('DropDBeat');
                     creep.drop(RESOURCE_ENERGY);
                 }
             }
