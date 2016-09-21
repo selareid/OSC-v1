@@ -18,7 +18,6 @@ module.exports = {
             }
             else {
                 var wallToRepair = this.findWall(room, hitsOfDefence);
-
                 if (wallToRepair) {
                     if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(wallToRepair);
@@ -49,14 +48,14 @@ module.exports = {
 
     findRampart: function (room, hitsOfDefence) {
         var rampart = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits < hitsOfDefence})[0];
+            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence})[0];
 
         return rampart;
     },
 
     findWall: function (room, hitsOfDefence) {
         var wall = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits < hitsOfDefence})[0];
+            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence})[0];
 
         return wall;
     }
