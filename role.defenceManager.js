@@ -17,7 +17,7 @@ module.exports = {
                 }
             }
             else {
-                var wallToRepair = this.findRampart(room, hitsOfDefence);
+                var wallToRepair = this.findWall(room, hitsOfDefence);
 
                 if (wallToRepair) {
                     if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {

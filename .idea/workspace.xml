@@ -58,8 +58,8 @@
       <file leaf-file-name="role.defenceManager.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/role.defenceManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+            <state relative-caret-position="223">
+              <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -242,12 +242,12 @@
       <workItem from="1474343546584" duration="430000" />
       <workItem from="1474351680516" duration="826000" />
       <workItem from="1474413669201" duration="2366000" />
-      <workItem from="1474420379780" duration="1308000" />
+      <workItem from="1474420379780" duration="1521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66432000" />
+    <option name="totallyTimeSpent" value="66645000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="400" y="229" width="1520" height="778" extended-state="0" />
@@ -654,8 +654,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/role.defenceManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="54" column="6" selection-start-line="54" selection-start-column="6" selection-end-line="54" selection-end-column="6" />
+        <state relative-caret-position="223">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
           <folding />
         </state>
       </provider>
