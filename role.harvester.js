@@ -41,7 +41,7 @@ module.exports = {
                 if (source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                         creep.say('M2M', true);
-                        creep.moveTo(source);
+                        creep.moveTo(source, {reusePath: 10});
                     }
                 }
             }

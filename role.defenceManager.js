@@ -20,7 +20,7 @@ module.exports = {
                 var wallToRepair = this.findWall(room, hitsOfDefence);
                 if (wallToRepair) {
                     if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(wallToRepair);
+                        creep.moveTo(wallToRepair, {reusePath: 10});
                     }
                 }
             }
@@ -31,7 +31,7 @@ module.exports = {
 
             if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage)
+                    creep.moveTo(storage, {reusePath: 10})
                 }
             }
             else {

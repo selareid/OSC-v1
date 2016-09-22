@@ -10,7 +10,7 @@ module.exports = {
 
         if (creep.memory.working == true) {
             if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(room.controller);
+                creep.moveTo(room.controller, {reusePath: 20});
             }
         }
         else {
@@ -18,7 +18,7 @@ module.exports = {
             var storage = room.storage;
             if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage)
+                    creep.moveTo(storage, {reusePath: 10})
                 }
             }
             else {

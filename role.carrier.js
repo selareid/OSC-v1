@@ -13,7 +13,7 @@ module.exports = {
 
             if (storage) {
                 if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage);
+                    creep.moveTo(storage, {reusePath: 10});
                 }
             }
             else {
@@ -30,7 +30,7 @@ module.exports = {
                 }
             }
             else {
-                var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                var container = creep.pos.find(FIND_STRUCTURES, {
                     filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0});
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

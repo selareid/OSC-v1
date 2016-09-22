@@ -15,7 +15,7 @@ module.exports = {
             if (structureToRepair) {
                 creep.say('REPAIR!', true);
                 if (creep.repair(structureToRepair) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(structureToRepair);
+                    creep.moveTo(structureToRepair, {reusePath: 7});
                 }
             }
             else {
@@ -27,7 +27,7 @@ module.exports = {
 
             if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage)
+                    creep.moveTo(storage, {reusePath: 10})
                 }
             }
             else {
