@@ -69,7 +69,7 @@ module.exports.loop = function () {
                 stored = room.storage.store[RESOURCE_ENERGY];
                 storedTotal = room.storage.storeCapacity[RESOURCE_ENERGY];
             } else {
-                stored = 0
+                stored = 0;
                 storedTotal = 0
             }
 
