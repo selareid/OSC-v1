@@ -30,8 +30,8 @@ module.exports = {
                 }
             }
             else {
-                var container = creep.pos.find(FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0});
+                var container = room.find(FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0})[0];
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(container)
