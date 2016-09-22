@@ -48,7 +48,7 @@ module.exports = {
             var storage = room.storage;
 
             link = Game.getObjectById('57e0d5dc07b9dd24411ea83f');
-            if (link && link.energy > 0) {
+            if (link && link.energy > 100) {
                 if (creep.withdraw(link) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(link);
                 }
