@@ -32,7 +32,7 @@ module.exports.loop = function () {
     }
 
     //link thief stuff
-    if (Game.time % 20 == 0) {
+    if (Game.time % 5 == 0) {
         var rampart1 = Game.getObjectById('57d8c3b28479098c7b064844');
         var rampart2 = Game.getObjectById('57d8c6894bbe662d7107d574');
         if (rampart1 && rampart2) {
