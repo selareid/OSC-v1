@@ -8,8 +8,8 @@ module.exports = function () {
             if (roleName == 'harvester') {
                 numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
 
-                if (numberOfParts > 5) {
-                    numberOfParts = 5;
+                if (numberOfParts > 6) {
+                    numberOfParts = 6;
                 }
                 body.push(MOVE);
                 body.push(CARRY);

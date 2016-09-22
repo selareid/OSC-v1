@@ -24,7 +24,7 @@ module.exports = {
                 minimumNumberOfHarvesters = 2;
             }
             else {
-                var creepsGonnaDie = room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester' && c.ticksToLive <= 200})[0];
+                var creepsGonnaDie = room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester' && c.ticksToLive <= 300})[0];
                 if (creepsGonnaDie) {
                     minimumNumberOfHarvesters += 1;
                 }
