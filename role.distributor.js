@@ -34,7 +34,7 @@ module.exports = {
                     }
                     else {
                         creep.say('ALLFULL!');
-                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo'});
+                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && s.memory.room == creep.room});
                         if (flagToGoTo) {
                             creep.moveTo(flagToGoTo);
                         }
@@ -99,7 +99,8 @@ module.exports = {
     },
 
     findTower: function (room, energyOfTowers) {
-        var tower = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy <= energyOfTowers})[0];
+        var tower = room.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER
+        && s.energy <= energyOfTowers && s.energy != s.energyCapacity})[0];
         return tower;
     }
 };

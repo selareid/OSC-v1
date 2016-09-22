@@ -47,7 +47,7 @@ module.exports = {
     },
 
     getHitsOfDefence: function (room) {
-        var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| STRUCTURE_RAMPART});
+        var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| s.structureType == STRUCTURE_RAMPART});
         var allHits = [];
 
         for (let structure of wallsRamparts) {
@@ -61,7 +61,7 @@ module.exports = {
         var allEnergy = [];
 
         for (let tower of towers) {
-            allEnergy.push(tower.hits);
+            allEnergy.push(tower.energy);
         }
         return _.min(allEnergy) + 1;
     }

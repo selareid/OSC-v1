@@ -4,35 +4,44 @@ module.exports.loop = function () {
 
     var allyUsername = ['BuffyNZ'];
 
+    //memory stuff
     for (let name in Memory.creeps) {
         if (!Game.creeps[name]) {
             delete Memory.creeps[name];
+        }
+        else if (Memory.creeps[name].room) {
+            Memory.creeps[name].room = '' + Game.creeps[name].room.name;
         }
     }
     for (let spawn in Memory.spawns) {
         if (!Game.spawns[spawn]) {
             delete Memory.spawns[spawn];
         }
+        else if (Memory.spawns[spawn].room) {
+            Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
+        }
     }
     for (let flag in Memory.flags) {
         if (!Game.flags[flag]) {
             delete Memory.spawns[flag];
         }
-    }
-
-
-    for (let name in Game.creeps) {
-        let creep = Game.creeps[name];
-
-        if (!creep.memory.room) {
-            creep.memory.room = creep.room.name;
+        else if (Memory.flags[flag].room) {
+            Memory.flags[flag].room = '' + Game.flags[flag].room.name;
         }
+
     }
 
+
+    //do actual stuff
     for (let room_it in Game.rooms) {
         var room = Game.rooms[room_it];
         var spawn = room.find(FIND_MY_SPAWNS)[0];
         if (spawn) {
+
+            if (!Memory.rooms[room]) {
+                Memory.rooms[room] = {};
+            }
+
             roomHandler.run(room, allyUsername);
         }
     }
@@ -65,7 +74,7 @@ module.exports.loop = function () {
             }
 
             Memory.stats['room.' + room.name + '.storedEnergy'] = stored
-        }else {
+        } else {
             Memory.stats['room.' + room.name + '.myRoom'] = undefined
         }
     }
@@ -79,6 +88,6 @@ module.exports.loop = function () {
 
 
     Memory.stats['cpu.bucket'] = Game.cpu.bucket;
-     Memory.stats['cpu.limit'] = Game.cpu.limit;
+    Memory.stats['cpu.limit'] = Game.cpu.limit;
     Memory.stats['cpu.getUsed'] = Game.cpu.getUsed()
 };
