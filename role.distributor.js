@@ -99,7 +99,7 @@ module.exports = {
     },
 
     findTower: function (room, energyOfTowers) {
-        var tower = room.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER
+        var tower = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER
         && s.energy <= energyOfTowers && s.energy != s.energyCapacity})[0];
         return tower;
     }
