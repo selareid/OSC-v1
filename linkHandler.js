@@ -18,19 +18,5 @@ module.exports = {
                 }
             }
         }
-        else if (Game.time % 20 == 0) {
-            var rampart1 = Game.getObjectById('57d8c3b28479098c7b064844');
-            var rampart2 = Game.getObjectById('57d8c6894bbe662d7107d574');
-            if (rampart1 && rampart2) {
-                if (Memory.toll.paid == true) {
-                    rampart1.setPublic(true);
-                    rampart2.setPublic(true);
-                }
-                else {
-                    rampart1.setPublic(false);
-                    rampart2.setPublic(false);
-                }
-            }
-        }
     }
 };
