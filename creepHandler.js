@@ -38,7 +38,7 @@ module.exports = {
                     var hitsOfDefence = this.getHitsOfDefence(room);
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
-                else if (creep.role.memory == 'warrior') {
+                else if (creep.memory.role == 'warrior') {
                     roleWarrior.run(room, creep, allyUsername, isUnderAttack)
                 }
                 else if (creep.memory.role === '') {
