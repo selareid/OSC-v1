@@ -1,7 +1,7 @@
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack) {
+    run: function (room, isUnderAttack, isAttacking, armySize) {
 
         var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true})[0];
 
@@ -16,11 +16,14 @@ module.exports = {
             var minimumNumberOfDefenceManagers = 1;
             var minimumNumberOfWarriors;
 
-            if (isUnderAttack == true) {
+            if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
                 || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1}).length;
 
                 minimumNumberOfWarriors = Math.round(numberOfHostiles * 1.25);
+            }
+            else if (isAttacking === true) {
+                minimumNumberOfWarriors = armySize;
             }
 
             var numberOfSources = room.find(FIND_SOURCES).length;

@@ -17,16 +17,13 @@ module.exports.loop = function () {
         if (!Game.spawns[spawn]) {
             delete Memory.spawns[spawn];
         }
-        else if (Memory.spawns[spawn].room) {
+        else if (!Memory.spawns[spawn].room) {
             Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
         }
     }
     for (let flag in Memory.flags) {
         if (!Game.flags[flag]) {
             delete Memory.spawns[flag];
-        }
-        else if (Memory.flags[flag].room) {
-            Memory.flags[flag].room = '' + Game.flags[flag].room.name;
         }
 
     }

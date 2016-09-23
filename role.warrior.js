@@ -1,5 +1,5 @@
 module.exports = {
-    run: function (room, creep, allyUsername, isUnderAttack) {
+    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack) {
 
         var creepAttackRange;
         if (creep.getActiveBodyparts(HEAL) >= 1) {
@@ -7,16 +7,16 @@ module.exports = {
         }
         else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
             creepAttackRange = 3;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack);
         }
         else if (creep.getActiveBodyparts(ATTACK) >= 1) {
             creepAttackRange = 1;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack);
         }
 
     },
 
-    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange) {
+    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack) {
 
         if (isUnderAttack === true) {
             if (creep.room.name == room) {
@@ -53,27 +53,10 @@ module.exports = {
                 creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(room)));
             }
         }
-        else {
-            //put attack flag go to attack other room stuff here and stuff
-            //when you're ready though
-            //don't rush yourself
-            //you only have 10 CPU anyway
-            //don't even try yet
-            //wait a while
-            //ok a long-ish time
-            //you know just don't do it
-            //make everything work first
-            //if I haven't convinced you yet you shouldn't be here
-            //unless you think you're ready
-            //nope forget that I'm not trusting you
-            //when I say you're ready you can
+        else if (isAttacking === true && roomToAttack && armySize > 0) {
 
-            // if (iSayReady === true) {
-            //     doStuff.startCodeing(human, universe, codeWhat);
-            // }
-            // else {
-            //     doStuff.sleep(human, universe);
-            // }
+            
+
         }
 
     },

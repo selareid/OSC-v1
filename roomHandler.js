@@ -5,6 +5,18 @@ const spawnerHandler = require ('spawnerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {
+        var roomsToAttackFrom = ['E58N9'];
+        if (!roomsToAttackFrom.includes(room)) {
+            var isAttacking = false;
+            var armySize = 0;
+            var roomToAttack = '';
+        }
+        else {
+            var isAttacking = false;
+            var armySize = 0;
+            var roomToAttack = 'E58N8';
+        }
+
         if (Game.time % 5 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room, allyUsername);
             if (underAttack === false) {
@@ -22,8 +34,8 @@ module.exports = {
         }
         //else {
         linkHandler.run(room);
-        spawnerHandler.run(room, areWeUnderAttack);
-        creepHandler.run(room, allyUsername, areWeUnderAttack);
+        spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
+        creepHandler.run(room, allyUsername, areWeUnderAttack, isAttacking, armySize, roomToAttack);
         //}
     }
 };
