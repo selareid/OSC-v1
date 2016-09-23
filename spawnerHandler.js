@@ -14,7 +14,14 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
-            
+            var minimumNumberOfWarriors;
+
+            if (isUnderAttack == true) {
+                let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
+                || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1}).length;
+
+                minimumNumberOfWarriors = Math.round(numberOfHostiles * 1.25);
+            }
 
             var numberOfSources = room.find(FIND_SOURCES).length;
 
@@ -41,6 +48,7 @@ module.exports = {
             var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room.name);
             var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer' && c.memory.room == room.name);
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
+            var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
 
             // console.log('Harvesters ' + numberOfHarvesters);
             // console.log('Carriers ' + numberOfCarriers);
@@ -49,6 +57,7 @@ module.exports = {
             // console.log('Builders ' + numberOfBuilders);
             // console.log('Repairer ' + numberOfRepairers);
             // console.log('Defence Managers ' + numberOfDefenceManagers);
+            // console.log('Warriors ' + numberOfWarriors);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -71,6 +80,9 @@ module.exports = {
                 }
                 else if (numberOfCarriers < minimumNumberOfCarriers) {
                     name = spawn.createCustomCreep(room, energy, 'carrier', amountToSave);
+                }
+                else if (numberOfWarriors < minimumNumberOfWarriors) {
+                    name = spawn.createCustomCreep(room, energy, 'warrior', amountToSave);
                 }
                 else if (numberOfUpgraders < minimumNumberOfUpgraders) {
                     name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);

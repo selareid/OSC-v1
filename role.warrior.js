@@ -113,7 +113,7 @@ module.exports = {
 
     findRampartNearTarget: function (room, creep, target, creepAttackRange) {
 
-        var rampart = target.pos.findInRange(FIND_MY_STRUCTURES, creepAttackRange, {filter: (s) => s.structureType == STRUCTURE_RAMPART})[0];
+        var rampart = target.pos.findInRange(FIND_MY_STRUCTURES, creepAttackRange, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.findInRange(FIND_CREEPS, 1).length == 0})[0];
 
         if (rampart) {
             return rampart;

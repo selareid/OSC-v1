@@ -5,7 +5,7 @@ const roleUpgrader = require ('role.upgrader');
 const roleBuilder = require ('role.builder');
 const roleRepairer = require ('role.repairer');
 const roleDefenceManager = require ('role.defenceManager');
-const roleWarrier = require ('role.warrier');
+const roleWarrior = require ('role.warrior');
 
 module.exports = {
     run: function (room, allyUsername, isUnderAttack) {
@@ -38,8 +38,8 @@ module.exports = {
                     var hitsOfDefence = this.getHitsOfDefence(room);
                     roleDefenceManager.run(room, creep, hitsOfDefence);
                 }
-                else if (creep.role.memory == 'warrier') {
-                    roleWarrier.run(room, creep, allyUsername, isUnderAttack)
+                else if (creep.role.memory == 'warrior') {
+                    roleWarrior.run(room, creep, allyUsername, isUnderAttack)
                 }
                 else if (creep.memory.role === '') {
                     creep.say('ERROR!!!', true);
