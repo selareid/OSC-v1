@@ -30,6 +30,11 @@ module.exports = {
 
         var hostileCreepsInRoom = this.getHostileCreeps(room, allyUsername)[0];
 
-        return hostileCreepsInRoom;
+        if (hostileCreepsInRoom) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 };
