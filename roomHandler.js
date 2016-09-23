@@ -7,11 +7,11 @@ module.exports = {
     run: function (room, allyUsername) {
         if (Game.time % 5 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room, allyUsername);
-            if (underAttack == true) {
-                Memory.rooms[room].isUnderAttack = true;
+            if (underAttack === false) {
+                Memory.rooms[room].isUnderAttack = false;
             }
             else {
-                Memory.rooms[room].isUnderAttack = false;
+                Memory.rooms[room].isUnderAttack = true;
             }
         }
 
@@ -20,8 +20,8 @@ module.exports = {
         }
         //else {
         linkHandler.run(room);
-        spawnerHandler.run(room);
-        creepHandler.run(room);
+        spawnerHandler.run(room, isUnderAttack);
+        creepHandler.run(room, allyUsername, isUnderAttack);
         //}
     }
 };

@@ -16,7 +16,7 @@ module.exports = {
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
         for (let tower of towers) {
-            towerHandler.run(tower, allyUsername);
+            towerHandler.run(room, tower, allyUsername);
         }
 
     },

@@ -1,7 +1,7 @@
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room) {
+    run: function (room, isUnderAttack) {
 
         var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true})[0];
 
