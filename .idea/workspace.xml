@@ -6,11 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="555453cd-a0fd-4ec1-a2aa-5006fbf69908" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/role.warrier.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/creepHandler.js" afterPath="$PROJECT_DIR$/creepHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prototype.spawn.js" afterPath="$PROJECT_DIR$/prototype.spawn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spawnerHandler.js" afterPath="$PROJECT_DIR$/spawnerHandler.js" />
     </list>
     <ignored path="NSC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,8 +52,8 @@
       <file leaf-file-name="creepHandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/creepHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+            <state relative-caret-position="480">
+              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -98,9 +94,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="984" />
+    <option name="x" value="400" />
+    <option name="y" value="228" />
+    <option name="width" value="1520" />
+    <option name="height" value="779" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -244,18 +241,18 @@
       <workItem from="1474413669201" duration="2366000" />
       <workItem from="1474420379780" duration="4358000" />
       <workItem from="1474501834739" duration="13605000" />
-      <workItem from="1474589583990" duration="11938000" />
+      <workItem from="1474589583990" duration="12000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95025000" />
+    <option name="totallyTimeSpent" value="95087000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="984" extended-state="6" />
+    <frame x="400" y="228" width="1520" height="779" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18430753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23348899" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847533" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -690,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/creepHandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        <state relative-caret-position="480">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
           <folding />
         </state>
       </provider>
