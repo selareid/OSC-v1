@@ -63,7 +63,7 @@ module.exports = {
             var amountToSave = 0;
             var name = undefined;
 
-            if (room.energyCapacityAvailable <= 350 && (numberOfHarvesters >= minimumNumberOfHarvesters)
+            if (room.energyCapacityAvailable >= 400 && (numberOfHarvesters >= minimumNumberOfHarvesters)
                 && (numberOfDistributors >= minimumNumberOfDistributors)
                 && (numberOfCarriers >= minimumNumberOfCarriers)) {
                 amountToSave = 0.1;//in percent
