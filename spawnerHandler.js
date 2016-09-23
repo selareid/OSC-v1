@@ -42,6 +42,7 @@ module.exports = {
 
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
+                minimumNumberOfDistributors = 2;
             }
 
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
