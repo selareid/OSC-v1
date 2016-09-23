@@ -55,7 +55,7 @@ module.exports = {
         }
         else if (isAttacking === true && roomToAttack && armySize > 0) {
 
-            
+
 
         }
 
