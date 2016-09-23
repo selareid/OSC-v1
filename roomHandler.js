@@ -12,8 +12,8 @@ module.exports = {
             var roomToAttack = '';
         }
         else {
-            var isAttacking = false;
-            var armySize = 0;
+            var isAttacking = true;
+            var armySize = 7;
             var roomToAttack = 'E58N8';
         }
 
