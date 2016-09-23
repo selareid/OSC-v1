@@ -56,6 +56,8 @@ module.exports = {
         else if (isAttacking === true && roomToAttack && armySize > 0) {
 
             var target = this.findTarget(room, creep, allyUsername);
+
+
             var rallyPoint = new RoomPosition(36, 46, roomToRallyAt);
 
             if (!creepAttackRange > 1) {
