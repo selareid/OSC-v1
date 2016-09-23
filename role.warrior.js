@@ -56,8 +56,16 @@ module.exports = {
         else if (isAttacking === true && roomToAttack && armySize > 0) {
 
             var target = this.findTarget(room, creep, allyUsername);
-            if (creep.attack(target) != 0) {
-                creep.moveTo(26, 46);
+
+            if (!creepAttackRange > 1) {
+                if (creep.attack(target) != 0) {
+                    creep.moveTo(26, 46);
+                }
+            }
+            else {
+                if (creep.rangedAttack(target) != 0) {
+                    creep.moveTo(26, 46);
+                }
             }
 
         }
