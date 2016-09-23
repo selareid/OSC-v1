@@ -1,5 +1,5 @@
 module.exports = {
-    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack) {
+    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt) {
 
         var creepAttackRange;
         if (creep.getActiveBodyparts(HEAL) >= 1) {
@@ -7,16 +7,16 @@ module.exports = {
         }
         else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
             creepAttackRange = 3;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt);
         }
         else if (creep.getActiveBodyparts(ATTACK) >= 1) {
             creepAttackRange = 1;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt);
         }
 
     },
 
-    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack) {
+    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt) {
 
         if (isUnderAttack === true) {
             if (creep.room.name == room) {
@@ -56,15 +56,16 @@ module.exports = {
         else if (isAttacking === true && roomToAttack && armySize > 0) {
 
             var target = this.findTarget(room, creep, allyUsername);
+            var rallyPoint = new RoomPosition(26, 46, roomToRallyAt);
 
             if (!creepAttackRange > 1) {
                 if (creep.attack(target) != 0) {
-                    creep.moveTo(26, 46);
+                    creep.moveTo(rallyPoint);
                 }
             }
             else {
                 if (creep.rangedAttack(target) != 0) {
-                    creep.moveTo(26, 46);
+                    creep.moveTo(rallyPoint);
                 }
             }
 

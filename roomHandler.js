@@ -6,6 +6,7 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room, allyUsername) {
         var roomsToAttackFrom = ['E58N9'];
+        var roomToRallyAt = 'E58N9';
         if (!roomsToAttackFrom.includes(room.name)) {
             var isAttacking = false;
             var armySize = 0;
@@ -35,7 +36,7 @@ module.exports = {
         //else {
         linkHandler.run(room);
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
-        creepHandler.run(room, allyUsername, areWeUnderAttack, isAttacking, armySize, roomToAttack);
+        creepHandler.run(room, allyUsername, areWeUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt);
         //}
     }
 };
