@@ -4,14 +4,15 @@ module.exports = {
     run: function (room, allyUsername) {
         var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room, allyUsername));
 
-        console.log('Enemy creeps spotted in room ' + room);
-        console.log('The creeps are' + hostileCreepsInRoom);
-        console.log('Prepare to die future self');
+        if (Game.time % 20 == 0) {
+            console.log('Enemy creeps spotted in room ' + room);
+            console.log('The creeps are' + hostileCreepsInRoom);
+            console.log('Prepare to die future self');
 
-        Game.notify('Enemy creeps spotted in room ' + room);
-        Game.notify('The creeps are' + hostileCreepsInRoom);
-        Game.notify('Prepare to die future self');
-
+            Game.notify('Enemy creeps spotted in room ' + room);
+            Game.notify('The creeps are' + hostileCreepsInRoom);
+            Game.notify('Prepare to die future self');
+        }
 
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
