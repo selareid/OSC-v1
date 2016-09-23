@@ -14,6 +14,7 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
+            var
 
             var numberOfSources = room.find(FIND_SOURCES).length;
 

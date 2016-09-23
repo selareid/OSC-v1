@@ -15,13 +15,15 @@ module.exports = {
             }
         }
 
-        if (Memory.rooms[room].isUnderAttack == true) {
+        var areWeUnderAttack = Memory.rooms[room].isUnderAttack;
+
+        if (areWeUnderAttack == true) {
             defenceHandler.run(room, allyUsername);
         }
         //else {
         linkHandler.run(room);
-        spawnerHandler.run(room, isUnderAttack);
-        creepHandler.run(room, allyUsername, isUnderAttack);
+        spawnerHandler.run(room, areWeUnderAttack);
+        creepHandler.run(room, allyUsername, areWeUnderAttack);
         //}
     }
 };
