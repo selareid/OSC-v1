@@ -14,11 +14,15 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
-            var minimumNumberOfWarriors;
+            var minimumNumberOfWarriors = 0;
+            var minimumNumberOfLandlords = 0;
+
 
             if (isUnderAttack === true) {
-                let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
-                || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1}).length;
+                let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
+                    filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
+                    || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
+                }).length;
 
                 minimumNumberOfWarriors = Math.round(numberOfHostiles * 1.25);
             }
@@ -27,13 +31,10 @@ module.exports = {
             }
 
             var numberOfSources = room.find(FIND_SOURCES).length;
-
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name
             && c.getActiveBodyparts(WORK) >= 5);
-
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
-
                 var creepsGonnaDie = room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester' && c.ticksToLive <= 400})[0];
                 if (creepsGonnaDie) {
                     minimumNumberOfHarvesters += 1;
@@ -45,6 +46,12 @@ module.exports = {
                 minimumNumberOfDistributors = 2;
             }
 
+
+            var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == creep.memory.room);
+            var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == creep.memory.room);
+            minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
+
+
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
             var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
             var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
@@ -53,6 +60,7 @@ module.exports = {
             var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer' && c.memory.room == room.name);
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
             var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
+            var numberOfLandlords = _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);
 
             // console.log('Harvesters ' + numberOfHarvesters);
             // console.log('Carriers ' + numberOfCarriers);
@@ -62,6 +70,7 @@ module.exports = {
             // console.log('Repairer ' + numberOfRepairers);
             // console.log('Defence Managers ' + numberOfDefenceManagers);
             // console.log('Warriors ' + numberOfWarriors);
+            // console.log('Landlords ' + numberOfLandlords);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -99,6 +108,9 @@ module.exports = {
                 }
                 else if (numberOfDefenceManagers < minimumNumberOfDefenceManagers) {
                     name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
+                }
+                else if (numberOfLandlords < minimumNumberOfLandlords && energy - (energy * amountToSave) >= 650) {
+                    name = spawn.createCustomCreep(room, energy, 'landlord', amountToSave);
                 }
 
                 if (name) {

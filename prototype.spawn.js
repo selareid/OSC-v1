@@ -105,6 +105,15 @@ module.exports = function () {
                 }
                 return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
+            else if (roleName == 'landlord') {
+                numberOfParts = Math.floor((energy - (energy * amountToSave)) / 650);
+
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(CLAIM);
+                    body.push(MOVE);
+                }
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+            }
             else {
                 return 'SPAWNING ERROR';
             }
