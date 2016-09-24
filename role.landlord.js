@@ -51,14 +51,14 @@ module.exports = {
 
     findFlagToDo: function (room, creep, claimFlags, reserveFlags) {
 
-        for (let flag in claimFlags) {
-            if (!Game.flags[flag].room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
+        for (let flag of claimFlags) {
+            if (!Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
                 && c.memory.room == flag.room && c.memory.flag == flag.name})[0]) {
                 return flag.name;
             }
         }
-        for (let flag in reserveFlags) {
-            if (Game.flags[flag].room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
+        for (let flag of reserveFlags) {
+            if (Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
                 && c.memory.room == flag.room && c.memory.flag == flag.name}) <= 2) {
                 return flag.name;
             }
