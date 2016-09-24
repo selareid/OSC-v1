@@ -16,6 +16,7 @@ module.exports = {
             var minimumNumberOfDefenceManagers = 1;
             var minimumNumberOfWarriors = 0;
             var minimumNumberOfLandlords = 0;
+            var minimumNumberOfOtherRoomCreeps = 10;
 
 
             if (isUnderAttack === true) {
@@ -61,6 +62,7 @@ module.exports = {
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
             var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
             var numberOfLandlords = _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);
+            var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
 
             // console.log('Harvesters ' + numberOfHarvesters);
             // console.log('Carriers ' + numberOfCarriers);
@@ -71,6 +73,7 @@ module.exports = {
             // console.log('Defence Managers ' + numberOfDefenceManagers);
             // console.log('Warriors ' + numberOfWarriors);
             // console.log('Landlords ' + numberOfLandlords);
+            // console.log('Other Room Creeps ' + numberOfOtherRoomCreeps);
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -111,6 +114,9 @@ module.exports = {
                 }
                 else if (numberOfLandlords < minimumNumberOfLandlords && energy - (energy * amountToSave) >= 650) {
                     name = spawn.createCustomCreep(room, energy, 'landlord', amountToSave);
+                }
+                else if (numberOfOtherRoomCreeps < minimumNumberOfOtherRoomCreeps) {
+                    name = spawn.createCustomCreep(room, energy, 'otherRoomCreep', amountToSave);
                 }
 
                 if (name) {

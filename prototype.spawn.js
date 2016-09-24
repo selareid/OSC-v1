@@ -114,6 +114,16 @@ module.exports = function () {
                 }
                 return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
             }
+            else if (roleName == 'otherRoomCreep') {
+                numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
+
+                for (let i = 0; i < numberOfParts; i++) {
+                    body.push(WORK);
+                    body.push(MOVE);
+                    body.push(CARRY);
+                }
+                return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+            }
             else {
                 return 'SPAWNING ERROR';
             }
