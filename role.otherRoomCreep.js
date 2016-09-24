@@ -8,7 +8,7 @@ module.exports = {
 
         if (creep.room.name != roomToGoTo) {
             var roomPos = new RoomPosition(26, 20, roomToGoTo);
-            creep.moveTo();
+            creep.moveTo(roomPos);
         }
         else {
                 if (creep.memory.type == undefined) {
