@@ -57,22 +57,43 @@ module.exports = {
 
             var target = this.findTarget(room, creep, allyUsername);
 
+            if (Game.time < 13918869) {
+                var rallyPoint = new RoomPosition(36, 46, roomToRallyAt);
 
-            var rallyPoint = new RoomPosition(36, 46, roomToRallyAt);
-
-            if (!creepAttackRange > 1) {
-                if (creep.attack(target) != 0) {
-                    creep.moveTo(rallyPoint, {reusePath: 20});
+                if (!creepAttackRange > 1) {
+                    if (creep.attack(target) != 0) {
+                        creep.moveTo(rallyPoint, {reusePath: 20});
+                    }
+                }
+                else {
+                    if (creep.rangedAttack(target) != 0) {
+                        creep.moveTo(rallyPoint, {reusePath: 20});
+                    }
                 }
             }
             else {
-                if (creep.rangedAttack(target) != 0) {
-                    creep.moveTo(rallyPoint, {reusePath: 20});
+                if (creep.room.name == roomToAttack) {
+                    creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
+                }
+                else {
+                    var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
+                    if (targetSpawn) {
+                        if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+                            if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
+                                if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(target);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target);
+                        }
+                    }
                 }
             }
-
         }
-
     },
 
     findTarget: function (room, creep, allyUsername) {
