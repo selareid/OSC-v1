@@ -1,3 +1,5 @@
+requrie('prototype.creep')();
+
 module.exports = {
     run: function (room, creep) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
@@ -23,7 +25,7 @@ module.exports = {
         }
         else {
 
-            var droppedenergy = this.findDroppedEnergy(room, creep);
+            var droppedenergy = creep.findDroppedEnergy(room);
             if (droppedenergy) {
                 if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(droppedenergy)
@@ -40,28 +42,6 @@ module.exports = {
                 }
             }
 
-        }
-    },
-
-    findDroppedEnergy: function (room, creep) {
-        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 1000});
-        if (droppedEnergy) {
-            return droppedEnergy;
-        }
-        else {
-            droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 500});
-            if (droppedEnergy) {
-                return droppedEnergy;
-            }
-            else {
-                droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 100});
-                if (droppedEnergy) {
-                    return droppedEnergy;
-                }
-                else {
-                    return undefined;
-                }
-            }
         }
     }
 };

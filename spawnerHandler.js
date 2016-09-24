@@ -47,7 +47,7 @@ module.exports = {
                 minimumNumberOfDistributors = 3;
             }
 
-            
+
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
