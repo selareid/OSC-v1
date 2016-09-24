@@ -47,8 +47,8 @@ module.exports = {
             }
 
 
-            var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == creep.memory.room);
-            var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == creep.memory.room);
+            var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
+            var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
 
 
