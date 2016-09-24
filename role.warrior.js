@@ -71,28 +71,28 @@ module.exports = {
                     }
                 }
             //}
-            //else {
-                // if (creep.room.name == roomToAttack) {
-                //     creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
-                // }
-                // else {
-                //     var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
-                //     if (targetSpawn) {
-                //         if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                //             if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
-                //                 if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-                //                     creep.moveTo(target);
-                //                 }
-                //             }
-                //         }
-                //     }
-                //     else {
-                //         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-                //             creep.moveTo(target);
-                //         }
-                //     }
-                // }
-            }
+            // else {
+            //     if (creep.room.name == roomToAttack) {
+            //         creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
+            //     }
+            //     else {
+            //         var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
+            //         if (targetSpawn) {
+            //             if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+            //                 if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
+            //                     if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+            //                         creep.moveTo(target);
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //         else {
+            //             if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+            //                 creep.moveTo(target);
+            //             }
+            //         }
+            //      }
+            // }
         }
     },
 
