@@ -52,15 +52,15 @@ module.exports = {
     findFlagToDo: function (room, creep, claimFlags, reserveFlags) {
 
         for (let flag of claimFlags) {
-            let myCreepsNearby = Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
+            let myCreepsNearby = Game.flags[flag.name].room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
             && c.memory.room == flag.room && c.memory.flag == flag.name})[0];
             if (!myCreepsNearby) {
                 return flag.name;
             }
         }
         for (let flag of reserveFlags) {
-            let numberOfMyCreepsNearby = Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
-            && c.memory.room == flag.room && c.memory.flag == flag.name});
+            let numberOfMyCreepsNearby = Game.flags[flag.name].room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
+            && c.memory.room == flag.room && c.memory.flag == flag.name}).length;
 
             if (numberOfMyCreepsNearby <= 2) {
                 return flag.name;
