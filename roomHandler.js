@@ -5,7 +5,7 @@ const spawnerHandler = require ('spawnerHandler');
 
 module.exports = {
     run: function (room, allyUsername) {
-        var roomToAttackFrom = 'E58N9';
+        var roomsToAttackFrom = ['E58N9'];
         var roomToRallyAt = 'E58N9';
 
         if (!roomsToAttackFrom.includes(room.name)) {
