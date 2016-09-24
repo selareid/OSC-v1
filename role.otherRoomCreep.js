@@ -7,7 +7,7 @@ module.exports = {
     run: function (room, creep, roomToGoTo) {
 
         if (creep.room.name != roomToGoTo) {
-            var roomPos = new roomPosition(26, 20, roomToGoTo);
+            var roomPos = new RoomPosition(26, 20, roomToGoTo);
             creep.moveTo();
         }
         else {
