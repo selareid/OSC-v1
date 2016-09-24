@@ -7,7 +7,7 @@ module.exports = {
     run: function (room, allyUsername) {
 
         var roomsToAttackFrom = [''];
-        var roomToRallyAt = '';
+        var roomToRallyAt = 'E58N8';
         if (!roomsToAttackFrom.includes(room.name)) {
             var isAttacking = false;
             var armySize = 0;

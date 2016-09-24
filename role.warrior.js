@@ -57,8 +57,8 @@ module.exports = {
 
             var target = this.findTarget(room, creep, allyUsername);
 
-            if (Game.time < 13918869) {
-                var rallyPoint = new RoomPosition(36, 46, roomToRallyAt);
+            //if (Game.time < 13918869) {
+                var rallyPoint = new RoomPosition(27, 26, roomToRallyAt);
 
                 if (!creepAttackRange > 1) {
                     if (creep.attack(target) != 0) {
@@ -70,8 +70,8 @@ module.exports = {
                         creep.moveTo(rallyPoint, {reusePath: 20});
                     }
                 }
-            }
-            else {
+            //}
+            //else {
                 // if (creep.room.name == roomToAttack) {
                 //     creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
                 // }
