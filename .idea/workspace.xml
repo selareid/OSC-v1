@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="555453cd-a0fd-4ec1-a2aa-5006fbf69908" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.type1.js" afterPath="$PROJECT_DIR$/role.type1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.type2.js" afterPath="$PROJECT_DIR$/role.type2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.type3.js" afterPath="$PROJECT_DIR$/role.type3.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.type4.js" afterPath="$PROJECT_DIR$/role.type4.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.carrier.js" afterPath="$PROJECT_DIR$/role.carrier.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/role.distributor.js" afterPath="$PROJECT_DIR$/role.distributor.js" />
     </list>
     <ignored path="NSC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,31 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="creepHandler.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="creepHandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/creepHandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="role.otherRoomCreep.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/role.otherRoomCreep.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="84" selection-start-line="17" selection-start-column="84" selection-end-line="17" selection-end-column="84" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="role.type1.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/role.type1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+            <state relative-caret-position="555">
+              <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -96,7 +74,6 @@
         <option value="$PROJECT_DIR$/role.builder.js" />
         <option value="$PROJECT_DIR$/role.repairer.js" />
         <option value="$PROJECT_DIR$/role.defenceManager.js" />
-        <option value="$PROJECT_DIR$/role.carrier.js" />
         <option value="$PROJECT_DIR$/towerHandler.js" />
         <option value="$PROJECT_DIR$/role.warrier.js" />
         <option value="$PROJECT_DIR$/role.harvester.js" />
@@ -104,7 +81,6 @@
         <option value="$PROJECT_DIR$/ScreepsAutocomplete-master/Memory.js" />
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/defenceHandler.js" />
-        <option value="$PROJECT_DIR$/role.distributor.js" />
         <option value="$PROJECT_DIR$/role.warrior.js" />
         <option value="$PROJECT_DIR$/spawnerHandler.js" />
         <option value="$PROJECT_DIR$/prototype.spawn.js" />
@@ -116,6 +92,8 @@
         <option value="$PROJECT_DIR$/role.type3.js" />
         <option value="$PROJECT_DIR$/role.type2.js" />
         <option value="$PROJECT_DIR$/role.type1.js" />
+        <option value="$PROJECT_DIR$/role.carrier.js" />
+        <option value="$PROJECT_DIR$/role.distributor.js" />
       </list>
     </option>
   </component>
@@ -285,12 +263,12 @@
       <workItem from="1474696350928" duration="4240000" />
       <workItem from="1474704203991" duration="1130000" />
       <workItem from="1474744896296" duration="2402000" />
-      <workItem from="1474751938429" duration="577000" />
+      <workItem from="1474751938429" duration="1211000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122415000" />
+    <option name="totallyTimeSpent" value="123049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="546" y="240" width="1374" height="767" extended-state="0" />
@@ -572,13 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/role.carrier.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="35" column="89" selection-start-line="35" selection-start-column="89" selection-end-line="35" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/role.warrier.js" />
     <entry file="file://$PROJECT_DIR$/linkHandler.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -598,13 +569,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/role.distributor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="108" column="6" selection-start-line="108" selection-start-column="6" selection-end-line="108" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -669,22 +633,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/creepHandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/role.otherRoomCreep.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="84" selection-start-line="17" selection-start-column="84" selection-end-line="17" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/role.type4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -711,8 +659,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/role.type1.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/role.otherRoomCreep.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          <caret line="17" column="84" selection-start-line="17" selection-start-column="84" selection-end-line="17" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/role.distributor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/role.carrier.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/creepHandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
           <folding />
         </state>
       </provider>

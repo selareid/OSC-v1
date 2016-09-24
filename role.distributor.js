@@ -93,14 +93,25 @@ module.exports = {
     },
 
     findDroppedEnergy: function (room, creep) {
-        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount >= 100});
+        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 1000});
         if (droppedEnergy) {
             return droppedEnergy;
         }
         else {
-            return undefined;
+            droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 500});
+            if (droppedEnergy) {
+                return droppedEnergy;
+            }
+            else {
+                droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 100});
+                if (droppedEnergy) {
+                    return droppedEnergy;
+                }
+                else {
+                    return undefined;
+                }
+            }
         }
-
     },
 
     findSpawn: function (room, creep) {

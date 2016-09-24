@@ -31,7 +31,8 @@ module.exports = {
             }
             else {
                 var container = room.find(FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0})[0];
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0
+                })[0];
                 if (container) {
                     if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(container)
@@ -43,13 +44,24 @@ module.exports = {
     },
 
     findDroppedEnergy: function (room, creep) {
-        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 70});
+        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 1000});
         if (droppedEnergy) {
             return droppedEnergy;
         }
         else {
-            return undefined;
+            droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 500});
+            if (droppedEnergy) {
+                return droppedEnergy;
+            }
+            else {
+                droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 100});
+                if (droppedEnergy) {
+                    return droppedEnergy;
+                }
+                else {
+                    return undefined;
+                }
+            }
         }
-
     }
 };
