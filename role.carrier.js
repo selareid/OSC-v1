@@ -1,4 +1,4 @@
-requrie('prototype.creep')();
+require('prototype.creep')();
 
 module.exports = {
     run: function (room, creep) {
