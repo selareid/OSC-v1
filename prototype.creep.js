@@ -30,13 +30,13 @@ module.exports = function () {
                 if (allContainersInRoom.length > 0) {
                     var maxEnergyContainers = [];
 
-                    for (let container in allContainersInRoom) {
+                    for (let container of allContainersInRoom) {
                         maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
                     }
 
                     var containerEnergy = _.max(maxEnergyContainers) + 10;
 
-                    var container = room.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
+                    var container = this.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
 
                     if (container) {
                         return container;
