@@ -62,12 +62,12 @@ module.exports = {
 
             if (!creepAttackRange > 1) {
                 if (creep.attack(target) != 0) {
-                    creep.moveTo(rallyPoint);
+                    creep.moveTo(rallyPoint, {reusePath: 20});
                 }
             }
             else {
                 if (creep.rangedAttack(target) != 0) {
-                    creep.moveTo(rallyPoint);
+                    creep.moveTo(rallyPoint, {reusePath: 20});
                 }
             }
 
