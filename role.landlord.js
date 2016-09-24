@@ -58,8 +58,10 @@ module.exports = {
             }
         }
         for (let flag of reserveFlags) {
-            if (Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
-                && c.memory.room == flag.room && c.memory.flag == flag.name}) <= 2) {
+            let numberOfMyCreepsNearby = Game.flags.flag.room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
+            && c.memory.room == flag.room && c.memory.flag == flag.name});
+
+            if (numberOfMyCreepsNearby <= 2) {
                 return flag.name;
             }
         }
