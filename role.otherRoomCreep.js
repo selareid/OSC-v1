@@ -22,7 +22,7 @@ module.exports = {
                         creep.memory.type = 'type3';
                     }
                     if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 1) {
-                        creep.memory.type = 'type4';
+                        creep.memory.type = 'type1';
                     }
                     else {creep.memory.type = 'type2';}
                 }
