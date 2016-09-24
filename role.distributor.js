@@ -54,31 +54,39 @@ module.exports = {
             //     }
             // }
             // else {
+            if (!storage) {
+                var droppedenergy = this.findDroppedEnergy(room, creep);
+                if (droppedenergy) {
+                    if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedenergy);
+                    }
+                }
+            }
 
-                var storage = room.storage;
-                if (storage && storage.store[RESOURCE_ENERGY] > 50) {
-                    if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(storage, {reusePath: 10})
+            var storage = room.storage;
+            if (storage && storage.store[RESOURCE_ENERGY] > 50) {
+                if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(storage, {reusePath: 10})
+                }
+            }
+            else {
+                var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && _.sum(s.store) > 0
+                });
+                if (container) {
+                    if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(container);
                     }
                 }
                 else {
-                    var container = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER && _.sum(s.store) > 0
-                    });
-                    if (container) {
-                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container);
-                        }
-                    }
-                    else {
-                        var droppedenergy = this.findDroppedEnergy(room, creep);
-                        if (droppedenergy) {
-                            if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(droppedenergy);
-                            }
+                    var droppedenergy = this.findDroppedEnergy(room, creep);
+                    if (droppedenergy) {
+                        if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(droppedenergy);
                         }
                     }
                 }
+            }
             //}
 
         }
