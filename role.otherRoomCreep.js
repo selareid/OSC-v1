@@ -12,19 +12,19 @@ module.exports = {
         }
         else {
                 if (creep.memory.type == undefined) {
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type1') < 2) {
+                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type1') < 1) {
                         creep.memory.type = 'type1';
                     }
-                    else if (_.sum(Game.creeps, (c) => c.memory.type == 'type2') < 1) {
+                    else if (_.sum(Game.creeps, (c) => c.memory.type == 'type2') < 4) {
                         creep.memory.type = 'type2';
                     }
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type3') < 2) {
+                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type3') < 1) {
                         creep.memory.type = 'type3';
                     }
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 2) {
+                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 1) {
                         creep.memory.type = 'type4';
                     }
-                    else {creep.memory.type = 'type3';}
+                    else {creep.memory.type = 'type2';}
                 }
                 else {
                     if (creep.memory.type == 'type1') {
