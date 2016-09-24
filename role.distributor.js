@@ -93,7 +93,7 @@ module.exports = {
     },
 
     findDroppedEnergy: function (room, creep) {
-        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+        var droppedEnergy = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {filter: (e) => e.amount >= 100});
         if (droppedEnergy) {
             return droppedEnergy;
         }
