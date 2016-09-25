@@ -21,29 +21,22 @@ module.exports = function () {
                 }
             }
         },
-
         Creep.prototype.findContainer =
             function (room) {
                 var allContainersInRoom = room.find(FIND_STRUCTURES, {
                     filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0});
+                var maxEnergyContainers = [];
 
-                if (allContainersInRoom.length > 0) {
-                    var maxEnergyContainers = [];
+                for (let container in allContainersInRoom) {
+                    maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
+                }
 
-                    for (let container in allContainersInRoom) {
-                        maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
-                    }
+                var containerEnergy = _.max(maxEnergyContainers) + 10;
 
-                    var containerEnergy = _.max(maxEnergyContainers) + 10;
+                var container = room.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
 
-                    var container = room.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
-
-                    if (container) {
-                        return container;
-                    }
-                    else {
-                        return undefined;
-                    }
+                if (container) {
+                    return container;
                 }
                 else {
                     return undefined;
