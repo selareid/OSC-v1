@@ -6,8 +6,8 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room, allyUsername) {
 
-        var roomsToAttackFrom = [''];
-        var roomToRallyAt = '';
+        var roomsToAttackFrom = ['E58N8'];
+        var roomToRallyAt = 'E58N8';
         if (!roomsToAttackFrom.includes(room.name)) {
             var isAttacking = false;
             var armySize = 0;
@@ -15,8 +15,8 @@ module.exports = {
         }
         else {
             var isAttacking = true;
-            var armySize = 5;
-            var roomToAttack = 'E58N8';
+            var armySize = 10;
+            var roomToAttack = 'E58N9';
         }
 
         if (Game.time % 5 == 0) {

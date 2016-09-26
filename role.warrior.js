@@ -57,8 +57,8 @@ module.exports = {
 
             var target = this.findTarget(room, creep, allyUsername);
 
-            //if (Game.time < 13918869) {
-                var rallyPoint = new RoomPosition(27, 26, roomToRallyAt);
+            if (Game.time < 14000631) {
+                var rallyPoint = new RoomPosition(33, 6, roomToRallyAt);
 
                 if (!creepAttackRange > 1) {
                     if (creep.attack(target) != 0) {
@@ -70,29 +70,29 @@ module.exports = {
                         creep.moveTo(rallyPoint, {reusePath: 20});
                     }
                 }
-            //}
-            // else {
-            //     if (creep.room.name == roomToAttack) {
-            //         creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
-            //     }
-            //     else {
-            //         var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
-            //         if (targetSpawn) {
-            //             if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
-            //                 if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
-            //                     if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-            //                         creep.moveTo(target);
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //         else {
-            //             if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-            //                 creep.moveTo(target);
-            //             }
-            //         }
-            //      }
-            // }
+            }
+            else {
+                if (creep.room.name == roomToAttack) {
+                    creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
+                }
+                else {
+                    var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
+                    if (targetSpawn) {
+                        if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+                            if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
+                                if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(target);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target);
+                        }
+                    }
+                 }
+            }
         }
     },
 
