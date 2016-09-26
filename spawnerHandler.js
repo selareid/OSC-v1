@@ -97,9 +97,6 @@ module.exports = {
                 else if (numberOfCarriers < minimumNumberOfCarriers) {
                     name = spawn.createCustomCreep(room, energy, 'carrier', amountToSave);
                 }
-                else if (numberOfWarriors < minimumNumberOfWarriors) {
-                    name = spawn.createCustomCreep(room, energy, 'warrior', amountToSave);
-                }
                 else if (numberOfUpgraders < minimumNumberOfUpgraders) {
                     name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);
                 }
@@ -111,6 +108,9 @@ module.exports = {
                 }
                 else if (numberOfDefenceManagers < minimumNumberOfDefenceManagers) {
                     name = spawn.createCustomCreep(room, energy, 'defenceManager', amountToSave);
+                }
+                else if (numberOfWarriors < minimumNumberOfWarriors) {
+                    name = spawn.createCustomCreep(room, energy, 'warrior', amountToSave);
                 }
                 else if (numberOfLandlords < minimumNumberOfLandlords && energy - (energy * amountToSave) >= 650) {
                     name = spawn.createCustomCreep(room, energy, 'landlord', amountToSave);
