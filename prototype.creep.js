@@ -27,13 +27,26 @@ module.exports = function () {
                     filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0});
                 var maxEnergyContainers = [];
 
+<<<<<<< HEAD
                 for (let container in allContainersInRoom) {
                     maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
                 }
+=======
+                if (allContainersInRoom.length > 0) {
+                    var maxEnergyContainers = [];
+
+                    for (let container in allContainersInRoom) {
+                        maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
+                    }
+>>>>>>> parent of ffc8efd... fixed creep.prototype.findContainers
 
                 var containerEnergy = _.max(maxEnergyContainers) + 10;
 
+<<<<<<< HEAD
                 var container = room.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
+=======
+                    var container = room.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] >= containerEnergy})
+>>>>>>> parent of ffc8efd... fixed creep.prototype.findContainers
 
                 if (container) {
                     return container;
