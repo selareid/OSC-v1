@@ -2,7 +2,7 @@ const roomHandler = require ('roomHandler');
 
 module.exports.loop = function () {
 
-    var allyUsername = ['BuffyNZ'];
+    var allyUsername = ['BuffyNZ', 'Lur', 'Leonyx'];
 
     //memory stuff
     for (let name in Memory.creeps) {
@@ -27,7 +27,7 @@ module.exports.loop = function () {
         }
 
     }
-    
+
 
     //do actual stuff
     for (let room_it in Game.rooms) {
