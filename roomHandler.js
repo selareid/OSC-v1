@@ -7,7 +7,7 @@ module.exports = {
     run: function (room, allyUsername) {
 
         var roomsToAttackFrom = ['E58N8'];
-        var roomToRallyAt = 'E58N8';
+        var flagToRallyAt = Game.flags['warGroupingFlag'];
         if (!roomsToAttackFrom.includes(room.name)) {
             var isAttacking = false;
             var armySize = 0;
@@ -38,7 +38,7 @@ module.exports = {
         //else {
         linkHandler.run(room);
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
-        creepHandler.run(room, allyUsername, areWeUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt);
+        creepHandler.run(room, allyUsername, areWeUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt);
         //}
     }
 };

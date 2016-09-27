@@ -1,5 +1,5 @@
 module.exports = {
-    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt) {
+    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt) {
 
         var creepAttackRange;
         if (creep.getActiveBodyparts(HEAL) >= 1) {
@@ -7,16 +7,16 @@ module.exports = {
         }
         else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
             creepAttackRange = 3;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt);
         }
         else if (creep.getActiveBodyparts(ATTACK) >= 1) {
             creepAttackRange = 1;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt);
+            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt);
         }
 
     },
 
-    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, roomToRallyAt) {
+    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt) {
 
         if (isUnderAttack === true) {
             if (creep.room.name == room) {
@@ -57,8 +57,9 @@ module.exports = {
 
             var target = this.findTarget(room, creep, allyUsername);
 
-            if (Game.time < 14000631) {
-                var rallyPoint = new RoomPosition(33, 6, roomToRallyAt);
+            //the number is the game time to attack
+            if (Game.time <  14000157) {
+                var rallyPoint = flagToRallyAt.pos;
 
                 if (!creepAttackRange > 1) {
                     if (creep.attack(target) != 0) {
@@ -72,14 +73,14 @@ module.exports = {
                 }
             }
             else {
-                if (creep.room.name == roomToAttack) {
-                    creep.moveTo(creep.findClosestByRange(room.findExitTo(roomToAttack)));
+                if (creep.room.name != roomToAttack) {
+                    creep.moveTo(creep.pos.findClosestByRange(room.findExitTo(roomToAttack)));
                 }
                 else {
                     var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
                     if (targetSpawn) {
                         if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                            if (creep.moveTo(targetSpawn) == ERR_NO_PATH) {
+                            if (creep.moveTo(targetSpawn, {ignoreCreeps: true, ignoreDestructibleStructures: true}) == ERR_NO_PATH) {
                                 if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                                     creep.moveTo(target);
                                 }

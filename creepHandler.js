@@ -10,7 +10,7 @@ const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
 
 module.exports = {
-    run: function (room, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt) {
+    run: function (room, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt) {
 
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
@@ -42,7 +42,7 @@ module.exports = {
                         roleDefenceManager.run(room, creep, hitsOfDefence);
                         break;
                     case 'warrior':
-                        roleWarrior.run(room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt);
+                        roleWarrior.run(room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt);
                         break;
                     case 'landlord':
                         roleLandlord(room, creep);
