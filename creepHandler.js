@@ -17,46 +17,49 @@ module.exports = {
 
             if (creep.memory.room == room.name && creep.spawning === false) {
 
-                if (creep.memory.role == 'harvester') {
-                    roleHarvester.run(room, creep);
+                switch(creep.memory.role) {
+                    case 'harvester':
+                        roleHarvester.run(room, creep);
+                        break;
+                    case 'carrier':
+                        roleCarrier.run(room, creep);
+                        break;
+                    case 'distributor':
+                        var energyOfTowers = this.getEnergyOfTower(room);
+                        roleDistributor.run(room, creep, energyOfTowers);
+                        break;
+                    case 'upgrader':
+                        roleUpgrader.run(room, creep);
+                        break;
+                    case 'builder':
+                        roleBuilder.run(room, creep);
+                        break;
+                    case 'repairer':
+                        roleRepairer.run(room, creep);
+                        break;
+                    case 'defenceManager':
+                        var hitsOfDefence = this.getHitsOfDefence(room);
+                        roleDefenceManager.run(room, creep, hitsOfDefence);
+                        break;
+                    case 'warrior':
+                        roleWarrior.run(room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt);
+                        break;
+                    case 'landlord':
+                        roleLandlord(room, creep);
+                        break;
+                    case 'otherRoomCreep':
+                        otherRoomCreep.run(room, creep, 'E58N8');
+                        break;
+                    case '':
+                        creep.say('ERROR!!!', true);
+                        break;
+                    default:
+                        creep.say('ERROR!!!', true);
+                        console.log('Unknown Creep Role ' + creep.memory.role);
+                        creep.memory.role = 'upgrader';
+                        break;
                 }
-                else if (creep.memory.role == 'carrier') {
-                    roleCarrier.run(room, creep);
-                }
-                else if (creep.memory.role == 'distributor') {
-                    var energyOfTowers = this.getEnergyOfTower(room);
-                    roleDistributor.run(room, creep, energyOfTowers);
-                }
-                else if (creep.memory.role == 'upgrader') {
-                    roleUpgrader.run(room, creep);
-                }
-                else if (creep.memory.role == 'builder') {
-                    roleBuilder.run(room, creep);
-                }
-                else if (creep.memory.role == 'repairer') {
-                    roleRepairer.run(room, creep);
-                }
-                else if (creep.memory.role == 'defenceManager') {
-                    var hitsOfDefence = this.getHitsOfDefence(room);
-                    roleDefenceManager.run(room, creep, hitsOfDefence);
-                }
-                else if (creep.memory.role == 'warrior') {
-                    roleWarrior.run(room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, roomToRallyAt);
-                }
-                else if (creep.memory.role == 'landlord') {
-                    roleLandlord.run(room, creep);
-                }
-                else if (creep.memory.role == 'otherRoomCreep') {
-                    otherRoomCreep.run(room, creep, 'E58N8');
-                }
-                else if (creep.memory.role === '') {
-                    creep.say('ERROR!!!', true);
-                }
-                else {
-                    creep.say('ERROR!!!', true);
-                    console.log('Unknown Creep Role ' + creep.memory.role);
-                    creep.memory.role = 'upgrader';
-                }
+
             }
         }
     },
