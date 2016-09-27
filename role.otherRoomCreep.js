@@ -11,7 +11,7 @@ module.exports = {
             creep.moveTo(roomPos);
         }
         else {
-                if (creep.memory.type == undefined) {
+                if (!creep.memory.type) {
                     if (_.sum(Game.creeps, (c) => c.memory.type == 'type1') < 1) {
                         creep.memory.type = 'type1';
                     }
@@ -27,20 +27,25 @@ module.exports = {
                     else {creep.memory.type = 'type2';}
                 }
                 else {
-                    if (creep.memory.type == 'type1') {
-                        type1.run(creep);
-                    }
-                    else if (creep.memory.type == 'type2') {
-                        type2.run(creep);
-                    }
-                    else if (creep.memory.type == 'type3') {
-                        type3.run(creep);
-                    }
-                    else if (creep.memory.type == 'type4') {
-                        type4.run(creep);
-                    }
-                }
 
+                    switch (creep.memory.type) {
+                        case 'type1':
+                            type1.run(creep);
+                            break;
+                        case 'type2':
+                            type2.run(creep);
+                            break;
+                        case 'type3':
+                            type3.run(creep);
+                            break;
+                        case 'type4':
+                            type4.run(creep);
+                            break;
+                        default:
+                            creep.say('ERR TYPE');
+                    }
+
+                }
 
         }
     }
