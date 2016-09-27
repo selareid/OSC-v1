@@ -34,7 +34,7 @@ module.exports = function () {
                         maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
                     }
 
-                    var containerEnergy = _.max(maxEnergyContainers) + 10;
+                    var containerEnergy = _.max(maxEnergyContainers) - 10;
 
 
                     var container = this.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY]
@@ -47,6 +47,9 @@ module.exports = function () {
                     else {
                         return undefined;
                     }
+                }
+                else {
+                    return undefined;
                 }
             }
 };
