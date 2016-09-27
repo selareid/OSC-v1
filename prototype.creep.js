@@ -26,7 +26,6 @@ module.exports = function () {
                 var allContainersInRoom = room.find(FIND_STRUCTURES, {
                     filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0
                 });
-                var maxEnergyContainers = [];
 
                 if (allContainersInRoom.length > 0) {
                     var maxEnergyContainers = [];
