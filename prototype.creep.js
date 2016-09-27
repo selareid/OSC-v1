@@ -28,18 +28,12 @@ module.exports = function () {
                 });
                 var maxEnergyContainers = [];
 
-
-                for (let container in allContainersInRoom) {
-                    maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
-                }
-
                 if (allContainersInRoom.length > 0) {
                     var maxEnergyContainers = [];
 
                     for (let container in allContainersInRoom) {
                         maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
                     }
-
 
                     var containerEnergy = _.max(maxEnergyContainers) + 10;
 
