@@ -90,14 +90,22 @@ module.exports = {
                     if (targetSpawn) {
                         if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
                             if (creep.moveTo(targetSpawn, {ignoreCreeps: true, ignoreDestructibleStructures: true}) == ERR_NO_PATH) {
-                                if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                                var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL && s.structureType == STRUCTURE_RAMPART});
+                                if (creep.attack(wallTarget) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(wallTarget);
+                                }
+                                else if (creep.attack(wallTarget) == ERR_NO_PATH) {
                                     creep.moveTo(target);
                                 }
                             }
                         }
                         else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
                             if (creep.moveTo(targetSpawn, {ignoreCreeps: true, ignoreDestructibleStructures: true}) == ERR_NO_PATH) {
-                                if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
+                                var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL && s.structureType == STRUCTURE_RAMPART});
+                                if (creep.rangedAttack(wallTarget) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(wallTarget);
+                                }
+                                else if (creep.rangedAttack(wallTarget) == ERR_NO_PATH) {
                                     creep.moveTo(target);
                                 }
                             }
