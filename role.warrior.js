@@ -95,9 +95,19 @@ module.exports = {
                                 }
                             }
                         }
+                        else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
+                            if (creep.moveTo(targetSpawn, {ignoreCreeps: true, ignoreDestructibleStructures: true}) == ERR_NO_PATH) {
+                                if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(target);
+                                }
+                            }
+                        }
                     }
                     else {
                         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target);
+                        }
+                        else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target);
                         }
                     }
