@@ -4,11 +4,9 @@ module.exports = function () {
     Room.prototype.findAttackFlag =
         function (room) {
 
-            var rallyFlags = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(room) && f.memory.whenToAttack && f.memory.whereToAttack && f.memory.armySize);
+            var rallyFlag = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(room) && f.memory.whenToAttack && f.memory.whereToAttack && f.memory.armySize)[0];
 
-            var rallyFlag = _.min(rallyFlags, 'memory.when');
-
-            if (rallyFlag != Number.POSITIVE_INFINITY || rallyFlag != Number.NEGATIVE_INFINITY) {
+            if (rallyFlag) {
                 return rallyFlag;
             }
             else {
