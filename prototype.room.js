@@ -19,6 +19,7 @@ module.exports = function () {
             function () {
 
                 /*
+                 *      WHITE:
                  *		RED         container
                  *		PURPLE      extension
                  *		BLUE        link
@@ -29,6 +30,9 @@ module.exports = function () {
                  *		BROWN		tower
                  *		GREY		wall
                  *		WHITE		road
+                 *		GREY:
+                 *	    WHITE:      lab
+                 *	    GREY:       terminal
                  */
 
                 if (global.rooms == undefined || global.rooms[this.name] == undefined) {
@@ -104,6 +108,39 @@ module.exports = function () {
                                 }
                             }
                         }
+                        else if (flag.color == COLOR_GREY && flag.pos.roomName == this.name) {
+                            let object = undefined;
+                            switch (flag.secondaryColor) {
+                                case COLOR_WHITE:
+                                    object = STRUCTURE_LAB;
+                                    break;
+                                case COLOR_GREY:
+                                    object = STRUCTURE_TERMINAL;
+                                    break;
+                                default:
+                                    console.log('Color error: ' + flag.secondaryColor);
+                            }
+                            if (object != undefined) {
+                                let atPos = flag.pos.look();
+                                atPos = atPos.filter(o => o.type == LOOK_STRUCTURES && o.structure.structureType == object);
+                                if (existing[object] == undefined) {
+                                    existing[object] = this.find(FIND_STRUCTURES, {filter: o => o.structureType == object});
+                                }
+                                console.log(this.name + `: check ${object} : ${atPos.length} vs ${global.rooms[this.name].constructionTargets[object]} vs ${existing[object].length}`);
+                                if (atPos.length == 0 &&
+                                    global.rooms[this.name].constructionTargets[object] != undefined &&
+                                    global.rooms[this.name].constructionTargets[object] > existing[object].length) {
+                                    let res = flag.room.createConstructionSite(flag.pos, object);
+                                    if (res != 0) {
+                                        console.log(this.name + `: Failed to create construction site at ${flag.name}: ${res}`);
+                                    } else {
+                                        console.log(this.name + `: Created construction site at ${flag.name}: ${res}`);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
 //        console.log(`Check construction in ${this.name}`);
