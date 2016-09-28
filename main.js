@@ -39,7 +39,7 @@ module.exports.loop = function () {
                 Memory.rooms[room] = {};
             }
 
-            roomHandler.run(room, allyUsername);
+            roomHandler.run(room);
         }
     }
 
