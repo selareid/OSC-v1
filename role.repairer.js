@@ -1,4 +1,6 @@
+require('global');
 require('prototype.creep')();
+
 const roleBuilder = require ('role.builder');
 
 module.exports = {

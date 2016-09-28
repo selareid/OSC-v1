@@ -1,3 +1,4 @@
+require('global');
 require('prototype.creep')();
 
 module.exports = {

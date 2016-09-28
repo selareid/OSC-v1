@@ -1,4 +1,6 @@
+require('global');
 require('prototype.creep')();
+
 const roleUpgrader = require ('role.upgrader');
 
 module.exports = {

@@ -1,3 +1,5 @@
+require('global');
+
 module.exports = function () {
     StructureSpawn.prototype.createCustomCreep =
         function (room, energy, roleName, amountToSave) {

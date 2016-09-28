@@ -1,3 +1,5 @@
+require('global');
+
 require('prototype.spawn')();
 
 module.exports = {
@@ -16,7 +18,7 @@ module.exports = {
             var minimumNumberOfDefenceManagers = 1;
             var minimumNumberOfWarriors = 0;
             var minimumNumberOfLandlords = 0;
-            var minimumNumberOfOtherRoomCreeps = 10;
+            var minimumNumberOfOtherRoomCreeps = 0;
 
 
             if (isUnderAttack === true) {

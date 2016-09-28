@@ -1,3 +1,5 @@
+require('global');
+
 var type2 = require ('role.type2');
 
 module.exports = {

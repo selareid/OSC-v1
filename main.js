@@ -1,8 +1,8 @@
+require('global');
+
 const roomHandler = require ('roomHandler');
 
 module.exports.loop = function () {
-
-    var allyUsername = ['BuffyNZ', 'Lur', 'Leonyx'];
 
     //memory stuff
     for (let name in Memory.creeps) {

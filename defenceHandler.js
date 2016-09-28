@@ -1,8 +1,10 @@
+require('global');
+
 const towerHandler = require('towerHandler');
 
 module.exports = {
-    run: function (room, allyUsername) {
-        var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room, allyUsername));
+    run: function (room) {
+        var hostileCreepsInRoom = JSON.stringify(this.getHostileCreeps(room));
 
         if (Game.time % 20 == 0) {
             console.log('Enemy creeps spotted in room ' + room);
@@ -17,19 +19,19 @@ module.exports = {
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
         for (let tower of towers) {
-            towerHandler.run(room, tower, allyUsername);
+            towerHandler.run(room, tower);
         }
 
     },
 
-    getHostileCreeps: function (room, allyUsername) {
-        var hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => allyUsername.includes(c.owner.username) == false});
+    getHostileCreeps: function (room) {
+        var hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
         return hostileCreepsInRoom;
     },
 
-    isUnderAttack: function (room, allyUsername) {
+    isUnderAttack: function (room) {
 
-        var hostileCreepsInRoom = this.getHostileCreeps(room, allyUsername)[0];
+        var hostileCreepsInRoom = this.getHostileCreeps(room)[0];
 
         if (hostileCreepsInRoom) {
             return true;

@@ -1,3 +1,5 @@
+require('global');
+
 var type1 = require ('role.type1'); //RCL upgrader
 var type2 = require ('role.type2'); //builder
 var type3 = require ('role.type3'); //repairer

@@ -1,8 +1,10 @@
+require('global');
+
 module.exports = {
 
-    run: function (room, tower, allyUsername) {
+    run: function (room, tower) {
 
-        var towerTarget = this.findTarget(room, tower, allyUsername);
+        var towerTarget = this.findTarget(room, tower);
 
         if (towerTarget) {
             tower.attack(towerTarget);
@@ -15,13 +17,13 @@ module.exports = {
         }
     },
 
-    findTarget: function (room, tower, allyUsername) {
+    findTarget: function (room, tower) {
 
         var towerTarget;
 
         towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: (c) => c.getActiveBodyparts(HEAL) >= 1
-            && allyUsername.includes(c.owner.username) == false
+            && Allies.includes(c.owner.username) == false
         });
 
         if (towerTarget) {
@@ -30,14 +32,14 @@ module.exports = {
         else {
             towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
                 filter: (c) => c.getActiveBodyparts(ATTACK) >= 1
-                && allyUsername.includes(c.owner.username) == false
+                && Allies.includes(c.owner.username) == false
             });
 
             if (towerTarget) {
                 return towerTarget;
             }
             else {
-                towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => allyUsername.includes(c.owner.username) == false});
+                towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
                 if (towerTarget) {
                     return towerTarget;
                 }

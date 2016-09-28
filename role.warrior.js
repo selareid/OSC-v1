@@ -1,5 +1,7 @@
+require('global');
+
 module.exports = {
-    run: function (room, creep, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt) {
+    run: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt) {
 
         var creepAttackRange;
         if (creep.getActiveBodyparts(HEAL) >= 1) {
@@ -7,20 +9,24 @@ module.exports = {
         }
         else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
             creepAttackRange = 3;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt);
+            this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt);
         }
         else if (creep.getActiveBodyparts(ATTACK) >= 1) {
             creepAttackRange = 1;
-            this.creepAttack(room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt);
+            this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt);
         }
 
     },
 
-    creepAttack: function (room, creep, allyUsername, isUnderAttack, creepAttackRange, isAttacking, armySize, roomToAttack, flagToRallyAt) {
+    creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt) {
+
+        var armySize = flagToRallyAt.memory.armySize;
+        var roomToAttack = flagToRallyAt.memory.whereToAttack;
+        var whenToAttack = flagToRallyAt.memory.whenToAttack;
 
         if (isUnderAttack === true) {
             if (creep.room.name == room) {
-                var target = this.findTarget(room, creep, allyUsername);
+                var target = this.findTarget(room, creep);
                 if (target) {
                     var rampart = this.findRampartNearTarget(room, creep, target, creepAttackRange);
                     if (rampart) {
@@ -55,10 +61,10 @@ module.exports = {
         }
         else if (isAttacking === true && roomToAttack && armySize > 0) {
 
-            var target = this.findTarget(room, creep, allyUsername);
+            var target = this.findTarget(room, creep);
 
             //the number is the game time to attack
-            if (Game.time < 14003012) {
+            if (Game.time < whenToAttack) {
                 var rallyPoint = flagToRallyAt.pos;
 
                 if (!creepAttackRange > 1) {
@@ -96,17 +102,17 @@ module.exports = {
             }
         }
         else {
-            creep.moveTo(new RoomPosition(41, 9, 'E58N8'));
+            //do stuff when not under attack and not attacking
         }
     },
 
-    findTarget: function (room, creep, allyUsername) {
+    findTarget: function (room, creep) {
 
         var target;
 
         target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
             filter: (c) => c.getActiveBodyparts(HEAL) >= 1
-            && allyUsername.includes(c.owner.username) == false
+            && Allies.includes(c.owner.username) == false
         });
 
         if (target) {
@@ -115,14 +121,14 @@ module.exports = {
         else {
             target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
                 filter: (c) => c.getActiveBodyparts(ATTACK) >= 1
-                && allyUsername.includes(c.owner.username) == false
+                && Allies.includes(c.owner.username) == false
             });
 
             if (target) {
                 return target;
             }
             else {
-                target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => allyUsername.includes(c.owner.username) == false});
+                target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
                 if (target) {
                     return target;
                 }

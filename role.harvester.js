@@ -1,3 +1,4 @@
+require('global');
 const roleEmergencyHarvester = require ('role.emergencyHarvester');
 
 module.exports = {

@@ -1,3 +1,5 @@
+require('global');
+
 module.exports = function () {
     Creep.prototype.findDroppedEnergy =
         function (room) {

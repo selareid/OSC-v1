@@ -1,3 +1,5 @@
+require('global');
+
 module.exports = {
     run: function (room, creep) {
         var spawn = room.find(FIND_MY_SPAWNS)[0];
