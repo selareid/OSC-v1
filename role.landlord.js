@@ -12,7 +12,7 @@ module.exports = {
         }
         else {
 
-            if (creep.room != flag.room) {
+            if (creep.pos.roomName != flag.pos.roomName) {
                 creep.moveTo(flag.pos);
             }
             else {
