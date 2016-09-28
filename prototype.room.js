@@ -51,6 +51,15 @@ module.exports = function () {
                         if (flag.color == COLOR_WHITE && flag.pos.roomName == this.name) {
                             let object = undefined;
                             switch (flag.secondaryColor) {
+                                case COLOR_GREY:
+                                    object = STRUCTURE_WALL;
+                                    break;
+                                case COLOR_CYAN:
+                                    object = STRUCTURE_RAMPART;
+                                    break;
+                                case COLOR_BROWN:
+                                    object = STRUCTURE_TOWER;
+                                    break;
                                 case COLOR_RED:
                                     object = STRUCTURE_CONTAINER;
                                     break;
@@ -60,9 +69,6 @@ module.exports = function () {
                                 case COLOR_BLUE:
                                     object = STRUCTURE_LINK;
                                     break;
-                                case COLOR_CYAN:
-                                    object = STRUCTURE_RAMPART;
-                                    break;
                                 case COLOR_GREEN:
                                     object = STRUCTURE_EXTRACTOR;
                                     break;
@@ -71,12 +77,6 @@ module.exports = function () {
                                     break;
                                 case COLOR_ORANGE:
                                     object = STRUCTURE_STORAGE;
-                                    break;
-                                case COLOR_BROWN:
-                                    object = STRUCTURE_TOWER;
-                                    break;
-                                case COLOR_GREY:
-                                    object = STRUCTURE_WALL;
                                     break;
                                 case COLOR_WHITE:
                                     object = STRUCTURE_ROAD;
