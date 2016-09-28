@@ -47,7 +47,7 @@ module.exports = {
                         roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
                         break;
                     case 'landlord':
-                        roleLandlord(room, creep);
+                        roleLandlord.run(room, creep);
                         break;
                     case 'otherRoomCreep':
                         otherRoomCreep.run(room, creep, roomToGoTo);
