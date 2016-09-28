@@ -66,7 +66,7 @@ module.exports = {
             var target = this.findTarget(room, creep);
 
             //the number is the game time to attack
-            if (Game.time > whenToAttack) {
+            if (Game.time < whenToAttack) {
                 var rallyPoint = flagToRallyAt.pos;
 
                 if (!creepAttackRange > 1) {
