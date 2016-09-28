@@ -82,7 +82,8 @@ module.exports = {
             }
             else {
                 if (creep.room.name != roomToAttack) {
-                    creep.moveTo(room.findExitTo(roomToAttack));
+                    var randomPosition = new RoomPosition(46,44,roomToAttack);
+                    creep.moveTo(randomPosition);
                 }
                 else {
                     var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
