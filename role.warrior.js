@@ -95,6 +95,9 @@ module.exports = {
                  }
             }
         }
+        else {
+            creep.moveTo(new RoomPosition(41, 9, 'E58N8'));
+        }
     },
 
     findTarget: function (room, creep, allyUsername) {
