@@ -6,7 +6,7 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room, allyUsername) {
 
-        var roomsToAttackFrom = ['E58N8'];
+        var roomsToAttackFrom = [''];
         var flagToRallyAt = Game.flags['warGroupingFlag'];
         var otherRoomCreepsRoomToGoTo = '';
 
