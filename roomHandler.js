@@ -18,7 +18,7 @@ module.exports = {
         else {
             var isAttacking = true;
             var armySize = 10;
-            var roomToAttack = 'E58N7';
+            var roomToAttack = '';
         }
 
         if (Game.time % 5 == 0) {
