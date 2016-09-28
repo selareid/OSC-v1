@@ -10,7 +10,7 @@ const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
 
 module.exports = {
-    run: function (room, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt) {
+    run: function (room, allyUsername, isUnderAttack, isAttacking, armySize, roomToAttack, flagToRallyAt, roomToGoTo) {
 
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
@@ -48,7 +48,7 @@ module.exports = {
                         roleLandlord(room, creep);
                         break;
                     case 'otherRoomCreep':
-                        otherRoomCreep.run(room, creep, 'E58N8');
+                        otherRoomCreep.run(room, creep, roomToGoTo);
                         break;
                     case '':
                         creep.say('ERROR!!!', true);

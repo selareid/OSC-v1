@@ -6,11 +6,13 @@ var type4 = require ('role.type4'); //wallRepairer and tower replenisher
 module.exports = {
     run: function (room, creep, roomToGoTo) {
 
-        if (creep.room.name != roomToGoTo) {
-            var roomPos = new RoomPosition(26, 20, roomToGoTo);
-            creep.moveTo(roomPos);
-        }
-        else {
+        if (roomToGoTo) {
+
+            if (creep.room.name != roomToGoTo) {
+                var roomPos = new RoomPosition(26, 20, roomToGoTo);
+                creep.moveTo(roomPos);
+            }
+            else {
                 if (!creep.memory.type) {
                     if (_.sum(Game.creeps, (c) => c.memory.type == 'type1') < 1) {
                         creep.memory.type = 'type1';
@@ -22,9 +24,11 @@ module.exports = {
                         creep.memory.type = 'type3';
                     }
                     if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 1) {
-                        creep.memory.type = 'type1';
+                        creep.memory.type = 'type4';
                     }
-                    else {creep.memory.type = 'type2';}
+                    else {
+                        creep.memory.type = 'type2';
+                    }
                 }
                 else {
 
@@ -46,6 +50,7 @@ module.exports = {
                     }
 
                 }
+            }
 
         }
     }
