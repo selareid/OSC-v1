@@ -10,7 +10,7 @@ module.exports = {
     run: function (room) {
 
         if (Game.time % 20 == 0) {
-            Game.rooms[room].updateConstructionTargets();
+            room.updateConstructionTargets();
         }
 
         var flagToRallyAt = room.findAttackFlag(room);
