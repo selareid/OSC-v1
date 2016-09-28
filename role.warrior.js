@@ -20,9 +20,11 @@ module.exports = {
 
     creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt) {
 
-        var armySize = flagToRallyAt.memory.armySize;
-        var roomToAttack = flagToRallyAt.memory.whereToAttack;
-        var whenToAttack = flagToRallyAt.memory.whenToAttack;
+        if (flagToRallyAt) {
+            var armySize = flagToRallyAt.memory.armySize;
+            var roomToAttack = flagToRallyAt.memory.whereToAttack;
+            var whenToAttack = flagToRallyAt.memory.whenToAttack;
+        }
 
         if (isUnderAttack === true) {
             if (creep.room.name == room) {
