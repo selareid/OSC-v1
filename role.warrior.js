@@ -17,7 +17,8 @@ module.exports = {
             }
             else if (creep.getActiveBodyparts(ATTACK) >= 1) {
                 creepAttackRange = 1;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking,);
+                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
+                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
             }
         }
         else {
