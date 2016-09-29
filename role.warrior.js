@@ -50,7 +50,7 @@ module.exports = {
             //the number is the game time to attack
             if (Game.time < whenToAttack) {
 
-                if (creep.pos.findInRange(FIND_FLAGS, 7, {filter: (f) => f.name == flagToRallyAt.name})) {
+                if (creep.pos.findInRange(FIND_FLAGS, 7, {filter: (f) => f.name == flagToRallyAt.name}).length > 0) {
                     return true;
                 }
                 else {
@@ -66,7 +66,7 @@ module.exports = {
                     return false;
                 }
                 else {
-                    return true; 
+                    return true;
                 }
             }
         }
