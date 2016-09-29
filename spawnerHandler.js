@@ -12,7 +12,7 @@ module.exports = {
             var minimumNumberOfHarvesters = 3;
             var minimumNumberOfCarriers = 3;
             var minimumNumberOfDistributors = 1;
-            var minimumNumberOfUpgraders = 2;
+            var minimumNumberOfUpgraders = 1;
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
@@ -20,6 +20,9 @@ module.exports = {
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
 
+            if (room.controller.level <= 4) {
+                minimumNumberOfUpgraders = 4;
+            }
 
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
