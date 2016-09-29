@@ -1,3 +1,3 @@
 'use strict';
 
-global.Allies = ['BuffyNZ', 'Lur', 'Leonyx'];
+global.Allies = ['starwar15432', 'BuffyNZ', 'Lur', 'Leonyx'];
