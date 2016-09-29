@@ -50,14 +50,16 @@ module.exports = {
             //the number is the game time to attack
             if (Game.time < whenToAttack) {
 
-                if (creep.pos.findInRange(FIND_FLAGS, 7, {filter: (f) => f.name == flagToRallyAt.name}).length > 0) {
-                    return true;
-                }
-                else {
-                    var rallyPoint = flagToRallyAt.pos;
-                    creep.moveTo(rallyPoint, {reusePath: 20});
+                if (creep.moveTo(flagToRallyAt.pos) == ERR_NO_PATH) {
+                    if (creep.pos.findInRange(FIND_FLAGS, 5, {filter: (f) => f.name == flagToRallyAt.name}).length > 0) {
+                        return true;
+                    }
+                    else {
+                        var rallyPoint = flagToRallyAt.pos;
+                        creep.moveTo(rallyPoint, {reusePath: 20});
 
-                    return false;
+                        return false;
+                    }
                 }
             }
             else {
@@ -132,7 +134,10 @@ module.exports = {
                 }
             }
             else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                if (creep.moveTo(targetSpawn, {ignoreCreeps: true, ignoreDestructibleStructures: true}) == ERR_NO_PATH) {
+                if (creep.moveTo(targetSpawn, {
+                        ignoreCreeps: true,
+                        ignoreDestructibleStructures: true
+                    }) == ERR_NO_PATH) {
                     var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL && s.structureType == STRUCTURE_RAMPART});
                     if (creep.rangedAttack(wallTarget) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(wallTarget);
