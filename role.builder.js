@@ -41,6 +41,12 @@ module.exports = {
                         creep.moveTo(container)
                     }
                 }
+                else {
+                    var droppedEnergy = creep.findDroppedEnergy(room);
+                    if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(container)
+                    }
+                }
             }
         }
     },
