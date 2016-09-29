@@ -39,12 +39,20 @@ module.exports = function () {
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'warrior':
+                    var numberOfHeal = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(HEAL) >= 1);
                     var numberOfRanged = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(RANGED_ATTACK) >= 1);
 
-                    if (numberOfRanged < 2) {
+                    if (numberOfHeal < 2) {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(MOVE);
+                            body.push(RANGED_ATTACK);
+                        }
+                    }
+                    else if (numberOfRanged < 2) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                        if (numberOfParts > 4) {
-                            numberOfParts = 4;
+                        if (numberOfParts > 5) {
+                            numberOfParts = 5;
                         }
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(MOVE);
@@ -53,8 +61,8 @@ module.exports = function () {
                     }
                     else {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 210);
-                        if (numberOfParts > 3) {
-                            numberOfParts = 3;
+                        if (numberOfParts > 5) {
+                            numberOfParts = 5;
                         }
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(MOVE);
