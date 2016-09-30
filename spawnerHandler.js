@@ -24,6 +24,12 @@ module.exports = {
                 minimumNumberOfUpgraders = 4;
             }
 
+            if (!room.storage) {
+                minimumNumberOfCarriers = 0;
+                minimumNumberOfDistributors = 3;
+                minimumNumberOfBuilders = 3;
+            }
+
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
                     filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
@@ -45,11 +51,6 @@ module.exports = {
                 if (creepsGonnaDie) {
                     minimumNumberOfHarvesters += 1;
                 }
-            }
-
-            if (!room.storage) {
-                minimumNumberOfCarriers = 0;
-                minimumNumberOfDistributors = 3;
             }
 
 
