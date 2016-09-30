@@ -12,7 +12,7 @@ module.exports = {
 
         if (creep.memory.working == true) {
 
-            spawn = this.findSpawn(room, creep);
+            var spawn = this.findSpawn(room, creep);
 
             if (spawn) {
                 if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
