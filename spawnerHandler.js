@@ -30,18 +30,6 @@ module.exports = {
                 minimumNumberOfBuilders = 3;
             }
 
-            if (isUnderAttack === true) {
-                let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
-                    filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
-                    || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
-                }).length;
-
-                minimumNumberOfWarriors = Math.round(numberOfHostiles * 1.25);
-            }
-            else if (isAttacking === true) {
-                minimumNumberOfWarriors = armySize;
-            }
-
             var numberOfSources = room.find(FIND_SOURCES).length;
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name
             && c.getActiveBodyparts(WORK) >= 5);
@@ -58,6 +46,23 @@ module.exports = {
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
 
+            if (isUnderAttack === true) {
+                let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
+                    filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
+                    || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
+                }).length;
+
+                minimumNumberOfWarriors = Math.round(numberOfHostiles * 2.10);
+                minimumNumberOfUpgraders = 0;
+                minimumNumberOfBuilders = 1;
+                minimumNumberOfRepairers = 1;
+                minimumNumberOfDefenceManagers = 1;
+                minimumNumberOfLandlords = 0;
+                minimumNumberOfOtherRoomCreeps = 0;
+            }
+            else if (isAttacking === true) {
+                minimumNumberOfWarriors = armySize;
+            }
 
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
             var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
