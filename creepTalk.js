@@ -3,7 +3,7 @@ require('global');
 module.exports = {
 
     movingToSource: function (creep) {
-        switch (Game.time % 8) {
+        switch (Game.time % 9) {
             case 0:
                 creep.say("I'm on");
                 break;
@@ -14,10 +14,10 @@ module.exports = {
                 creep.say('from spawn');
                 break;
             case 3:
-                creep.say('to source this tick');
+                creep.say('to source');
                 break;
             case 4:
-                creep.say('uh-huh');
+                creep.say('this tick');
                 break;
             case 5:
                 creep.say('uh-huh');
@@ -28,10 +28,13 @@ module.exports = {
             case 7:
                 creep.say('uh-huh');
                 break;
+            case 8:
+                creep.say('uh-huh');
+                break;
         }
     },
     movingToSpawn: function (creep) {
-        switch (Game.time % 8) {
+        switch (Game.time % 9) {
             case 0:
                 creep.say("I'm on");
                 break;
@@ -42,10 +45,10 @@ module.exports = {
                 creep.say('from source');
                 break;
             case 3:
-                creep.say('to spawn this tick');
+                creep.say('to spawn');
                 break;
             case 4:
-                creep.say('uh-huh');
+                creep.say('this tick');
                 break;
             case 5:
                 creep.say('uh-huh');
@@ -54,6 +57,9 @@ module.exports = {
                 creep.say('uh-huh');
                 break;
             case 7:
+                creep.say('uh-huh');
+                break;
+            case 8:
                 creep.say('uh-huh');
                 break;
         }
