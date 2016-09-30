@@ -42,7 +42,7 @@ module.exports = function () {
                     var numberOfHeal = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(HEAL) >= 1);
                     var numberOfRanged = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(RANGED_ATTACK) >= 1);
 
-                    if (numberOfHeal <= 2) {
+                    if (numberOfRanged < 2 && numberOfHeal <= 2) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(MOVE);
