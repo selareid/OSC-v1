@@ -18,7 +18,6 @@ module.exports = {
             else if (creep.getActiveBodyparts(ATTACK) >= 1) {
                 creepAttackRange = 1;
                 this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
             }
         }
         else {
@@ -37,7 +36,7 @@ module.exports = {
         }
 
         if (isUnderAttack === true) {
-            if (creep.room.name != room) {
+            if (creep.room.name != room.name) {
                 creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(room)),
                     {ignoreDestructibleStructures:  true, ignoreCreeps: true, ignoreRoads: true});
                 return false;
@@ -258,7 +257,7 @@ module.exports = {
 
     findRampartNearTarget: function (room, creep, target, creepAttackRange) {
 
-        var rampart = target.pos.findInRange(FIND_MY_STRUCTURES, creepAttackRange, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.findInRange(FIND_CREEPS, 1).length == 0})[0];
+        var rampart = target.pos.findInRange(FIND_MY_STRUCTURES, creepAttackRange, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.pos.findInRange(FIND_CREEPS, 1).length == 0})[0];
 
         if (rampart) {
             return rampart;
