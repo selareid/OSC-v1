@@ -1,4 +1,5 @@
 require('global');
+require('prototype.creepsSpeech')();
 
 module.exports = {
     run: function (room, creep) {
@@ -25,16 +26,24 @@ module.exports = {
                 });
             }
 
-            if (structure != undefined) {
+            if (structure) {
                 if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.creepSpeech(room, creep, 'movingToSpawn');
                     creep.moveTo(structure);
+
                 }
             }
         }
         else {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
+            switch (creep.harvest(source)) {
+                case ERR_NOT_IN_RANGE:
+                    creep.creepSpeech(room, creep, 'movingToSource');
+                    creep.moveTo(source);
+                    break;
+                case OK:
+                    creep.creepSpeech(room, creep, 'harvesting');
+                    break;
             }
         }
     }
