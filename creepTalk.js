@@ -65,7 +65,7 @@ module.exports = {
         }
     },
     harvesting: function (creep) {
-        switch (Game.time % 17) {
+        switch (Game.time % 18) {
             case 0:
                 creep.say("Aw I'm");
                 break;
@@ -91,30 +91,33 @@ module.exports = {
                 creep.say("don't let");
                 break;
             case 8:
-                creep.say('that energy');
+                creep.say('that');
                 break;
             case 9:
-                creep.say('waste in');
+                creep.say('energy');
                 break;
             case 10:
-                creep.say('the source');
+                creep.say('waste in');
                 break;
             case 11:
-                creep.say('gotta');
+                creep.say('the source');
                 break;
             case 12:
-                creep.say('bring');
+                creep.say('gotta');
                 break;
             case 13:
-                creep.say('that energy');
+                creep.say('bring');
                 break;
             case 14:
-                creep.say('and drop');
+                creep.say('that energy');
                 break;
             case 15:
-                creep.say('it out');
+                creep.say('and drop');
                 break;
             case 16:
+                creep.say('it out');
+                break;
+            case 17:
                 creep.say('MINE MINE!');
                 break;
         }
