@@ -3,123 +3,135 @@ require('global');
 module.exports = {
 
     movingToSource: function (creep) {
+        var say;
         switch (Game.time % 9) {
             case 0:
-                creep.say("I'm on");
+                say = ("I'm on");
                 break;
             case 1:
-                creep.say('my way');
+                say = ('my way');
                 break;
             case 2:
-                creep.say('from spawn');
+                say = ('from spawn');
                 break;
             case 3:
-                creep.say('to source');
+                say = ('to source');
                 break;
             case 4:
-                creep.say('this tick');
+                say = ('this tick');
                 break;
             case 5:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 6:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 7:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 8:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
         }
     },
     movingToSpawn: function (creep) {
+        var say;
         switch (Game.time % 9) {
             case 0:
-                creep.say("I'm on");
+                say = ("I'm on");
                 break;
             case 1:
-                creep.say('my way');
+                say = ('my way');
                 break;
             case 2:
-                creep.say('from source');
+                say = ('from source');
                 break;
             case 3:
-                creep.say('to spawn');
+                say = ('to spawn');
                 break;
             case 4:
-                creep.say('this tick');
+                say = ('this tick');
                 break;
             case 5:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 6:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 7:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
             case 8:
-                creep.say('uh-huh');
+                say = ('uh-huh');
                 break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
         }
     },
     harvesting: function (creep) {
+        var say;
         switch (Game.time % 18) {
             case 0:
-                creep.say("Aw I'm");
+                say = ("Aw I'm");
                 break;
             case 1:
-                creep.say('a miner!');
+                say = ('a miner!');
                 break;
             case 2:
-                creep.say('MINE MINE!');
+                say = ('MINE MINE!');
                 break;
             case 3:
-                creep.say('aw ya');
+                say = ('aw ya');
                 break;
             case 4:
-                creep.say("it's");
+                say = ("it's");
                 break;
             case 5:
-                creep.say('all I do');
+                say = ('all I do');
                 break;
             case 6:
-                creep.say('MINE MINE!');
+                say = ('MINE MINE!');
                 break;
             case 7:
-                creep.say("don't let");
+                say = ("don't let");
                 break;
             case 8:
-                creep.say('that');
+                say = ('that');
                 break;
             case 9:
-                creep.say('energy');
+                say = ('energy');
                 break;
             case 10:
-                creep.say('waste in');
+                say = ('waste in');
                 break;
             case 11:
-                creep.say('the source');
+                say = ('the source');
                 break;
             case 12:
-                creep.say('gotta');
+                say = ('gotta');
                 break;
             case 13:
-                creep.say('bring');
+                say = ('bring');
                 break;
             case 14:
-                creep.say('that energy');
+                say = ('that energy');
                 break;
             case 15:
-                creep.say('and drop');
+                say = ('and drop');
                 break;
             case 16:
-                creep.say('it out');
+                say = ('it out');
                 break;
             case 17:
-                creep.say('MINE MINE!');
+                say = ('MINE MINE!');
                 break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
         }
     }
 };
