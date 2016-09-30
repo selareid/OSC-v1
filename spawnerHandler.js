@@ -16,7 +16,7 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
-            var minimumNumberOfWarriors = 0;
+            var minimumNumberOfWarriors = 3;
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
 
@@ -52,7 +52,7 @@ module.exports = {
                     || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
                 }).length;
 
-                minimumNumberOfWarriors = Math.round(numberOfHostiles * 2.10);
+                minimumNumberOfWarriors += Math.round(numberOfHostiles * 2.10);
                 minimumNumberOfUpgraders = 0;
                 minimumNumberOfBuilders = 1;
                 minimumNumberOfRepairers = 1;
@@ -61,7 +61,7 @@ module.exports = {
                 minimumNumberOfOtherRoomCreeps = 0;
             }
             else if (isAttacking === true) {
-                minimumNumberOfWarriors = armySize;
+                minimumNumberOfWarriors += armySize;
             }
 
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);

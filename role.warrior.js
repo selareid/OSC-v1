@@ -186,7 +186,7 @@ module.exports = {
             }
         }
         else {
-            //do stuff when not under attack and not attacking
+            creep.moveTo(Game.flags[thatFlag].pos);
         }
 
     },
