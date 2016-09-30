@@ -127,7 +127,7 @@ module.exports = {
                 }
             }
             else {
-                creep.say('All Clear', true);
+                //no one left to kill
             }
         }
         else if (isAttacking === true) {

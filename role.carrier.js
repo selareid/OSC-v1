@@ -20,7 +20,6 @@ module.exports = {
                 }
             }
             else {
-                creep.say('ERROR!!!', true);
                 console.log('Creep ' + creep + ' could not find structure storage in room ' + room);
             }
         }

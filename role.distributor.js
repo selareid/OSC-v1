@@ -34,7 +34,6 @@ module.exports = {
                         }
                     }
                     else {
-                        creep.say('ALLFULL!');
                         var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name});
                         if (flagToGoTo) {
                             creep.moveTo(flagToGoTo);

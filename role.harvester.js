@@ -25,11 +25,9 @@ module.exports = {
                 && _.sum(s.store) < s.storeCapacity})[0];
 
                 if (container) {
-                    creep.say('Yay!');
                     creep.transfer(container, RESOURCE_ENERGY);
                 }
                 else {
-                    creep.say('DropDBeat');
                     creep.drop(RESOURCE_ENERGY);
                 }
             }
@@ -37,11 +35,8 @@ module.exports = {
 
                 var source = this.findSource(room, creep);
 
-                creep.say('MINE!!', true);
-
                 if (source) {
                     if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.say('M2M', true);
                         creep.moveTo(source, {reusePath: 10});
                     }
                 }

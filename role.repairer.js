@@ -16,7 +16,6 @@ module.exports = {
         if (creep.memory.working == true) {
             var structureToRepair = this.findStructureToRepair(room, creep);
             if (structureToRepair) {
-                creep.say('REPAIR!', true);
                 if (creep.repair(structureToRepair) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(structureToRepair, {reusePath: 7});
                 }

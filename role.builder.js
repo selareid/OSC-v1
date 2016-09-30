@@ -16,7 +16,6 @@ module.exports = {
         if (creep.memory.working == true) {
 
             var structureToBuild = this.findStructureToBuild(room, creep);
-            creep.say('BUILD!', true);
             if (structureToBuild) {
                 if (creep.build(structureToBuild) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(structureToBuild, {reusePath: 7});
