@@ -15,6 +15,14 @@ module.exports = function () {
             case 'harvesting':
                 creepTalk.harvesting(creep);
                 break;
+            case 'emergencyHarvesting':
+
+                break;
+            case 'droppingEnergy':
+                break;
+            case 'droppingEnergyContainer':
+
+                break;
         }
 
     }

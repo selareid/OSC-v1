@@ -1,4 +1,5 @@
 require('global');
+require('prototype.creepSpeech')();
 const roleEmergencyHarvester = require ('role.emergencyHarvester');
 
 module.exports = {
@@ -36,9 +37,15 @@ module.exports = {
                 var source = this.findSource(room, creep);
 
                 if (source) {
-                    if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(source, {reusePath: 10});
-                    }
+                        switch (creep.harvest(source)) {
+                            case ERR_NOT_IN_RANGE:
+                                creep.creepSpeech(room, creep, 'movingToSource')
+                            creep.moveTo(source, {reusePath: 10});
+                                break;
+                            case OK:
+                                creep.creepSpeech(room, creep, 'harvesting');
+                                break;
+                        }
                 }
             }
         }
