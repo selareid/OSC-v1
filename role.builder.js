@@ -29,7 +29,7 @@ module.exports = {
 
             var droppedEnergy = creep.findDroppedEnergy(room);
 
-            if (droppedEnergy.amount < 2000) {
+            if (droppedEnergy && droppedEnergy.amount < 2000) {
                 var storage = room.storage;
                 if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                     if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
