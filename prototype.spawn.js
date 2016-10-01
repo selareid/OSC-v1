@@ -41,17 +41,11 @@ module.exports = function () {
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'warrior':
-                    var numberOfHeal = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(HEAL) >= 1);
                     var numberOfRanged = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(RANGED_ATTACK) >= 1);
+                    var numberOfAttack = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(ATTACK) >= 1);
 
-                    if (numberOfRanged >= 2 && numberOfHeal <= 2) {
-                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
-                        for (let i = 0; i < numberOfParts; i++) {
-                            body.push(MOVE);
-                            body.push(HEAL);
-                        }
-                    }
-                    else if (numberOfRanged <= 2) {
+
+                    if (numberOfRanged <= 3) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
                         if (numberOfParts > 5) {
                             numberOfParts = 5;
@@ -61,7 +55,7 @@ module.exports = function () {
                             body.push(RANGED_ATTACK);
                         }
                     }
-                    else {
+                    else if (numberOfAttack > 10) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 210);
                         if (numberOfParts > 5) {
                             numberOfParts = 5;
@@ -70,6 +64,13 @@ module.exports = function () {
                             body.push(MOVE);
                             body.push(ATTACK);
                             body.push(ATTACK);
+                        }
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(MOVE);
+                            body.push(HEAL);
                         }
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
