@@ -20,11 +20,8 @@ module.exports = {
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
 
-            if (room.controller.level <= 4) {
+            if (room.controller.level <= 4 || !room.storage) {
                 minimumNumberOfUpgraders = 4;
-            }
-
-            if (!room.storage) {
                 minimumNumberOfCarriers = 0;
                 minimumNumberOfDistributors = 3;
                 minimumNumberOfBuilders = 3;
