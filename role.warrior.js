@@ -186,7 +186,7 @@ module.exports = {
             }
         }
         else {
-            creep.moveTo(Game.flags[thatFlag].pos);
+            creep.moveTo(Game.flags['thatFlag'].pos);
         }
 
     },
