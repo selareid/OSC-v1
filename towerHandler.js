@@ -14,6 +14,12 @@ module.exports = {
             if (towerHeal) {
                 tower.heal(towerHeal)
             }
+            else {
+                var towerRepair = this.findRampartToGetStarted(room, tower);
+                if (towerRepair) {
+                    tower.repair(owerRepair)
+                }
+            }
         }
     },
 
@@ -21,33 +27,8 @@ module.exports = {
 
         var towerTarget;
 
-        towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
-            filter: (c) => c.getActiveBodyparts(HEAL) >= 1
-            && Allies.includes(c.owner.username) == false
-        });
-
-        if (towerTarget) {
-            return towerTarget;
-        }
-        else {
-            towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
-                filter: (c) => c.getActiveBodyparts(ATTACK) >= 1
-                && Allies.includes(c.owner.username) == false
-            });
-
-            if (towerTarget) {
-                return towerTarget;
-            }
-            else {
-                towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
-                if (towerTarget) {
-                    return towerTarget;
-                }
-                else {
-
-                }
-            }
-        }
+        towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => !Allies.includes(c)});
+        return towerTarget;
     },
 
     findHeal: function (room, tower) {
@@ -56,5 +37,9 @@ module.exports = {
         if (towerHeal) {
             return towerHeal;
         }
+    },
+
+    findRampartToGetStarted: function (room, tower) {
+        tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400})
     }
 };
