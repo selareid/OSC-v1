@@ -40,6 +40,6 @@ module.exports = {
     },
 
     findRampartToGetStarted: function (room, tower) {
-        tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400})
+       return tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400});
     }
 };
