@@ -16,7 +16,7 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
-            var minimumNumberOfWarriors = 3;
+            var minimumNumberOfWarriors = 7;
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
 
