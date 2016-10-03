@@ -24,7 +24,7 @@ module.exports = {
                 minimumNumberOfUpgraders = 4;
                 minimumNumberOfCarriers = 0;
                 minimumNumberOfDistributors = 3;
-                minimumNumberOfBuilders = 3;
+                minimumNumberOfBuilders = 4;
             }
 
             var numberOfSources = room.find(FIND_SOURCES).length;
