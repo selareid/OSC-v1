@@ -39,11 +39,11 @@ module.exports = {
                 if (source) {
                         switch (creep.harvest(source)) {
                             case ERR_NOT_IN_RANGE:
-                                creep.creepSpeech(room, creep, 'movingToSource')
+                                creep.creepSpeech(room, 'movingToSource')
                             creep.moveTo(source, {reusePath: 10});
                                 break;
                             case OK:
-                                creep.creepSpeech(room, creep, 'harvesting');
+                                creep.creepSpeech(room, 'harvesting');
                                 break;
                         }
                 }

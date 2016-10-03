@@ -133,5 +133,19 @@ module.exports = {
         if (say != undefined) {
             creep.say(say, true);
         }
+    },
+    droppingEnergy: function (creep) {
+        var say;
+        say = ('DropDaBeat');
+        if (say != undefined) {
+            creep.say(say, true);
+        }
+    },
+    droppingEnergyContainer: function (creep) {
+        var say;
+        say = ('DatContanr');
+        if (say != undefined) {
+            creep.say(say, true);
+        }
     }
 };

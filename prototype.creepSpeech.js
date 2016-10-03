@@ -3,25 +3,23 @@ require('global');
 const creepTalk = require('creepTalk');
 
 module.exports = function () {
-    Creep.prototype.creepSpeech = function (room, creep, doingWhat) {
+    Creep.prototype.creepSpeech = function (room, doingWhat) {
 
         switch (doingWhat) {
             case 'movingToSource':
-                creepTalk.movingToSource(creep);
+                creepTalk.movingToSource(this);
                 break;
             case 'movingToSpawn':
-                creepTalk.movingToSpawn(creep);
+                creepTalk.movingToSpawn(this);
                 break;
             case 'harvesting':
-                creepTalk.harvesting(creep);
-                break;
-            case 'emergencyHarvesting':
-
+                creepTalk.harvesting(this);
                 break;
             case 'droppingEnergy':
+                creepTalk.droppingEnergy(this);
                 break;
             case 'droppingEnergyContainer':
-
+                creepTalk.droppingEnergyContainer(this);
                 break;
         }
 

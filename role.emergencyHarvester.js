@@ -28,7 +28,7 @@ module.exports = {
 
             if (structure) {
                 if (creep.transfer(structure, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.creepSpeech(room, creep, 'movingToSpawn');
+                    creep.creepSpeech(room, 'movingToSpawn');
                     creep.moveTo(structure);
 
                 }
@@ -38,11 +38,11 @@ module.exports = {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             switch (creep.harvest(source)) {
                 case ERR_NOT_IN_RANGE:
-                    creep.creepSpeech(room, creep, 'movingToSource');
+                    creep.creepSpeech(room, 'movingToSource');
                     creep.moveTo(source);
                     break;
                 case OK:
-                    creep.creepSpeech(room, creep, 'harvesting');
+                    creep.creepSpeech(room, 'harvesting');
                     break;
             }
         }
