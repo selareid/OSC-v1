@@ -158,9 +158,12 @@ module.exports = {
                 say = ('Going to');
                 break;
             case 1:
-                say = ('that energy');
+                say = ('that');
                 break;
             case 2:
+                say = ('energy');
+                break;
+            case 3:
                 say = ('aw ya!');
                 break;
         }
