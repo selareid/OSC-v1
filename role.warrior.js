@@ -4,20 +4,20 @@ module.exports = {
     run: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt) {
 
         var creepAttackRange;
-
-        var shouldWeAttack = this.creepGoToRoomToAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
+        var beforeRallyFlag = room.findBeforeRallyFlag(room);
+        var shouldWeAttack = this.creepGoToRoomToAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag);
 
         if (shouldWeAttack == true) {
             if (creep.getActiveBodyparts(HEAL) >= 1) {
-                this.creepHeal(room, creep, isUnderAttack, isAttacking, flagToRallyAt)
+                this.creepHeal(room, creep, isUnderAttack, isAttacking, flagToRallyAt, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
                 creepAttackRange = 3;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
+                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(ATTACK) >= 1) {
                 creepAttackRange = 1;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking);
+                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
         }
         else {
@@ -26,11 +26,12 @@ module.exports = {
 
     },
 
-    creepGoToRoomToAttack: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt) {
+    creepGoToRoomToAttack: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag) {
 
         if (flagToRallyAt) {
             var roomToAttack = flagToRallyAt.memory.whereToAttack;
             var whenToAttack = flagToRallyAt.memory.whenToAttack;
+            var whenToRally = flagToRallyAt.memory.whenToRally;
             var armySize = flagToRallyAt.memory.armySize;
 
         }
@@ -50,7 +51,20 @@ module.exports = {
             //the number is the game time to attack
             if (Game.time < whenToAttack) {
 
-                if (creep.moveTo(flagToRallyAt.pos) == ERR_NO_PATH) {
+                if (whenToRally < Game.time) {
+                    if (creep.moveTo(beforeRallyFlag.pos) == ERR_NO_PATH) {
+                        if (creep.pos.findInRange(FIND_FLAGS, 5, {filter: (f) => f.name == beforeRallyFlag.name}).length > 0) {
+                            return true;
+                        }
+                        else {
+                            var beforeRallyPoint = beforeRallyFlag.pos;
+                            creep.moveTo(beforeRallyPoint, {reusePath: 20});
+
+                            return false;
+                        }
+                    }
+                }
+                else if (creep.moveTo(flagToRallyAt.pos) == ERR_NO_PATH) {
                     if (creep.pos.findInRange(FIND_FLAGS, 5, {filter: (f) => f.name == flagToRallyAt.name}).length > 0) {
                         return true;
                     }
@@ -80,7 +94,9 @@ module.exports = {
 
     },
 
-    creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking) {
+    creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag) {
+
+        var whenToAttack = flagToRallyAt.memory.whenToAttack;
 
         if (isUnderAttack === true) {
 
@@ -129,7 +145,7 @@ module.exports = {
                 //no one left to kill
             }
         }
-        else if (isAttacking === true) {
+        else if (isAttacking === true && whenToAttack < Game.time) {
 
             var target = this.findTarget(room, creep);
 
@@ -186,12 +202,12 @@ module.exports = {
             }
         }
         else {
-            creep.moveTo(Game.flags['thatFlag'].pos);
+            creep.moveTo(beforeRallyFlag);
         }
 
     },
 
-    creepHeal: function (room, creep) {
+    creepHeal: function (room, creep, flagToRallyAt, beforeRallyFlag) {
 
         var healTarget = this.findCreepToHeal(room, creep);
 
