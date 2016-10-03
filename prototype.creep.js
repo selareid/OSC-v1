@@ -23,6 +23,7 @@ module.exports = function () {
                 }
             }
         },
+
         Creep.prototype.findContainer =
             function (room) {
                 var allContainersInRoom = room.find(FIND_STRUCTURES, {
@@ -36,7 +37,7 @@ module.exports = function () {
                         maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
                     }
 
-                    var containerEnergy = _.max(maxEnergyContainers) - 200;
+                    var containerEnergy = _.max(maxEnergyContainers) - 400;
 
 
                     var container = this.pos.findClosestByRange(FIND_STRUCTURES, {

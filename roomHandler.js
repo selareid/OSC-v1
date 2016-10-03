@@ -28,7 +28,7 @@ module.exports = {
         }
 
 
-        if (Game.time % 5 == 0) {
+        if (Game.time % 3 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room);
             if (underAttack === false) {
                 Memory.rooms[room].isUnderAttack = false;
@@ -47,7 +47,6 @@ module.exports = {
         //else {
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
         for (let tower of towers) {
-            towerHandler.run(room, tower);
             towerHandler.repairRampart(room, tower);
         }
 
