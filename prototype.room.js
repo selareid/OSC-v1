@@ -17,7 +17,7 @@ module.exports = function () {
 
         Room.prototype.findBeforeRallyFlag =
             function (room) {
-                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == room)[0];
+                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == room.name)[0];
 
                 if (beforeRallyFlag) {
                     return beforeRallyFlag;
