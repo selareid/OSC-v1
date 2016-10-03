@@ -96,7 +96,11 @@ module.exports = {
 
     creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag) {
 
-        var whenToAttack = flagToRallyAt.memory.whenToAttack;
+        var whenToAttack;
+
+        if (whenToAttack) {
+            whenToAttack = flagToRallyAt.memory.whenToAttack;
+        }
 
         if (isUnderAttack === true) {
 
@@ -145,7 +149,7 @@ module.exports = {
                 //no one left to kill
             }
         }
-        else if (isAttacking === true && whenToAttack < Game.time) {
+        else if (isAttacking === true && whenToAttack != undefined && whenToAttack < Game.time) {
 
             var target = this.findTarget(room, creep);
 
