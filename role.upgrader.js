@@ -12,12 +12,13 @@ module.exports = {
 
 
         if (creep.memory.working == true) {
+            creep.creepSpeech(room, 'upgrading');
             if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(room.controller, {reusePath: 20});
             }
         }
         else {
-
+            creep.creepSpeech(room, 'movingToEnergy');
             var storage = room.storage;
             if (storage && storage.store[RESOURCE_ENERGY] > 0) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

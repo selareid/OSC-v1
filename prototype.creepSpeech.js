@@ -21,6 +21,15 @@ module.exports = function () {
             case 'droppingEnergyContainer':
                 creepTalk.droppingEnergyContainer(this);
                 break;
+            case 'movingToEnergy':
+                creepTalk.movingToEnergy(this);
+                break;
+            case 'upgrading':
+                creepTalk.upgrading(this);
+                break;
+            default:
+                creepTalk.undefinedSay(this);
+                break;
         }
 
     }

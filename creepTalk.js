@@ -150,5 +150,56 @@ module.exports = {
         if (say != undefined) {
             creep.say(say, true);
         }
+    },
+    movingToEnergy: function (creep) {
+        var say;
+        switch (Game.time % 3) {
+            case 0:
+                say = ('Going to');
+                break;
+            case 1:
+                say = ('that energy');
+                break;
+            case 2:
+                say = ('aw ya!');
+                break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
+        }
+    },
+    upgrading: function (creep) {
+        var say;
+        switch (Game.time % 3) {
+            case 0:
+                say = ('PUMP');
+                break;
+            case 1:
+                say = ('THAT');
+                break;
+            case 2:
+                say = ('GCL');
+                break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
+        }
+    },
+    undefinedSay: function (creep) {
+        var say;
+        switch (Game.time % 3) {
+            case 0:
+                say = ("I ain't");
+                break;
+            case 1:
+                say = ('got no');
+                break;
+            case 2:
+                say = ('speech yet');
+                break;
+        }
+        if (say != undefined) {
+            creep.say(say, true);
+        }
     }
 };
