@@ -74,7 +74,7 @@ module.exports = {
     },
     harvesting: function (creep) {
         var say;
-        switch (Game.time % 18) {
+        switch (Game.time % 19) {
             case 0:
                 say = ("Aw I'm");
                 break;
@@ -118,15 +118,18 @@ module.exports = {
                 say = ('bring');
                 break;
             case 14:
-                say = ('that energy');
+                say = ('that');
                 break;
             case 15:
-                say = ('and drop');
+                say = ('energy');
                 break;
             case 16:
-                say = ('it out');
+                say = ('and drop');
                 break;
             case 17:
+                say = ('it out');
+                break;
+            case 18:
                 say = ('MINE MINE!');
                 break;
         }
