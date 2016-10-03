@@ -26,9 +26,11 @@ module.exports = {
                 && _.sum(s.store) < s.storeCapacity})[0];
 
                 if (container) {
+                    creep.creepSpeech(room, 'droppingEnergyContainer')
                     creep.transfer(container, RESOURCE_ENERGY);
                 }
                 else {
+                    creep.creepSpeech(room, 'droppingEnergy');
                     creep.drop(RESOURCE_ENERGY);
                 }
             }
