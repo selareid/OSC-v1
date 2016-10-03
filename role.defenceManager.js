@@ -82,7 +82,7 @@ module.exports = {
                 allEnergyTowers.push(tower.energy);
             }
 
-            var towerEnergy = _min(allEnergyTowers) - 200;
+            var towerEnergy = _.min(allEnergyTowers) - 200;
 
             var tower = creep.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy <= towerEnergy});
 
