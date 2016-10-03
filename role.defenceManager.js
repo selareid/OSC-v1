@@ -11,18 +11,29 @@ module.exports = {
         }
 
         if (creep.memory.working == true) {
-            var rampartToRepair = this.findRampart(room, hitsOfDefence);
-
-            if (rampartToRepair) {
-                if (creep.repair(rampartToRepair) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(rampartToRepair);
+            var towerLowerThan = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < 210});
+            if (isUnderAttack === true || towerLowerThan) {
+                var tower = this.getTowerToRefill(room, creep);
+                if (tower) {
+                    if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(tower);
+                    }
                 }
             }
             else {
-                var wallToRepair = this.findWall(room, hitsOfDefence);
-                if (wallToRepair) {
-                    if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(wallToRepair, {reusePath: 10});
+                var rampartToRepair = this.findRampart(room, hitsOfDefence);
+
+                if (rampartToRepair) {
+                    if (creep.repair(rampartToRepair) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(rampartToRepair);
+                    }
+                }
+                else {
+                    var wallToRepair = this.findWall(room, hitsOfDefence);
+                    if (wallToRepair) {
+                        if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(wallToRepair, {reusePath: 10});
+                        }
                     }
                 }
             }
