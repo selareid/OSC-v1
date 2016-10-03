@@ -33,15 +33,10 @@ module.exports = {
         }
     },
 
-<<<<<<< HEAD
     repairRampart: function (room, tower) {
         var towerRepair = tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400});
         if (towerRepair) {
             tower.repair(towerRepair)
         }
-=======
-    findRampartToGetStarted: function (room, tower) {
-       return tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400});
->>>>>>> origin/master
     }
 };
