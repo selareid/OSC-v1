@@ -4,6 +4,7 @@ require('prototype.room')();
 const creepHandler = require ('creepHandler');
 const linkHandler = require ('linkHandler');
 const defenceHandler = require ('defenceHandler');
+const towerHandler = require ('towerHandler');
 const spawnerHandler = require ('spawnerHandler');
 
 module.exports = {
@@ -44,6 +45,12 @@ module.exports = {
             defenceHandler.run(room);
         }
         //else {
+        var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+        for (let tower of towers) {
+            towerHandler.run(room, tower);
+            towerHandler.repairRampart(room, tower);
+        }
+
         linkHandler.run(room);
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
         creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo);

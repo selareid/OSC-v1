@@ -14,12 +14,6 @@ module.exports = {
             if (towerHeal) {
                 tower.heal(towerHeal)
             }
-            else {
-                var towerRepair = this.findRampartToGetStarted(room, tower);
-                if (towerRepair) {
-                    tower.repair(owerRepair)
-                }
-            }
         }
     },
 
@@ -39,7 +33,10 @@ module.exports = {
         }
     },
 
-    findRampartToGetStarted: function (room, tower) {
-        tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400})
+    repairRampart: function (room, tower) {
+        var towerRepair = tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400});
+        if (towerRepair) {
+            tower.repair(towerRepair)
+        }
     }
 };
