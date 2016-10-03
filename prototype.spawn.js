@@ -55,7 +55,7 @@ module.exports = function () {
                             body.push(RANGED_ATTACK);
                         }
                     }
-                    else if (numberOfAttack > 10) {
+                    else if (numberOfAttack < 10) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 210);
                         if (numberOfParts > 5) {
                             numberOfParts = 5;
