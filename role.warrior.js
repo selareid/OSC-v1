@@ -9,15 +9,15 @@ module.exports = {
 
         if (shouldWeAttack == true) {
             if (creep.getActiveBodyparts(HEAL) >= 1) {
-                this.creepHeal(room, creep, isUnderAttack, isAttacking, flagToRallyAt, flagToRallyAt, beforeRallyFlag);
+                creep.creepHeal(room, creep, isUnderAttack, isAttacking, flagToRallyAt, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
                 creepAttackRange = 3;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
+                creep.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(ATTACK) >= 1) {
                 creepAttackRange = 1;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
+                creep.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
         }
         else {
