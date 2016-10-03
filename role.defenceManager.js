@@ -12,7 +12,7 @@ module.exports = {
 
         if (creep.memory.working == true) {
             var towerLowerThan = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < 210});
-            if (isUnderAttack === true || towerLowerThan) {
+            if (isUnderAttack === true || towerLowerThan.length > 0) {
                 var tower = this.getTowerToRefill(room, creep);
                 if (tower) {
                     if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
