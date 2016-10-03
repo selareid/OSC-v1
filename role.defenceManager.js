@@ -3,6 +3,7 @@ require('prototype.creep')();
 
 module.exports = {
     run: function (room, creep, hitsOfDefence, isUnderAttack) {
+        creep.say('defend');
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
