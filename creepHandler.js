@@ -41,7 +41,7 @@ module.exports = {
                         break;
                     case 'defenceManager':
                         var hitsOfDefence = this.getHitsOfDefence(room);
-                        roleDefenceManager.run(room, creep, hitsOfDefence);
+                        roleDefenceManager.run(room, creep, hitsOfDefence, isUnderAttack);
                         break;
                     case 'warrior':
                         roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);

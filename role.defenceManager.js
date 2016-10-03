@@ -2,7 +2,7 @@ require('global');
 require('prototype.creep')();
 
 module.exports = {
-    run: function (room, creep, hitsOfDefence) {
+    run: function (room, creep, hitsOfDefence, isUnderAttack) {
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
@@ -59,5 +59,33 @@ module.exports = {
             {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence});
 
         return wall[0];
+    },
+
+    getTowerToRefill: function (room, creep) {
+        var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+
+        if (towers.length > 0) {
+            var allEnergyTowers = [];
+
+            for (let tower of towers) {
+                allEnergyTowers.push(tower.energy);
+            }
+
+            var towerEnergy = _min(allEnergyTowers) - 200;
+
+            var tower = creep.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy <= towerEnergy});
+
+            if (tower) {
+                return tower;
+            }
+            else {
+                return undefined;
+            }
+
+        }
+        else {
+            return undefined;
+        }
+
     }
 };
