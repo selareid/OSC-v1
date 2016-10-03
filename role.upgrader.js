@@ -12,9 +12,13 @@ module.exports = {
 
 
         if (creep.memory.working == true) {
-            creep.creepSpeech(room, 'upgrading');
-            if (creep.upgradeController(room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(room.controller, {reusePath: 20});
+            switch (creep.upgradeController(room.controller)) {
+                case ERR_NOT_IN_RANGE:
+                    creep.moveTo(room.controller, {reusePath: 20});
+                    break;
+                case OK:
+                    creep.creepSpeech(room, 'upgrading');
+                    break;
             }
         }
         else {
