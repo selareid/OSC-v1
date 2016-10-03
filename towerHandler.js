@@ -34,7 +34,7 @@ module.exports = {
     },
 
     repairRampart: function (room, tower) {
-        var towerRepair = tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 400});
+        var towerRepair = tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= 1000});
         if (towerRepair) {
             tower.repair(towerRepair)
         }
