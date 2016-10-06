@@ -3,7 +3,6 @@ require('global');
 module.exports = {
     run: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt) {
 
-        var creepAttackRange;
         var beforeRallyFlag = room.findBeforeRallyFlag(room);
         var shouldWeAttack = this.creepGoToRoomToAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag);
 
@@ -12,12 +11,10 @@ module.exports = {
                 this.creepHeal(room, creep, isUnderAttack, isAttacking, flagToRallyAt, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
-                creepAttackRange = 3;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
+                this.creepAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
             else if (creep.getActiveBodyparts(ATTACK) >= 1) {
-                creepAttackRange = 1;
-                this.creepAttack(room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag);
+                this.creepAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag);
             }
         }
         else {
@@ -94,7 +91,7 @@ module.exports = {
 
     },
 
-    creepAttack: function (room, creep, isUnderAttack, creepAttackRange, isAttacking, flagToRallyAt, beforeRallyFlag) {
+    creepAttack: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag) {
 
         var whenToAttack;
 
@@ -106,7 +103,7 @@ module.exports = {
 
             var target = this.findTarget(room, creep);
             if (target) {
-                var rampart = this.findRampartNearTarget(room, creep, target, creepAttackRange);
+                var rampart = this.findRampartNearTarget(room, creep, target);
                 if (rampart) {
                     if (creep.pos != rampart.pos) {
                         creep.moveTo(rampart, {
@@ -116,7 +113,7 @@ module.exports = {
                         });
                     }
                     else {
-                        if (!creepAttackRange > 1) {
+                        if (creep.getActiveBodyparts(ATTACK) >= 1) {
                             creep.attack(target)
                         }
                         else {
@@ -125,7 +122,7 @@ module.exports = {
                     }
                 }
                 else {
-                    if (!creepAttackRange > 1) {
+                    if (creep.getActiveBodyparts(ATTACK) >= 1) {
                         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {
                                 ignoreDestructibleStructures: true,
@@ -275,7 +272,16 @@ module.exports = {
         }
     },
 
-    findRampartNearTarget: function (room, creep, target, creepAttackRange) {
+    findRampartNearTarget: function (room, creep, target) {
+
+        var creepAttackRange;
+
+        if (creep.getActiveBodyparts(ATTACK) >= 1) {
+            creepAttackRange = 1;
+        }
+        else if (creep.getActiveBodyparts(RANGED_ATTACK) >= 1) {
+            creepAttackRange = 3;
+        }
 
         var rampart = target.pos.findInRange(FIND_MY_STRUCTURES, creepAttackRange, {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.pos.findInRange(FIND_CREEPS, 1).length == 0})[0];
 
