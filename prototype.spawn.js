@@ -127,7 +127,7 @@ module.exports = function () {
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 default:
-                    return 'SPAWNING ERROR';
+                    return undefined;
             }
 
         }
