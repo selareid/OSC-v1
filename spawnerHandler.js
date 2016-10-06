@@ -12,7 +12,7 @@ module.exports = {
             var minimumNumberOfHarvesters = 3;
             var minimumNumberOfCarriers = 3;
             var minimumNumberOfDistributors = 1;
-            var minimumNumberOfUpgraders = 1;
+            var minimumNumberOfUpgraders = 2;
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
@@ -104,7 +104,9 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, 'carrier', amountToSave);
                 }
                 else if (numberOfUpgraders < minimumNumberOfUpgraders) {
+
                     name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);
+
                 }
                 else if (numberOfBuilders < minimumNumberOfBuilders) {
                     name = spawn.createCustomCreep(room, energy, 'builder', amountToSave);
