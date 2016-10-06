@@ -48,7 +48,7 @@ module.exports = {
             //the number is the game time to attack
             if (Game.time < whenToAttack) {
 
-                if (whenToRally < Game.time) {
+                if (whenToRally > Game.time) {
                     if (creep.moveTo(beforeRallyFlag.pos) == ERR_NO_PATH) {
                         if (creep.pos.findInRange(FIND_FLAGS, 5, {filter: (f) => f.name == beforeRallyFlag.name}).length > 0) {
                             return true;
@@ -94,9 +94,11 @@ module.exports = {
     creepAttack: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag) {
 
         var whenToAttack;
+        var whenToRally;
 
-        if (whenToAttack) {
+        if (flagToRallyAt) {
             whenToAttack = flagToRallyAt.memory.whenToAttack;
+            whenToRally = flagToRallyAt.memory.whenToRally;
         }
 
         if (isUnderAttack === true) {
@@ -146,7 +148,7 @@ module.exports = {
                 //no one left to kill
             }
         }
-        else if (isAttacking === true && whenToAttack != undefined && whenToAttack < Game.time) {
+        else if (isAttacking === true && whenToAttack != undefined && whenToRally != undefined && whenToAttack < Game.time) {
 
             var target = this.findTarget(room, creep);
 
