@@ -73,7 +73,7 @@ module.exports = {
         for (let structure of wallsRamparts) {
             allHits.push(structure.hits);
         }
-        return _.min(allHits) + 1;
+        return _.min(allHits) + 1000;
     },
 
     getEnergyOfTower: function (room) {
