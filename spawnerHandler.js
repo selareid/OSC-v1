@@ -139,7 +139,17 @@ module.exports = {
                 }
                 else if (numberOfUpgraders < minimumNumberOfUpgraders) {
 
-                    name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);
+                    if (room.storage) {
+                        if (room.storage.store[RESOURCE_ENERGY] > 100000) {
+                            name = spawn.createCustomCreep(room, room.energyCapacityAvailable, 'upgrader', amountToSave);
+                        }
+                        else {
+                            name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);
+                        }
+                    }
+                    else {
+                        name = spawn.createCustomCreep(room, energy, 'upgrader', amountToSave);
+                    }
 
                 }
                 else if (numberOfBuilders < minimumNumberOfBuilders) {
