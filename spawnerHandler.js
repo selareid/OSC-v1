@@ -125,7 +125,7 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, 'otherRoomCreep', amountToSave);
                 }
 
-                if (name) {
+                if (!(name in Game.creeps)) {
                     console.log("Creating Creep " + name);
                 }
 
