@@ -32,12 +32,7 @@ module.exports = {
             && c.getActiveBodyparts(WORK) >= 5);
             if (amountOfBigHarvesters >= numberOfSources) {
                 minimumNumberOfHarvesters = 2;
-                var creepsGonnaDie = room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'harvester' && c.ticksToLive <= 400})[0];
-                if (creepsGonnaDie) {
-                    minimumNumberOfHarvesters += 1;
-                }
             }
-
 
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
@@ -59,6 +54,45 @@ module.exports = {
             }
             else if (isAttacking === true) {
                 minimumNumberOfWarriors += armySize;
+            }
+
+            var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.ticksToLive <= 400 && c.memory.role), 'ticksToLive');
+
+            if (creepAboutToDie.length > 0) {
+                let role = creepAboutToDie.memory.role;
+
+                switch (role) {
+                    case 'harvester':
+                        minimumNumberOfHarvesters += 1;
+                        break;
+                    case 'carrier':
+                        minimumNumberOfCarriers += 1;
+                        break;
+                    case 'distributor':
+                        minimumNumberOfDistributors += 1;
+                        break;
+                    case 'upgrader':
+                        minimumNumberOfUpgraders += 1;
+                        break;
+                    case 'builder':
+                        minimumNumberOfBuilders += 1;
+                        break;
+                    case 'repairer':
+                        minimumNumberOfRepairers += 1;
+                        break;
+                    case 'defenceManager':
+                        minimumNumberOfDefenceManagers += 1;
+                        break;
+                    case 'warrior':
+                        minimumNumberOfWarriors += 1;
+                        break;
+                    case 'landlord':
+                        minimumNumberOfLandlords += 1;
+                        break;
+                    case 'otherRoomCreep':
+                        minimumNumberOfOtherRoomCreeps += 1;
+                        break;
+                }
             }
 
             var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
@@ -127,7 +161,7 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, 'otherRoomCreep', amountToSave);
                 }
 
-                if (!(name in Game.creeps)) {
+                if ((name in Game.creeps)) {
                     console.log("Creating Creep " + name);
                 }
 
