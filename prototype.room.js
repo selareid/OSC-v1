@@ -2,9 +2,10 @@ require('global');
 
 module.exports = function () {
     Room.prototype.findAttackFlag =
-        function (room) {
+        function () {
 
-            var rallyFlag = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(room.name) && f.memory.whenToAttack != undefined && f.memory.whenToRally != undefined && f.memory.whereToAttack != undefined && f.memory.armySize > 0)[0];
+            var rallyFlag = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(this.name)
+            && f.memory.whenToAttack != undefined && f.memory.whenToRally != undefined && f.memory.whereToAttack != undefined && f.memory.armySize > 0)[0];
 
             if (rallyFlag) {
                 return rallyFlag;
@@ -16,8 +17,20 @@ module.exports = function () {
         },
 
         Room.prototype.findBeforeRallyFlag =
-            function (room) {
-                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == room.name)[0];
+            function () {
+                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == this.name)[0];
+
+                if (beforeRallyFlag) {
+                    return beforeRallyFlag;
+                }
+                else {
+                    return undefined;
+                }
+            },
+
+        Room.prototype.findOtherRoomToGoTo =
+            function () {
+                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name)[0];
 
                 if (beforeRallyFlag) {
                     return beforeRallyFlag;

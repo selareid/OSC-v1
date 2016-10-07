@@ -14,12 +14,12 @@ module.exports = {
             room.updateConstructionTargets();
         }
 
-        var flagToRallyAt = room.findAttackFlag(room);
+        var flagToRallyAt = room.findAttackFlag();
 
         var isAttacking;
         var armySize;
 
-        var otherRoomCreepsRoomToGoTo = '';
+        var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
 
 
         if (flagToRallyAt) {
@@ -29,7 +29,7 @@ module.exports = {
 
 
         if (Game.time % 3 == 0) {
-            var underAttack = defenceHandler.isUnderAttack(room);
+            var underAttack = defenceHandler.isUnderAttack();
             if (underAttack === false) {
                 Memory.rooms[room].isUnderAttack = false;
             }
