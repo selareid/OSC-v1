@@ -103,6 +103,10 @@ module.exports = {
 
         if (isUnderAttack === true) {
 
+            if (creep.memory.path) {
+                delete creep.memory.path;
+            }
+
             var target = this.findTarget(room, creep);
             if (target) {
                 var rampart = this.findRampartNearTarget(room, creep, target);
@@ -155,56 +159,89 @@ module.exports = {
             var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
             if (targetSpawn) {
                 if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+
+                    var path;
+                    if (!creep.memory.path) {
+                        creep.memory.path = creep.room.findPath(creep.pos, targetSpawn.pos, {
+                            serialize: true,
+                            ignoreDestructibleStructures: true,
+                            ignoreCreeps: true,
+                            ignoreRoads: true
+                        });
+                    }
+                    else if (creep.memory.path[creep.memory.path.length].x != targetSpawn.pos.x && creep.memory.path[creep.memory.path.length].y != targetSpawn.pos.y) {
+                        creep.memory.path = creep.room.findPath(creep.pos, targetSpawn.pos, {
+                            serialize: true,
+                            ignoreDestructibleStructures: true,
+                            ignoreCreeps: true,
+                            ignoreRoads: true
+                        });
+                    }
+
+                    path = creep.memory.path;
+
+
+                    if (path.length) {
+                        creep.move(path[0].direction);
+                    }
+                    else {
+                        var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
+                        switch (creep.attack(wallTarget)) {
+                            case ERR_NOT_IN_RANGE:
+                                creep.moveTo(wallTarget, {
+                                    ignoreDestructibleStructures: true,
+                                    ignoreCreeps: true,
+                                    ignoreRoads: true
+                                });
+                                break;
+                            case ERR_NO_PATH:
+                                creep.moveTo(target, {
+                                    ignoreDestructibleStructures: true,
+                                    ignoreCreeps: true,
+                                    ignoreRoads: true
+                                });
+                                break;
+                        }
+
+                    }
+                }
+                else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
                     if (creep.moveTo(targetSpawn,
                             {
                                 ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
                             }) == ERR_NO_PATH) {
-                        var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL && s.structureType == STRUCTURE_RAMPART});
-                        if (creep.attack(wallTarget) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(wallTarget, {
-                                ignoreDestructibleStructures: true,
-                                ignoreCreeps: true,
-                                ignoreRoads: true
-                            });
+                        var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
+                        if (creep.rangedAttack(wallTarget) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(wallTarget,
+                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
                         }
-                        else if (creep.attack(wallTarget) == ERR_NO_PATH) {
-                            creep.moveTo(target, {
-                                ignoreDestructibleStructures: true,
-                                ignoreCreeps: true,
-                                ignoreRoads: true
-                            });
+                        else if (creep.rangedAttack(wallTarget) == ERR_NO_PATH) {
+                            creep.moveTo(target,
+                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
+                        }
+                    }
+                    else {
+                        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target,
+                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
+                        }
+                        else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target,
+                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
                         }
                     }
                 }
             }
-            else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                if (creep.moveTo(targetSpawn,
-                        {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true}) == ERR_NO_PATH) {
-                    var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL && s.structureType == STRUCTURE_RAMPART});
-                    if (creep.rangedAttack(wallTarget) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(wallTarget,
-                            {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                    }
-                    else if (creep.rangedAttack(wallTarget) == ERR_NO_PATH) {
-                        creep.moveTo(target,
-                            {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                    }
-                }
-                else {
-                    if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target,
-                            {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                    }
-                    else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target,
-                            {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                    }
-                }
+            else {
+
             }
         }
         else {
+            if (creep.memory.path) {
+                delete creep.memory.path;
+            }
             creep.moveTo(beforeRallyFlag);
         }
 
