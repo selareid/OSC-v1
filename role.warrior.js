@@ -103,10 +103,6 @@ module.exports = {
 
         if (isUnderAttack === true) {
 
-            if (creep.memory.path) {
-                delete creep.memory.path;
-            }
-
             var target = this.findTarget(room, creep);
             if (target) {
                 var rampart = this.findRampartNearTarget(room, creep, target);
@@ -161,24 +157,14 @@ module.exports = {
                 if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
 
                     var path;
-                    if (!creep.memory.path) {
-                        creep.memory.path = creep.room.findPath(creep.pos, targetSpawn.pos, {
-                            serialize: true,
-                            ignoreDestructibleStructures: true,
-                            ignoreCreeps: true,
-                            ignoreRoads: true
-                        });
-                    }
-                    else if (creep.memory.path[creep.memory.path.length].x != targetSpawn.pos.x && creep.memory.path[creep.memory.path.length].y != targetSpawn.pos.y) {
-                        creep.memory.path = creep.room.findPath(creep.pos, targetSpawn.pos, {
-                            serialize: true,
-                            ignoreDestructibleStructures: true,
-                            ignoreCreeps: true,
-                            ignoreRoads: true
-                        });
-                    }
 
-                    path = creep.memory.path;
+                        path = creep.room.findPath(creep.pos, targetSpawn.pos, {
+                            serialize: true,
+                            ignoreDestructibleStructures: true,
+                            ignoreCreeps: true,
+                            ignoreRoads: true
+                        });
+
 
 
                     if (path.length) {
@@ -239,9 +225,6 @@ module.exports = {
             }
         }
         else {
-            if (creep.memory.path) {
-                delete creep.memory.path;
-            }
             creep.moveTo(beforeRallyFlag);
         }
 
