@@ -5,7 +5,8 @@ const roleEmergencyHarvester = require ('role.emergencyHarvester');
 module.exports = {
     run: function (room, creep) {
         var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
-        if (numberOfDistributors <= 0) {
+        var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
+        if (!room.storage && numberOfDistributors <= 0 || room.storage && numberOfCarriers <= 0) {
             roleEmergencyHarvester.run(room, creep);
         }
         else {
