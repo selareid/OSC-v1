@@ -127,7 +127,7 @@ module.exports = {
                 amountToSave = 0.1;//in percent
             }
 
-
+            if (room.energyAvailable >= 300) {
                 if (numberOfHarvesters < minimumNumberOfHarvesters) {
                     name = spawn.createCustomCreep(room, energy, 'harvester', amountToSave);
                 }
@@ -174,7 +174,7 @@ module.exports = {
                 if ((name in Game.creeps)) {
                     console.log("Creating Creep " + name);
                 }
-
+            }
 
 
             if (numberOfHarvesters <= 0) {
