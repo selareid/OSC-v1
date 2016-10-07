@@ -36,7 +36,7 @@ module.exports = {
         if (isUnderAttack === true) {
             if (creep.room.name != room.name) {
                 creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(room)),
-                    {ignoreDestructibleStructures:  true, ignoreCreeps: true, ignoreRoads: true});
+                    {ignoreCreeps: true, ignoreRoads: true});
                 return false;
             }
             else {
