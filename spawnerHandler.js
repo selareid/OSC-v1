@@ -44,7 +44,7 @@ module.exports = {
                     || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
                 }).length;
 
-                minimumNumberOfWarriors += Math.round(numberOfHostiles * 2.10);
+                minimumNumberOfWarriors = Math.round(numberOfHostiles * 2.10);
                 minimumNumberOfUpgraders = 0;
                 minimumNumberOfBuilders = 1;
                 minimumNumberOfRepairers = 1;
@@ -53,7 +53,7 @@ module.exports = {
                 minimumNumberOfOtherRoomCreeps = 0;
             }
             else if (isAttacking === true) {
-                minimumNumberOfWarriors += armySize;
+                minimumNumberOfWarriors = armySize;
             }
 
             var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.ticksToLive <= 400 && c.memory.role), 'ticksToLive');
