@@ -40,8 +40,7 @@ module.exports = {
                         roleRepairer.run(room, creep);
                         break;
                     case 'defenceManager':
-                        var hitsOfDefence = this.getHitsOfDefence(room);
-                        roleDefenceManager.run(room, creep, hitsOfDefence, isUnderAttack);
+                        roleDefenceManager.run(room, creep, isUnderAttack);
                         break;
                     case 'warrior':
                         roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
@@ -64,16 +63,6 @@ module.exports = {
 
             }
         }
-    },
-
-    getHitsOfDefence: function (room) {
-        var wallsRamparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL|| s.structureType == STRUCTURE_RAMPART});
-        var allHits = [];
-
-        for (let structure of wallsRamparts) {
-            allHits.push(structure.hits);
-        }
-        return _.min(allHits) + 1000;
     },
 
     getEnergyOfTower: function (room) {

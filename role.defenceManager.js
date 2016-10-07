@@ -2,7 +2,7 @@ require('global');
 require('prototype.creep')();
 
 module.exports = {
-    run: function (room, creep, hitsOfDefence, isUnderAttack) {
+    run: function (room, creep, isUnderAttack) {
         creep.say('defend');
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
@@ -22,19 +22,11 @@ module.exports = {
                 }
             }
             else {
-                var rampartToRepair = this.findRampart(room, hitsOfDefence);
+                var defenceToRepair = this.findDefence(room);
 
-                if (rampartToRepair) {
-                    if (creep.repair(rampartToRepair) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(rampartToRepair);
-                    }
-                }
-                else {
-                    var wallToRepair = this.findWall(room, hitsOfDefence);
-                    if (wallToRepair) {
-                        if (creep.repair(wallToRepair) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(wallToRepair, {reusePath: 10});
-                        }
+                if (defenceToRepair) {
+                    if (creep.repair(defenceToRepair) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(defenceToRepair);
                     }
                 }
             }
@@ -59,18 +51,13 @@ module.exports = {
         }
     },
 
-    findRampart: function (room, hitsOfDefence) {
-        var rampart = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_RAMPART && s.hits <= hitsOfDefence});
+    findDefence: function (room) {
+        var structures = room.find(FIND_STRUCTURES,
+            {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits < s.hitsMax});
 
-        return rampart[0];
-    },
+        var structure = _.min(structures, 'hits');
 
-    findWall: function (room, hitsOfDefence) {
-        var wall = room.find(FIND_STRUCTURES,
-            {filter: (s) => s.structureType == STRUCTURE_WALL && s.hits <= hitsOfDefence});
-
-        return wall[0];
+        return structure[0];
     },
 
     getTowerToRefill: function (room, creep) {
