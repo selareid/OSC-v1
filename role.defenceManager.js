@@ -77,15 +77,8 @@ module.exports = {
         var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
         if (towers.length > 0) {
-            var allEnergyTowers = [];
 
-            for (let tower of towers) {
-                allEnergyTowers.push(tower.energy);
-            }
-
-            var towerEnergy = _.min(allEnergyTowers) * -1.25;
-
-            var tower = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && (s.energy <= towerEnergy + 10 && s.energy >= towerEnergy - 10)});
+            var tower = _.min(towers, 'energy');
 
             if (tower) {
                 return tower;
