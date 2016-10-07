@@ -27,7 +27,7 @@ module.exports = {
                 && _.sum(s.store) < s.storeCapacity})[0];
 
                 if (container) {
-                    creep.creepSpeech(room, 'droppingEnergyContainer')
+                    creep.creepSpeech(room, 'droppingEnergyContainer');
                     creep.transfer(container, RESOURCE_ENERGY);
                 }
                 else {
@@ -42,7 +42,7 @@ module.exports = {
                 if (source) {
                         switch (creep.harvest(source)) {
                             case ERR_NOT_IN_RANGE:
-                                creep.creepSpeech(room, 'movingToSource')
+                                creep.creepSpeech(room, 'movingToSource');
                             creep.moveTo(source, {reusePath: 10});
                                 break;
                             case OK:
