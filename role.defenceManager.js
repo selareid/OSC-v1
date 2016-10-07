@@ -57,7 +57,7 @@ module.exports = {
 
         var structure = _.min(structures, 'hits');
 
-        return structure[0];
+        return structure;
     },
 
     getTowerToRefill: function (room, creep) {
