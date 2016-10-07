@@ -14,14 +14,25 @@ module.exports = {
 
             if (creep.pos.roomName == flag.pos.roomName) {
                 if (flag.memory.type == 'claimFlag') {
-                    if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.controller);
+
+                    switch (creep.claimController(creep.room.controller)) {
+                        case ERR_NOT_IN_RANGE:
+                            creep.moveTo(creep.room.controller);
+                            break;
+                        case ERR_INVALID_TARGET:
+                            creep.attackController(creep.room.controller);
+                            break;
                     }
 
                 }
                 else if (flag.memory.type == 'reserveFlag') {
-                    if (creep.reserveController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.controller);
+                    switch (creep.reserveController(creep.room.controller)) {
+                        case ERR_NOT_IN_RANGE:
+                            creep.moveTo(creep.room.controller);
+                            break;
+                        case ERR_INVALID_TARGET:
+                            creep.attackController(creep.room.controller);
+                            break;
                     }
                 }
             }
