@@ -29,7 +29,7 @@ module.exports = {
 
 
         if (Game.time % 3 == 0) {
-            var underAttack = defenceHandler.isUnderAttack();
+            var underAttack = defenceHandler.isUnderAttack(room);
             if (underAttack === false) {
                 Memory.rooms[room].isUnderAttack = false;
             }
