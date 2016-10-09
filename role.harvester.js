@@ -37,7 +37,12 @@ module.exports = {
             }
             else {
 
-                var source = this.findSource(room, creep);
+                if (!creep.memory.source || Game.time % 30 == 0) {
+                    creep.memory.source = this.findSource(room, creep).id;
+                    console.log('harvesters calculating source');
+                }
+
+                var source = Game.getObjectById(creep.memory.source);
 
                 if (source) {
                         switch (creep.harvest(source)) {
@@ -49,6 +54,9 @@ module.exports = {
                                 creep.creepSpeech(room, 'harvesting');
                                 break;
                         }
+                }
+                else {
+                    delete creep.memory.source;
                 }
             }
         }
