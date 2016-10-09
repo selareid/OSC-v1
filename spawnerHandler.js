@@ -1,4 +1,4 @@
-require('global');
+3require('global');
 
 require('prototype.spawn')();
 
@@ -25,6 +25,9 @@ module.exports = {
                 minimumNumberOfCarriers = 0;
                 minimumNumberOfDistributors = 3;
                 minimumNumberOfBuilders = 4;
+            }
+            else if (room.storage.store[RESOURCE_ENERGY] <= 150000) {
+                minimumNumberOfCarriers = 4;
             }
 
             var numberOfSources = room.find(FIND_SOURCES).length;
