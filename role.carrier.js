@@ -36,7 +36,7 @@ module.exports = {
 
                 var container;
 
-                if (!creep.memory.container || Game.time % 20 == 0) {
+                if (!creep.memory.container) {
                     creep.memory.container = creep.findContainer(room).id;
                     console.log('carriers recalculating container');
                 }
