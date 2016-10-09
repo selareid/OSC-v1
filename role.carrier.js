@@ -36,12 +36,12 @@ module.exports = {
 
                 var container;
 
-                if (!creep.memory.energy || Game.time % 20 == 0) {
-                    creep.memory.energy = creep.findContainer(room).id;
+                if (!creep.memory.container || Game.time % 20 == 0) {
+                    creep.memory.container = creep.findContainer(room).id;
                     console.log('carriers recalculating container');
                 }
 
-                container = Game.getObjectById(creep.memory.energy);
+                container = Game.getObjectById(creep.memory.container);
 
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

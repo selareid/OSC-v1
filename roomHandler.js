@@ -18,7 +18,7 @@ module.exports = {
 
         var isAttacking;
         var armySize;
-        
+
         var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
 
 
