@@ -3,6 +3,7 @@ require('prototype.creep')();
 
 module.exports = {
     run: function (room, creep) {
+        creep.say('carry');
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
