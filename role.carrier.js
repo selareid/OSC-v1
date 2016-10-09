@@ -43,7 +43,7 @@ module.exports = {
 
                 container = Game.getObjectById(creep.memory.container);
 
-                if (container.store[RESOURCE_ENERGY] >= 300) {
+                if (container.store[RESOURCE_ENERGY] > 0) {
 
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
