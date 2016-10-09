@@ -1,4 +1,4 @@
-3require('global');
+require('global');
 
 require('prototype.spawn')();
 
