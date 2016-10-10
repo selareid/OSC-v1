@@ -20,7 +20,7 @@ module.exports = {
         var armySize;
 
         var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
-        var remoteCreepFlags = room.getRemoteFlags();
+
 
         if (flagToRallyAt) {
             isAttacking = true;
