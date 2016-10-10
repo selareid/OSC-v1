@@ -46,16 +46,18 @@ module.exports = {
 
                 container = Game.getObjectById(creep.memory.container);
 
-                if (container.store[RESOURCE_ENERGY] > 0) {
+                if (container) {
+                    if (container.store[RESOURCE_ENERGY] > 0) {
 
-                    if (container) {
-                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+                        if (container) {
+                            if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(container)
+                            }
                         }
                     }
-                }
-                else {
-                    delete creep.memory.container;
+                    else {
+                        delete creep.memory.container;
+                    }
                 }
             }
 
