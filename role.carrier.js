@@ -34,8 +34,6 @@ module.exports = {
             }
             else {
 
-                var container;
-
                 if (!creep.memory.container) {
                     let foundContainer = creep.findContainer(room);
                     if (foundContainer) {
@@ -44,7 +42,7 @@ module.exports = {
                     }
                 }
 
-                container = Game.getObjectById(creep.memory.container);
+                var container = Game.getObjectById(creep.memory.container);
 
                 if (container) {
                     if (container.store[RESOURCE_ENERGY] > 0) {
