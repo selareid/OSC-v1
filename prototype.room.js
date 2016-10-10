@@ -30,10 +30,22 @@ module.exports = function () {
 
         Room.prototype.findOtherRoomToGoTo =
             function () {
-                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name)[0];
+                var otherRoomToGoToFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name)[0];
 
-                if (beforeRallyFlag) {
-                    return beforeRallyFlag;
+                if (otherRoomToGoToFlag) {
+                    return otherRoomToGoToFlag;
+                }
+                else {
+                    return undefined;
+                }
+            },
+
+        Room.prototype.getRemoteFlags =
+            function () {
+                var remoteFlags = _.filter(Game.flags, f => f.memory.type == 'remoteFlag' && f.memory.room == this.name);
+
+                if (remoteFlags.length > 0) {
+                    return remoteFlags;
                 }
                 else {
                     return undefined;
