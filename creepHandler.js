@@ -10,7 +10,6 @@ const roleDefenceManager = require ('role.defenceManager');
 const roleWarrior = require ('role.warrior');
 const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
-const energyThief = require ('role.energyThief');
 
 module.exports = {
     run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo) {
@@ -51,10 +50,6 @@ module.exports = {
                         break;
                     case 'otherRoomCreep':
                         otherRoomCreep.run(room, creep, roomToGoTo);
-                        break;
-                    case 'energyThief':
-                        energyThief.run(room, creep);
-                        creep.say('ERROR!!!', true);
                         break;
                     case '':
                         creep.say('ERROR!!!', true);
