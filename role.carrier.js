@@ -37,8 +37,11 @@ module.exports = {
                 var container;
 
                 if (!creep.memory.container) {
-                    creep.memory.container = creep.findContainer(room).id;
-                    console.log('carriers recalculating container');
+                    let foundContainer = creep.findContainer(room);
+                    if (foundContainer) {
+                        creep.memory.container = foundContainer.id;
+                        console.log('carrier recalculating container');
+                    }
                 }
 
                 container = Game.getObjectById(creep.memory.container);
