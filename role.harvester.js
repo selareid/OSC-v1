@@ -37,17 +37,24 @@ module.exports = {
             }
             else {
 
-                if (!creep.memory.source || Game.time % 30 == 0) {
+                if (!creep.memory.source) {
                     var harvesters = _.filter(Game.creeps, c => c.memory.role == 'harvester' && c.memory.room == room.name && c.spawning == false && c.name != creep.name);
-                    var takenSources = [];
 
-                    for (let harvester of harvesters) {
-                        if (harvester.memory.source) {
-                            takenSources.push(harvester.memory.source);
+                    if (harvesters >= room.find(FIND_SOURCES).length) {
+                        var creepNearestToDeath = _.min(harvesters, 'tickToLive');
+                        if (creepNearestToDeath && creepNearestToDeath.memory.source) {
+                            creep.memory.source = creepNearestToDeath.memory.source;
+                        }
+                        else {
+                            creep.memory.source = this.findSource(room, creep, harvesters).id;
                         }
                     }
+                    else {
+                        creep.memory.source = this.findSource(room, creep, harvesters).id;
+                    }
 
-                    creep.memory.source = this.findSource(room, creep, takenSources).id;
+
+
                     console.log('harvesters calculating source');
                 }
 
@@ -71,7 +78,15 @@ module.exports = {
         }
     },
 
-    findSource: function (room, creep, takenSources) {
+    findSource: function (room, creep, harvesters) {
+        
+        var takenSources = [];
+
+        for (let harvester of harvesters) {
+            if (harvester.memory.source) {
+                takenSources.push(harvester.memory.source);
+            }
+        }
 
         var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => !takenSources.includes(s.id)});
         if (source) {
