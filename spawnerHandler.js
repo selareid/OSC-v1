@@ -41,7 +41,8 @@ module.exports = {
 
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
-            minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
+            var amountOfReservers = this.getAmountOfReservers(room, numberOfReserveFlags);
+            minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
                 minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
                 minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
@@ -95,9 +96,6 @@ module.exports = {
                         break;
                     case 'warrior':
                         minimumNumberOfWarriors += 1;
-                        break;
-                    case 'landlord':
-                        minimumNumberOfLandlords += 1;
                         break;
                     case 'remoteHarvester':
                         minimumNumberOfRemoteHarvesters += 1;
@@ -210,5 +208,33 @@ module.exports = {
 
         }
 
+    },
+
+    getAmountOfReservers: function(room, reserveFlags) {
+        for (let flag in reserveFlags) {
+            if (flag.room) {
+                if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
+                    var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
+                    if (landlordsInRoom == 0) {
+                        return 1;
+                    }
+                    else if (landlordsInRoom == 1) {
+
+                        var amountOfLandlordsAboutToDie = _.filter(landlordsInRoom, (c) => c.ticksToLive <= 40).length;
+
+                        if (amountOfLandlordsAboutToDie <= landlordsInRoom.length) {
+                            return landlordsInRoom.length
+                        }
+
+                    }
+                }
+                else {
+                    return 2;
+                }
+            }
+            else {
+                return 2;
+            }
+        }
     }
 };
