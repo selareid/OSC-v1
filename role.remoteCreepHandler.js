@@ -4,7 +4,7 @@ const roleRemoteHauler = require('role.remoteHauler');
 
 module.exports = {
     run: function (room, creep, remoteCreepFlags) {
-
+creep.say('yeah');
         if (remoteCreepFlags.length > 0) {
 
             if (!creep.memory.remoteFlag) {
@@ -22,6 +22,9 @@ module.exports = {
                 }
             }
 
+        }
+        else {
+            creep.moveTo(35, 40);
         }
     },
 

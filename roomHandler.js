@@ -51,7 +51,7 @@ module.exports = {
         }
 
         linkHandler.run(room);
-        spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
+        spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
         creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo, remoteCreepFlags);
         //}
     }

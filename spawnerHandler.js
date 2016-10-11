@@ -3,7 +3,7 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, armySize) {
+    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags) {
 
         var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true})[0];
 
@@ -18,6 +18,8 @@ module.exports = {
             var minimumNumberOfDefenceManagers = 1;
             var minimumNumberOfWarriors = 7;
             var minimumNumberOfLandlords = 0;
+            var minimumNumberOfRemoteHarvesters = 0;
+            var minimumNumberOfRemoteHaulers = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
 
             if (!room.storage) {
@@ -41,6 +43,9 @@ module.exports = {
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
 
+            minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
+            minimumNumberOfRemoteHaulers =  minimumNumberOfHarvesters * 3;
+
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
                     filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
@@ -53,13 +58,15 @@ module.exports = {
                 minimumNumberOfRepairers = 1;
                 minimumNumberOfDefenceManagers = 1;
                 minimumNumberOfLandlords = 0;
+                minimumNumberOfRemoteHarvesters = 0;
+                minimumNumberOfRemoteHaulers = 0;
                 minimumNumberOfOtherRoomCreeps = 0;
             }
             else if (isAttacking === true) {
                 minimumNumberOfWarriors = armySize;
             }
 
-            var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.ticksToLive <= 400 && c.memory.role), 'ticksToLive');
+            var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 100 && c.memory.role), 'ticksToLive');
 
             if (creepAboutToDie.length > 0) {
                 let role = creepAboutToDie.memory.role;
@@ -92,9 +99,16 @@ module.exports = {
                     case 'landlord':
                         minimumNumberOfLandlords += 1;
                         break;
+                    case 'remoteHarvester':
+                        minimumNumberOfRemoteHarvesters += 1;
+                        break;
+                    case 'remoteHauler':
+                        minimumNumberOfRemoteHaulers += 1;
+                        break;
                     case 'otherRoomCreep':
                         minimumNumberOfOtherRoomCreeps += 1;
                         break;
+
                 }
             }
 
@@ -107,6 +121,8 @@ module.exports = {
             var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
             var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
             var numberOfLandlords = _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);
+            var numberOfRemoteHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHarvester' && c.memory.room == room.name);
+            var numberOfRemoteHaulers = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHauler' && c.memory.room == room.name);
             var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
 
             // console.log('Harvesters ' + numberOfHarvesters);
@@ -119,6 +135,7 @@ module.exports = {
             // console.log('Warriors ' + numberOfWarriors);
             // console.log('Landlords ' + numberOfLandlords);
             // console.log('Other Room Creeps ' + numberOfOtherRoomCreeps);
+            // add more cause this ain't all the roles ^
 
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;
@@ -169,6 +186,12 @@ module.exports = {
                 }
                 else if (numberOfLandlords < minimumNumberOfLandlords && energy - (energy * amountToSave) >= 650) {
                     name = spawn.createCustomCreep(room, energy, 'landlord', amountToSave);
+                }
+                else if (numberOfRemoteHarvesters < minimumNumberOfRemoteHarvesters) {
+                    name = spawn.createCustomCreep(room, energy, 'remoteHarvester', amountToSave);
+                }
+                else if (numberOfRemoteHaulers < minimumNumberOfRemoteHaulers) {
+                    name = spawn.createCustomCreep(room, energy, 'remoteHauler', amountToSave);
                 }
                 else if (numberOfOtherRoomCreeps < minimumNumberOfOtherRoomCreeps) {
                     name = spawn.createCustomCreep(room, energy, 'otherRoomCreep', amountToSave);

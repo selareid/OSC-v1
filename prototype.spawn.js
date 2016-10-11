@@ -7,7 +7,7 @@ module.exports = function () {
             var numberOfParts;
             var body = [];
 
-            switch(roleName) {
+            switch (roleName) {
                 case 'harvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
 
@@ -115,6 +115,25 @@ module.exports = function () {
                     for (let i = 0; i < numberOfParts; i++) {
                         body.push(CLAIM);
                         body.push(MOVE);
+                    }
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                case 'remoteHarvester':
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 150);
+                    body.push(CARRY);
+                    body.push(MOVE);
+                    for (let i = 0; i < numberOfParts; i++) {
+                        body.push(MOVE);
+                        body.push(WORK);
+                    }
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                case 'remoteHauler':
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
+                    body.push(WORK);
+                    body.push(MOVE);
+                    for (let i = 0; i < numberOfParts; i++) {
+                        body.push(MOVE);
+                        body.push(CARRY);
+                        body.push(CARRY);
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'otherRoomCreep':
