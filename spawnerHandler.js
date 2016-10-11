@@ -43,8 +43,8 @@ module.exports = {
             var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             minimumNumberOfLandlords = numberOfClaimFlags + (numberOfReserveFlags * 2);
 
-            minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
-            minimumNumberOfRemoteHaulers =  minimumNumberOfHarvesters * 3;
+                minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
+                minimumNumberOfRemoteHaulers = minimumNumberOfHarvesters * 3;
 
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
