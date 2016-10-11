@@ -40,7 +40,7 @@ module.exports = {
                 if (!creep.memory.source) {
                     var harvesters = _.filter(Game.creeps, c => c.memory.role == 'harvester' && c.memory.room == room.name && c.spawning == false && c.name != creep.name);
 
-                    if (harvesters >= room.find(FIND_SOURCES).length) {
+                    if (harvesters > room.find(FIND_SOURCES).length) {
                         var creepNearestToDeath = _.min(harvesters, 'tickToLive');
                         if (creepNearestToDeath && creepNearestToDeath.memory.source) {
                             creep.memory.source = creepNearestToDeath.memory.source;
@@ -79,7 +79,7 @@ module.exports = {
     },
 
     findSource: function (room, creep, harvesters) {
-        
+
         var takenSources = [];
 
         for (let harvester of harvesters) {
