@@ -20,7 +20,7 @@ module.exports = {
         var armySize;
 
         var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
-        var remoteCreepFlags = room.();
+        var remoteCreepFlags = room.getRemoteFlags();
 
         if (flagToRallyAt) {
             isAttacking = true;
@@ -52,7 +52,7 @@ module.exports = {
 
         linkHandler.run(room);
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize);
-        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo);
+        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo, remoteCreepFlags);
         //}
     }
 };

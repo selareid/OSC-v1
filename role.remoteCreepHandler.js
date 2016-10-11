@@ -1,59 +1,64 @@
 require('global');
-
-var type1 = require ('role.type1'); //RCL upgrader
-var type2 = require ('role.type2'); //builder
-var type3 = require ('role.type3'); //repairer
-var type4 = require ('role.type4'); //wallRepairer and tower replenisher
+const roleRemoteHarvester = require('role.remoteHarvester');
+const roleRemoteHauler = require('role.remoteHauler');
 
 module.exports = {
-    run: function (room, creep, roomToGoTo) {
+    run: function (room, creep, remoteCreepFlags) {
 
-        if (roomToGoTo) {
+        if (remoteCreepFlags.length > 0) {
 
-            if (creep.room.name != roomToGoTo) {
-                var roomPos = new RoomPosition(26, 20, roomToGoTo);
-                creep.moveTo(roomPos);
+            if (!creep.memory.remoteFlag) {
+                creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep);
             }
-            else {
-                if (!creep.memory.type) {
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type1') < 1) {
-                        creep.memory.type = 'type1';
-                    }
-                    else if (_.sum(Game.creeps, (c) => c.memory.type == 'type2') < 4) {
-                        creep.memory.type = 'type2';
-                    }
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type3') < 1) {
-                        creep.memory.type = 'type3';
-                    }
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 1) {
-                        creep.memory.type = 'type4';
-                    }
-                    else {
-                        creep.memory.type = 'type2';
-                    }
+
+            var remoteFlag = creep.memory.remoteFlag;
+
+            if (remoteFlag) {
+                if (creep.memory.role == 'remoteHarvester') {
+                    this.remoteHarvesterHandler(room, creep, remoteFlag);
                 }
-                else {
-
-                    switch (creep.memory.type) {
-                        case 'type1':
-                            type1.run(creep);
-                            break;
-                        case 'type2':
-                            type2.run(creep);
-                            break;
-                        case 'type3':
-                            type3.run(creep);
-                            break;
-                        case 'type4':
-                            type4.run(creep);
-                            break;
-                        default:
-                            creep.say('ERR TYPE');
-                    }
-
+                else if (creep.memory.role == 'hauler') {
+                    this.haulerHandler(room, creep, remoteFlag);
                 }
             }
 
         }
+    },
+
+    setRemoteFlagMemory: function (room, creep) {
+
+        var zeChosenFlag;
+
+        switch (creep.memory.type) {
+            case 'remoteHarvester':
+                zeChosenFlag = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
+                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
+                break;
+            case 'hauler':
+                zeChosenFlag = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
+                _.sum(Game.creeps, (c) => (c.memory.role == 'hauler') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) <
+                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) * 2)));
+                break;
+        }
+
+        if (zeChosenFlag.id) {
+            return zeChosenFlag.id;
+        }
+        else {
+            return undefined;
+        }
+    },
+
+    remoteHarvesterHandler: function (room, creep, remoteFlag) {
+        if (creep.pos.roomName != remoteFlag.pos.roomName) {
+            creep.moveTo(remoteFlag, {reusePath: 30, ignoreCreeps: true});
+        }
+        else {
+            roleRemoteHarvester.run(room, creep);
+        }
+    },
+
+    haulerHandler: function (room, creep, remoteFlag) {
+        roleRemoteHauler.run(room, creep, remoteFlag);
     }
 };

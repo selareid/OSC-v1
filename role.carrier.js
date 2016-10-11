@@ -29,7 +29,7 @@ module.exports = {
             var droppedenergy = creep.findDroppedEnergy(room);
             if (droppedenergy) {
                 if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(droppedenergy)
+                    creep.moveTo(droppedenergy);
                 }
             }
             else {
@@ -49,7 +49,7 @@ module.exports = {
 
                         if (container) {
                             if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(container)
+                                creep.moveTo(container, {ignoreCreeps: true});
                             }
                         }
                     }
