@@ -18,10 +18,10 @@ module.exports = function () {
 
         Room.prototype.findBeforeRallyFlag =
             function () {
-                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == this.name)[0];
+                var Flag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == this.name)[0];
 
-                if (beforeRallyFlag) {
-                    return beforeRallyFlag;
+                if (Flag) {
+                    return Flag;
                 }
                 else {
                     return undefined;
@@ -34,6 +34,18 @@ module.exports = function () {
 
                 if (beforeRallyFlag) {
                     return beforeRallyFlag;
+                }
+                else {
+                    return undefined;
+                }
+            },
+
+        Room.prototype.getRemoteFlags =
+            function () {
+                var Flags = _.filter(Game.flags, f => f.memory.type == 'remoteFlag' && f.memory.room == this.name)[0];
+
+                if (Flags.length > 0) {
+                    return Flags;
                 }
                 else {
                     return undefined;
