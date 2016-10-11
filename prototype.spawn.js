@@ -112,7 +112,7 @@ module.exports = function () {
                 case 'landlord':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 650);
 
-                    for (let i = 0; i < numberOfParts; i++) {
+                    if (numberOfParts >= 1) {
                         body.push(CLAIM);
                         body.push(MOVE);
                     }
