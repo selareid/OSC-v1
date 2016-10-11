@@ -40,8 +40,8 @@ module.exports = {
             }
 
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
-            var numberOfReserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
-            var amountOfReservers = this.getAmountOfReservers(room, numberOfReserveFlags);
+            var reserveFlags = _.sum(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
+            var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
                 minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
@@ -211,7 +211,7 @@ module.exports = {
     },
 
     getAmountOfReservers: function(room, reserveFlags) {
-        for (let flag in reserveFlags) {
+        for (let flag of reserveFlags) {
             if (flag.room) {
                 if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
                     var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
