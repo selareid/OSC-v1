@@ -75,12 +75,12 @@ module.exports = function () {
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'upgrader':
-                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 50) / 150);
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
                     body.push(MOVE);
                     for (let i = 0; i < numberOfParts; i++) {
                         body.push(WORK);
-                        body.push(CARRY);
                     }
+                    body.push(CARRY);
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'builder':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
