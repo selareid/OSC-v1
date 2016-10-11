@@ -16,11 +16,13 @@ module.exports = {
             var minimumNumberOfBuilders = 1;
             var minimumNumberOfRepairers = 1;
             var minimumNumberOfDefenceManagers = 1;
-            var minimumNumberOfWarriors = 7;
+            var minimumNumberOfWarriors = 3;
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfRemoteHarvesters = 0;
             var minimumNumberOfRemoteHaulers = 0;
             var minimumNumberOfOtherRoomCreeps = 0;
+
+            var maximumNumberOfWarriors = 7;
 
             if (!room.storage) {
                 minimumNumberOfUpgraders = 4;
@@ -193,6 +195,9 @@ module.exports = {
                 }
                 else if (numberOfOtherRoomCreeps < minimumNumberOfOtherRoomCreeps) {
                     name = spawn.createCustomCreep(room, energy, 'otherRoomCreep', amountToSave);
+                }
+                else if (numberOfWarriors < maximumNumberOfWarriors) {
+                    name = spawn.createCustomCreep(room, energy, 'warrior', amountToSave);
                 }
 
                 if (Game.creeps[name]) {
