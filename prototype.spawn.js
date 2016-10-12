@@ -79,6 +79,9 @@ module.exports = function () {
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
 
                     if (Memory.rooms[room].energyMode == 'saving' && numberOfParts > 7) {
+                        numberOfParts = 7;
+                    }
+                    if (Memory.rooms[room].energyMode == 'ok' && numberOfParts > 15) {
                         numberOfParts = 15;
                     }
 
