@@ -54,6 +54,14 @@ module.exports = {
             //     }
             // }
             // else {
+            if (!storage) {
+                var droppedenergy = creep.findDroppedEnergy(room);
+                if (droppedenergy) {
+                    if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedenergy, {ignoreCreeps: true});
+                    }
+                }
+            }
 
             if (storage && storage.store[RESOURCE_ENERGY] > 50) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
