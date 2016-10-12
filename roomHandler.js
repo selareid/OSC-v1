@@ -13,6 +13,7 @@ module.exports = {
         if (Game.time % 20 == 0 || !Memory.rooms[room].partsForCarrier) {
             room.updateConstructionTargets();
 
+
             let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}), 'store[RESOURCE_ENERGY]');
 
             if (minContEn) {
@@ -26,6 +27,24 @@ module.exports = {
                     Memory.rooms[room].partsForCarrier = 5;
                 }
             }
+
+
+            if (room.storage) {
+                var energyInStore = room.storage.store[RESOURCE_ENERGY];
+                if (energyInStore >= 150000) {
+                    Memory.rooms[room].energyMode = 'normal';
+                }
+                else if (energyInStore <= 20000) {
+                    Memory.rooms[room].energyMode = 'saving';
+                }
+            }
+            else if (room.controller.level < 4) {
+                Memory.rooms[room].energyMode = 'upgrading';
+            }
+            else {
+                Memory.rooms[room].energyMode = 'building';
+            }
+
         }
 
         var flagToRallyAt = room.findAttackFlag();

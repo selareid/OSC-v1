@@ -49,6 +49,30 @@ module.exports = {
             minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
             minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
 
+            switch (Memory.rooms[room].energyMode) {
+                case 'normal':
+                    break;
+                case 'saving':
+                    minimumNumberOfUpgraders = 1;
+                    minimumNumberOfBuilders = 0;
+                    minimumNumberOfRepairers = 1;
+                    minimumNumberOfDefenceManagers = 1;
+                    minimumNumberOfWarriors = 0;
+                    minimumNumberOfLandlords = 0;
+                    minimumNumberOfRemoteHarvesters = 0;
+                    minimumNumberOfRemoteHaulers = 0;
+                    minimumNumberOfOtherRoomCreeps = 0;
+
+                    maximumNumberOfWarriors = 0;
+                    break;
+                case 'upgrading':
+                    minimumNumberOfUpgraders = 3;
+                    break;
+                case 'building':
+                    minimumNumberOfBuilders = 3;
+                    break;
+            }
+
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
                     filter: (c) => c.getActiveBodyparts(ATTACK) >= 1 || c.getActiveBodyparts(RANGED_ATTACK) >= 1
