@@ -120,6 +120,9 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'remoteHarvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 150);
+                    if (numberOfParts > 7) {
+                        numberOfParts = 7;
+                    }
                     body.push(CARRY);
                     body.push(MOVE);
                     for (let i = 0; i < numberOfParts; i++) {
