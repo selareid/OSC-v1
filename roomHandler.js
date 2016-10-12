@@ -10,7 +10,7 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room) {
 
-        if (Game.time % 20 == 0 || !Memory.rooms[room].partsForCarrier) {
+        if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier) {
             room.updateConstructionTargets();
 
 
@@ -22,10 +22,10 @@ module.exports = {
                     Memory.rooms[room].maxPartsForCarrier = 6;
                 }
                 else if (minContEn < 500) {
-                    Memory.rooms[room].partsForCarrier = 4;
+                    Memory.rooms[room].maxPartsForCarrier = 4;
                 }
                 else {
-                    Memory.rooms[room].partsForCarrier = 5;
+                    Memory.rooms[room].maxPartsForCarrier = 5;
                 }
             }
 
