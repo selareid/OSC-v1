@@ -15,7 +15,7 @@ module.exports = {
 
 
             let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
-                'store[RESOURCE_ENERGY]');
+                'store.energy');
 
             if (minContEn) {
                 if (minContEn >= 1000) {
