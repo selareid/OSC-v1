@@ -30,22 +30,22 @@ creep.say('yeah');
 
     setRemoteFlagMemory: function (room, creep) {
 
-        var zeChosenFlag;
+        var zeChosenFlags;
 
         switch (creep.memory.role) {
             case 'remoteHarvester':
-                zeChosenFlag = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
+                zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
                 _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
                 break;
             case 'hauler':
-                zeChosenFlag = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
+                zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
                 _.sum(Game.creeps, (c) => (c.memory.role == 'hauler') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) <
                 (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) * 2)));
                 break;
         }
 
-        if (zeChosenFlag && zeChosenFlag.id) {
-            return zeChosenFlag.id;
+        if (zeChosenFlags.length > 0) {
+            return zeChosenFlags[0].id;
         }
         else {
             return undefined;
