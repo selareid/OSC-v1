@@ -22,6 +22,8 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'distributor':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
+
+
                     body.push(WORK);
                     body.push(MOVE);
                     for (let i = 0; i < numberOfParts; i++) {
@@ -32,6 +34,11 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'carrier':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
+
+                    if (numberOfParts > Memory.rooms[room].partsForCarrier) {
+
+                    }
+
                     body.push(WORK);
                     body.push(MOVE);
                     for (let i = 0; i < numberOfParts; i++) {

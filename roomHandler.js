@@ -10,8 +10,22 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room) {
 
-        if (Game.time % 20 == 0) {
+        if (Game.time % 20 == 0 || !Memory.rooms[room].partsForCarrier) {
             room.updateConstructionTargets();
+
+            let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}), 'store[RESOURCE_ENERGY]');
+
+            if (minContEn) {
+                if (minContEn >= 1000) {
+                    Memory.rooms[room].maxPartsForCarrier = 6;
+                }
+                else if (minContEn < 500) {
+                    Memory.rooms[room].partsForCarrier = 4;
+                }
+                else {
+                    Memory.rooms[room].partsForCarrier = 5;
+                }
+            }
         }
 
         var flagToRallyAt = room.findAttackFlag();
