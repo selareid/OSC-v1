@@ -32,7 +32,7 @@ creep.say('yeah');
 
         var zeChosenFlag;
 
-        switch (creep.memory.type) {
+        switch (creep.memory.role) {
             case 'remoteHarvester':
                 zeChosenFlag = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
                 _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
