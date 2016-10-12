@@ -77,6 +77,11 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'upgrader':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
+
+                    if (Memory.rooms[room].energyMode == 'saving' && numberOfParts > 7) {
+                        numberOfParts = 15;
+                    }
+
                     body.push(MOVE);
                     for (let i = 0; i < numberOfParts; i++) {
                         body.push(WORK);
