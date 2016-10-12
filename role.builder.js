@@ -29,29 +29,31 @@ module.exports = {
 
             var droppedEnergy = creep.findDroppedEnergy(room);
 
-            if (droppedEnergy == undefined) {
-                droppedEnergy = 0;
-                droppedEnergy.amount = 0;
-            }
-
-            if (droppedEnergy.amount < 2000) {
-                var storage = room.storage;
-                if (storage && storage.store[RESOURCE_ENERGY] > 0) {
-                    if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(storage, {reusePath: 10})
-                    }
-                }
-                else {
-                    var container = creep.findContainer(room);
-                    if (container) {
-                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+            if (droppedEnergy) {
+                if (droppedEnergy.amount < 2000) {
+                    var storage = room.storage;
+                    if (storage && storage.store[RESOURCE_ENERGY] > 0) {
+                        if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage, {reusePath: 10})
                         }
                     }
                     else {
-                        if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+                        var container = creep.findContainer(room);
+                        if (container) {
+                            if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(container)
+                            }
                         }
+                        else {
+                            if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(container)
+                            }
+                        }
+                    }
+                }
+                else {
+                    if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedEnergy);
                     }
                 }
             }
