@@ -167,7 +167,7 @@ module.exports = {
 
             if (room.energyCapacityAvailable >= 400 && (numberOfHarvesters >= minimumNumberOfHarvesters)
                 && (numberOfDistributors >= minimumNumberOfDistributors)
-                && (numberOfCarriers >= minimumNumberOfCarriers)) {
+                && (numberOfCarriers >= 2)) {
                 amountToSave = 0.1;//in percent
             }
 
