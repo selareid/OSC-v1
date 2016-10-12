@@ -27,7 +27,7 @@ module.exports = {
         else {
             var storage = room.storage;
 
-            if (storage && storage.store[RESOURCE_ENERGY] > 0) {
+            if (storage && storage.store[RESOURCE_ENERGY] > 1000) {
                 if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(storage, {reusePath: 10})
                 }
