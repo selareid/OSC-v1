@@ -52,6 +52,19 @@ module.exports = {
             switch (Memory.rooms[room].energyMode) {
                 case 'normal':
                     break;
+                case 'ok':
+                    minimumNumberOfUpgraders = 1;
+                    minimumNumberOfBuilders = 1;
+                    minimumNumberOfRepairers = 1;
+                    minimumNumberOfDefenceManagers = 1;
+                    minimumNumberOfWarriors = 2;
+                    //minimumNumberOfLandlords = 0;
+                    //minimumNumberOfRemoteHarvesters = 0;
+                    //minimumNumberOfRemoteHaulers = 0;
+                    minimumNumberOfOtherRoomCreeps = 0;
+
+                    maximumNumberOfWarriors = 0;
+                    break;
                 case 'saving':
                     minimumNumberOfUpgraders = 1;
                     minimumNumberOfBuilders = 1;
@@ -168,6 +181,9 @@ module.exports = {
             if (room.energyCapacityAvailable >= 400) {
                 if (Memory.rooms[room].energyMode == 'saving') {
                     amountToSave = 0.3;
+                }
+                else if (Memory.rooms[room].energyMode == 'ok') {
+                    amountToSave = 0.2;
                 }
                 else if ((numberOfHarvesters >= minimumNumberOfHarvesters)
                     && (numberOfDistributors >= minimumNumberOfDistributors)

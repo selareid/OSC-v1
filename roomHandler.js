@@ -35,6 +35,9 @@ module.exports = {
                 if (energyInStore >= 150000) {
                     Memory.rooms[room].energyMode = 'normal';
                 }
+                else if (energyInStore >= 30000) {
+                    Memory.rooms[room].energyMode = 'ok';
+                }
                 else if (energyInStore <= 20000) {
                     Memory.rooms[room].energyMode = 'saving';
                 }
