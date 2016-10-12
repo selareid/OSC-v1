@@ -19,13 +19,13 @@ module.exports = {
 
             if (minContEn) {
                 if (minContEn >= 1000) {
-                    Memory.rooms[room].maxPartsForCarrier = 6;
+                    Memory.rooms[room].maxPartsForCarrier = 20;
                 }
                 else if (minContEn < 500) {
-                    Memory.rooms[room].maxPartsForCarrier = 4;
+                    Memory.rooms[room].maxPartsForCarrier = 10;
                 }
                 else {
-                    Memory.rooms[room].maxPartsForCarrier = 5;
+                    Memory.rooms[room].maxPartsForCarrier = 15;
                 }
             }
 
