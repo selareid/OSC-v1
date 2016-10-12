@@ -184,7 +184,7 @@ module.exports = {
                 else if (numberOfWarriors < minimumNumberOfWarriors) {
                     name = spawn.createCustomCreep(room, energy, 'warrior', amountToSave);
                 }
-                else if (numberOfLandlords < minimumNumberOfLandlords && energy - (energy * amountToSave) >= 650) {
+                else if (numberOfLandlords < minimumNumberOfLandlords) {
                     name = spawn.createCustomCreep(room, energy, 'landlord', amountToSave);
                 }
                 else if (numberOfRemoteHarvesters < minimumNumberOfRemoteHarvesters) {
