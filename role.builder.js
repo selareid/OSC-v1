@@ -31,6 +31,7 @@ module.exports = {
 
             if (droppedEnergy == undefined) {
                 droppedEnergy = 0;
+                droppedEnergy.amount = 0;
             }
 
             if (droppedEnergy.amount < 2000) {
