@@ -162,13 +162,18 @@ module.exports = {
             // add more cause this ain't all the roles ^
 
             var energy = spawn.room.energyAvailable;
-            var amountToSave = 0;
+            var amountToSave = 0;//in percent
             var name = undefined;
 
-            if (room.energyCapacityAvailable >= 400 && (numberOfHarvesters >= minimumNumberOfHarvesters)
-                && (numberOfDistributors >= minimumNumberOfDistributors)
-                && (numberOfCarriers >= 2)) {
-                amountToSave = 0.1;//in percent
+            if (room.energyCapacityAvailable >= 400) {
+                if (Memory.rooms[room].energyMode == 'saving') {
+                    amountToSave = 0.3;
+                }
+                else if ((numberOfHarvesters >= minimumNumberOfHarvesters)
+                    && (numberOfDistributors >= minimumNumberOfDistributors)
+                    && (numberOfCarriers >= 2)) {
+                    amountToSave = 0.1;
+                }
             }
 
             if (room.energyAvailable >= 300) {
