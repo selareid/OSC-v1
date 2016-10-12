@@ -46,8 +46,8 @@ module.exports = {
             var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
-                minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
-                minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
+            minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
+            minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
 
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
@@ -215,7 +215,7 @@ module.exports = {
 
     },
 
-    getAmountOfReservers: function(room, reserveFlags) {
+    getAmountOfReservers: function (room, reserveFlags) {
         for (let flag of reserveFlags) {
             if (flag.room) {
                 if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
