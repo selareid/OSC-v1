@@ -54,7 +54,7 @@ module.exports = {
                     break;
                 case 'saving':
                     minimumNumberOfUpgraders = 1;
-                    minimumNumberOfBuilders = 0;
+                    minimumNumberOfBuilders = 1;
                     minimumNumberOfRepairers = 1;
                     minimumNumberOfDefenceManagers = 1;
                     minimumNumberOfWarriors = 1;
