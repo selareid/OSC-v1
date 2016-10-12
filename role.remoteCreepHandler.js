@@ -44,7 +44,7 @@ creep.say('yeah');
                 break;
         }
 
-        if (zeChosenFlag.id) {
+        if (zeChosenFlag && zeChosenFlag.id) {
             return zeChosenFlag.id;
         }
         else {
