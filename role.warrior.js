@@ -161,10 +161,7 @@ module.exports = {
                                 ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
-                            }) == OK) {
-
-                    }
-                    else {
+                            }) == ERR_NO_PATH) {
                         var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
                         switch (creep.attack(wallTarget)) {
                             case ERR_NOT_IN_RANGE:
