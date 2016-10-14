@@ -5,6 +5,38 @@ require('prototype.spawn')();
 module.exports = {
     run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags) {
 
+        var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
+        var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
+        var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
+        var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.room == room.name);
+        var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room.name);
+        var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer' && c.memory.room == room.name);
+        var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
+        var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
+        var numberOfLandlords = _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);
+        var numberOfRemoteHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHarvester' && c.memory.room == room.name);
+        var numberOfRemoteHaulers = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHauler' && c.memory.room == room.name);
+        var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
+
+        // console.log('Harvesters ' + numberOfHarvesters);
+        // console.log('Carriers ' + numberOfCarriers);
+        // console.log('Distributors ' + numberOfDistributors);
+        // console.log('Upgraders ' + numberOfUpgraders);
+        // console.log('Builders ' + numberOfBuilders);
+        // console.log('Repairer ' + numberOfRepairers);
+        // console.log('Defence Managers ' + numberOfDefenceManagers);
+        // console.log('Warriors ' + numberOfWarriors);
+        // console.log('Landlords ' + numberOfLandlords);
+        // console.log('Other Room Creeps ' + numberOfOtherRoomCreeps);
+        // add more cause this ain't all the roles ^
+
+        if (numberOfHarvesters <= 0) {
+            Game.notify("No harvesters in room " + room);
+            console.log("No harvesters in room " + room);
+        }
+
+        Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
+
         var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true})[0];
 
         if (spawn) {
@@ -160,31 +192,6 @@ module.exports = {
                 }
             }
 
-            var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
-            var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
-            var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
-            var numberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.room == room.name);
-            var numberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.room == room.name);
-            var numberOfRepairers = _.sum(Game.creeps, (c) => c.memory.role == 'repairer' && c.memory.room == room.name);
-            var numberOfDefenceManagers = _.sum(Game.creeps, (c) => c.memory.role == 'defenceManager' && c.memory.room == room.name);
-            var numberOfWarriors = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name);
-            var numberOfLandlords = _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);
-            var numberOfRemoteHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHarvester' && c.memory.room == room.name);
-            var numberOfRemoteHaulers = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHauler' && c.memory.room == room.name);
-            var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
-
-            // console.log('Harvesters ' + numberOfHarvesters);
-            // console.log('Carriers ' + numberOfCarriers);
-            // console.log('Distributors ' + numberOfDistributors);
-            // console.log('Upgraders ' + numberOfUpgraders);
-            // console.log('Builders ' + numberOfBuilders);
-            // console.log('Repairer ' + numberOfRepairers);
-            // console.log('Defence Managers ' + numberOfDefenceManagers);
-            // console.log('Warriors ' + numberOfWarriors);
-            // console.log('Landlords ' + numberOfLandlords);
-            // console.log('Other Room Creeps ' + numberOfOtherRoomCreeps);
-            // add more cause this ain't all the roles ^
-
             var energy = spawn.room.energyAvailable;
             var amountToSave = 0;//in percent
             var name = undefined;
@@ -260,15 +267,7 @@ module.exports = {
                     console.log("Creating Creep " + name);
                 }
             }
-
-
-            if (numberOfHarvesters <= 0) {
-                Game.notify("No harvesters in room " + room);
-                console.log("No harvesters in room " + room);
-            }
-
         }
-
     },
 
     getAmountOfReservers: function (room, reserveFlags) {
