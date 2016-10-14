@@ -64,8 +64,8 @@ module.exports = {
 
         for (let flag of claimFlags) {
 
-            let myCreepsNearby = Game.flags[flag.name].room.find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
-            && c.memory.room == flag.room && c.memory.flag == flag.name})[0];
+            let myCreepsNearby = _.filter(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == flag.memory.room && c.memory.flag == flag.name)[0];
+
             if (!myCreepsNearby) {
                 return flag.name;
             }
@@ -73,8 +73,7 @@ module.exports = {
         for (let flag of reserveFlags) {
             let flagRoom = flag.room;
             if (Game.rooms[flagRoom]) {
-                let numberOfMyCreepsNearby = Game.rooms[flagRoom].find(FIND_MY_CREEPS, {filter: (c) => c.memory.role == 'landlord'
-                && c.memory.room == flag.room && c.memory.flag == flag.name}).length;
+                let numberOfMyCreepsNearby = _.filter(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == flag.memory.room && c.memory.flag == flag.name).length;
 
                 if (numberOfMyCreepsNearby <= 2) {
                     return flag.name;

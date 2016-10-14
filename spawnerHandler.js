@@ -290,7 +290,7 @@ module.exports = {
             }
         }
 
-        
+
         return amountToReturn + _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room.name);;
 
     }
