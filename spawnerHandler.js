@@ -41,6 +41,17 @@ module.exports = {
                 minimumNumberOfHarvesters = 2;
             }
 
+            var lowestDefenceHits = _.min(_.filter(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL})), 'hits').hits;
+            if (lowestDefenceHits < 60000) {
+                minimumNumberOfDefenceManagers = 4;
+            }
+            else if (lowestDefenceHits < 100000) {
+                minimumNumberOfDefenceManagers = 3;
+            }
+            else if (lowestDefenceHits < 200000) {
+                minimumNumberOfDefenceManagers = 2;
+            }
+
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
             var reserveFlags = _.filter(Game.flags, (f) => f.memory.type == 'reserveFlag' && f.memory.room == room.name);
             var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
@@ -56,7 +67,7 @@ module.exports = {
                     minimumNumberOfUpgraders = 1;
                     minimumNumberOfBuilders = 1;
                     minimumNumberOfRepairers = 1;
-                    minimumNumberOfDefenceManagers = 1;
+                    //minimumNumberOfDefenceManagers = 1;
                     minimumNumberOfWarriors = 2;
                     //minimumNumberOfLandlords = 0;
                     //minimumNumberOfRemoteHarvesters = 0;
@@ -69,7 +80,7 @@ module.exports = {
                     minimumNumberOfUpgraders = 1;
                     minimumNumberOfBuilders = 1;
                     minimumNumberOfRepairers = 1;
-                    minimumNumberOfDefenceManagers = 1;
+                    //minimumNumberOfDefenceManagers = 1;
                     minimumNumberOfWarriors = 1;
                     minimumNumberOfLandlords = 0;
                     minimumNumberOfRemoteHarvesters = 0;
