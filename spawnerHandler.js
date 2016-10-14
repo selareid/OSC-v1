@@ -269,24 +269,24 @@ module.exports = {
                 if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
                     var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
                     if (landlordsInRoom == 0) {
-                        amountToReturn = 1;
+                        amountToReturn += 1;
                     }
                     else if (landlordsInRoom == 1) {
 
                         var amountOfLandlordsAboutToDie = _.filter(landlordsInRoom, (c) => c.ticksToLive <= 40).length;
 
                         if (amountOfLandlordsAboutToDie <= landlordsInRoom.length) {
-                            amountToReturn = landlordsInRoom.length
+                            amountToReturn += landlordsInRoom.length
                         }
 
                     }
                 }
                 else {
-                    amountToReturn = 2;
+                    amountToReturn += 2;
                 }
             }
             else {
-                amountToReturn = 2;
+                amountToReturn += 2;
             }
         }
 
