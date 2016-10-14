@@ -156,19 +156,13 @@ module.exports = {
             if (targetSpawn) {
                 if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
 
-                    var path;
+                    if (creep.moveTo(targetSpawn,
+                            {
+                                ignoreDestructibleStructures: true,
+                                ignoreCreeps: true,
+                                ignoreRoads: true
+                            }) == OK) {
 
-                        path = creep.room.findPath(creep.pos, targetSpawn.pos, {
-                            serialize: true,
-                            ignoreDestructibleStructures: true,
-                            ignoreCreeps: true,
-                            ignoreRoads: true
-                        });
-
-
-
-                    if (path.length) {
-                        creep.move(path[0].direction);
                     }
                     else {
                         var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
