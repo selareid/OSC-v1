@@ -82,8 +82,6 @@ module.exports.loop = function () {
                 }
 
                 Memory.stats['room.' + room.name + '.storedEnergy'] = stored
-            } else {
-                Memory.stats['room.' + room.name + '.myRoom'] = undefined
             }
         }
         Memory.stats['gcl.progress'] = Game.gcl.progress;
