@@ -103,6 +103,7 @@ module.exports = {
         Memory.stats['room.' + room.name + '.energyCapacityAvailable'] = room.energyCapacityAvailable;
         Memory.stats['room.' + room.name + '.controllerProgress'] = room.controller.progress;
         Memory.stats['room.' + room.name + '.controllerProgressTotal'] = room.controller.progressTotal;
+
         var stored = 0;
         var storedTotal = 0;
 
@@ -114,7 +115,15 @@ module.exports = {
             storedTotal = 0
         }
 
+
+        var energyMode = '';
+
+        if (Memory.rooms[room].energyMode) {
+            energyMode = Memory.rooms[room].energyMode;
+        }
+
         Memory.stats['room.' + room.name + '.storedEnergy'] = stored;
+        Memory.stats['room' + room.name + '.energyMode'] = energyMode;
 
         Memory.stats['cpu.' + 'creepHandler'] = cpuUsedByCreepHandler;
     }
