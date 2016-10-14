@@ -266,19 +266,15 @@ module.exports = {
 
         for (let flag of reserveFlags) {
             if (flag.room) {
-                if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
-                    var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
-                    if (landlordsInRoom == 0) {
-                        amountToReturn += 1;
+                if (flag.room.controller.reservation) {
+                    if (flag.room.controller.reservation.ticksToEnd <= 2500) {
+                        amountToReturn += 2;
                     }
-                    else if (landlordsInRoom == 1) {
-
-                        var amountOfLandlordsAboutToDie = _.filter(landlordsInRoom, (c) => c.ticksToLive <= 40).length;
-
-                        if (amountOfLandlordsAboutToDie <= landlordsInRoom.length) {
-                            amountToReturn += landlordsInRoom.length
+                    else {
+                        var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
+                        if (landlordsInRoom == 0) {
+                            amountToReturn += 1;
                         }
-
                     }
                 }
                 else {
