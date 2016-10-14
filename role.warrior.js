@@ -156,59 +156,21 @@ module.exports = {
             if (targetSpawn) {
                 if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
 
-                    if (creep.moveTo(targetSpawn,
+                    creep.moveTo(targetSpawn,
                             {
                                 ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
-                            }) == ERR_NO_PATH) {
-                        var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
-                        switch (creep.attack(wallTarget)) {
-                            case ERR_NOT_IN_RANGE:
-                                creep.moveTo(wallTarget, {
-                                    ignoreDestructibleStructures: true,
-                                    ignoreCreeps: true,
-                                    ignoreRoads: true
-                                });
-                                break;
-                            case ERR_NO_PATH:
-                                creep.moveTo(target, {
-                                    ignoreDestructibleStructures: true,
-                                    ignoreCreeps: true,
-                                    ignoreRoads: true
-                                });
-                                break;
-                        }
+                            });
 
-                    }
                 }
                 else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                    if (creep.moveTo(targetSpawn,
-                            {
-                                ignoreDestructibleStructures: true,
-                                ignoreCreeps: true,
-                                ignoreRoads: true
-                            }) == ERR_NO_PATH) {
-                        var wallTarget = creep.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
-                        if (creep.rangedAttack(wallTarget) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(wallTarget,
-                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                        }
-                        else if (creep.rangedAttack(wallTarget) == ERR_NO_PATH) {
-                            creep.moveTo(target,
-                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                        }
-                    }
-                    else {
-                        if (creep.attack(target) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(target,
-                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                        }
-                        else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(target,
-                                {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                        }
-                    }
+                    creep.moveTo(targetSpawn,
+                        {
+                            ignoreDestructibleStructures: true,
+                            ignoreCreeps: true,
+                            ignoreRoads: true
+                        });
                 }
             }
             else {
