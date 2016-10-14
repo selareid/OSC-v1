@@ -93,5 +93,26 @@ module.exports = {
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
         creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo, remoteCreepFlags);
         //}
+
+        //grafana room stuff
+            Memory.stats['room.' + room.name + '.myRoom'] = 1;
+            Memory.stats['room.' + room.name + '.energyAvailable'] = room.energyAvailable;
+            Memory.stats['room.' + room.name + '.energyCapacityAvailable'] = room.energyCapacityAvailable;
+            Memory.stats['room.' + room.name + '.controllerProgress'] = room.controller.progress;
+            Memory.stats['room.' + room.name + '.controllerProgressTotal'] = room.controller.progressTotal;
+            var stored = 0;
+            var storedTotal = 0;
+
+            if (room.storage) {
+                stored = room.storage.store[RESOURCE_ENERGY];
+                storedTotal = room.storage.storeCapacity[RESOURCE_ENERGY];
+            } else {
+                stored = 0;
+                storedTotal = 0
+            }
+
+            Memory.stats['room.' + room.name + '.storedEnergy'] = stored
+
+
     }
 };
