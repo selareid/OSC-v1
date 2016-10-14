@@ -37,6 +37,8 @@ module.exports = {
 
 
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
+        Memory.stats['room.' + room.name + '.creeps' + '.numberOfCarriers'] = numberOfCarriers;
+        Memory.stats['room.' + room.name + '.creeps' + '.numberOfDistributors'] = numberOfDistributors;
 
         var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true})[0];
 
