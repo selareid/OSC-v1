@@ -261,30 +261,36 @@ module.exports = {
     },
 
     getAmountOfReservers: function (room, reserveFlags) {
+
+        var amountToReturn = 0;
+
         for (let flag of reserveFlags) {
             if (flag.room) {
                 if (flag.room.controller.reservation && flag.room.controller.reservation.ticksToEnd >= 2500) {
                     var landlordsInRoom = flag.room.find(FIND_CREEPS, {filter: (c) => c.memory.role == 'landlord' && c.memory.flag == flag.name});
                     if (landlordsInRoom == 0) {
-                        return 1;
+                        amountToReturn = 1;
                     }
                     else if (landlordsInRoom == 1) {
 
                         var amountOfLandlordsAboutToDie = _.filter(landlordsInRoom, (c) => c.ticksToLive <= 40).length;
 
                         if (amountOfLandlordsAboutToDie <= landlordsInRoom.length) {
-                            return landlordsInRoom.length
+                            amountToReturn = landlordsInRoom.length
                         }
 
                     }
                 }
                 else {
-                    return 2;
+                    amountToReturn = 2;
                 }
             }
             else {
-                return 2;
+                amountToReturn = 2;
             }
         }
+
+        return amountToReturn;
+
     }
 };
