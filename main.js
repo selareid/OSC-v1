@@ -59,7 +59,7 @@ module.exports.loop = function () {
             Memory.stats = {}
         }
 
-        
+
         Memory.stats['gcl.progress'] = Game.gcl.progress;
         Memory.stats['gcl.progressTotal'] = Game.gcl.progressTotal;
         Memory.stats['gcl.level'] = Game.gcl.level;

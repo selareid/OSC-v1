@@ -81,7 +81,7 @@ module.exports = {
         if (areWeUnderAttack == true) {
             defenceHandler.run(room);
         }
-        //else {
+
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
         for (let tower of towers) {
             if (tower.energy > 500) {
@@ -91,28 +91,31 @@ module.exports = {
 
         linkHandler.run(room);
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
+
+        var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
         creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo, remoteCreepFlags);
-        //}
+        var cpuUsedAfterCreepHandler = Game.cpu.getUsed();
+        var cpuUsedByCreepHandler = cpuUsedAfterCreepHandler - cpuUsedBeforeCreepHandler;
 
         //grafana room stuff
-            Memory.stats['room.' + room.name + '.myRoom'] = 1;
-            Memory.stats['room.' + room.name + '.energyAvailable'] = room.energyAvailable;
-            Memory.stats['room.' + room.name + '.energyCapacityAvailable'] = room.energyCapacityAvailable;
-            Memory.stats['room.' + room.name + '.controllerProgress'] = room.controller.progress;
-            Memory.stats['room.' + room.name + '.controllerProgressTotal'] = room.controller.progressTotal;
-            var stored = 0;
-            var storedTotal = 0;
+        Memory.stats['room.' + room.name + '.myRoom'] = 1;
+        Memory.stats['room.' + room.name + '.energyAvailable'] = room.energyAvailable;
+        Memory.stats['room.' + room.name + '.energyCapacityAvailable'] = room.energyCapacityAvailable;
+        Memory.stats['room.' + room.name + '.controllerProgress'] = room.controller.progress;
+        Memory.stats['room.' + room.name + '.controllerProgressTotal'] = room.controller.progressTotal;
+        var stored = 0;
+        var storedTotal = 0;
 
-            if (room.storage) {
-                stored = room.storage.store[RESOURCE_ENERGY];
-                storedTotal = room.storage.storeCapacity[RESOURCE_ENERGY];
-            } else {
-                stored = 0;
-                storedTotal = 0
-            }
+        if (room.storage) {
+            stored = room.storage.store[RESOURCE_ENERGY];
+            storedTotal = room.storage.storeCapacity[RESOURCE_ENERGY];
+        } else {
+            stored = 0;
+            storedTotal = 0
+        }
 
-            Memory.stats['room.' + room.name + '.storedEnergy'] = stored
+        Memory.stats['room.' + room.name + '.storedEnergy'] = stored;
 
-
+        Memory.stats['cpu.' + 'creepHandler'] = cpuUsedByCreepHandler;
     }
 };
