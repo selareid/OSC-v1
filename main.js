@@ -70,7 +70,6 @@ module.exports.loop = function () {
                 Memory.stats['room.' + room.name + '.energyCapacityAvailable'] = room.energyCapacityAvailable;
                 Memory.stats['room.' + room.name + '.controllerProgress'] = room.controller.progress;
                 Memory.stats['room.' + room.name + '.controllerProgressTotal'] = room.controller.progressTotal;
-                Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = 777;
                 var stored = 0;
                 var storedTotal = 0;
 
