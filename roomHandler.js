@@ -84,7 +84,9 @@ module.exports = {
         //else {
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
         for (let tower of towers) {
-            towerHandler.repairRampart(room, tower);
+            if (tower.energy > 500) {
+                towerHandler.repairRampart(room, tower);
+            }
         }
 
         linkHandler.run(room);
