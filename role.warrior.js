@@ -151,36 +151,80 @@ module.exports = {
         else if (isAttacking === true && whenToAttack != undefined && whenToRally != undefined && whenToAttack < Game.time) {
 
             var target = this.findTarget(room, creep);
+            var objectsToAttack = this.findThingsToAttack(room, creep);
 
-            var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
-            if (targetSpawn) {
-                if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+            if (objectsToAttack.length > 0) {
+                var objectTarget = creep.pos.findClosestByPath(objectsToAttack);
+                if (objectTarget) {
+                    if (creep.attack(objectTarget) == ERR_NOT_IN_RANGE) {
 
-                    creep.moveTo(targetSpawn,
+                        creep.moveTo(objectTarget,
                             {
-                                ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
                             });
 
+                    }
+                    else if (creep.rangedAttack(objectTarget) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(objectTarget,
+                            {
+                                ignoreCreeps: true,
+                                ignoreRoads: true
+                            });
+                    }
                 }
-                else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targetSpawn,
-                        {
-                            ignoreDestructibleStructures: true,
-                            ignoreCreeps: true,
-                            ignoreRoads: true
-                        });
+                else {
+                    this.becauseWritingItTwiceDidntSeemCool(room, creep, target);
                 }
             }
             else {
-
+                this.becauseWritingItTwiceDidntSeemCool(room, creep, target);
             }
         }
         else {
             creep.moveTo(beforeRallyFlag);
         }
 
+    },
+
+    becauseWritingItTwiceDidntSeemCool: function (room, creep, target) {
+        var targetSpawn = creep.room.find(FIND_HOSTILE_SPAWNS)[0];
+        if (targetSpawn) {
+            if (creep.attack(targetSpawn) == ERR_NOT_IN_RANGE) {
+
+                creep.moveTo(targetSpawn,
+                    {
+                        ignoreCreeps: true,
+                        ignoreRoads: true
+                    });
+
+            }
+            else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(targetSpawn,
+                    {
+                        ignoreCreeps: true,
+                        ignoreRoads: true
+                    });
+            }
+        }
+        else if (target) {
+            if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+
+                creep.moveTo(target,
+                    {
+                        ignoreCreeps: true,
+                        ignoreRoads: true
+                    });
+
+            }
+            else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target,
+                    {
+                        ignoreCreeps: true,
+                        ignoreRoads: true
+                    });
+            }
+        }
     },
 
     creepHeal: function (room, creep, flagToRallyAt, beforeRallyFlag) {
@@ -218,7 +262,7 @@ module.exports = {
 
         var target;
 
-        target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+        target = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS, {
             filter: (c) => c.getActiveBodyparts(HEAL) >= 1
             && Allies.includes(c.owner.username) == false
         });
@@ -227,7 +271,7 @@ module.exports = {
             return target;
         }
         else {
-            target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
+            target = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS, {
                 filter: (c) => c.getActiveBodyparts(ATTACK) >= 1
                 && Allies.includes(c.owner.username) == false
             });
@@ -236,7 +280,7 @@ module.exports = {
                 return target;
             }
             else {
-                target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
+                target = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
                 if (target) {
                     return target;
                 }
@@ -245,6 +289,22 @@ module.exports = {
                 }
             }
         }
+    },
+
+    findThingsToAttack: function (room, creep) {
+        var thingsToAttackFlags = creep.room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'attackThingFlag' && f.memory.room == room.name});
+        var objectsToReturn = [];
+
+        for (let flag in thingsToAttackFlags) {
+            var look = creep.room.lookAt(flag);
+            look.forEach(function (lookObject) {
+                if (lookObject == 'structure') {
+                    objectsToReturn.push(objectsToReturn);
+                }
+            });
+        }
+
+        return objectsToReturn;
     },
 
     findRampartNearTarget: function (room, creep, target) {
