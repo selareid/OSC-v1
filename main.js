@@ -63,6 +63,8 @@ module.exports.loop = function () {
         Memory.stats['gcl.progress'] = Game.gcl.progress;
         Memory.stats['gcl.progressTotal'] = Game.gcl.progressTotal;
         Memory.stats['gcl.level'] = Game.gcl.level;
+
+        var spawns = Game.spawns;
         for (let spawnKey in spawns) {
             let spawn = Game.spawns[spawnKey];
             Memory.stats['spawn.' + spawn.name + '.defenderIndex'] = spawn.memory['defenderIndex']
