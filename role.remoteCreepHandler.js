@@ -17,7 +17,7 @@ creep.say('yeah');
                 if (creep.memory.role == 'remoteHarvester') {
                     this.remoteHarvesterHandler(room, creep, remoteFlag);
                 }
-                else if (creep.memory.role == 'hauler') {
+                else if (creep.memory.role == 'remoteHauler') {
                     this.haulerHandler(room, creep, remoteFlag);
                 }
             }
@@ -30,17 +30,17 @@ creep.say('yeah');
 
     setRemoteFlagMemory: function (room, creep) {
 
-        var zeChosenFlags;
+        var zeChosenFlags = [];
 
         switch (creep.memory.role) {
             case 'remoteHarvester':
                 zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
-                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
+                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
                 break;
-            case 'hauler':
+            case 'remoteHauler':
                 zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
-                _.sum(Game.creeps, (c) => (c.memory.role == 'hauler') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) <
-                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && creep.memory.remoteFlag == f.name) * 2)));
+                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHauler') && c.memory.room == room.name && c.memory.remoteFlag == f.name) <
+                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) * 2)));
                 break;
         }
 

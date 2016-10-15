@@ -3,7 +3,7 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags) {
+    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo) {
 
         var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
         var numberOfCarriers = _.sum(Game.creeps, (c) => c.memory.role == 'carrier' && c.memory.room == room.name);
@@ -64,7 +64,7 @@ module.exports = {
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfRemoteHarvesters = 0;
             var minimumNumberOfRemoteHaulers = 0;
-            var minimumNumberOfOtherRoomCreeps = 10;
+            var minimumNumberOfOtherRoomCreeps = otherRoomCreepsRoomToGoTo.length * 10;
 
             var maximumNumberOfWarriors = 7;
 
