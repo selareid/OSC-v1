@@ -25,7 +25,7 @@ module.exports = {
                     if (_.sum(Game.creeps, (c) => c.memory.type == 'type3') < 1) {
                         creep.memory.type = 'type3';
                     }
-                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 1) {
+                    if (_.sum(Game.creeps, (c) => c.memory.type == 'type4') < 0) {
                         creep.memory.type = 'type4';
                     }
                     else {
