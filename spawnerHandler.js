@@ -163,7 +163,7 @@ module.exports = {
 
             var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role), 'ticksToLive');
 
-            if (creepAboutToDie.length > 0) {
+            if (creepAboutToDie) {
                 let role = creepAboutToDie.memory.role;
 
                 switch (role) {
