@@ -11,7 +11,7 @@ module.exports = {
         if (roomToGoTo) {
 
             if (creep.room.name != roomToGoTo) {
-                var roomPos = new RoomPosition(26, 20, roomToGoTo);
+                var roomPos = new RoomPosition(26, 20, roomToGoTo.pos.roomName);
                 creep.moveTo(roomPos);
             }
             else {
