@@ -64,7 +64,7 @@ module.exports = {
             var minimumNumberOfLandlords = 0;
             var minimumNumberOfRemoteHarvesters = 0;
             var minimumNumberOfRemoteHaulers = 0;
-            var minimumNumberOfOtherRoomCreeps = 0;
+            var minimumNumberOfOtherRoomCreeps = 10;
 
             var maximumNumberOfWarriors = 7;
 
