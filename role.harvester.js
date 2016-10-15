@@ -54,7 +54,9 @@ module.exports = {
                     }
                     else {
                         let foundSource = this.findSource(room, creep, harvesters);
-                        creep.memory.source = foundSource.id;
+                        if (foundSource) {
+                            creep.memory.source = foundSource.id;
+                        }
                     }
 
 

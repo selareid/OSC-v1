@@ -104,7 +104,7 @@ module.exports = {
             var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
-            minimumNumberOfRemoteHarvesters = remoteCreepFlags.length * 2;
+            minimumNumberOfRemoteHarvesters = 0;//remoteCreepFlags.length * 2;
             minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
 
             switch (Memory.rooms[room].energyMode) {
