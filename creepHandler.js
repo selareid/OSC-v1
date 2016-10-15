@@ -50,7 +50,7 @@ module.exports = {
                         roleLandlord.run(room, creep);
                         break;
                     case 'otherRoomCreep':
-                        otherRoomCreep.run(room, creep, 'E59N2');
+                        otherRoomCreep.run(room, creep, roomToGoTo);
                         break;
                     case 'remoteHarvester':
                         roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);

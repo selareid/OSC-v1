@@ -93,7 +93,9 @@ module.exports = {
         spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
 
         var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
-        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo, remoteCreepFlags);
+
+        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoTo.pos.roomName, remoteCreepFlags);
+
         var cpuUsedAfterCreepHandler = Game.cpu.getUsed();
         var cpuUsedByCreepHandler = cpuUsedAfterCreepHandler - cpuUsedBeforeCreepHandler;
 
