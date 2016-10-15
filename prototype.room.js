@@ -48,7 +48,7 @@ module.exports = function () {
                     return Flags;
                 }
                 else {
-                    return undefined;
+                    return [];
                 }
             },
 
