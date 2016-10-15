@@ -116,10 +116,24 @@ module.exports = {
         }
 
 
-        var energyMode = '';
+        var energyMode = 0;
 
-        if (Memory.rooms[room].energyMode) {
-            energyMode = Memory.rooms[room].energyMode;
+        switch (Memory.rooms[room].energyMode) {
+            case 'normal':
+                energyMode = 1;
+                break;
+            case 'ok':
+                energyMode = 2;
+                break;
+            case 'saving':
+                energyMode = 3;
+                break;
+            case 'upgrading':
+                energyMode = 4;
+                break;
+            case 'building':
+                energyMode = 5;
+                break;
         }
 
         Memory.stats['room.' + room.name + '.storedEnergy'] = stored;
