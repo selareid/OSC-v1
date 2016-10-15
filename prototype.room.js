@@ -11,7 +11,7 @@ module.exports = function () {
                 return rallyFlag;
             }
             else {
-                return undefined;
+                return [];
             }
 
         },
@@ -24,7 +24,7 @@ module.exports = function () {
                     return Flag;
                 }
                 else {
-                    return undefined;
+                    return [];
                 }
             },
 
@@ -36,7 +36,7 @@ module.exports = function () {
                     return beforeRallyFlag;
                 }
                 else {
-                    return undefined;
+                    return [];
                 }
             },
 
