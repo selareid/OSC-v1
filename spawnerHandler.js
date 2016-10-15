@@ -121,7 +121,7 @@ module.exports = {
                     //minimumNumberOfRemoteHaulers = 0;
                     //minimumNumberOfOtherRoomCreeps = 0;
 
-                    //maximumNumberOfWarriors = 0;
+                    maximumNumberOfWarriors = 0;
                     break;
                 case 'saving':
                     minimumNumberOfUpgraders = 1;
