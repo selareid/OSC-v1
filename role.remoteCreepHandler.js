@@ -35,7 +35,7 @@ creep.say('yeah');
         switch (creep.memory.role) {
             case 'remoteHarvester':
                 zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
-                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES)));
+                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES).length)));
                 break;
             case 'remoteHauler':
                 zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
