@@ -161,9 +161,9 @@ module.exports = {
                 minimumNumberOfWarriors = armySize;
             }
 
-            var creepAboutToDie = _.min(_.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role), 'ticksToLive');
+            var creepAboutToDie = _.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role)[0];
 
-            if (creepAboutToDie) {
+            if (creepAboutToDie.length > 0) {
                 let role = creepAboutToDie.memory.role;
 
                 switch (role) {
