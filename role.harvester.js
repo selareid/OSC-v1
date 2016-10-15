@@ -46,11 +46,15 @@ module.exports = {
                             creep.memory.source = creepNearestToDeath.memory.source;
                         }
                         else {
-                            creep.memory.source = this.findSource(room, creep, harvesters).id;
+                            let foundSource = this.findSource(room, creep, harvesters);
+                            if (foundSource) {
+                            creep.memory.source = foundSource.id;
+                            }
                         }
                     }
                     else {
-                        creep.memory.source = this.findSource(room, creep, harvesters).id;
+                        let foundSource = this.findSource(room, creep, harvesters);
+                        creep.memory.source = foundSource.id;
                     }
 
 
