@@ -137,6 +137,7 @@ module.exports = {
                     maximumNumberOfWarriors = 0;
                     break;
                 case 'upgrading':
+                    minimumNumberOfHarvesters = 5;
                     minimumNumberOfUpgraders = 3;
                     break;
                 case 'building':
