@@ -39,16 +39,22 @@ module.exports.loop = function () {
     }
 
     //do actual stuff
-    for (let room_it in Game.rooms) {
-        var room = Game.rooms[room_it];
-        var spawn = room.find(FIND_MY_SPAWNS)[0];
-        if (spawn) {
+        for (let room_it in Game.rooms) {
+            var room = Game.rooms[room_it];
+            var spawn = room.find(FIND_MY_SPAWNS)[0];
+            if (spawn) {
 
-            if (!Memory.rooms[room]) {
-                Memory.rooms[room] = {};
+                if (Memory.rooms) {
+                    if (!Memory.rooms[room]) {
+                        Memory.rooms[room] = {};
+                    }
+                }
+                else {
+                    Memory.rooms = {};
+                }
+
+                roomHandler.run(room);
             }
-
-            roomHandler.run(room);
         }
     }
 
