@@ -12,6 +12,7 @@
 ## Some code for later use
 
 * put on hauler code so they repair roads under them
+<br>
 let underMe = creep.pos.lookFor(LOOK_STRUCTURES);
 underMe = underMe.filter(function (obj) {
 	return obj.hits < obj.hitsMax
