@@ -55,7 +55,6 @@ module.exports.loop = function () {
 
                 roomHandler.run(room);
             }
-        }
     }
 
     try {
