@@ -5,6 +5,7 @@ const roomHandler = require ('roomHandler');
 module.exports.loop = function () {
 
     if (Game.map.isRoomAvailable('W57N66') === true) {
+        console.log('room W57N66 is available be quick!!!!');
         Game.notify('room W57N66 is available be quick!!!!');
     }
 
