@@ -3,7 +3,7 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
-* Use spawn queue
+* Add code to use spawn queue
 * Fix remoteCreeps
 * Put ally checks in creep.attack and creep.ranged_attack
 * Implement automatic road creation
