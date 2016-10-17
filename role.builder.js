@@ -48,6 +48,7 @@ module.exports = {
                         }
                     }
                     else {
+Game.notify(droppedEnergy);
                         if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(container)
                         }
