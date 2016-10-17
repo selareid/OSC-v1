@@ -104,8 +104,10 @@ module.exports = {
             var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
-            minimumNumberOfRemoteHarvesters = 0;//remoteCreepFlags.length * 2;
-            minimumNumberOfRemoteHaulers = minimumNumberOfRemoteHarvesters * 3;
+            for (let flag in remoteCreepFlags) {
+                minimumNumberOfRemoteHarvesters += flag.memory.numberOfRemoteHarvesters;
+                minimumNumberOfRemoteHaulers += flag.memory.numberOfRemoteHaulers;
+            }
 
             switch (Memory.rooms[room].energyMode) {
                 case 'normal':
