@@ -11,7 +11,6 @@ module.exports = {
         else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
-Game.notify(creep.memory.working);
 
         if (creep.memory.working == true) {
 
