@@ -3,6 +3,7 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
+* Use spawn queue
 * Fix remoteCreeps
 * Put ally checks in creep.attack and creep.ranged_attack
 * Implement automatic road creation
@@ -11,13 +12,4 @@
 
 ## Some code for later use
 
-* put on hauler code so they repair roads under them
-<br>
-
-`let underMe = creep.pos.lookFor(LOOK_STRUCTURES);
-underMe = underMe.filter(function (obj) {
-	return obj.hits < obj.hitsMax
-});
-if (underMe.length > 0) {
-	let res = creep.repair(underMe[0]);
-}`
+*nothing here ooooh
