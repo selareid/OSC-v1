@@ -42,7 +42,8 @@ module.exports = function () {
 
         Room.prototype.getRemoteFlags =
             function () {
-                var Flags = _.filter(Game.flags, f => f.memory.type == 'remoteFlag' && f.memory.room == this.name);
+                var Flags = _.filter(Game.flags, f => f.memory.type == 'remoteFlag' && f.memory.room == this.name && f.memory.pos && f.memory.pos.x != undefined && f.memory.pos.y != undefined
+                && f.memory.numberOfRemoteHarvesters != undefined && f.memory.numberOfRemoteHaulers != undefined);
 
                 if (Flags.length > 0) {
                     return Flags;

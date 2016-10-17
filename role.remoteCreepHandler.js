@@ -8,10 +8,10 @@ creep.say('yeah');
         if (remoteCreepFlags.length > 0) {
 
             if (!creep.memory.remoteFlag) {
-                creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep);
+                creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep, remoteCreepFlags);
             }
 
-            var remoteFlag = creep.memory.remoteFlag;
+            var remoteFlag = Game.flags[creep.memory.remoteFlag];
 
             if (remoteFlag) {
                 if (creep.memory.role == 'remoteHarvester') {
@@ -21,31 +21,43 @@ creep.say('yeah');
                     this.haulerHandler(room, creep, remoteFlag);
                 }
             }
+            else {
+                creep.move(BOTTOM);
+            }
 
         }
         else {
-            creep.moveTo(35, 40);
+            creep.move(BOTTOM);
         }
     },
 
-    setRemoteFlagMemory: function (room, creep) {
+    setRemoteFlagMemory: function (room, creep, remoteCreepFlags) {
 
-        var zeChosenFlags = [];
+        var zeChosenFlag;
 
         switch (creep.memory.role) {
             case 'remoteHarvester':
-                zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
-                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) < f.room.find(FIND_SOURCES).length)));
+                for (let flag in remoteCreepFlags) {
+                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room = room && c.memory.role == 'remoteHarvester' && c.memory.flag && c.memory.flag == flag.id).length;
+                    if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHarvesters) {
+                        zeChosenFlag = flag;
+                        break;
+                    }
+                }
                 break;
             case 'remoteHauler':
-                zeChosenFlags = _.filter(Game.flags, (f) => f.memory.type == 'remoteFlag' && f.memory.room == room.name && (!f.room ||
-                _.sum(Game.creeps, (c) => (c.memory.role == 'remoteHauler') && c.memory.room == room.name && c.memory.remoteFlag == f.name) <
-                (_.sum(Game.creeps, (c) => (c.memory.role == 'remoteHarvester') && c.memory.room == room.name && c.memory.remoteFlag == f.name) * 2)));
+                for (let flag in remoteCreepFlags) {
+                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room = room && c.memory.role == 'remoteHarvester' && c.memory.flag && c.memory.flag == flag.id).length;
+                    if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHaulers) {
+                        zeChosenFlag = flag;
+                        break;
+                    }
+                }
                 break;
         }
 
-        if (zeChosenFlags.length > 0) {
-            return zeChosenFlags[0].id;
+        if (zeChosenFlag) {
+            return zeChosenFlag.name;
         }
         else {
             return undefined;
