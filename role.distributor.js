@@ -34,7 +34,7 @@ module.exports = {
                         }
                     }
                     else {
-                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name});
+                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name})[0];
                         if (flagToGoTo) {
                             creep.moveTo(flagToGoTo);
                         }
