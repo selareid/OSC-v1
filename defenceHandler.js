@@ -25,7 +25,8 @@ module.exports = {
     },
 
     getHostileCreeps: function (room) {
-        var hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
+        var hostileCreepsInRoom = []
+        hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
         return hostileCreepsInRoom;
     },
 
