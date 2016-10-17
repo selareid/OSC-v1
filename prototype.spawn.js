@@ -137,7 +137,7 @@ module.exports = function () {
                         body.push(MOVE);
                         body.push(WORK);
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
                 case 'remoteHauler':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
                     body.push(WORK);
@@ -147,7 +147,7 @@ module.exports = function () {
                         body.push(CARRY);
                         body.push(CARRY);
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
                 case 'otherRoomCreep':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
 
