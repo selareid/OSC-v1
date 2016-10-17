@@ -11,7 +11,7 @@ module.exports = {
         else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
         }
-
+Game.notify(creep.memory.working);
 
         if (creep.memory.working == true) {
 
@@ -48,9 +48,8 @@ module.exports = {
                         }
                     }
                     else {
-Game.notify(droppedEnergy);
                         if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+                           creep.moveTo(container)
                         }
                     }
                 }
