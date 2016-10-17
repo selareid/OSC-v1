@@ -12,7 +12,6 @@ module.exports = {
             creep.memory.working = true;
         }
 
-
         if (creep.memory.working == true) {
 
             var structureToBuild = this.findStructureToBuild(room, creep);
@@ -49,7 +48,7 @@ module.exports = {
                     }
                     else {
                         if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container)
+                           creep.moveTo(container)
                         }
                     }
                 }
