@@ -94,7 +94,16 @@ module.exports = {
         }
 
         linkHandler.run(room);
-        spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
+
+        try {
+            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
+        }
+        catch (err) {
+            if (err !== null && err !== undefined) {
+                Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
+                console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
+            }
+        }
 
         var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
 
