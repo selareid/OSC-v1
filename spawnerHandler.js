@@ -310,28 +310,28 @@ module.exports = {
         }
 
         if (Memory.rooms[room].populationGoal.harvesters == undefined) {
-            Memory.rooms[room].populationGoal.harvesters = 0;
+            Memory.rooms[room].populationGoal.harvesters = 3;
         }
         if (Memory.rooms[room].populationGoal.carriers == undefined) {
-            Memory.rooms[room].populationGoal.carriers = 0;
+            Memory.rooms[room].populationGoal.carriers = 2;
         }
         if (Memory.rooms[room].populationGoal.distributors == undefined) {
-            Memory.rooms[room].populationGoal.distributors = 0;
+            Memory.rooms[room].populationGoal.distributors = 1;
         }
         if (Memory.rooms[room].populationGoal.upgraders == undefined) {
-            Memory.rooms[room].populationGoal.upgraders = 0;
+            Memory.rooms[room].populationGoal.upgraders = 2;
         }
         if (Memory.rooms[room].populationGoal.builders == undefined) {
-            Memory.rooms[room].populationGoal.builders = 0;
+            Memory.rooms[room].populationGoal.builders = 1;
         }
         if (Memory.rooms[room].populationGoal.repairers == undefined) {
-            Memory.rooms[room].populationGoal.repairers = 0;
+            Memory.rooms[room].populationGoal.repairers = 1;
         }
         if (Memory.rooms[room].populationGoal.defenceManagers == undefined) {
-            Memory.rooms[room].populationGoal.defenceManagers = 0;
+            Memory.rooms[room].populationGoal.defenceManagers = 1;
         }
         if (Memory.rooms[room].populationGoal.warriors == undefined) {
-            Memory.rooms[room].populationGoal.warriors = 0;
+            Memory.rooms[room].populationGoal.warriors = 3;
         }
         if (Memory.rooms[room].populationGoal.landlords == undefined) {
             Memory.rooms[room].populationGoal.landlords = 0;
