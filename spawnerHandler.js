@@ -106,6 +106,9 @@ module.exports = {
             else if (room.storage.store[RESOURCE_ENERGY] <= 150000) {
                 minimumNumberOfCarriers = 4;
             }
+            else {
+                minimumNumberOfCarriers = 3;
+            }
 
             var numberOfSources = room.find(FIND_SOURCES).length;
             var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name
