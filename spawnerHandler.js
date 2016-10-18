@@ -72,18 +72,18 @@ module.exports = {
         }
         else {
 
-            var harvestersInQueue = _.filter(spawnQueue, (r) => r == 'harvester').length;
-            var carriersInQueue = _.filter(spawnQueue, (r) => r == 'carrier').length;
-            var distributorsInQueue = _.filter(spawnQueue, (r) => r == 'distributor').length;
-            var upgradersInQueue = _.filter(spawnQueue, (r) => r == 'upgrader').length;
-            var buildersInQueue = _.filter(spawnQueue, (r) => r == 'builder').length;
-            var repairersInQueue = _.filter(spawnQueue, (r) => r == 'repairer').length;
-            var defenceManagersInQueue = _.filter(spawnQueue, (r) => r == 'defenceManager').length;
-            var warriorsInQueue = _.filter(spawnQueue, (r) => r == 'warrior').length;
-            var landlordsInQueue = _.filter(spawnQueue, (r) => r == 'landlord').length;
-            var remoteHarvestersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHarvester').length;
-            var remoteHaulersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHauler').length;
-            var otherRoomCreepsInQueue = _.filter(spawnQueue, (r) => r == 'otherRoomCreep').length;
+            var harvestersInQueue = _.sum(spawnQueue, (r) => r == 'harvester');
+            var carriersInQueue = _.sum(spawnQueue, (r) => r == 'carrier');
+            var distributorsInQueue = _.sum(spawnQueue, (r) => r == 'distributor');
+            var upgradersInQueue = _.sum(spawnQueue, (r) => r == 'upgrader');
+            var buildersInQueue = _.sum(spawnQueue, (r) => r == 'builder');
+            var repairersInQueue = _.sum(spawnQueue, (r) => r == 'repairer');
+            var defenceManagersInQueue = _.sum(spawnQueue, (r) => r == 'defenceManager');
+            var warriorsInQueue = _.sum(spawnQueue, (r) => r == 'warrior');
+            var landlordsInQueue = _.sum(spawnQueue, (r) => r == 'landlord');
+            var remoteHarvestersInQueue = _.sum(spawnQueue, (r) => r == 'remoteHarvester');
+            var remoteHaulersInQueue = _.sum(spawnQueue, (r) => r == 'remoteHauler');
+            var otherRoomCreepsInQueue = _.sum(spawnQueue, (r) => r == 'otherRoomCreep');
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
