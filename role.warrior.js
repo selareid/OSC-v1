@@ -238,23 +238,10 @@ module.exports = {
             creep.heal(healTarget);
         }
 
-        var tower = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && !Allies.includes(s.owner.username)});
-
-        if (tower) {
-            if (creep.moveTo(tower,
-                    {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true}) != 0) {
-                if (creep.heal(healTarget) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(healTarget,
-                        {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
-                }
-            }
-        }
-        else {
             if (creep.heal(healTarget) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(healTarget,
                     {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
             }
-        }
 
     },
 
