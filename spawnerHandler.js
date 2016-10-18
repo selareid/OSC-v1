@@ -52,8 +52,6 @@ module.exports = {
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHaulers'] = numberOfRemoteHaulers;
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfOtherRoomCreeps'] = numberOfOtherRoomCreeps;
 
-        var spawnQueue = Memory.rooms[room].spawnQueue.normal;
-
         var minimumNumberOfHarvesters = Memory.rooms[room].populationGoal.harvesters;
         var minimumNumberOfCarriers = Memory.rooms[room].populationGoal.carriers;
         var minimumNumberOfDistributors = Memory.rooms[room].populationGoal.distributors;
@@ -67,23 +65,23 @@ module.exports = {
         var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
         var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
 
-        if (numberOfHarvesters == 0 && spawnQueue[0] != 'harvester') {
-            spawnQueue.splice(0, 0, 'harvester');
+        if (numberOfHarvesters == 0 && Memory.rooms[room].spawnQueue.normal[0] != 'harvester') {
+            Memory.rooms[room].spawnQueue.normal.splice(0, 0, 'harvester');
         }
         else {
 
-            var harvestersInQueue = _.sum(spawnQueue, (r) => r == 'harvester');
-            var carriersInQueue = _.sum(spawnQueue, (r) => r == 'carrier');
-            var distributorsInQueue = _.sum(spawnQueue, (r) => r == 'distributor');
-            var upgradersInQueue = _.sum(spawnQueue, (r) => r == 'upgrader');
-            var buildersInQueue = _.sum(spawnQueue, (r) => r == 'builder');
-            var repairersInQueue = _.sum(spawnQueue, (r) => r == 'repairer');
-            var defenceManagersInQueue = _.sum(spawnQueue, (r) => r == 'defenceManager');
-            var warriorsInQueue = _.sum(spawnQueue, (r) => r == 'warrior');
-            var landlordsInQueue = _.sum(spawnQueue, (r) => r == 'landlord');
-            var remoteHarvestersInQueue = _.sum(spawnQueue, (r) => r == 'remoteHarvester');
-            var remoteHaulersInQueue = _.sum(spawnQueue, (r) => r == 'remoteHauler');
-            var otherRoomCreepsInQueue = _.sum(spawnQueue, (r) => r == 'otherRoomCreep');
+            var harvestersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'harvester');
+            var carriersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'carrier');
+            var distributorsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'distributor');
+            var upgradersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'upgrader');
+            var buildersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'builder');
+            var repairersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'repairer');
+            var defenceManagersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'defenceManager');
+            var warriorsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'warrior');
+            var landlordsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'landlord');
+            var remoteHarvestersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'remoteHarvester');
+            var remoteHaulersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'remoteHauler');
+            var otherRoomCreepsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'otherRoomCreep');
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
@@ -194,7 +192,7 @@ module.exports = {
 
             if (creepAboutToDie) {
                 let role = creepAboutToDie.memory.role;
-                spawnQueue.push(role);
+                Memory.rooms[room].spawnQueue.normal.push(role);
             }
 
             var creepToAddToQueue;
@@ -237,7 +235,7 @@ module.exports = {
             }
 
             if (creepToAddToQueue) {
-                spawnQueue.push(creepToAddToQueue);
+                Memory.rooms[room].spawnQueue.normal.push(creepToAddToQueue);
             }
 
         }
@@ -269,17 +267,15 @@ module.exports = {
 
             if (room.energyAvailable >= 300) {
 
-                spawn.createCustomCreep(room, energy, spawnQueue[0], amountToSave);
+                spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
 
 
                 if (Game.creeps[name]) {
-                    spawnQueue.shift;
+                    Memory.rooms[room].spawnQueue.normal.shift;
                     console.log("Creating Creep " + name);
                 }
             }
         }
-
-        Memory.rooms[room].spawnQueue.normal = spawnQueue;
 
         Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
         Memory.rooms[room].populationGoal.carriers = minimumNumberOfCarriers;
