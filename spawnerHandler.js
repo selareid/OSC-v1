@@ -267,7 +267,7 @@ module.exports = {
 
             if (room.energyAvailable >= 300) {
 
-                spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
+                name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
 
 
                 if (Game.creeps[name]) {
