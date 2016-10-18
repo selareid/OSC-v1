@@ -54,44 +54,48 @@ module.exports = {
 
         var spawnQueue = Memory.rooms[room].spawnQueue.normal;
 
-        if (numberOfHarvesters == 0) {
-            spawnQueue.splice(0, 0, 'harvester');
+        var minimumNumberOfHarvesters = Memory.rooms[room].populationGoal.harvesters;
+        var minimumNumberOfCarriers = Memory.rooms[room].populationGoal.carriers;
+        var minimumNumberOfDistributors = Memory.rooms[room].populationGoal.distributors;
+        var minimumNumberOfUpgraders = Memory.rooms[room].populationGoal.upgraders;
+        var minimumNumberOfBuilders = Memory.rooms[room].populationGoal.builders;
+        var minimumNumberOfRepairers = Memory.rooms[room].populationGoal.repairers;
+        var minimumNumberOfDefenceManagers = Memory.rooms[room].populationGoal.defenceManagers;
+        var minimumNumberOfWarriors = Memory.rooms[room].populationGoal.warriors;
+        var minimumNumberOfLandlords = Memory.rooms[room].populationGoal.landlords;
+        var minimumNumberOfRemoteHarvesters = Memory.rooms[room].populationGoal.remoteHarvesters;
+        var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
+        var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
+
+        if (room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}).length > 0 && numberOfBuilders == 0) {
+            spawnQueue.splice(0, 0, 'builder');
+        }
+        else if (numberOfDistributors == 0) {
             spawnQueue.splice(0, 0, 'distributor');
+        }
+        else if (numberOfHarvesters == 0) {
+            spawnQueue.splice(0, 0, 'harvester');
         }
         else {
 
             var harvestersInQueue = _.filter(spawnQueue, (r) => r == 'harvester').length;
-            var carriersInQueue = _.filter(spawnQueue, (r) => r == 'carrier').length;;
-            var distributorsInQueue = _.filter(spawnQueue, (r) => r == 'distributor').length;;
-            var upgradersInQueue = _.filter(spawnQueue, (r) => r == 'upgrader').length;;
-            var buildersInQueue = _.filter(spawnQueue, (r) => r == 'builder').length;;
-            var repairersInQueue = _.filter(spawnQueue, (r) => r == 'repairer').length;;
-            var defenceManagersInQueue = _.filter(spawnQueue, (r) => r == 'defenceManager').length;;
-            var warriorsInQueue = _.filter(spawnQueue, (r) => r == 'warrior').length;;
-            var landlordsInQueue = _.filter(spawnQueue, (r) => r == 'landlord').length;;
-            var remoteHarvestersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHarvester').length;;
-            var remoteHaulersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHauler').length;;
-            var otherRoomCreepsInQueue = _.filter(spawnQueue, (r) => r == 'otherRoomCreep').length;;
+            var carriersInQueue = _.filter(spawnQueue, (r) => r == 'carrier').length;
+            var distributorsInQueue = _.filter(spawnQueue, (r) => r == 'distributor').length;
+            var upgradersInQueue = _.filter(spawnQueue, (r) => r == 'upgrader').length;
+            var buildersInQueue = _.filter(spawnQueue, (r) => r == 'builder').length;
+            var repairersInQueue = _.filter(spawnQueue, (r) => r == 'repairer').length;
+            var defenceManagersInQueue = _.filter(spawnQueue, (r) => r == 'defenceManager').length;
+            var warriorsInQueue = _.filter(spawnQueue, (r) => r == 'warrior').length;
+            var landlordsInQueue = _.filter(spawnQueue, (r) => r == 'landlord').length;
+            var remoteHarvestersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHarvester').length;
+            var remoteHaulersInQueue = _.filter(spawnQueue, (r) => r == 'remoteHauler').length;
+            var otherRoomCreepsInQueue = _.filter(spawnQueue, (r) => r == 'otherRoomCreep').length;
 
-
-            var minimumNumberOfHarvesters = Memory.rooms[room].populationGoal.harvesters;
-            var minimumNumberOfCarriers = Memory.rooms[room].populationGoal.carriers;
-            var minimumNumberOfDistributors = Memory.rooms[room].populationGoal.distributors;
-            var minimumNumberOfUpgraders = Memory.rooms[room].populationGoal.upgraders;
-            var minimumNumberOfBuilders = Memory.rooms[room].populationGoal.builders;
-            var minimumNumberOfRepairers = Memory.rooms[room].populationGoal.repairers;
-            var minimumNumberOfDefenceManagers = Memory.rooms[room].populationGoal.defenceManagers;
-            var minimumNumberOfWarriors = Memory.rooms[room].populationGoal.warriors;
-            var minimumNumberOfLandlords = Memory.rooms[room].populationGoal.landlords;
-            var minimumNumberOfRemoteHarvesters = Memory.rooms[room].populationGoal.remoteHarvesters;
-            var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
-            var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
+            var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
             if (otherRoomCreepsRoomToGoTo) {
                 minimumNumberOfOtherRoomCreeps = otherRoomCreepsRoomToGoTo.length * 10;
             }
-
-            var maximumNumberOfWarriors = 7;
 
             if (!room.storage) {
                 minimumNumberOfUpgraders = 4;
@@ -126,7 +130,7 @@ module.exports = {
             var amountOfReservers = this.getAmountOfReservers(room, reserveFlags);
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
-            for (let flag in remoteCreepFlags) {
+            for (let flag of remoteCreepFlags) {
                 minimumNumberOfRemoteHarvesters += flag.memory.numberOfRemoteHarvesters;
                 minimumNumberOfRemoteHaulers += flag.memory.numberOfRemoteHaulers;
             }
@@ -195,6 +199,50 @@ module.exports = {
                 let role = creepAboutToDie.memory.role;
                 spawnQueue.push(role);
             }
+
+            var creepToAddToQueue;
+
+            if (minimumNumberOfHarvesters < harvestersInQueue) {
+                creepAboutToDie = 'harvester';
+            }
+            else if (minimumNumberOfDistributors < distributorsInQueue) {
+                creepAboutToDie = 'distributor';
+            }
+            else if (minimumNumberOfCarriers < carriersInQueue) {
+                creepAboutToDie = 'carrier';
+            }
+            else if (minimumNumberOfUpgraders < upgradersInQueue) {
+                creepAboutToDie = 'upgrader';
+            }
+            else if (minimumNumberOfBuilders < buildersInQueue) {
+                creepAboutToDie = 'builder';
+            }
+            else if (minimumNumberOfRepairers < repairersInQueue) {
+                creepAboutToDie = 'repairer';
+            }
+            else if (minimumNumberOfDefenceManagers < defenceManagersInQueue) {
+                creepAboutToDie = 'defenceManager';
+            }
+            else if (minimumNumberOfWarriors < warriorsInQueue) {
+                creepAboutToDie = 'warrior';
+            }
+            else if (minimumNumberOfLandlords < landlordsInQueue) {
+                creepAboutToDie = 'landlord';
+            }
+            else if (minimumNumberOfRemoteHarvesters < remoteHarvestersInQueue) {
+                creepAboutToDie = 'remoteHarvester';
+            }
+            else if (minimumNumberOfRemoteHaulers < remoteHaulersInQueue) {
+                creepAboutToDie = 'remoteHauler';
+            }
+            else if (minimumNumberOfOtherRoomCreeps < otherRoomCreepsInQueue) {
+                creepAboutToDie = 'otherRoomCreep';
+            }
+
+            if (creepAboutToDie) {
+                spawnQueue.push(creepAboutToDie);
+            }
+
         }
 
 
@@ -226,12 +274,30 @@ module.exports = {
 
                 spawn.createCustomCreep(room, energy, spawnQueue[0], amountToSave);
 
+
                 if (Game.creeps[name]) {
                     spawnQueue.splice(0, 1);
                     console.log("Creating Creep " + name);
                 }
             }
         }
+
+        Memory.rooms[room].spawnQueue.normal = spawnQueue;
+
+        Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
+        Memory.rooms[room].populationGoal.carriers = minimumNumberOfCarriers;
+        Memory.rooms[room].populationGoal.distributors = minimumNumberOfDistributors;
+        Memory.rooms[room].populationGoal.upgraders = minimumNumberOfUpgraders;
+        Memory.rooms[room].populationGoal.builders = minimumNumberOfBuilders;
+        Memory.rooms[room].populationGoal.repairers = minimumNumberOfRepairers;
+        Memory.rooms[room].populationGoal.defenceManagers = minimumNumberOfDefenceManagers;
+        Memory.rooms[room].populationGoal.warriors = minimumNumberOfWarriors;
+        Memory.rooms[room].populationGoal.landlords = minimumNumberOfLandlords;
+        Memory.rooms[room].populationGoal.remoteHarvesters = minimumNumberOfRemoteHarvesters;
+        Memory.rooms[room].populationGoal.remoteHaulers = minimumNumberOfRemoteHaulers;
+        Memory.rooms[room].populationGoal.otherRoomCreeps = minimumNumberOfOtherRoomCreeps;
+
+        Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
     },
 
     checkMemory: function (room) {
@@ -243,41 +309,44 @@ module.exports = {
             Memory.rooms[room].populationGoal = {};
         }
 
-        if (!Memory.rooms[room].populationGoal.harvesters) {
+        if (Memory.rooms[room].populationGoal.harvesters == undefined) {
             Memory.rooms[room].populationGoal.harvesters = 0;
         }
-        if (!Memory.rooms[room].populationGoal.carriers) {
+        if (Memory.rooms[room].populationGoal.carriers == undefined) {
             Memory.rooms[room].populationGoal.carriers = 0;
         }
-        if (!Memory.rooms[room].populationGoal.distributors) {
+        if (Memory.rooms[room].populationGoal.distributors == undefined) {
             Memory.rooms[room].populationGoal.distributors = 0;
         }
-        if (!Memory.rooms[room].populationGoal.upgraders) {
+        if (Memory.rooms[room].populationGoal.upgraders == undefined) {
             Memory.rooms[room].populationGoal.upgraders = 0;
         }
-        if (!Memory.rooms[room].populationGoal.builders) {
+        if (Memory.rooms[room].populationGoal.builders == undefined) {
             Memory.rooms[room].populationGoal.builders = 0;
         }
-        if (!Memory.rooms[room].populationGoal.repairers) {
+        if (Memory.rooms[room].populationGoal.repairers == undefined) {
             Memory.rooms[room].populationGoal.repairers = 0;
         }
-        if (!Memory.rooms[room].populationGoal.defenceManagers) {
+        if (Memory.rooms[room].populationGoal.defenceManagers == undefined) {
             Memory.rooms[room].populationGoal.defenceManagers = 0;
         }
-        if (!Memory.rooms[room].populationGoal.warriors) {
+        if (Memory.rooms[room].populationGoal.warriors == undefined) {
             Memory.rooms[room].populationGoal.warriors = 0;
         }
-        if (!Memory.rooms[room].populationGoal.landlords) {
+        if (Memory.rooms[room].populationGoal.landlords == undefined) {
             Memory.rooms[room].populationGoal.landlords = 0;
         }
-        if (!Memory.rooms[room].populationGoal.remoteHarvesters) {
+        if (Memory.rooms[room].populationGoal.remoteHarvesters == undefined) {
             Memory.rooms[room].populationGoal.remoteHarvesters = 0;
         }
-        if (!Memory.rooms[room].populationGoal.remoteHaulers) {
+        if (Memory.rooms[room].populationGoal.remoteHaulers == undefined) {
             Memory.rooms[room].populationGoal.remoteHaulers = 0;
         }
-        if (!Memory.rooms[room].populationGoal.otherRoomCreeps) {
+        if (Memory.rooms[room].populationGoal.otherRoomCreeps == undefined) {
             Memory.rooms[room].populationGoal.otherRoomCreeps = 0;
+        }
+        if (Memory.rooms[room].populationGoal.maxWarriors == undefined) {
+            Memory.rooms[room].populationGoal.maxWarriors = 7;
         }
     },
 
