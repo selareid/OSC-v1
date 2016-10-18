@@ -67,13 +67,13 @@ module.exports = {
         var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
         var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
 
-        if (room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}).length > 0 && numberOfBuilders == 0) {
+        if (room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}).length == 0 && numberOfBuilders == 0 && spawnQueue[0] == 'builder') {
             spawnQueue.splice(0, 0, 'builder');
         }
-        else if (numberOfDistributors == 0) {
+        else if (numberOfDistributors == 0 && (spawnQueue[0] == 'distributor') ) {
             spawnQueue.splice(0, 0, 'distributor');
         }
-        else if (numberOfHarvesters == 0) {
+        else if (numberOfHarvesters == 0 && spawnQueue[0] == 'harvester') {
             spawnQueue.splice(0, 0, 'harvester');
         }
         else {
