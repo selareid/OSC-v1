@@ -271,7 +271,7 @@ module.exports = {
 
 
                 if (Game.creeps[name]) {
-                    Memory.rooms[room].spawnQueue.normal.shift;
+                    Memory.rooms[room].spawnQueue.normal.splice(0, 1);
                     console.log("Creating Creep " + name);
                 }
             }
