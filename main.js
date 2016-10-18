@@ -4,6 +4,7 @@ const roomHandler = require ('roomHandler');
 
 module.exports.loop = function () {
 
+
     try {
         //memory stuff
         for (let name in Memory.creeps) {
