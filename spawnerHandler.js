@@ -273,7 +273,7 @@ module.exports = {
 
 
                 if (Game.creeps[name]) {
-                    delete spawnQueue[0];
+                    spawnQueue.shift;
                     console.log("Creating Creep " + name);
                 }
             }
