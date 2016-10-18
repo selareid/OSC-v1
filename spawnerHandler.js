@@ -203,43 +203,43 @@ module.exports = {
             var creepToAddToQueue;
 
             if (minimumNumberOfHarvesters < harvestersInQueue) {
-                creepAboutToDie = 'harvester';
+                creepToAddToQueue = 'harvester';
             }
             else if (minimumNumberOfDistributors < distributorsInQueue) {
-                creepAboutToDie = 'distributor';
+                creepToAddToQueue = 'distributor';
             }
             else if (minimumNumberOfCarriers < carriersInQueue) {
-                creepAboutToDie = 'carrier';
+                creepToAddToQueue = 'carrier';
             }
             else if (minimumNumberOfUpgraders < upgradersInQueue) {
-                creepAboutToDie = 'upgrader';
+                creepToAddToQueue = 'upgrader';
             }
             else if (minimumNumberOfBuilders < buildersInQueue) {
-                creepAboutToDie = 'builder';
+                creepToAddToQueue = 'builder';
             }
             else if (minimumNumberOfRepairers < repairersInQueue) {
-                creepAboutToDie = 'repairer';
+                creepToAddToQueue = 'repairer';
             }
             else if (minimumNumberOfDefenceManagers < defenceManagersInQueue) {
-                creepAboutToDie = 'defenceManager';
+                creepToAddToQueue = 'defenceManager';
             }
             else if (minimumNumberOfWarriors < warriorsInQueue) {
-                creepAboutToDie = 'warrior';
+                creepToAddToQueue = 'warrior';
             }
             else if (minimumNumberOfLandlords < landlordsInQueue) {
-                creepAboutToDie = 'landlord';
+                creepToAddToQueue = 'landlord';
             }
             else if (minimumNumberOfRemoteHarvesters < remoteHarvestersInQueue) {
-                creepAboutToDie = 'remoteHarvester';
+                creepToAddToQueue = 'remoteHarvester';
             }
             else if (minimumNumberOfRemoteHaulers < remoteHaulersInQueue) {
-                creepAboutToDie = 'remoteHauler';
+                creepToAddToQueue = 'remoteHauler';
             }
             else if (minimumNumberOfOtherRoomCreeps < otherRoomCreepsInQueue) {
-                creepAboutToDie = 'otherRoomCreep';
+                creepToAddToQueue = 'otherRoomCreep';
             }
 
-            if (creepAboutToDie) {
+            if (creepToAddToQueue) {
                 spawnQueue.push(creepAboutToDie);
             }
 
