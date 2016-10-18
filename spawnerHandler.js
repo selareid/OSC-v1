@@ -202,40 +202,40 @@ module.exports = {
 
             var creepToAddToQueue;
 
-            if (minimumNumberOfHarvesters < harvestersInQueue) {
+            if (minimumNumberOfHarvesters > harvestersInQueue + numberOfHarvesters) {
                 creepToAddToQueue = 'harvester';
             }
-            else if (minimumNumberOfDistributors < distributorsInQueue) {
+            else if (minimumNumberOfDistributors > distributorsInQueue + numberOfDistributors) {
                 creepToAddToQueue = 'distributor';
             }
-            else if (minimumNumberOfCarriers < carriersInQueue) {
+            else if (minimumNumberOfCarriers > carriersInQueue + numberOfCarriers) {
                 creepToAddToQueue = 'carrier';
             }
-            else if (minimumNumberOfUpgraders < upgradersInQueue) {
+            else if (minimumNumberOfUpgraders > upgradersInQueue + numberOfUpgraders) {
                 creepToAddToQueue = 'upgrader';
             }
-            else if (minimumNumberOfBuilders < buildersInQueue) {
+            else if (minimumNumberOfBuilders > buildersInQueue + numberOfBuilders) {
                 creepToAddToQueue = 'builder';
             }
-            else if (minimumNumberOfRepairers < repairersInQueue) {
+            else if (minimumNumberOfRepairers > repairersInQueue + numberOfRepairers) {
                 creepToAddToQueue = 'repairer';
             }
-            else if (minimumNumberOfDefenceManagers < defenceManagersInQueue) {
+            else if (minimumNumberOfDefenceManagers > defenceManagersInQueue + numberOfDefenceManagers) {
                 creepToAddToQueue = 'defenceManager';
             }
-            else if (minimumNumberOfWarriors < warriorsInQueue) {
+            else if (minimumNumberOfWarriors > warriorsInQueue + numberOfWarriors) {
                 creepToAddToQueue = 'warrior';
             }
-            else if (minimumNumberOfLandlords < landlordsInQueue) {
+            else if (minimumNumberOfLandlords > landlordsInQueue + numberOfLandlords) {
                 creepToAddToQueue = 'landlord';
             }
-            else if (minimumNumberOfRemoteHarvesters < remoteHarvestersInQueue) {
+            else if (minimumNumberOfRemoteHarvesters > remoteHarvestersInQueue + numberOfRemoteHarvesters) {
                 creepToAddToQueue = 'remoteHarvester';
             }
-            else if (minimumNumberOfRemoteHaulers < remoteHaulersInQueue) {
+            else if (minimumNumberOfRemoteHaulers > remoteHaulersInQueue + numberOfRemoteHaulers) {
                 creepToAddToQueue = 'remoteHauler';
             }
-            else if (minimumNumberOfOtherRoomCreeps < otherRoomCreepsInQueue) {
+            else if (minimumNumberOfOtherRoomCreeps > otherRoomCreepsInQueue + numberOfOtherRoomCreeps) {
                 creepToAddToQueue = 'otherRoomCreep';
             }
 
