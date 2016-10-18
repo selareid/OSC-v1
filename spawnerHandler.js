@@ -240,7 +240,7 @@ module.exports = {
             }
 
             if (creepToAddToQueue) {
-                spawnQueue.push(creepAboutToDie);
+                spawnQueue.push(creepToAddToQueue);
             }
 
         }
