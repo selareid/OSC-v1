@@ -90,17 +90,9 @@ module.exports = {
                 //     }
                 // }
                 // else {
-                if (!storage) {
-                    if (droppedenergy) {
-                        if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(droppedenergy, {ignoreCreeps: true});
-                        }
-                    }
-                }
-
-                if (storage && storage.store[RESOURCE_ENERGY] > 0) {
-                    if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(storage, {reusePath: 10, ignoreCreeps: true})
+                if (droppedEnergy && droppedEnergy.amount > 200) {
+                    if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedEnergy, {ignoreCreeps: true});
                     }
                 }
                 else {
@@ -111,10 +103,9 @@ module.exports = {
                         }
                     }
                     else {
-                        var droppedenergy = creep.findDroppedEnergy(room);
-                        if (droppedenergy) {
-                            if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(droppedenergy, {ignoreCreeps: true});
+                        if (droppedEnergy) {
+                            if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(droppedEnergy, {ignoreCreeps: true});
                             }
                         }
                     }
