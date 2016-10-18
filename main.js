@@ -6,7 +6,6 @@ module.exports.loop = function () {
 
 
     try {
-
         //memory stuff
         for (let name in Memory.creeps) {
             if (!Game.creeps[name]) {
@@ -45,18 +44,26 @@ module.exports.loop = function () {
             var spawn = room.find(FIND_MY_SPAWNS)[0];
             if (spawn) {
 
-                if (Memory.rooms) {
-                    if (!Memory.rooms[room]) {
-                        Memory.rooms[room] = {};
+                try {
+                    if (Memory.rooms) {
+                        if (!Memory.rooms[room]) {
+                            Memory.rooms[room] = {};
+                        }
+                    }
+                    else {
+                        Memory.rooms = {};
                     }
                 }
-                else {
-                    Memory.rooms = {};
+                catch (err) {
+                    if (err !== null && err !== undefined) {
+                        Game.notify("Error in Memory.room logic: \n" + err + "\n " + err.stack);
+                        console.log("Error in Memory.room logic: \n" + err + "\n" + err.stack);
+                    }
                 }
 
                 roomHandler.run(room);
             }
-    }
+        }
 
     try {
 
