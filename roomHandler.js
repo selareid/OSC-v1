@@ -61,6 +61,7 @@ module.exports = {
         if (otherRoomCreepsRoomToGoTo) {
             otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
+
         var remoteCreepFlags = room.getRemoteFlags();
 
         if (flagToRallyAt) {
