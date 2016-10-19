@@ -57,6 +57,7 @@ module.exports = {
                     creep.moveTo(droppedEnergy);
                 }
             }
+        }
     },
 
     findStructureToRepair: function (room, creep) {
