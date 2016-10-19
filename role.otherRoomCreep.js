@@ -57,7 +57,7 @@ extraType.run(creep);
                 }
             }
             else if (creep.memory.working == true && creep.room.name != room.name) {
-                let roomPos = new RoomPosition(12, 25, roomToGoTo);
+                let roomPos = new RoomPosition(12, 25, room.name);
                 creep.moveTo(roomPos);
             }
 
