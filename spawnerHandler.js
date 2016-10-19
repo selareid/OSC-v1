@@ -277,7 +277,8 @@ module.exports = {
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHaulers'] = numberOfRemoteHaulers;
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfOtherRoomCreeps'] = numberOfOtherRoomCreeps;
 
-        Memory.stats['room.' + room.name + '.spawnQueues' + '.normal'] = Memory.rooms[room].spawnQueue.normal;
+        var spawnQueue = Memory.rooms[room].spawnQueue.normal;
+        Memory.stats['room.' + room.name + '.spawnQueues' + '.normal'] = spawnQueue.length;
 
         Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
         Memory.rooms[room].populationGoal.carriers = minimumNumberOfCarriers;
