@@ -152,7 +152,7 @@ module.exports = function () {
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
 
                     for (let i = 0; i < numberOfParts; i++) {
-                        body.push(WORK);
+                        body.push(CARRY);
                         body.push(MOVE);
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
