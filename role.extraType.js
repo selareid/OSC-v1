@@ -10,11 +10,20 @@ module.exports = {
         }
 
         if (creep.memory.working == true) {
-            if (creep.pos.x == 12 && creep.pos.y == 25) {
-                creep.drop(RESOURCE_ENERGY);
+            var spawn = creep.room.find(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
+
+            if (spawn) {
+                if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(spawn);
+                }
             }
             else {
-                creep.moveTo(12, 25);
+                if (creep.pos.x == 12 && creep.pos.y == 25) {
+                    creep.drop(RESOURCE_ENERGY);
+                }
+                else {
+                    creep.moveTo(12, 25);
+                }
             }
         }
         else {
