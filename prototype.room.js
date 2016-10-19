@@ -30,10 +30,22 @@ module.exports = function () {
 
         Room.prototype.findOtherRoomToGoTo =
             function () {
-                var beforeRallyFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name)[0];
+                var otherRoomFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name && f.memory.numberOfCreeps > 0)[0];
 
-                if (beforeRallyFlag) {
-                    return beforeRallyFlag;
+                if (otherRoomFlag) {
+                    return otherRoomFlag;
+                }
+                else {
+                    return undefined;
+                }
+            },
+
+        Room.prototype.findRoomToStealFrom =
+            function () {
+                var thiefFlag = _.filter(Game.flags, f => f.memory.type == 'thiefFlag' && f.memory.room == this.name && f.memory.numberOfCreeps > 0)[0];
+
+                if (thiefFlag) {
+                    return thiefFlag;
                 }
                 else {
                     return undefined;

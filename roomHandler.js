@@ -62,6 +62,12 @@ module.exports = {
             otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
 
+        var roomToStealFrom = room.findOtherRoomToGoTo();
+        var roomToStealFromPos;
+        if (roomToStealFrom) {
+            roomToStealFromPos = roomToStealFrom.pos.roomName
+        }
+
         var remoteCreepFlags = room.getRemoteFlags();
 
         if (flagToRallyAt) {
@@ -97,7 +103,7 @@ module.exports = {
         linkHandler.run(room);
 
         try {
-            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags);
+            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoToPos, roomToStealFrom);
         }
         catch (err) {
             if (err !== null && err !== undefined) {
@@ -108,7 +114,7 @@ module.exports = {
 
         var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
 
-        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags);
+        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos);
 
         var cpuUsedAfterCreepHandler = Game.cpu.getUsed();
         var cpuUsedByCreepHandler = cpuUsedAfterCreepHandler - cpuUsedBeforeCreepHandler;
