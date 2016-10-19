@@ -15,7 +15,7 @@ module.exports = {
                 creep.moveTo(roomPos2);
             }
             else {
-                var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
+                var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity})[0];
 
                 if (spawn) {
                     if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
