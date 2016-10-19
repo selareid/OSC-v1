@@ -52,7 +52,7 @@ module.exports = {
         var minimumNumberOfRemoteHarvesters = Memory.rooms[room].populationGoal.remoteHarvesters;
         var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
         var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
-        var minimumNumberOfEnergyThiefs = Memory.rooms[room].populationGoal.minimumNumberOfEnergyThiefs;
+        var minimumNumberOfEnergyThiefs = Memory.rooms[room].populationGoal.energyThiefs;
 
         if (numberOfHarvesters == 0 && Memory.rooms[room].spawnQueue.normal[0] != 'harvester') {
             Memory.rooms[room].spawnQueue.normal.splice(0, 0, 'harvester');
@@ -354,8 +354,8 @@ module.exports = {
         if (Memory.rooms[room].populationGoal.otherRoomCreeps == undefined) {
             Memory.rooms[room].populationGoal.otherRoomCreeps = 0;
         }
-        if (Memory.rooms[room].populationGoal.minimumNumberOfEnergyThiefs == undefined) {
-            Memory.rooms[room].populationGoal.minimumNumberOfEnergyThiefs = 0;
+        if (Memory.rooms[room].populationGoal.energyThiefs == undefined) {
+            Memory.rooms[room].populationGoal.energyThiefs = 0;
         }
         if (Memory.rooms[room].populationGoal.maxWarriors == undefined) {
             Memory.rooms[room].populationGoal.maxWarriors = 7;
