@@ -62,7 +62,7 @@ module.exports = {
             otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
 
-        var roomToStealFrom = room.findOtherRoomToGoTo();
+        var roomToStealFrom = room.findRoomToStealFrom();
         var roomToStealFromPos;
         if (roomToStealFrom) {
             roomToStealFromPos = roomToStealFrom.pos.roomName
