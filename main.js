@@ -45,8 +45,7 @@ module.exports.loop = function () {
     //do actual stuff
         for (let room_it in Game.rooms) {
             var room = Game.rooms[room_it];
-            var spawn = room.find(FIND_MY_SPAWNS)[0];
-            if (spawn) {
+            if (room.controller.my) {
 
                 try {
                     if (Memory.rooms) {
