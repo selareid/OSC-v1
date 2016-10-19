@@ -4,6 +4,10 @@ const roomHandler = require ('roomHandler');
 
 module.exports.loop = function () {
 
+    //quick grafana check
+    if (Memory.stats == undefined) {
+        Memory.stats = {}
+    }
 
     try {
         //memory stuff
@@ -68,10 +72,6 @@ module.exports.loop = function () {
     try {
 
 //Grafana stuff
-        if (Memory.stats == undefined) {
-            Memory.stats = {}
-        }
-
 
         Memory.stats['gcl.progress'] = Game.gcl.progress;
         Memory.stats['gcl.progressTotal'] = Game.gcl.progressTotal;
