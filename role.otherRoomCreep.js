@@ -4,7 +4,7 @@ const type1 = require ('role.type1'); //RCL upgrader
 const type2 = require ('role.type2'); //builder
 const type3 = require ('role.type3'); //repairer
 const type4 = require ('role.type4'); //wallRepairer and tower replenisher
-const extraType = require ('role.exxtraType');
+const extraType = require ('role.extraType');
 
 module.exports = {
     run: function (room, creep, roomToGoTo) {
