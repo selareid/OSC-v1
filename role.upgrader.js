@@ -22,19 +22,36 @@ module.exports = {
             }
         }
         else {
-            creep.creepSpeech(room, 'movingToEnergy');
-            var storage = room.storage;
-            if (storage && storage.store[RESOURCE_ENERGY] > 1000) {
-                if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage, {reusePath: 10})
+            var droppedEnergy = creep.findDroppedEnergy(room);
+
+            if (!droppedEnergy) {
+                droppedEnergy = [];
+            }
+
+            if (droppedEnergy.amount == undefined || droppedEnergy.amount < 1010) {
+                var storage = room.storage;
+                if (storage && storage.store[RESOURCE_ENERGY] > 1000) {
+                    if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(storage, {reusePath: 10})
+                    }
+                }
+                else {
+                    var container = creep.findContainer(room);
+                    if (container) {
+                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(container)
+                        }
+                    }
+                    else {
+                        if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(container)
+                        }
+                    }
                 }
             }
             else {
-                var container = creep.findContainer(room);
-                if (container) {
-                    if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(container)
-                    }
+                if (creep.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(droppedEnergy);
                 }
             }
         }
