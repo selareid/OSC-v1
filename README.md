@@ -4,6 +4,7 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
+* Maie energyThief have work part abd become defenceManager when there's no flag for it
 * Add 2 more spawn queues: 'war' and 'priority'
 * Add nuke defensive mode to wallRepairers and as an energy mode
 * Fix/Test remoteCreeps
