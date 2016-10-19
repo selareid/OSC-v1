@@ -19,59 +19,67 @@ module.exports = {
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
 
-            if (creep.memory.room == room.name && creep.spawning === false) {
+            try {
+                if (creep.memory.room == room.name && creep.spawning === false) {
 
-                switch(creep.memory.role) {
-                    case 'harvester':
-                        roleHarvester.run(room, creep);
-                        break;
-                    case 'carrier':
-                        roleCarrier.run(room, creep);
-                        break;
-                    case 'distributor':
-                        var energyOfTowers = this.getEnergyOfTower(room);
-                        roleDistributor.run(room, creep, energyOfTowers);
-                        break;
-                    case 'upgrader':
-                        roleUpgrader.run(room, creep);
-                        break;
-                    case 'builder':
-                        roleBuilder.run(room, creep);
-                        break;
-                    case 'repairer':
-                        roleRepairer.run(room, creep);
-                        break;
-                    case 'defenceManager':
-                        roleDefenceManager.run(room, creep, isUnderAttack);
-                        break;
-                    case 'warrior':
-                        roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
-                        break;
-                    case 'landlord':
-                        roleLandlord.run(room, creep);
-                        break;
-                    case 'otherRoomCreep':
-                        otherRoomCreep.run(room, creep, roomToGoTo);
-                        break;
-                    case 'energyThief':
-                        energyThief.run(room, creep, roomToTakeFrom);
-                        break;
-                    case 'remoteHarvester':
-                        roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
-                        break;
-                    case 'remoteHauler':
-                        roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
-                        break;
-                    case '':
-                        creep.say('ERROR!!!', true);
-                        break;
-                    default:
-                        creep.say('ERROR!!!', true);
-                        console.log('Unknown Creep Role ' + creep.memory.role);
-                        creep.memory.role = 'upgrader';
-                        break;
+                    switch (creep.memory.role) {
+                        case 'harvester':
+                            roleHarvester.run(room, creep);
+                            break;
+                        case 'carrier':
+                            roleCarrier.run(room, creep);
+                            break;
+                        case 'distributor':
+                            var energyOfTowers = this.getEnergyOfTower(room);
+                            roleDistributor.run(room, creep, energyOfTowers);
+                            break;
+                        case 'upgrader':
+                            roleUpgrader.run(room, creep);
+                            break;
+                        case 'builder':
+                            roleBuilder.run(room, creep);
+                            break;
+                        case 'repairer':
+                            roleRepairer.run(room, creep);
+                            break;
+                        case 'defenceManager':
+                            roleDefenceManager.run(room, creep, isUnderAttack);
+                            break;
+                        case 'warrior':
+                            roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
+                            break;
+                        case 'landlord':
+                            roleLandlord.run(room, creep);
+                            break;
+                        case 'otherRoomCreep':
+                            otherRoomCreep.run(room, creep, roomToGoTo);
+                            break;
+                        case 'energyThief':
+                            energyThief.run(room, creep, roomToTakeFrom);
+                            break;
+                        case 'remoteHarvester':
+                            roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
+                            break;
+                        case 'remoteHauler':
+                            roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
+                            break;
+                        case '':
+                            creep.say('ERROR!!!', true);
+                            break;
+                        default:
+                            creep.say('ERROR!!!', true);
+                            console.log('Unknown Creep Role ' + creep.memory.role);
+                            creep.memory.role = 'upgrader';
+                            break;
+                    }
+
                 }
-
+            }
+            catch (err) {
+                if (err !== null && err !== undefined) {
+                    Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
+                    console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
+                }
             }
         }
     },
