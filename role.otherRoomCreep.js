@@ -60,6 +60,9 @@ extraType.run(creep);
                 let roomPos = new RoomPosition(12, 25, room.name);
                 creep.moveTo(roomPos);
             }
+            else {
+                extraType.run(creep);
+            }
 
         }
     }
