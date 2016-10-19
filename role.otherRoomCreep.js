@@ -61,7 +61,7 @@ module.exports = {
 //                 creep.moveTo(roomPos);
 //             }
 //             else {
-                extraType.run(room, creep, otherRoomCreeps);
+                extraType.run(room, creep, roomToGoTo);
             //}
 
         }
