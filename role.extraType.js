@@ -27,7 +27,7 @@ module.exports = {
                         creep.drop(RESOURCE_ENERGY);
                     }
                     else {
-                        creep.moveTo(12, 25, room.name);
+                        creep.moveTo(12, 25);
                     }
                 }
             }
