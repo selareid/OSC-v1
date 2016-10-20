@@ -22,3 +22,8 @@ Array.splice(index);
 let words = 'dont mind me just passing through ...'.split(' ');
 let word = words[Game.time % words.length];
 creep.say(word, 1);
+* "Push" creeps out of the way Needs Editing:
+this.creep.say("pardon me")
+occupyingCreep.say("sorry")
+                      this.creep.move(this.creep.pos.getDirectionTo(occupyingCreep))
+                      occupyingCreep.move(occupyingCreep.pos.getDirectionTo(this.creep))
