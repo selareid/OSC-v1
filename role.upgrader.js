@@ -12,14 +12,34 @@ module.exports = {
 
 
         if (creep.memory.working == true) {
-            switch (creep.upgradeController(room.controller)) {
-                case ERR_NOT_IN_RANGE:
-                    creep.moveTo(room.controller, {reusePath: 20});
-                    break;
-                case OK:
+
+
+            var target = room.controller;
+            var minRangeToTarget = 2;
+            if (Math.random() < 0.5) {
+                var adjacentPositions = _.filter(creep.pos.getAdjacentRoomPositions(), pos => {
+                    var range = pos.getRangeTo(target);
+                    if (range > minRangeToTarget) {
+                        return false
+                    }
+                    if (!pos.isWalkable()) {
+                        return false
+                    }
+                    return true
+                });
+
+                if (adjacentPositions.length > 0) {
+                    var newPos = _.sample(adjacentPositions); // random
+                    creep.move(creep.pos.getDirectionTo(newPos));
+                    creep.upgradeController(target)
                     creep.creepSpeech(room, 'upgrading');
-                    break;
+                }
+                else {
+                    creep.moveTo(target);
+                }
             }
+
+
         }
         else {
             var droppedEnergy = creep.findDroppedEnergy(room);
