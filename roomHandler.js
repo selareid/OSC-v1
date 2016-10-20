@@ -83,7 +83,7 @@ module.exports = {
             otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
 
-        var roomToStealFrom/* = room.findRoomToStealFrom()*/;
+        var roomToStealFrom = room.findRoomToStealFrom();
         var roomToStealFromPos;
         if (roomToStealFrom) {
             roomToStealFromPos = roomToStealFrom.pos.roomName
@@ -124,7 +124,7 @@ module.exports = {
         linkHandler.run(room);
 
         try {
-            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoToPos, roomToStealFrom);
+            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom);
         }
         catch (err) {
             if (err !== null && err !== undefined) {

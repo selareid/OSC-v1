@@ -3,8 +3,8 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom) {
-
+    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag) {
+//roomToStealFrom
         this.checkMemory(room);
 
 
@@ -80,11 +80,11 @@ module.exports = {
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
-            if (otherRoomCreepsRoomToGoTo) {
-                minimumNumberOfOtherRoomCreeps = otherRoomCreepsRoomToGoTo.memory.numberOfCreeps;
+            if (otherRoomFlag) {
+                minimumNumberOfOtherRoomCreeps = otherRoomFlag.memory.numberOfCreeps;
             }
-            if (roomToStealFrom) {
-                minimumNumberOfEnergyThiefs = roomToStealFrom.memory.numberOfCreeps;
+            if (roomToStealFromFlag) {
+                minimumNumberOfEnergyThiefs = roomToStealFromFlag.memory.numberOfCreeps;
             }
 
             if (!room.storage) {
