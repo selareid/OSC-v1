@@ -301,13 +301,17 @@ module.exports = {
             if (room.energyAvailable >= 300) {
 
 
-
-                if (Game.time % 3 == 0 || Game.time % 3 == 1) {
-                    name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
+                if (Memory.rooms[room].spawnQueue.priority.length > 0) {
+                    if (Game.time % 3 == 0 || Game.time % 3 == 1) {
+                        name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
+                    }
+                    else {
+                        queueUsed = 1;
+                        name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.priority[0], amountToSave);
+                    }
                 }
                 else {
-                    queueUsed = 1;
-                    name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.priority[0], amountToSave);
+                    name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
                 }
 
                 if (Game.creeps[name]) {
