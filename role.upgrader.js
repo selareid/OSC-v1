@@ -1,5 +1,5 @@
 require('global');
-require('prototype.creep')();
+require('prototype.roomPosition')();
 
 module.exports = {
     run: function (room, creep) {
