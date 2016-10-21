@@ -27,7 +27,12 @@ module.exports = {
                             roleHarvester.run(room, creep);
                             break;
                         case 'carrier':
-                            roleCarrier.run(room, creep);
+                            if (room.storage) {
+                                roleCarrier.run(room, creep);
+                            }
+                            else {
+                                    creep.memory.role = 'distributor';
+                            }
                             break;
                         case 'distributor':
                             var energyOfTowers = this.getEnergyOfTower(room);
@@ -55,7 +60,12 @@ module.exports = {
                             otherRoomCreep.run(room, creep, roomToGoTo);
                             break;
                         case 'energyThief':
-                            energyThief.run(room, creep, roomToTakeFrom);
+                            if (roomToTakeFrom != undefined) {
+                                energyThief.run(room, creep, roomToTakeFrom);
+                            }
+                            else {
+                                creep.memory.role = 'carrier';
+                            }
                             break;
                         case 'remoteHarvester':
                             roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
