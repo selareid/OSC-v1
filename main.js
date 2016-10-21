@@ -64,7 +64,6 @@ module.exports.loop = function () {
                         console.log("Error in Memory.room logic: \n" + err + "\n" + err.stack);
                     }
                 }
-
                 roomHandler.run(room);
             }
         }
@@ -86,7 +85,9 @@ module.exports.loop = function () {
 
         Memory.stats['cpu.bucket'] = Game.cpu.bucket;
         Memory.stats['cpu.limit'] = Game.cpu.limit;
-        Memory.stats['cpu.getUsed'] = Game.cpu.getUsed()
+        Memory.stats['cpu.getUsed'] = Game.cpu.getUsed();
+
+        Memory.stats['cpu.' + 'creepHandler'] = CPUUsedByCreepHandler;
 
     }
     catch (err) {

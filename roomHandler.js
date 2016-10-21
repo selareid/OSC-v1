@@ -182,6 +182,6 @@ module.exports = {
         Memory.stats['room.' + room.name + '.storedEnergy'] = stored;
         Memory.stats['room.' + room.name + '.energyMode'] = energyMode;
 
-        Memory.stats['cpu.' + 'creepHandler'] = cpuUsedByCreepHandler;
+        CPUUsedByCreepHandler += cpuUsedByCreepHandler;
     }
 };
