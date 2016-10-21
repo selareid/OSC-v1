@@ -44,6 +44,7 @@ module.exports.loop = function () {
 
     //do actual stuff
         for (let room_it in Game.rooms) {
+            var room = Game.rooms[room_it];
             var controller = room.controller;
              if (controller && controller.my === true) {
 
