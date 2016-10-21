@@ -18,7 +18,7 @@ module.exports = {
 
             if (controller.pos.getRangeTo(creep.pos) <= 4) {
                 creep.upgradeController(controller);
-                creep.creepSpeech('upgrading');
+                creep.creepSpeech(room, 'upgrading');
             }
 
             if (controller.pos.getRangeTo(creep.pos) > 1) {
