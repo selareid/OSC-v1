@@ -15,15 +15,15 @@
 ## Some code for later use
 
 * Find value in array equal to something and
-Array.indexOfsomething);
-Array.splice(index);
+`Array.indexOfsomething);`
+`Array.splice(index);`
 * Useful https://lodash.com/docs/3.10.1#pull
 * For when i get to making my creeps say things more
-let words = 'dont mind me just passing through ...'.split(' ');
-let word = words[Game.time % words.length];
-creep.say(word, 1);
-* "Push" creeps out of the way Needs Editing:
-this.creep.say("pardon me")
-occupyingCreep.say("sorry")
-                      this.creep.move(this.creep.pos.getDirectionTo(occupyingCreep))
-                      occupyingCreep.move(occupyingCreep.pos.getDirectionTo(this.creep))
+`let words = 'dont mind me just passing through ...'.split(' ');`
+`let word = words[Game.time % words.length];`
+`creep.say(word, 1);`
+*"Push" creeps out of the way Needs Editing:
+`this.creep.say("pardon me");`
+`occupyingCreep.say("sorry");`
+`this.creep.move(this.creep.pos.getDirectionTo(occupyingCreep));`
+`occupyingCreep.move(occupyingCreep.pos.getDirectionTo(this.creep))`
