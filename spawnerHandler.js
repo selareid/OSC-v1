@@ -206,28 +206,30 @@ module.exports = {
             if (creepAboutToDie) {
                 let role = creepAboutToDie.memory.role;
                 var whichQueue = 0; //0 is normal queue and 1 is priority 2 is war queue
-                if (role === 'harvester') {
-                    if (harvestersInPriorityQueue == 0) {
-                        whichQueue = 1;
-                    }
-                }
-                else if (role === 'distributor') {
-                    if (distributorsInPriorityQueue == 0) {
-                        whichQueue = 1;
-                    }
-                }
-                else if (role === 'carrier') {
-                    if (carriersInPriorityQueue == 0) {
-                        whichQueue = 1;
-                    }
-                }
-                else if (role === 'warrior') {
-                    if (warriorsInPriorityQueue == 0) {
-                        whichQueue = 1;
-                    }
-                    else if (warriorsInWarQueue == 0) {
-                        whichQueue = 2;
-                    }
+                switch (role) {
+                    case 'harvester':
+                        if (harvestersInPriorityQueue == 0) {
+                            whichQueue = 1;
+                        }
+                        break;
+                    case 'distributor':
+                        if (distributorsInPriorityQueue == 0) {
+                            whichQueue = 1;
+                        }
+                        break;
+                    case 'carrier':
+                        if (carriersInPriorityQueue == 0) {
+                            whichQueue = 1;
+                        }
+                        break;
+                    case 'warrior':
+                        if (warriorsInPriorityQueue == 0) {
+                            whichQueue = 1;
+                        }
+                        else if (warriorsInWarQueue == 0) {
+                            whichQueue = 2;
+                        }
+                        break;
                 }
 
                 switch (whichQueue) {
@@ -303,14 +305,18 @@ module.exports = {
             }
 
             if (creepToAddToQueue) {
-                if (queueToAddTo === 0) {
-                    Memory.rooms[room].spawnQueue.normal.push(creepToAddToQueue);
-                }
-                else if (queueToAddTo === 1) {
-                    Memory.rooms[room].spawnQueue.priority.push(creepToAddToQueue);
+                switch (queueToAddTo) {
+                    case 0:
+                        Memory.rooms[room].spawnQueue.normal.push(creepToAddToQueue);
+                        break;
+                    case 1:
+                        Memory.rooms[room].spawnQueue.priority.push(creepToAddToQueue);
+                        break;
+                    case 2:
+                        Memory.rooms[room].spawnQueue.war.push(creepToAddToQueue);
+                        break;
                 }
             }
-
         }
 
 
