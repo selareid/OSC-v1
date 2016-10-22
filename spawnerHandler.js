@@ -6,7 +6,9 @@ module.exports = {
     run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag) {
 
         //make sure memory is set
-        this.checkMemory(room);
+        if (!Memory.rooms[room].spawnQueue || Game.time % 50 == 0) {
+            this.checkMemory(room);
+        }
 
         //get number of each creeps of each role
         var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
