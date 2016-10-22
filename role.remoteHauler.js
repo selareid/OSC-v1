@@ -29,9 +29,16 @@ module.exports = {
 
                 }
                 else {
-                    creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
-                    if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-                        creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                    var constructionSitesInRange = creep.pos.findInRange(FIND_MY_CONSTRUCTION_SITES, 3);
+                    if (constructionSitesInRange.length > 0) {
+                        var buildTarget = creep.pos.findClosestByRange(constructionSitesInRange);
+                        creep.build(buildTarget);
+                    }
+                    else {
+                        creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
+                        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
+                            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                        }
                     }
                 }
             }
