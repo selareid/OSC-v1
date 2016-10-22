@@ -17,18 +17,14 @@ module.exports = {
                 let underMe = creep.pos.findInRange(FIND_STRUCTURES, 1);
                 underMe = underMe.filter(function (obj) { return obj.hits < obj.hitsMax });
                 if (underMe.length > 0) {
-                    if (creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})) {
-                        creep.move(LEFT);
+                    let res = creep.repair(underMe[0]);
+                    if (res === OK) {
+                        creep.say('REPAIR!!!', true);
                     }
                     else {
-                        let res = creep.repair(underMe[0]);
-                        if (res === OK) {
-                            creep.say('REPAIR!!!', true);
-                        }
-                        else {
-                            creep.say('REPAIR ERR', true);
-                        }
+                        creep.say('REPAIR ERR', true);
                     }
+
                 }
                 else {
                     creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
