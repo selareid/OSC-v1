@@ -4,7 +4,7 @@ require('prototype.spawn')();
 
 module.exports = {
     run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag) {
-//roomToStealFrom
+        
         this.checkMemory(room);
 
 
