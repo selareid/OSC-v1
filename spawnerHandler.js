@@ -73,6 +73,9 @@ module.exports = {
             var carriersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'carrier');
             var warriorsInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'warrior');
 
+            //get number of warriors in war queue
+            var warriorsInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'warrior');
+
             //get the population goal from memory
             var minimumNumberOfHarvesters = Memory.rooms[room].populationGoal.harvesters;
             var minimumNumberOfCarriers = Memory.rooms[room].populationGoal.carriers;
@@ -202,7 +205,7 @@ module.exports = {
 
             if (creepAboutToDie) {
                 let role = creepAboutToDie.memory.role;
-                var whichQueue = 0; //0 is normal queue and 1 is priority
+                var whichQueue = 0; //0 is normal queue and 1 is priority 2 is war queue
                 if (role === 'harvester') {
                     if (harvestersInPriorityQueue == 0) {
                         whichQueue = 1;
@@ -222,19 +225,27 @@ module.exports = {
                     if (warriorsInPriorityQueue == 0) {
                         whichQueue = 1;
                     }
+                    else if (warriorsInWarQueue == 0) {
+                        whichQueue = 2;
+                    }
                 }
 
-                if (whichQueue === 0) {
-                    Memory.rooms[room].spawnQueue.normal.push(role);
-                }
-                else if (whichQueue === 1) {
-                    Memory.rooms[room].spawnQueue.priority.push(role);
+                switch (whichQueue) {
+                    case 0:
+                        Memory.rooms[room].spawnQueue.normal.push(role);
+                        break;
+                    case 1:
+                        Memory.rooms[room].spawnQueue.priority.push(role);
+                        break;
+                    case 2:
+                        Memory.rooms[room].spawnQueue.war.push(role);
+                        break;
                 }
             }
 
             //add creep that needs to be added to queue to queue
             var creepToAddToQueue;
-            var queueToAddTo = 0; // 0 is normal and 1 is priority
+            var queueToAddTo = 0; // 0 is normal and 1 is priority 2 is war
 
             if (minimumNumberOfHarvesters > harvestersInQueue + numberOfHarvesters + harvestersInPriorityQueue) {
                 if (!harvestersInPriorityQueue > 0) {
@@ -266,9 +277,12 @@ module.exports = {
             else if (minimumNumberOfDefenceManagers > defenceManagersInQueue + numberOfDefenceManagers) {
                 creepToAddToQueue = 'defenceManager';
             }
-            else if (minimumNumberOfWarriors > warriorsInQueue + numberOfWarriors + warriorsInPriorityQueue) {
+            else if (minimumNumberOfWarriors > warriorsInQueue + numberOfWarriors + warriorsInPriorityQueue + warriorsInWarQueue) {
                 if (!warriorsInPriorityQueue > 0) {
                     queueToAddTo = 1;
+                }
+                else if (warriorsInQueue > 2) {
+                    queueToAddTo = 2;
                 }
                 creepToAddToQueue = 'warrior';
             }
@@ -306,30 +320,29 @@ module.exports = {
 
         if (spawn) {
 
-            var energy = spawn.room.energyAvailable/spawns.length;
+            var energy = spawn.room.energyAvailable / spawns.length;
             var amountToSave = 0;//in percent
             var name = undefined;
-            var queueUsed = 0; // 0 is normal and 1 is priority
+            var queueUsed = 0; // 0 is normal and 1 is priority 2 is war
 
             if (room.energyCapacityAvailable >= 400) {
                 if (Memory.rooms[room].energyMode == 'saving') {
-                    amountToSave = 0.3;
+                    amountToSave = 0.35;
                 }
                 else if (Memory.rooms[room].energyMode == 'ok') {
-                    amountToSave = 0.2;
+                    amountToSave = 0.25;
                 }
                 else if ((numberOfHarvesters >= minimumNumberOfHarvesters)
                     && (numberOfDistributors >= minimumNumberOfDistributors)
                     && (numberOfCarriers >= 2)) {
-                    amountToSave = 0.1;
+                    amountToSave = 0.15;
                 }
             }
 
             if (room.energyAvailable >= 300) {
 
-
-                if (Memory.rooms[room].spawnQueue.priority.length > 0) {
-                    if (Game.time % 3 == 0 || Game.time % 3 == 1) {
+                if (!Memory.rooms[room].spawnQueue.war.length > 0 || Game.time % 5 == 0 || Game.time % 5 == 1) {
+                    if (!Memory.rooms[room].spawnQueue.priority.length > 0 || Game.time % 3 == 0 || Game.time % 3 == 1) {
                         name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
                     }
                     else {
@@ -338,20 +351,27 @@ module.exports = {
                     }
                 }
                 else {
-                    name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
+                    queueUsed = 2;
+                    name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.war[0], amountToSave);
                 }
 
-                if (Game.creeps[name]) {
-                    if (queueUsed === 0) {
+            if (Game.creeps[name]) {
+
+                switch (queueUsed) {
+                    case 0:
                         Memory.rooms[room].spawnQueue.normal.splice(0, 1);
-                    }
-                    else if (queueUsed === 1) {
+                        break;
+                    case 1:
                         Memory.rooms[room].spawnQueue.priority.splice(0, 1);
-                    }
-                    console.log("Creating Creep " + name);
+                        break;
+                    case 2:
+                        Memory.rooms[room].spawnQueue.war.splice(0, 1);
+                        break;
                 }
+                console.log("Creating Creep " + name);
             }
         }
+    }
 
         //grafana stats stuff
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
@@ -372,6 +392,8 @@ module.exports = {
         Memory.stats['room.' + room.name + '.spawnQueues' + '.normal'] = normalSpawnQueue.length;
         var prioritySpawnQueue = Memory.rooms[room].spawnQueue.priority;
         Memory.stats['room.' + room.name + '.spawnQueues' + '.priority'] = prioritySpawnQueue.length;
+        var warSpawnQueue = Memory.rooms[room].spawnQueue.war;
+        Memory.stats['room.' + room.name + '.spawnQueues' + '.war'] = warSpawnQueue.length;
 
         //memory "cleanup"
         Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
@@ -401,6 +423,9 @@ module.exports = {
         }
         if (!Memory.rooms[room].spawnQueue.priority) {
             Memory.rooms[room].spawnQueue.priority = [];
+        }
+        if (!Memory.rooms[room].spawnQueue.war) {
+            Memory.rooms[room].spawnQueue.war = [];
         }
 
         if (!Memory.rooms[room].populationGoal) {
