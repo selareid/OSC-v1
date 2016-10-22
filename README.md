@@ -4,7 +4,6 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
-* Add 1 more spawn queues: 'war' which will be used 3 out of 5 ticks
 * Add nuke defensive mode to wallRepairers and as an energy mode
 * Fix/Test remoteCreeps
 * Have scouts that go out into the world and save data into memory and use that data to decide on rooms to remoteMine etc.
