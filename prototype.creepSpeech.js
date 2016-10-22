@@ -5,31 +5,39 @@ const creepTalk = require('creepTalk');
 module.exports = function () {
     Creep.prototype.creepSpeech = function (room, doingWhat) {
 
+        var toSay;
+        var partToSay;
+
         switch (doingWhat) {
             case 'movingToSource':
-                creepTalk.movingToSource(this);
+                toSay = "Moving To That Source Oh Yeah I'm Moving To That Source ...".split(' ');
                 break;
             case 'movingToSpawn':
-                creepTalk.movingToSpawn(this);
+                toSay = "Oh I Must Go Back To My Birth Place Go Back To My Birth Place Ooooh Why Must I Go Back To My Birth Place ...".split(' ');
                 break;
             case 'harvesting':
-                creepTalk.harvesting(this);
+                toSay = "I'm A Miner It's What I Do Mine Mine Mine Don't Let That Energy Waste In The Source Gotta Mine It ...".split(' ');
                 break;
             case 'droppingEnergy':
-                creepTalk.droppingEnergy(this);
+                toSay = "Dropping DropDaBeat Ground".split(' ');
                 break;
             case 'droppingEnergyContainer':
-                creepTalk.droppingEnergyContainer(this);
+                toSay = "Container NotDGround".split(' ');
                 break;
             case 'movingToEnergy':
-                creepTalk.movingToEnergy(this);
+                toSay = "I Need To Get Some Energy To Do Some Things Around You See ...".split(' ');
                 break;
             case 'upgrading':
-                creepTalk.upgrading(this);
+                toSay = "The GCl Needs Pumped The RCl Needs Pumped LUN Needs Praise Cause It Is Great ...".split(' ');
                 break;
             default:
-                creepTalk.undefinedSay(this);
+                toSay = "Praise LUN The Luranian United Nations Find It On SLACK and the LOAN Alliance Website ...".split(' ');
                 break;
+        }
+
+        if (partToSay != undefined) {
+            partToSay = toSay[Game.time % toSay.length];
+            this.say(partToSay, true);
         }
 
     }
