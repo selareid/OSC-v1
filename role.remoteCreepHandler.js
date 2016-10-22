@@ -14,6 +14,11 @@ creep.say('yeah');
             var remoteFlag = Game.flags[creep.memory.remoteFlag];
 
             if (remoteFlag) {
+
+                if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
+                    creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                }
+
                 if (creep.memory.role == 'remoteHarvester') {
                     this.remoteHarvesterHandler(room, creep, remoteFlag);
                 }

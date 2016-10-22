@@ -11,10 +11,6 @@ module.exports = {
             creep.memory.goingHome = true;
         }
 
-        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-        }
-
         if (creep.memory.goingHome === true) {
             if (creep.pos.roomName != creep.memory.room) {
 
