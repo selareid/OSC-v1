@@ -70,6 +70,8 @@ module.exports = {
             //get number of each role in priority queue
             var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
             var distributorsInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'distributor');
+            var carriersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'carrier');
+            var warriorsInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'warrior');
 
             //get the population goal from memory
             var minimumNumberOfHarvesters = Memory.rooms[room].populationGoal.harvesters;
@@ -211,6 +213,16 @@ module.exports = {
                         whichQueue = 1;
                     }
                 }
+                else if (role === 'carrier') {
+                    if (carriersInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                }
+                else if (role === 'warrior') {
+                    if (warriorsInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                }
 
                 if (whichQueue === 0) {
                     Memory.rooms[room].spawnQueue.normal.push(role);
@@ -236,7 +248,10 @@ module.exports = {
                 }
                 creepToAddToQueue = 'distributor';
             }
-            else if (minimumNumberOfCarriers > carriersInQueue + numberOfCarriers) {
+            else if (minimumNumberOfCarriers > carriersInQueue + numberOfCarriers + carriersInPriorityQueue) {
+                if (!carriersInPriorityQueue > 0) {
+                    queueToAddTo = 1;
+                }
                 creepToAddToQueue = 'carrier';
             }
             else if (minimumNumberOfUpgraders > upgradersInQueue + numberOfUpgraders) {
@@ -251,7 +266,10 @@ module.exports = {
             else if (minimumNumberOfDefenceManagers > defenceManagersInQueue + numberOfDefenceManagers) {
                 creepToAddToQueue = 'defenceManager';
             }
-            else if (minimumNumberOfWarriors > warriorsInQueue + numberOfWarriors) {
+            else if (minimumNumberOfWarriors > warriorsInQueue + numberOfWarriors + warriorsInPriorityQueue) {
+                if (!warriorsInPriorityQueue > 0) {
+                    queueToAddTo = 1;
+                }
                 creepToAddToQueue = 'warrior';
             }
             else if (minimumNumberOfEnergyThiefs > energyThiefsInQueue + numberOfEnergyThiefs) {
