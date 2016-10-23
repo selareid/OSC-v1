@@ -1,7 +1,5 @@
 require('global');
 
-const creepTalk = require('creepTalk');
-
 module.exports = function () {
     Creep.prototype.creepSpeech = function (room, doingWhat) {
 
