@@ -39,9 +39,11 @@ module.exports = {
         // add more cause this ain't all the roles ^
 
         //if no harvesters email me and spam console
-        if (numberOfHarvesters <= 0) {
-            Game.notify("No harvesters in room " + room);
-            console.log("No harvesters in room " + room);
+        if (Game.time % 200 == 0) {
+            if (numberOfHarvesters <= 0) {
+                Game.notify("No harvesters in room " + room);
+                console.log("No harvesters in room " + room);
+            }
         }
 
         if (numberOfHarvesters == 0 && (Memory.rooms[room].spawnQueue.priority[0] != 'harvester' || Memory.rooms[room].spawnQueue.normal[0] != 'harvester')) {
