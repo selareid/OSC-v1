@@ -37,7 +37,7 @@ creep.say('yeah');
 
         switch (creep.memory.role) {
             case 'remoteHarvester':
-                for (let flag in remoteCreepFlags) {
+                for (let flag of remoteCreepFlags) {
                     var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room = room && c.memory.role == 'remoteHarvester' && c.memory.flag && c.memory.flag == flag.id).length;
                     if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHarvesters) {
                         zeChosenFlag = flag;
@@ -46,7 +46,7 @@ creep.say('yeah');
                 }
                 break;
             case 'remoteHauler':
-                for (let flag in remoteCreepFlags) {
+                for (let flag of remoteCreepFlags) {
                     var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room = room && c.memory.role == 'remoteHarvester' && c.memory.flag && c.memory.flag == flag.id).length;
                     if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHaulers) {
                         zeChosenFlag = flag;
