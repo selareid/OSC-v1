@@ -12,9 +12,10 @@ const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
 const energyThief = require ('role.energyThief');
 const roleRemoteCreepHandler = require ('role.remoteCreepHandler');
+const roleEnergyHelper = require ('role.energyOtherRoomHelper');
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom) {
+    run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
 
         for (let name in Game.creeps) {
             let creep = Game.creeps[name];
@@ -72,6 +73,9 @@ module.exports = {
                             break;
                         case 'remoteHauler':
                             roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
+                            break;
+                        case 'energyHelper':
+                            roleEnergyHelper.run(room, creep, energyHelperFlag);
                             break;
                         case '':
                             creep.say('ERROR!!!', true);

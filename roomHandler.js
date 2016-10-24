@@ -96,6 +96,7 @@ module.exports = {
             armySize = flagToRallyAt.memory.armySize;
         }
 
+        var energyHelperFlag = room.getEnergyHelperFlags();
 
         if (Game.time % 3 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room);
@@ -135,7 +136,7 @@ module.exports = {
 
         var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
 
-        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos);
+        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
 
         var cpuUsedAfterCreepHandler = Game.cpu.getUsed();
         var cpuUsedByCreepHandler = cpuUsedAfterCreepHandler - cpuUsedBeforeCreepHandler;

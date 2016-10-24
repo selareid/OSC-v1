@@ -65,6 +65,18 @@ module.exports = function () {
                 }
             },
 
+        Room.prototype.getEnergyHelperFlags =
+            function () {
+                var Flags = _.filter(Game.flags, f => f.memory.type == 'energyHelperFlag' && f.memory.room == this.name && f.memory.numberOfCreeps != undefined);
+
+                if (Flags.length > 0) {
+                    return Flags[0];
+                }
+                else {
+                    return [];
+                }
+            },
+
         Room.prototype.updateConstructionTargets =
             function () {
 
