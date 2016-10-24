@@ -49,22 +49,24 @@ module.exports = {
                 creep.memory.source = this.findSource(room, creep, takenSources).id;
                 console.log('harvesters calculating source');
             }
-
-            var source = Game.getObjectById(creep.memory.source);
-
-            if (source) {
-                switch (creep.harvest(source)) {
-                    case ERR_NOT_IN_RANGE:
-                        creep.creepSpeech(room, 'movingToSource');
-                        creep.moveTo(source, {reusePath: 10});
-                        break;
-                    case OK:
-                        creep.creepSpeech(room, 'harvesting');
-                        break;
-                }
-            }
             else {
-                delete creep.memory.source;
+
+                var source = Game.getObjectById(creep.memory.source);
+
+                if (source) {
+                    switch (creep.harvest(source)) {
+                        case ERR_NOT_IN_RANGE:
+                            creep.creepSpeech(room, 'movingToSource');
+                            creep.moveTo(source, {reusePath: 10});
+                            break;
+                        case OK:
+                            creep.creepSpeech(room, 'harvesting');
+                            break;
+                    }
+                }
+                else {
+                    delete creep.memory.source;
+                }
             }
         }
     },
