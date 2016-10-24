@@ -4,6 +4,8 @@ require('prototype.creep');
 module.exports = {
     run: function (room, creep, remoteFlag) {
 
+        creep.say('hauler remote');
+
         if (creep.memory.goingHome === true && creep.carry.energy == 0) {
             creep.memory.goingHome = false;
         }
