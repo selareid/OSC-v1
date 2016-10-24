@@ -58,7 +58,7 @@ module.exports = {
                 creep.moveTo(remoteFlag.pos, {ignoreCreeps: true, reusePath: 20});
                 if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
                     creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-                }ss
+                }
             }
             else {
                 var container = creep.findContainer(room);
