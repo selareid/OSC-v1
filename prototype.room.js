@@ -80,7 +80,7 @@ module.exports = function () {
                  *		BROWN		tower
                  *		GREY		wall
                  *		WHITE		road
-                 *		GREY:
+                 *		GREY:       wall
                  *	    WHITE:      lab
                  *	    GREY:       terminal
                  */
