@@ -133,10 +133,16 @@ module.exports = {
             minimumNumberOfLandlords = numberOfClaimFlags + amountOfReservers;
 
             //set number of remote creeps
+            var tempRemoteHarvesters = 0;
+            var tempRemoteHaulers = 0
+
             for (let flag of remoteCreepFlags) {
-                minimumNumberOfRemoteHarvesters += flag.memory.numberOfRemoteHarvesters;
-                minimumNumberOfRemoteHaulers += flag.memory.numberOfRemoteHaulers;
+                tempRemoteHarvesters += flag.memory.numberOfRemoteHarvesters;
+                tempRemoteHaulers += flag.memory.numberOfRemoteHaulers;
             }
+
+            minimumNumberOfRemoteHarvesters = tempRemoteHarvesters;
+            minimumNumberOfRemoteHaulers = tempRemoteHaulers;
 
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
