@@ -6,7 +6,7 @@ module.exports = {
         creep.say('helper!!');
 
         var roomToGiveEnergyTo = roomFlagToGiveEnergyTo.room;
-        
+
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }

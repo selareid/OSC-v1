@@ -75,7 +75,12 @@ module.exports = {
                             roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
                             break;
                         case 'energyHelper':
-                            roleEnergyHelper.run(room, creep, energyHelperFlag);
+                            if (energyHelperFlag != undefined) {
+                                roleEnergyHelper.run(room, creep, energyHelperFlag);
+                            }
+                            else {
+                                creep.memory.role = 'carrier';
+                            }
                             break;
                         case '':
                             creep.say('ERROR!!!', true);
