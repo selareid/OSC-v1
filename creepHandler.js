@@ -58,8 +58,13 @@ module.exports = {
                             roleLandlord.run(room, creep);
                             break;
                         case 'otherRoomCreep':
+                            if (roomToGoTo) {
                             otherRoomCreep.run(room, creep, roomToGoTo);
-                            break;
+                            }
+                            else {
+                            creep.memory.role = 'upgrader';
+                            }
+                                break;
                         case 'energyThief':
                             if (roomToTakeFrom != undefined) {
                                 energyThief.run(room, creep, roomToTakeFrom);
