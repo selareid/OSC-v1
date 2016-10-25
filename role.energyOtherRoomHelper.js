@@ -6,7 +6,7 @@ module.exports = {
         creep.say('helper!!');
 
         var roomToGiveEnergyTo = roomFlagToGiveEnergyTo.room;
-
+        
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
@@ -21,8 +21,13 @@ module.exports = {
                 var storage = roomToGiveEnergyTo.storage;
 
                 if (storage) {
-                    if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(storage, {reusePath: 40, ignoreCreeps: true});
+                    if (storage.store[RESOURCE_ENERGY] <= 40000) {
+                        if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage, {reusePath: 40, ignoreCreeps: true});
+                        }
+                    }
+                    else {
+                        roomFlagToGiveEnergyTo.remove();
                     }
                 }
                 else {
