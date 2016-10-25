@@ -33,7 +33,7 @@ module.exports = function () {
                 break;
         }
 
-        if (partToSay != undefined) {
+        if (toSay != undefined) {
             partToSay = toSay[Game.time % toSay.length];
             this.say(partToSay, true);
         }
