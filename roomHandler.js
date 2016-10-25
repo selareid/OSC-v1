@@ -99,7 +99,7 @@ module.exports = {
             armySize = flagToRallyAt.memory.armySize;
         }
 
-        var energyHelperFlag;/* = room.getEnergyHelperFlags();*/
+        var energyHelperFlag = room.getEnergyHelperFlags();
 
         if (Game.time % 3 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room);
