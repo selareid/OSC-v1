@@ -100,13 +100,13 @@ module.exports = {
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
             //get flag for other room creep and if it exists set minimumNumberOfOtherRoomCreeps to the numberOfCreeps in flag memory, same for energy thief flag
-            if (otherRoomFlag) {
+            if (otherRoomFlag.memory != undefined) {
                 minimumNumberOfOtherRoomCreeps = otherRoomFlag.memory.numberOfCreeps;
             }
-            if (roomToStealFromFlag) {
+            if (roomToStealFromFlag.memory != undefined) {
                 minimumNumberOfEnergyThiefs = roomToStealFromFlag.memory.numberOfCreeps;
             }
-            if (energyHelperFlag) {
+            if (energyHelperFlag.memory != undefined) {
                 minimumNumberOfEnergyHelpers = energyHelperFlag.memory.numberOfCreeps;
             }
 
