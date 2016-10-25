@@ -53,6 +53,7 @@ module.exports = {
             Memory.rooms[room].spawnQueue.normal = [];
             Memory.rooms[room].spawnQueue.priority = [];
             Memory.rooms[room].spawnQueue.priority.push('harvester');
+            Memory.rooms[room].spawnQueue.normal.push('harvester');
         }
         else {
 
