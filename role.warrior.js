@@ -1,7 +1,10 @@
 require('global');
+require('prototype.creepSpeech');
 
 module.exports = {
     run: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt) {
+
+        creep.creepSpeech(room);
 
         var beforeRallyFlag = room.findBeforeRallyFlag(room);
         var shouldWeAttack = this.creepGoToRoomToAttack(room, creep, isUnderAttack, isAttacking, flagToRallyAt, beforeRallyFlag);
