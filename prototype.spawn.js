@@ -11,7 +11,7 @@ module.exports = function () {
                 case 'harvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
 
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         if (numberOfParts > 6) {
                             numberOfParts = 6;
                         }
@@ -24,7 +24,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'distributor':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(CARRY);
                             body.push(CARRY);
@@ -34,7 +34,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'carrier':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         if (numberOfParts > Memory.rooms[room].partsForCarrier) {
                             numberOfParts = Memory.rooms[room].partsForCarrier;
                         }
@@ -53,7 +53,7 @@ module.exports = function () {
 
                     if (numberOfRanged <= 3) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                        if (numberOfParts > 0) {
+                        if (!numberOfParts > 0) {
                             if (numberOfParts > 5) {
                                 numberOfParts = 5;
                             }
@@ -65,7 +65,7 @@ module.exports = function () {
                     }
                     else if (numberOfAttack < 10) {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 210);
-                        if (numberOfParts > 0) {
+                        if (!numberOfParts > 0) {
                             if (numberOfParts > 5) {
                                 numberOfParts = 5;
                             }
@@ -78,7 +78,7 @@ module.exports = function () {
                     }
                     else {
                         numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
-                        if (numberOfParts > 0) {
+                        if (!numberOfParts > 0) {
                             for (let i = 0; i < numberOfParts; i++) {
                                 body.push(MOVE);
                                 body.push(HEAL);
@@ -88,7 +88,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'upgrader':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         if (Memory.rooms[room].energyMode == 'saving' && numberOfParts > 7) {
                             numberOfParts = 7;
                         }
@@ -105,7 +105,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'builder':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(WORK);
                             body.push(CARRY);
@@ -115,7 +115,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'repairer':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(WORK);
                             body.push(CARRY);
@@ -125,7 +125,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'defenceManager':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(WORK);
                             body.push(CARRY);
@@ -135,7 +135,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'landlord':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 650);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         if (numberOfParts >= 1) {
                             body.push(CLAIM);
                             body.push(MOVE);
@@ -144,7 +144,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'remoteHarvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 150);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         if (numberOfParts > 7) {
                             numberOfParts = 7;
                         }
@@ -158,7 +158,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
                 case 'remoteHauler':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         body.push(WORK);
                         body.push(MOVE);
                         for (let i = 0; i < numberOfParts; i++) {
@@ -170,7 +170,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
                 case 'otherRoomCreep':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(WORK);
                             body.push(MOVE);
@@ -180,7 +180,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'energyThief':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(CARRY);
                             body.push(MOVE);
@@ -189,7 +189,7 @@ module.exports = function () {
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'energyHelper':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
-                    if (numberOfParts > 0) {
+                    if (!numberOfParts > 0) {
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(CARRY);
                             body.push(MOVE);
