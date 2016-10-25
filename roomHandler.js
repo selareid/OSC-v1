@@ -80,6 +80,9 @@ module.exports = {
         var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
         var otherRoomCreepsRoomToGoToPos;
         if (otherRoomCreepsRoomToGoTo) {
+            if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) {
+            otherRoomCreepsRoomToGoTo.remove();
+            }
             otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
 
