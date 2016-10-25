@@ -8,11 +8,9 @@ module.exports = {
 
         if (Game.time % 20 == 0) {
             console.log('Enemy creeps spotted in room ' + room);
-            console.log('The creeps are' + hostileCreepsInRoom);
-            console.log('Prepare to die future self');
+            console.log("<h1 style=\"color: #ff2f3c\"><strong><i>EMERGENCY MODE </i></strong></h1>\nEstimated time of death: " + hostileCreepsInRoom.length * 100 + "ticks" + "\nCreeps remaining: " + _.sum(Game.creeps, (s) => s.room.name === room.name));
 
             Game.notify('Enemy creeps spotted in room ' + room);
-            Game.notify('The creeps are' + hostileCreepsInRoom);
             Game.notify('Prepare to die future self');
         }
 
@@ -25,7 +23,7 @@ module.exports = {
     },
 
     getHostileCreeps: function (room) {
-        var hostileCreepsInRoom = []
+        var hostileCreepsInRoom = [];
         hostileCreepsInRoom = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username) == false});
         return hostileCreepsInRoom;
     },
