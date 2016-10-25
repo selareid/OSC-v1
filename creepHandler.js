@@ -32,7 +32,7 @@ module.exports = {
                                 roleCarrier.run(room, creep);
                             }
                             else {
-                                    creep.memory.role = 'distributor';
+                                creep.memory.role = 'distributor';
                             }
                             break;
                         case 'distributor':
