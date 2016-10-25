@@ -24,6 +24,9 @@ if (flag.room && flag.room.controller && flag.room.controller.my === true) {
                             break;
                     }
 }
+                    else {
+                    flag.remove();
+                    }
 
                 }
                 else if (flag.memory.type == 'reserveFlag') {
