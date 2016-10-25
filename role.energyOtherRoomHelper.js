@@ -48,7 +48,7 @@ module.exports = {
         }
         else {
 
-            if (creep.room.name === room) {
+            if (creep.room.name === room.name) {
                 var storage = room.storage;
 
                 if (storage.store[RESOURCE_ENERGY] >= 40000) {
