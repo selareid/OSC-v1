@@ -32,7 +32,7 @@ module.exports = {
 
         var hostileCreepsInRoom = this.getHostileCreeps(room)[0];
 
-        if (hostileCreepsInRoom && hostileCreepsInRoom.length > 0) {
+        if (hostileCreepsInRoom) {
             return true;
         }
         else {
