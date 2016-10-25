@@ -3,9 +3,10 @@ require('global');
 module.exports = {
     run: function (room, creep, roomFlagToGiveEnergyTo) {
 
+        creep.say('helper!!');
+
         var roomToGiveEnergyTo = roomFlagToGiveEnergyTo.room;
 
-        creep.say('carry');
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
