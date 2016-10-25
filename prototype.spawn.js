@@ -165,6 +165,14 @@ module.exports = function () {
                         body.push(MOVE);
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                case 'energyHelper':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
+
+                    for (let i = 0; i < numberOfParts; i++) {
+                        body.push(CARRY);
+                        body.push(MOVE);
+                    }
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }
