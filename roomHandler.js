@@ -125,7 +125,7 @@ module.exports = {
         linkHandler.run(room);
 
         try {
-            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom);
+            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
         }
         catch (err) {
             if (err !== null && err !== undefined) {

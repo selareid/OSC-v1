@@ -3,7 +3,7 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag) {
+    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag, energyHelperFlag) {
 
         //make sure memory is set
         if (!Memory.rooms[room].spawnQueue || Game.time % 50 == 0) {
@@ -24,6 +24,7 @@ module.exports = {
         var numberOfRemoteHaulers = _.sum(Game.creeps, (c) => c.memory.role == 'remoteHauler' && c.memory.room == room.name);
         var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
         var numberOfEnergyThiefs = _.sum(Game.creeps, (c) => c.memory.role == 'energyThief' && c.memory.room == room.name);
+        var numberOfEnergyHelpers = _.sum(Game.creeps, (c) => c.memory.role == 'energyHelper' && c.memory.room == room.name);
 
         // debugging
         // console.log('Harvesters ' + numberOfHarvesters);
@@ -69,6 +70,7 @@ module.exports = {
             var remoteHaulersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'remoteHauler');
             var otherRoomCreepsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'otherRoomCreep');
             var energyThiefsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyThief');
+            var energyHelpersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyHelper');
 
             //get number of each role in priority queue
             var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
@@ -93,6 +95,7 @@ module.exports = {
             var minimumNumberOfRemoteHaulers = Memory.rooms[room].populationGoal.remoteHaulers;
             var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
             var minimumNumberOfEnergyThiefs = Memory.rooms[room].populationGoal.energyThiefs;
+            var minimumNumberOfEnergyHelpers = Memory.rooms[room].populationGoal.energyHelpers;
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
@@ -102,6 +105,9 @@ module.exports = {
             }
             if (roomToStealFromFlag) {
                 minimumNumberOfEnergyThiefs = roomToStealFromFlag.memory.numberOfCreeps;
+            }
+            if (energyHelperFlag) {
+                minimumNumberOfEnergyHelpers = energyHelperFlag.memory.numberOfCreeps;
             }
 
             //if there's no storage you don't need carriers
@@ -204,6 +210,7 @@ module.exports = {
                 minimumNumberOfRemoteHarvesters = 0;
                 minimumNumberOfRemoteHaulers = 0;
                 minimumNumberOfOtherRoomCreeps = 0;
+                minimumNumberOfEnergyHelpers = 0;
             }
             else if (isAttacking === true) {
                 minimumNumberOfWarriors = armySize;
@@ -312,6 +319,9 @@ module.exports = {
             else if (minimumNumberOfOtherRoomCreeps > otherRoomCreepsInQueue + numberOfOtherRoomCreeps) {
                 creepToAddToQueue = 'otherRoomCreep';
             }
+            else if (minimumNumberOfEnergyHelpers > energyHelpersInQueue + numberOfEnergyHelpers) {
+                creepToAddToQueue = 'energyHelper';
+            }
 
             if (creepToAddToQueue) {
                 switch (queueToAddTo) {
@@ -402,6 +412,7 @@ module.exports = {
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHaulers'] = numberOfRemoteHaulers;
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfOtherRoomCreeps'] = numberOfOtherRoomCreeps;
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyThiefs'] = numberOfEnergyThiefs;
+        Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyHelpers'] = numberOfEnergyHelpers;
 
         var normalSpawnQueue = Memory.rooms[room].spawnQueue.normal;
         Memory.stats['room.' + room.name + '.spawnQueues' + '.normal'] = normalSpawnQueue.length;
@@ -424,6 +435,7 @@ module.exports = {
         Memory.rooms[room].populationGoal.remoteHaulers = minimumNumberOfRemoteHaulers;
         Memory.rooms[room].populationGoal.otherRoomCreeps = minimumNumberOfOtherRoomCreeps;
         Memory.rooms[room].populationGoal.energyThiefs = minimumNumberOfEnergyThiefs;
+        Memory.rooms[room].populationGoal.energyHelpers = minimumNumberOfEnergyHelpers;
 
         Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
     },
@@ -485,6 +497,9 @@ module.exports = {
         }
         if (Memory.rooms[room].populationGoal.energyThiefs == undefined) {
             Memory.rooms[room].populationGoal.energyThiefs = 0;
+        }
+        if (Memory.rooms[room].populationGoal.energyHelper == undefined) {
+            Memory.rooms[room].populationGoal.energyHelper = 0;
         }
         if (Memory.rooms[room].populationGoal.maxWarriors == undefined) {
             Memory.rooms[room].populationGoal.maxWarriors = 7;
