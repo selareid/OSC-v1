@@ -104,18 +104,18 @@ module.exports = {
                     if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(storage);
                     }
-                    else {
-                        container = creep.findContainer(room);
-                        if (container) {
-                            if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(container, {ignoreCreeps: true});
-                            }
+                }
+                else {
+                    container = creep.findContainer(room);
+                    if (container) {
+                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(container, {ignoreCreeps: true});
                         }
-                        else {
-                            if (droppedEnergy) {
-                                if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                    creep.moveTo(droppedEnergy, {ignoreCreeps: true});
-                                }
+                    }
+                    else {
+                        if (droppedEnergy) {
+                            if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(droppedEnergy, {ignoreCreeps: true});
                             }
                         }
                     }
