@@ -40,12 +40,12 @@ module.exports = {
         // add more cause this ain't all the roles ^
 
         //if no harvesters email me and spam console
-            if (numberOfHarvesters <= 0) {
-                if (Game.time % 200 == 0) {
-                    Game.notify("No harvesters in room " + room);
-                }
-                console.log("No harvesters in room " + room);
+        if (numberOfHarvesters <= 0) {
+            if (Game.time % 200 == 0) {
+                Game.notify("No harvesters in room " + room);
             }
+            console.log("No harvesters in room " + room);
+        }
 
 
         if (numberOfHarvesters == 0 && (Memory.rooms[room].spawnQueue.priority[0] != 'harvester' || Memory.rooms[room].spawnQueue.normal[0] != 'harvester')) {
@@ -375,23 +375,41 @@ module.exports = {
                     name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.war[0], amountToSave);
                 }
 
-            if (Game.creeps[name]) {
+                if (Game.creeps[name]) {
 
-                switch (queueUsed) {
-                    case 0:
-                        Memory.rooms[room].spawnQueue.normal.splice(0, 1);
-                        break;
-                    case 1:
-                        Memory.rooms[room].spawnQueue.priority.splice(0, 1);
-                        break;
-                    case 2:
-                        Memory.rooms[room].spawnQueue.war.splice(0, 1);
-                        break;
+                    switch (queueUsed) {
+                        case 0:
+                            Memory.rooms[room].spawnQueue.normal.splice(0, 1);
+                            break;
+                        case 1:
+                            Memory.rooms[room].spawnQueue.priority.splice(0, 1);
+                            break;
+                        case 2:
+                            Memory.rooms[room].spawnQueue.war.splice(0, 1);
+                            break;
+                    }
+                    console.log("Creating Creep " + name);
                 }
-                console.log("Creating Creep " + name);
             }
         }
-    }
+
+        //memory "cleanup"
+        Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
+        Memory.rooms[room].populationGoal.carriers = minimumNumberOfCarriers;
+        Memory.rooms[room].populationGoal.distributors = minimumNumberOfDistributors;
+        Memory.rooms[room].populationGoal.upgraders = minimumNumberOfUpgraders;
+        Memory.rooms[room].populationGoal.builders = minimumNumberOfBuilders;
+        Memory.rooms[room].populationGoal.repairers = minimumNumberOfRepairers;
+        Memory.rooms[room].populationGoal.defenceManagers = minimumNumberOfDefenceManagers;
+        Memory.rooms[room].populationGoal.warriors = minimumNumberOfWarriors;
+        Memory.rooms[room].populationGoal.landlords = minimumNumberOfLandlords;
+        Memory.rooms[room].populationGoal.remoteHarvesters = minimumNumberOfRemoteHarvesters;
+        Memory.rooms[room].populationGoal.remoteHaulers = minimumNumberOfRemoteHaulers;
+        Memory.rooms[room].populationGoal.otherRoomCreeps = minimumNumberOfOtherRoomCreeps;
+        Memory.rooms[room].populationGoal.energyThiefs = minimumNumberOfEnergyThiefs;
+        Memory.rooms[room].populationGoal.energyHelpers = minimumNumberOfEnergyHelpers;
+
+        Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
 
         //grafana stats stuff
         Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
@@ -416,23 +434,6 @@ module.exports = {
         var warSpawnQueue = Memory.rooms[room].spawnQueue.war;
         Memory.stats['room.' + room.name + '.spawnQueues' + '.war'] = warSpawnQueue.length;
 
-        //memory "cleanup"
-        Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
-        Memory.rooms[room].populationGoal.carriers = minimumNumberOfCarriers;
-        Memory.rooms[room].populationGoal.distributors = minimumNumberOfDistributors;
-        Memory.rooms[room].populationGoal.upgraders = minimumNumberOfUpgraders;
-        Memory.rooms[room].populationGoal.builders = minimumNumberOfBuilders;
-        Memory.rooms[room].populationGoal.repairers = minimumNumberOfRepairers;
-        Memory.rooms[room].populationGoal.defenceManagers = minimumNumberOfDefenceManagers;
-        Memory.rooms[room].populationGoal.warriors = minimumNumberOfWarriors;
-        Memory.rooms[room].populationGoal.landlords = minimumNumberOfLandlords;
-        Memory.rooms[room].populationGoal.remoteHarvesters = minimumNumberOfRemoteHarvesters;
-        Memory.rooms[room].populationGoal.remoteHaulers = minimumNumberOfRemoteHaulers;
-        Memory.rooms[room].populationGoal.otherRoomCreeps = minimumNumberOfOtherRoomCreeps;
-        Memory.rooms[room].populationGoal.energyThiefs = minimumNumberOfEnergyThiefs;
-        Memory.rooms[room].populationGoal.energyHelpers = minimumNumberOfEnergyHelpers;
-
-        Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
     },
 
     checkMemory: function (room) {
