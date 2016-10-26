@@ -123,7 +123,7 @@ module.exports = {
             }
             else {
                 let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
-                    'store.energy').store.energy;
+                    'store.energy');
                 let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 200}), '.amount').amount;
 
                 if (maxDropEn) {
@@ -137,10 +137,10 @@ module.exports = {
                     }
                 }
                 else if (minContEn) {
-                    if (minContEn >= 1900) {
+                    if (minContEn.store.energy >= 1900) {
                         minimumNumberOfCarriers = 4;
                     }
-                    else if (minContEn >= 500) {
+                    else if (minContEn.store.energy >= 500) {
                         minimumNumberOfCarriers = 3;
                     }
                     else {

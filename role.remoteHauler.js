@@ -67,7 +67,7 @@ module.exports = {
                 if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
                     creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
                 }
-                
+
                 var droppedEnergy = creep.findDroppedEnergy(remoteFlag.room);
 
                 if (droppedEnergy) {
