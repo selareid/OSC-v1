@@ -155,7 +155,7 @@ module.exports = function () {
                             body.push(WORK);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'remoteHauler':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
                     if (numberOfParts > 0) {
