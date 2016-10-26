@@ -114,12 +114,29 @@ module.exports = {
             //if there's no storage you don't need carriers
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
+
+                let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 200}), '.amount').amount;
+
+                if (maxDropEn) {
+                        minimumNumberOfUpgraders = 2;
+                }
             }
             else {
                 let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
-                    'store.energy');
+                    'store.energy').store.energy;
+                let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 200}), '.amount').amount;
 
-                if (minContEn) {
+                if (maxDropEn) {
+                    if (maxDropEn > 600) {
+                        minimumNumberOfCarriers = 6;
+                        minimumNumberOfUpgraders = 3;
+                    }
+                    else {
+                        minimumNumberOfCarriers = 5;
+                        minimumNumberOfUpgraders = 2;
+                    }
+                }
+                else if (minContEn) {
                     if (minContEn >= 1900) {
                         minimumNumberOfCarriers = 4;
                     }
