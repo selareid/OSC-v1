@@ -115,6 +115,22 @@ module.exports = {
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
             }
+            else {
+                let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
+                    'store.energy');
+
+                if (minContEn) {
+                    if (minContEn >= 1900) {
+                        minimumNumberOfCarriers = 4;
+                    }
+                    else if (minContEn >= 500) {
+                        minimumNumberOfCarriers = 3;
+                    }
+                    else {
+                        minimumNumberOfCarriers = 2;
+                    }
+                }
+            }
 
             //set number of harvesters
             var numberOfSources = room.find(FIND_SOURCES).length;
