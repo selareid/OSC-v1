@@ -346,16 +346,17 @@ module.exports = {
             var queueUsed = 0; // 0 is normal and 1 is priority 2 is war
 
             if (room.energyAvailable >= 400) {
-                if ((numberOfHarvesters >= minimumNumberOfHarvesters)
-                    && (numberOfDistributors >= minimumNumberOfDistributors)
-                    && (numberOfCarriers >= 2)) {
-                    amountToSave = 0.15;
-                }
-                else if (Memory.rooms[room].energyMode == 'saving') {
+                
+                if (Memory.rooms[room].energyMode == 'saving') {
                     amountToSave = 0.35;
                 }
                 else if (Memory.rooms[room].energyMode == 'ok') {
                     amountToSave = 0.25;
+                }
+else if ((numberOfHarvesters >= minimumNumberOfHarvesters)
+                    && (numberOfDistributors >= minimumNumberOfDistributors)
+                    && (numberOfCarriers >= 2)) {
+                    amountToSave = 0.15;
                 }
             }
 
