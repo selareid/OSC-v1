@@ -46,25 +46,32 @@ module.exports.loop = function () {
         for (let room_it in Game.rooms) {
             var room = Game.rooms[room_it];
             var controller = room.controller;
-             if (controller && controller.my === true) {
+            if (controller) {
+                if (controller.my === true) {
 
-                try {
-                    if (Memory.rooms) {
-                        if (!Memory.rooms[room]) {
-                            Memory.rooms[room] = {};
+                    try {
+                        if (Memory.rooms) {
+                            if (!Memory.rooms[room]) {
+                                Memory.rooms[room] = {};
+                            }
+                        }
+                        else {
+                            Memory.rooms = {};
                         }
                     }
-                    else {
-                        Memory.rooms = {};
+                    catch (err) {
+                        if (err !== null && err !== undefined) {
+                            Game.notify("Error in Memory.room logic: \n" + err + "\n " + err.stack);
+                            console.log("Error in Memory.room logic: \n" + err + "\n" + err.stack);
+                        }
+                    }
+                    roomHandler.run(room);
+                }
+                else if (controller.reservation && controller.reservation.username == 'starwar15432') {
+                    if (Game.time % 25 == 0) {
+                        room.updateConstructionTargets();
                     }
                 }
-                catch (err) {
-                    if (err !== null && err !== undefined) {
-                        Game.notify("Error in Memory.room logic: \n" + err + "\n " + err.stack);
-                        console.log("Error in Memory.room logic: \n" + err + "\n" + err.stack);
-                    }
-                }
-                roomHandler.run(room);
             }
         }
 
