@@ -31,13 +31,8 @@ module.exports = function () {
                 });
 
                 if (allContainersInRoom.length > 0) {
-                    var maxEnergyContainers = [];
 
-                    for (let container of allContainersInRoom) {
-                        maxEnergyContainers.push(container.store[RESOURCE_ENERGY]);
-                    }
-
-                    var containerEnergy = _.max(maxEnergyContainers) - 400;
+                    var containerEnergy = _.max(allContainersInRoom, '.store.energy').store.energy - 400;
 
 
                     var container = this.pos.findClosestByRange(FIND_STRUCTURES, {
