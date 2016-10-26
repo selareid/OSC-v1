@@ -109,13 +109,13 @@ module.exports = {
                     container = creep.findContainer(room);
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container, {ignoreCreeps: true});
+                            creep.moveTo(container);
                         }
                     }
                     else {
                         if (droppedEnergy) {
                             if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(droppedEnergy, {ignoreCreeps: true});
+                                creep.moveTo(droppedEnergy);
                             }
                         }
                     }
