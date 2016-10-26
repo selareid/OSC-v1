@@ -63,13 +63,24 @@ module.exports = {
                 }
             }
             else {
-                var container = creep.findContainer(room);
 
-                if (container) {
-                    if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(container, {ignoreCreeps: true, reusePath: 10});
-                        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-                            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
+                    creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                }
+                
+                var droppedEnergy = creep.findDroppedEnergy(remoteFlag.room);
+
+                if (droppedEnergy) {
+                    if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(droppedEnergy, {ignoreCreeps: true, reusePath: 10});
+                    }
+                }
+                else {
+                    var container = creep.findContainer(remoteFlag.room);
+
+                    if (container) {
+                        if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(container, {ignoreCreeps: true, reusePath: 10});
                         }
                     }
                 }
