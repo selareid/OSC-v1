@@ -345,7 +345,7 @@ module.exports = {
             var name = undefined;
             var queueUsed = 0; // 0 is normal and 1 is priority 2 is war
 
-            if (room.energyCapacityAvailable >= 400) {
+            if (room.energyAvailable >= 400) {
                 if ((numberOfHarvesters >= minimumNumberOfHarvesters)
                     && (numberOfDistributors >= minimumNumberOfDistributors)
                     && (numberOfCarriers >= 2)) {
