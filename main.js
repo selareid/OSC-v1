@@ -11,14 +11,6 @@ module.exports.loop = function () {
 
     try {
         //memory stuff
-        for (let name in Memory.creeps) {
-            if (!Game.creeps[name]) {
-                delete Memory.creeps[name];
-            }
-            else if (!Memory.creeps[name].room) {
-                Memory.creeps[name].room = '' + Game.creeps[name].room.name;
-            }
-        }
         for (let spawn in Memory.spawns) {
             if (!Game.spawns[spawn]) {
                 delete Memory.spawns[spawn];
