@@ -220,6 +220,8 @@ module.exports = {
                 case 'building':
                     minimumNumberOfBuilders = 3;
                     break;
+                default:
+                    break;
             }
 
             //if under attack over ride everything
