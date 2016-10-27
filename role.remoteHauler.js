@@ -57,7 +57,7 @@ module.exports = {
         }
         else {
             if (creep.pos.roomName != remoteFlag.pos.roomName) {
-                creep.moveTo(remoteFlag.pos, {ignoreCreeps: true, reusePath: 20});
+                creep.moveTo(remoteFlag.pos, {reusePath: 20});
                 if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
                     creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
                 }
@@ -82,6 +82,9 @@ module.exports = {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(container, {reusePath: 10});
                         }
+                    }
+                    else {
+                        creep.moveTo(remoteFlag.pos, {reusePath: 20});
                     }
                 }
             }
