@@ -18,6 +18,9 @@ module.exports = {
     run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
 
         try {
+            for (let name in Game.creeps) {
+ -                let creep = Game.creeps[name];
+                
             if (creep.memory.room == room.name && creep.spawning === false) {
 
                 switch (creep.memory.role) {
