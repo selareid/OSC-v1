@@ -40,10 +40,10 @@ module.exports = {
 
             if (minContEn) {
                 if (minContEn >= 1000) {
-                    Memory.rooms[room].maxPartsForCarrier = 20;
+                    Memory.rooms[room].maxPartsForCarrier = 25;
                 }
                 else if (minContEn < 500) {
-                    Memory.rooms[room].maxPartsForCarrier = 10;
+                    Memory.rooms[room].maxPartsForCarrier = 15;
                 }
                 else {
                     Memory.rooms[room].maxPartsForCarrier = 15;
