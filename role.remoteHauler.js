@@ -72,7 +72,7 @@ module.exports = {
 
                 if (droppedEnergy) {
                     if (creep.pickup(droppedEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(droppedEnergy, {ignoreCreeps: true, reusePath: 10});
+                        creep.moveTo(droppedEnergy, {reusePath: 10});
                     }
                 }
                 else {
@@ -80,7 +80,7 @@ module.exports = {
 
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(container, {ignoreCreeps: true, reusePath: 10});
+                            creep.moveTo(container, {reusePath: 10});
                         }
                     }
                 }
