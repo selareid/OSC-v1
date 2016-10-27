@@ -136,7 +136,7 @@ module.exports = {
                         minimumNumberOfUpgraders = 2;
                     }
                 }
-                else if (minContEn) {
+                else if (minContEn && minContEn.store) {
                     if (minContEn.store.energy >= 1900) {
                         minimumNumberOfCarriers = 4;
                     }
