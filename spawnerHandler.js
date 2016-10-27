@@ -171,7 +171,7 @@ module.exports = {
 
             //set number of remote creeps
             var tempRemoteHarvesters = 0;
-            var tempRemoteHaulers = 0
+            var tempRemoteHaulers = 0;
 
             for (let flag of remoteCreepFlags) {
                 tempRemoteHarvesters += flag.memory.numberOfRemoteHarvesters;
