@@ -20,6 +20,7 @@ module.exports = {
         try {
             for (let name in Game.creeps) {
  -                let creep = Game.creeps[name];
+            
                 
             if (creep.memory.room == room.name && creep.spawning === false) {
 
@@ -98,6 +99,7 @@ module.exports = {
                 }
 
             }
+        }
         }
         catch (err) {
             if (err !== null && err !== undefined) {
