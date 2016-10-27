@@ -17,22 +17,6 @@ const roleEnergyHelper = require ('role.energyOtherRoomHelper');
 module.exports = {
     run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
 
-        try {
-            for (let name in Game.creeps) {
-                let creep = Game.creeps[name];
-
-                if (!Game.creeps[name]) {
-                    delete Memory.creeps[name];
-                }
-            }
-        }
-        catch (err) {
-                if (err !== null && err !== undefined) {
-                    Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
-                    console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
-                }
-            }
-
             try {
                 if (creep.memory.room == room.name && creep.spawning === false) {
 
