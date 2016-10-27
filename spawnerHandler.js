@@ -159,8 +159,20 @@ module.exports = {
 
             //set minimumNumberOfDefenceManagers
             var lowestDefenceHits = _.min(_.filter(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL})), 'hits').hits;
-            if (lowestDefenceHits < 60000) {
+            if (lowestDefenceHits > 80000 && lowestDefenceHits < 100000) {
                 minimumNumberOfDefenceManagers = 2;
+            }
+            else if (lowestDefenceHits > 50000) {
+                      minimumNumberOfDefenceManagers = 3;
+            }
+            else if (lowestDefenceHits > 30000) {
+                      minimumNumberOfDefenceManagers = 4;
+            }
+            else if (lowestDefenceHits > 10000) {
+                      minimumNumberOfDefenceManagers = 5;
+            }
+            else {
+                      minimumNumberOfDefenceManagers = 6;
             }
 
             //set number of landlords
