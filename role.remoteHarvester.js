@@ -3,9 +3,6 @@ require('global');
 module.exports = {
     run: function (room, creep) {
 creep.say('harvester remote');
-        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-        }
 
         //changes state
         if (creep.memory.working == true && creep.carry.energy == 0) {
