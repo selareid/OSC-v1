@@ -53,7 +53,10 @@ module.exports = {
 
             if (room.storage) {
                 var energyInStore = room.storage.store[RESOURCE_ENERGY];
-                if (energyInStore >= 100000) {
+                if (energyInStore >= 250000) {
+                    Memory.rooms[room].energyMode = 'spendy';
+                }
+                else if (energyInStore >= 100000) {
                     Memory.rooms[room].energyMode = 'normal';
                 }
                 else if (energyInStore >= 40000) {
