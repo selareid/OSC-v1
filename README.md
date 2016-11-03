@@ -4,6 +4,9 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
+* Code terminals
+* Make energy thiefs work with storage
+* Make energy wasting mode
 * Add energy defense mode and creep mode etc.
 * Add nuke defensive mode to wallRepairers and as an energy mode
 * Have scouts that go out into the world and save data into memory and use that data to decide on rooms to remoteMine etc.
