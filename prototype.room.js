@@ -92,9 +92,9 @@ module.exports = function () {
                  *		BROWN		tower
                  *		GREY		wall
                  *		WHITE		road
-                 *		GREY:       wall
-                 *	    WHITE:      lab
-                 *	    GREY:       terminal
+                 *		GREY:
+                 *	    WHITE      lab
+                 *	    GREY       terminal
                  */
 
                 if (global.rooms == undefined || global.rooms[this.name] == undefined) {
