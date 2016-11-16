@@ -51,5 +51,29 @@ module.exports = function () {
                 else {
                     return undefined;
                 }
+            },
+
+        Creep.prototype.runInSquares = function () {
+            switch (creep.memory.lastMove) {
+                case TOP:
+                    creep.memory.lastMove = LEFT;
+                    creep.move(LEFT);
+                    break;
+                case LEFT:
+                    creep.memory.lastMove = BOTTOM;
+                    creep.move(BOTTOM);
+                    break;
+                case BOTTOM:
+                    creep.memory.lastMove = RIGHT;
+                    creep.move(RIGHT);
+                    break;
+                case RIGHT:
+                    creep.memory.lastMove = TOP;
+                    creep.move(TOP);
+                    break;
+                default:
+                    creep.memory.lastMove = TOP;
+                    creep.move(TOP);
             }
+        }
 };

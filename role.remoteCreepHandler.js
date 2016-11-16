@@ -1,4 +1,5 @@
 require('global');
+require('prototype.creep');
 const roleRemoteHarvester = require('role.remoteHarvester');
 const roleRemoteHauler = require('role.remoteHauler');
 
@@ -7,11 +8,14 @@ module.exports = {
 creep.say('yeah');
         if (remoteCreepFlags.length > 0) {
 
-            if (!creep.memory.remoteFlag) {
+            var creepRemoteFlag = creep.memory.remoteFlag;
+
+            if (!creepRemoteFlag) {
                 creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep, remoteCreepFlags);
+                creepRemoteFlag = creep.memory.remoteFlag;
             }
 
-            var remoteFlag = Game.flags[creep.memory.remoteFlag];
+            var remoteFlag = Game.flags[creepRemoteFlag];
 
             if (remoteFlag) {
                 if (creep.memory.role == 'remoteHarvester') {
@@ -22,12 +26,12 @@ creep.say('yeah');
                 }
             }
             else {
-                creep.move(BOTTOM);
+                creep.runInSquares();
             }
 
         }
         else {
-            creep.move(BOTTOM);
+            creep.runInSquares();
         }
     },
 

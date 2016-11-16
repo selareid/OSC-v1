@@ -16,44 +16,21 @@ module.exports = {
         if (creep.memory.goingHome === true) {
             if (creep.pos.roomName != creep.memory.room) {
 
-                let underMe = creep.pos.findInRange(FIND_STRUCTURES, 1);
-                underMe = underMe.filter(function (obj) {
-                    return obj.hits < obj.hitsMax
-                });
-                if (underMe.length > 0) {
-                    let res = creep.repair(underMe[0]);
-                    if (res === OK) {
-                        creep.say('REPAIR!!!', true);
-                    }
-                    else {
-                        creep.say('REPAIR ERR', true);
-                    }
 
+                var constructionSitesInRange = creep.pos.findInRange(FIND_MY_CONSTRUCTION_SITES, 3);
+                if (constructionSitesInRange.length > 0) {
+                    creep.build(constructionSitesInRange[0]);
                 }
                 else {
-                    var constructionSitesInRange = creep.pos.findInRange(FIND_MY_CONSTRUCTION_SITES, 3);
-                    if (constructionSitesInRange.length > 0) {
-                        var buildTarget = creep.pos.findClosestByRange(constructionSitesInRange);
-                        creep.build(buildTarget);
-                    }
-                    else {
-                        creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
-                        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-                            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-                        }
-                    }
+                    creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
                 }
-            }
-            else {
+
                 if (room.storage) {
                     if (_.sum(room.storage.store) >= room.storage.store) {
                         creep.drop(RESOURCE_ENERGY);
                     }
                     else if (creep.transfer(room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(room.storage);
-                        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-                            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-                        }
                     }
                 }
             }
