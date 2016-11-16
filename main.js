@@ -11,28 +11,29 @@ module.exports.loop = function () {
 
     try {
         //memory stuff
-        for (let name in Game.creeps) {
+        if (Game.time % 13 == 0) {
+            for (let name in Game.creeps) {
                 let creep = Game.creeps[name];
 
                 if (!Game.creeps[name]) {
                     delete Memory.creeps[name];
                 }
             }
-        for (let spawn in Memory.spawns) {
-            if (!Game.spawns[spawn]) {
-                delete Memory.spawns[spawn];
+            for (let spawn in Memory.spawns) {
+                if (!Game.spawns[spawn]) {
+                    delete Memory.spawns[spawn];
+                }
+                else if (!Memory.spawns[spawn].room) {
+                    Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
+                }
             }
-            else if (!Memory.spawns[spawn].room) {
-                Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
+            for (let flag in Memory.flags) {
+                if (!Game.flags[flag]) {
+                    delete Memory.spawns[flag];
+                }
+
             }
         }
-        for (let flag in Memory.flags) {
-            if (!Game.flags[flag]) {
-                delete Memory.spawns[flag];
-            }
-
-        }
-
     }
     catch (err) {
         if (err !== null && err !== undefined) {
@@ -92,8 +93,6 @@ module.exports.loop = function () {
         Memory.stats['cpu.bucket'] = Game.cpu.bucket;
         Memory.stats['cpu.limit'] = Game.cpu.limit;
         Memory.stats['cpu.getUsed'] = Game.cpu.getUsed();
-
-        Memory.stats['cpu.' + 'creepHandler'] = CPUUsedByCreepHandler;
 
     }
     catch (err) {

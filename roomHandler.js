@@ -140,12 +140,7 @@ module.exports = {
             }
         }
 
-        var cpuUsedBeforeCreepHandler = Game.cpu.getUsed();
-
         creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
-
-        var cpuUsedAfterCreepHandler = Game.cpu.getUsed();
-        var cpuUsedByCreepHandler = cpuUsedAfterCreepHandler - cpuUsedBeforeCreepHandler;
 
         //grafana room stuff
         Memory.stats['room.' + room.name + '.myRoom'] = 1;
@@ -188,7 +183,5 @@ module.exports = {
 
         Memory.stats['room.' + room.name + '.storedEnergy'] = stored;
         Memory.stats['room.' + room.name + '.energyMode'] = energyMode;
-
-        CPUUsedByCreepHandler += cpuUsedByCreepHandler;
     }
 };
