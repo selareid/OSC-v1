@@ -4,6 +4,7 @@ const roleEmergencyHarvester = require ('role.emergencyHarvester');
 
 module.exports = {
     run: function (room, creep) {
+        creep.say('miner;');
         var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
         if (numberOfDistributors <= 0) {
             roleEmergencyHarvester.run(room, creep);
