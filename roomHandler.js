@@ -32,8 +32,15 @@ module.exports = {
         }*/
         
         if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier) {
-            room.updateConstructionTargets();
 
+            if (Game.cpu.bucket < 2000) {
+                if (Game.time % 100 == 0) {
+                    room.updateConstructionTargets();
+                }
+            }
+            else {
+                room.updateConstructionTargets();
+            }
 
             let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
                 'store.energy');
