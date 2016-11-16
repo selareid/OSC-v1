@@ -4,7 +4,7 @@ const roomHandler = require ('roomHandler');
 const profiler = require('screeps-profiler');
 
 profiler.enable();
-if(Game.cpu.bucket < 300) return module.exports.loop = function () {
+if (Game.cpu.bucket > 300) return module.exports.loop = function () {
     //screeps profiler wrapper
     profiler.wrap(function() {
 
