@@ -1,6 +1,8 @@
 require('global');
 require('prototype.creep')();
 
+var roleDistributor = require('role.distributor')();
+
 module.exports = {
     run: function (room, creep) {
 
@@ -27,7 +29,16 @@ module.exports = {
 
             if (storage) {
                 if (_.sum(room.storage.store) >= room.storage.store) {
-                    creep.drop(RESOURCE_ENERGY);
+                    var energyOfTowers = function (room) {
+                        var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+                        var allEnergy = [];
+
+                        for (let tower of towers) {
+                            allEnergy.push(tower.energy);
+                        }
+                        return _.min(allEnergy) + 1;
+                    };
+                    roleDistributor.run(room, creep, energyOfTowers);
                 }
                 else if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(storage, {reusePath: 40});
