@@ -1,48 +1,52 @@
 require('global');
 
 const roomHandler = require ('roomHandler');
+const profiler = require('screeps-profiler');
 
+profiler.enable();
 module.exports.loop = function () {
+    //screeps profiler wrapper
+    profiler.wrap(function() {
 
-    //quick grafana check
-    if (Memory.stats == undefined) {
-        Memory.stats = {}
-    }
+        //quick grafana check
+        if (Memory.stats == undefined) {
+            Memory.stats = {}
+        }
 
-    try {
-        //memory stuff
-        if (Game.time % 13 == 0) {
-            for (let name in Game.creeps) {
-                let creep = Game.creeps[name];
+        try {
+            //memory stuff
+            if (Game.time % 13 == 0) {
+                for (let name in Game.creeps) {
+                    let creep = Game.creeps[name];
 
-                if (!Game.creeps[name]) {
-                    delete Memory.creeps[name];
+                    if (!Game.creeps[name]) {
+                        delete Memory.creeps[name];
+                    }
                 }
-            }
-            for (let spawn in Memory.spawns) {
-                if (!Game.spawns[spawn]) {
-                    delete Memory.spawns[spawn];
+                for (let spawn in Memory.spawns) {
+                    if (!Game.spawns[spawn]) {
+                        delete Memory.spawns[spawn];
+                    }
+                    else if (!Memory.spawns[spawn].room) {
+                        Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
+                    }
                 }
-                else if (!Memory.spawns[spawn].room) {
-                    Memory.spawns[spawn].room = '' + Game.spawns[spawn].room.name;
-                }
-            }
-            for (let flag in Memory.flags) {
-                if (!Game.flags[flag]) {
-                    delete Memory.spawns[flag];
-                }
+                for (let flag in Memory.flags) {
+                    if (!Game.flags[flag]) {
+                        delete Memory.spawns[flag];
+                    }
 
+                }
             }
         }
-    }
-    catch (err) {
-        if (err !== null && err !== undefined) {
-            Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
-            console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
+        catch (err) {
+            if (err !== null && err !== undefined) {
+                Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
+                console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
+            }
         }
-    }
 
-    //do actual stuff
+        //do actual stuff
         for (let room_it in Game.rooms) {
             var room = Game.rooms[room_it];
             var controller = room.controller;
@@ -75,30 +79,31 @@ module.exports.loop = function () {
             }
         }
 
-    try {
+        try {
 
 //Grafana stuff
 
-        Memory.stats['gcl.progress'] = Game.gcl.progress;
-        Memory.stats['gcl.progressTotal'] = Game.gcl.progressTotal;
-        Memory.stats['gcl.level'] = Game.gcl.level;
+            Memory.stats['gcl.progress'] = Game.gcl.progress;
+            Memory.stats['gcl.progressTotal'] = Game.gcl.progressTotal;
+            Memory.stats['gcl.level'] = Game.gcl.level;
 
-        var spawns = Game.spawns;
-        for (let spawnKey in spawns) {
-            let spawn = Game.spawns[spawnKey];
-            Memory.stats['spawn.' + spawn.name + '.defenderIndex'] = spawn.memory['defenderIndex']
+            var spawns = Game.spawns;
+            for (let spawnKey in spawns) {
+                let spawn = Game.spawns[spawnKey];
+                Memory.stats['spawn.' + spawn.name + '.defenderIndex'] = spawn.memory['defenderIndex']
+            }
+
+
+            Memory.stats['cpu.bucket'] = Game.cpu.bucket;
+            Memory.stats['cpu.limit'] = Game.cpu.limit;
+            Memory.stats['cpu.getUsed'] = Game.cpu.getUsed();
+
         }
-
-
-        Memory.stats['cpu.bucket'] = Game.cpu.bucket;
-        Memory.stats['cpu.limit'] = Game.cpu.limit;
-        Memory.stats['cpu.getUsed'] = Game.cpu.getUsed();
-
-    }
-    catch (err) {
-        if (err !== null && err !== undefined) {
-            Game.notify("Error in Grafana stuff: \n" + err + "\n " + err.stack);
-            console.log("Error in Grafana stuff: \n" + err + "\n" + err.stack);
+        catch (err) {
+            if (err !== null && err !== undefined) {
+                Game.notify("Error in Grafana stuff: \n" + err + "\n " + err.stack);
+                console.log("Error in Grafana stuff: \n" + err + "\n" + err.stack);
+            }
         }
-    }
+    });
 };
