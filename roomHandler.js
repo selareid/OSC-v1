@@ -10,26 +10,26 @@ const spawnerHandler = require ('spawnerHandler');
 module.exports = {
     run: function (room) {
         
-        try {
+        /*try {
             if (Game.time % 3 == 0) {
-        var ramparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART});
-        var creepss = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => c.owner.username == 'BuffyNZ'});
-        
-        if (creepss.length > 0) {
-            for (let rampart of ramparts) {
-                rampart.setPublic(true);
-            }
-        }
-        else {
-            for (let rampart of ramparts) {
-                rampart.setPublic(false);
-            }
-        }
+                var ramparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART});
+                var creepss = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username)});
+
+                if (creepss.length > 0) {
+                    for (let rampart of ramparts) {
+                        rampart.setPublic(true);
+                    }
+                }
+                else {
+                    for (let rampart of ramparts) {
+                        rampart.setPublic(false);
+                    }
+                }
             }
         }
         catch (err) {
             console.log(err);
-        }
+        }*/
         
         if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier) {
             room.updateConstructionTargets();
