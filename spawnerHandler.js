@@ -172,8 +172,11 @@ module.exports = {
             minimumNumberOfRemoteHarvesters = tempRemoteHarvesters;
             minimumNumberOfRemoteHaulers = tempRemoteHaulers;
 
-            if (room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})) {
+            if (room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})[0]) {
                 minimumNumberOfMiners = 1;
+            }
+            else {
+                minimumNumberOfMiners = 0;
             }
 
             //set number of some creep roles depending on energy mode
