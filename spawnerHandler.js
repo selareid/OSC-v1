@@ -125,38 +125,7 @@ module.exports = {
                 }
             }
             else {
-                let minContEn = _.min(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
-                    'store.energy');
-                let maxContEn = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0}),
-                    'store.energy');
-                let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 200}), '.amount').amount;
-
-                if (maxDropEn) {
-                    if (maxDropEn > 600) {
-                        minimumNumberOfCarriers = 5;
-                        minimumNumberOfUpgraders = 3;
-                    }
-                    else {
-                        minimumNumberOfCarriers = 5;
-                        minimumNumberOfUpgraders = 2;
-                    }
-                }
-                else if (minContEn && minContEn.store) {
-                    if (minContEn.store.energy >= 1900) {
-                        minimumNumberOfCarriers = 4;
-                    }
-                    else if (minContEn.store.energy >= 500) {
-                        minimumNumberOfCarriers = 3;
-                    }
-                    else {
-                        if (maxContEn < 1000) {
-                            minimumNumberOfCarriers = 2;
-                        }
-                        else {
-                            minimumNumberOfCarriers = 1;
-                        }
-                    }
-                }
+                minimumNumberOfCarriers = 3;
             }
 
             //set number of harvesters
