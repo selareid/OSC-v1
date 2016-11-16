@@ -7,10 +7,10 @@ module.exports = {
     run: function (room, creep) {
 
         creep.say('carry');
-        if (creep.memory.working == true && creep.carry.energy == 0) {
+        if (creep.memory.working == true && _.sum(creep.carry) == 0) {
             creep.memory.working = false;
         }
-        else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
+        else if (creep.memory.working == false && _.sum(creep.carry) == creep.carryCapacity) {
             creep.memory.working = true;
         }
 
@@ -19,7 +19,7 @@ module.exports = {
             var storage = room.storage;
 
             if (storage) {
-                if (_.sum(room.storage.store) >= room.storage.store) {
+                if (_.sum(room.storage.store) >= room.storage.storeCapacity) {
                     var energyOfTowers = function (room) {
                         var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
                         var allEnergy = [];
@@ -31,8 +31,12 @@ module.exports = {
                     };
                     roleDistributor.run(room, creep, energyOfTowers);
                 }
-                else if (creep.transfer(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(storage, {reusePath: 40});
+                else {
+                    for (let resourceType in creep.carry) {
+                        if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage, {reusePath: 19});
+                        }
+                    }
                 }
             }
             else {
@@ -41,10 +45,10 @@ module.exports = {
         }
         else {
 
-            var droppedenergy = creep.findDroppedEnergy(room);
-            if (droppedenergy) {
-                if (creep.pickup(droppedenergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(droppedenergy);
+            var droppedResource = creep.pos.find(FIND_DROPPED_RESOURCES);
+            if (droppedResource) {
+                if (creep.pickup(droppedResource) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(droppedResource);
                 }
             }
             else {
