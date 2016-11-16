@@ -133,7 +133,7 @@ module.exports = {
 
                 if (maxDropEn) {
                     if (maxDropEn > 600) {
-                        minimumNumberOfCarriers = 6;
+                        minimumNumberOfCarriers = 5;
                         minimumNumberOfUpgraders = 3;
                     }
                     else {
