@@ -1,7 +1,7 @@
 require('global');
 require('prototype.creep')();
 
-var roleDistributor = require('role.distributor')();
+var roleDistributor = require ('role.distributor');
 
 module.exports = {
     run: function (room, creep) {
