@@ -46,10 +46,15 @@ module.exports = {
             }
             else {
                 if (room.storage) {
-                    if (creep.transfer(room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(room.storage);
-                        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-                            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                    if (_.sum(room.storage.store) >= room.storage.store) {
+                        creep.drop(RESOURCE_ENERGY);
+                    }
+                    else {
+                        if (creep.transfer(room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(room.storage);
+                            if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
+                                creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+                            }
                         }
                     }
                 }
