@@ -43,9 +43,9 @@ module.exports = {
             }
             else {
 
-                var extractor = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR});
+                var extractor = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})[0];
                 if (extractor) {
-                    var mineral = room.find(FIND_MINERALS);
+                    var mineral = room.find(FIND_MINERALS)[0];
                     if (creep.harvest(mineral) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(mineral);
                     }
@@ -53,25 +53,5 @@ module.exports = {
 
             }
         }
-    },
-
-    findSource: function (room, creep, harvesters) {
-
-        var takenSources = [];
-
-        for (let harvester of harvesters) {
-            if (harvester.memory.source) {
-                takenSources.push(harvester.memory.source);
-            }
-        }
-
-        var source = creep.pos.findClosestByPath(FIND_SOURCES, {filter: (s) => !takenSources.includes(s.id)});
-        if (source) {
-            return source;
-        }
-        else {
-            return creep.pos.findClosestByPath(FIND_SOURCES);
-        }
-
     }
 };
