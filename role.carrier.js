@@ -45,7 +45,7 @@ module.exports = {
         }
         else {
 
-            var droppedResource = creep.room.find(FIND_DROPPED_RESOURCES);
+            var droppedResource = room.find(FIND_DROPPED_RESOURCES)[0];
             if (droppedResource) {
                 if (creep.pickup(droppedResource) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(droppedResource);
