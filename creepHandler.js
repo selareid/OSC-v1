@@ -13,6 +13,7 @@ const otherRoomCreep = require ('role.otherRoomCreep');
 const energyThief = require ('role.energyThief');
 const roleRemoteCreepHandler = require ('role.remoteCreepHandler');
 const roleEnergyHelper = require ('role.energyOtherRoomHelper');
+const roleMiner = require ('role.miner');
 
 module.exports = {
     run: function (room, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
@@ -87,6 +88,9 @@ module.exports = {
                         else {
                             creep.memory.role = 'carrier';
                         }
+                        break;
+                    case 'miner':
+                        roleMiner.run(room, creep);
                         break;
                     case '':
                         creep.say('ERROR!!!', true);
