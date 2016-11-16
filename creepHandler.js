@@ -69,7 +69,7 @@ module.exports = {
                         break;
                     case 'energyThief':
                         if (roomToTakeFrom != undefined) {
-                            if (Game.cpu.bucket < 500) return energyThief.run(room, creep, roomToTakeFrom);
+                            if (Game.cpu.bucket > 500) return energyThief.run(room, creep, roomToTakeFrom);
                         }
                         else {
                             creep.memory.role = 'carrier';
@@ -83,14 +83,14 @@ module.exports = {
                         break;
                     case 'energyHelper':
                         if (energyHelperFlag != undefined) {
-                            if (Game.cpu.bucket < 500) return roleEnergyHelper.run(room, creep, energyHelperFlag);
+                            if (Game.cpu.bucket > 500) return roleEnergyHelper.run(room, creep, energyHelperFlag);
                         }
                         else {
-                            if (Game.cpu.bucket < 500) return creep.memory.role = 'carrier';
+                            if (Game.cpu.bucket > 500) return creep.memory.role = 'carrier';
                         }
                         break;
                     case 'miner':
-                        if (Game.cpu.bucket < 500) return roleMiner.run(room, creep);
+                        if (Game.cpu.bucket > 500) return roleMiner.run(room, creep);
                         break;
                     case '':
                         creep.say('ERROR!!!', true);
