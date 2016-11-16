@@ -4,7 +4,10 @@
 ### I'm not gonna put any info here incase someone finds my code and tries to find flaws in it, good luck trying to figure out how my code works
 
 ## TODO:
-* Code terminals
+* Code miners
+* Code carriers to work with minerals
+* Code terminals/market
+* Code terminal creeps
 * Make energy thiefs work with storage
 * Make energy wasting mode
 * Add energy defense mode and creep mode etc.
