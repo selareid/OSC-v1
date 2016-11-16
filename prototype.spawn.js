@@ -196,6 +196,17 @@ module.exports = function () {
                         }
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                case 'miner':
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
+
+                    if (numberOfParts > 0) {
+                        body.push(MOVE);
+                        body.push(CARRY);
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(WORK);
+                        }
+                    }
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }

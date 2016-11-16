@@ -25,6 +25,7 @@ module.exports = {
         var numberOfOtherRoomCreeps = _.sum(Game.creeps, (c) => c.memory.role == 'otherRoomCreep' && c.memory.room == room.name);
         var numberOfEnergyThiefs = _.sum(Game.creeps, (c) => c.memory.role == 'energyThief' && c.memory.room == room.name);
         var numberOfEnergyHelpers = _.sum(Game.creeps, (c) => c.memory.role == 'energyHelper' && c.memory.room == room.name);
+        var numberOfMiners = _.sum(Game.creeps, (c) => c.memory.role == 'miner' && c.memory.room == room.name);
 
         // debugging
         // console.log('Harvesters ' + numberOfHarvesters);
@@ -72,6 +73,7 @@ module.exports = {
             var otherRoomCreepsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'otherRoomCreep');
             var energyThiefsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyThief');
             var energyHelpersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyHelper');
+            var minersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'miner');
 
             //get number of each role in priority queue
             var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
@@ -97,6 +99,7 @@ module.exports = {
             var minimumNumberOfOtherRoomCreeps = Memory.rooms[room].populationGoal.otherRoomCreeps;
             var minimumNumberOfEnergyThiefs = Memory.rooms[room].populationGoal.energyThiefs;
             var minimumNumberOfEnergyHelpers = Memory.rooms[room].populationGoal.energyHelpers;
+            var minimumNumberOfMiners = Memory.rooms[room].populationGoal.miners;
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
@@ -200,6 +203,10 @@ module.exports = {
             minimumNumberOfRemoteHarvesters = tempRemoteHarvesters;
             minimumNumberOfRemoteHaulers = tempRemoteHaulers;
 
+            if (room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})) {
+                minimumNumberOfMiners = 1;
+            }
+
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
                 case 'normal':
@@ -229,6 +236,7 @@ module.exports = {
                     minimumNumberOfRemoteHaulers = 0;
                     minimumNumberOfOtherRoomCreeps = 0;
 //minimumNumberOfEnergyThiefs = 0;
+                    minimumNumberOfMiners = 0;
 
                     maximumNumberOfWarriors = 0;
                     break;
@@ -260,6 +268,7 @@ module.exports = {
                 minimumNumberOfRemoteHaulers = 0;
                 minimumNumberOfOtherRoomCreeps = 0;
                 minimumNumberOfEnergyHelpers = 0;
+                minimumNumberOfMiners = 0;
             }
             else if (isAttacking === true) {
                 minimumNumberOfWarriors = armySize;
@@ -371,6 +380,9 @@ module.exports = {
             else if (minimumNumberOfEnergyHelpers > energyHelpersInQueue + numberOfEnergyHelpers) {
                 creepToAddToQueue = 'energyHelper';
             }
+            else if (minimumNumberOfMiners > minersInQueue + numberOfMiners) {
+                creepToAddToQueue = 'miner';
+            }
 
             if (creepToAddToQueue) {
                 switch (queueToAddTo) {
@@ -463,24 +475,26 @@ module.exports = {
         Memory.rooms[room].populationGoal.otherRoomCreeps = minimumNumberOfOtherRoomCreeps;
         Memory.rooms[room].populationGoal.energyThiefs = minimumNumberOfEnergyThiefs;
         Memory.rooms[room].populationGoal.energyHelpers = minimumNumberOfEnergyHelpers;
+        Memory.rooms[room].populationGoal.miners = minimumNumberOfMiners;
 
         Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
 
-        //grafana stats stuff
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfCarriers'] = numberOfCarriers;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfDistributors'] = numberOfDistributors;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfUpgraders'] = numberOfUpgraders;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfBuilders'] = numberOfBuilders;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfRepairers'] = numberOfRepairers;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfDefenceManagers'] = numberOfDefenceManagers;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfWarriors'] = numberOfWarriors;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfLandlords'] = numberOfLandlords;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHarvesters'] = numberOfRemoteHarvesters;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHaulers'] = numberOfRemoteHaulers;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfOtherRoomCreeps'] = numberOfOtherRoomCreeps;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyThiefs'] = numberOfEnergyThiefs;
-        Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyHelpers'] = numberOfEnergyHelpers;
+        //grafana population stats stuff
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfCarriers'] = numberOfCarriers;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfDistributors'] = numberOfDistributors;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfUpgraders'] = numberOfUpgraders;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfBuilders'] = numberOfBuilders;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfRepairers'] = numberOfRepairers;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfDefenceManagers'] = numberOfDefenceManagers;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfWarriors'] = numberOfWarriors;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfLandlords'] = numberOfLandlords;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHarvesters'] = numberOfRemoteHarvesters;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfRemoteHaulers'] = numberOfRemoteHaulers;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfOtherRoomCreeps'] = numberOfOtherRoomCreeps;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyThiefs'] = numberOfEnergyThiefs;
+        // Memory.stats['room.' + room.name + '.creeps' + '.numberOfEnergyHelpers'] = numberOfEnergyHelpers;
+        //add more cause that's not all
 
         var normalSpawnQueue = Memory.rooms[room].spawnQueue.normal;
         Memory.stats['room.' + room.name + '.spawnQueues' + '.normal'] = normalSpawnQueue.length;
@@ -549,8 +563,11 @@ module.exports = {
         if (Memory.rooms[room].populationGoal.energyThiefs == undefined) {
             Memory.rooms[room].populationGoal.energyThiefs = 0;
         }
-        if (Memory.rooms[room].populationGoal.energyHelper == undefined) {
-            Memory.rooms[room].populationGoal.energyHelper = 0;
+        if (Memory.rooms[room].populationGoal.energyHelpers == undefined) {
+            Memory.rooms[room].populationGoal.energyHelpers = 0;
+        }
+        if (Memory.rooms[room].populationGoal.miners == undefined) {
+            Memory.rooms[room].populationGoal.miners = 0;
         }
         if (Memory.rooms[room].populationGoal.maxWarriors == undefined) {
             Memory.rooms[room].populationGoal.maxWarriors = 7;
