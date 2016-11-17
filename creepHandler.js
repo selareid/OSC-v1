@@ -107,8 +107,8 @@ module.exports = {
         }
         catch (err) {
             if (err !== null && err !== undefined) {
-                Game.notify("Error in memory management logic: \n" + err + "\n " + err.stack);
-                console.log("Error in memory management logic: \n" + err + "\n" + err.stack);
+                Game.notify("Creep Error: \n" + err + "\n " + err.stack);
+                console.log("Creep Error: \n" + err + "\n" + err.stack);
             }
         }
 
