@@ -156,7 +156,7 @@ module.exports = function () {
                                 if (existing[object] == undefined) {
                                     existing[object] = this.find(FIND_STRUCTURES, {filter: o => o.structureType == object});
                                 }
-                                console.log(this.name + `: check ${object} : ${atPos.length} vs ${global.rooms[this.name].constructionTargets[object]} vs ${existing[object].length}`);
+                                //console.log(this.name + `: check ${object} : ${atPos.length} vs ${global.rooms[this.name].constructionTargets[object]} vs ${existing[object].length}`);
                                 if (atPos.length == 0 &&
                                     global.rooms[this.name].constructionTargets[object] != undefined &&
                                     global.rooms[this.name].constructionTargets[object] > existing[object].length) {
@@ -188,7 +188,7 @@ module.exports = function () {
                                 if (existing[object] == undefined) {
                                     existing[object] = this.find(FIND_STRUCTURES, {filter: o => o.structureType == object});
                                 }
-                                console.log(this.name + `: check ${object} : ${atPos.length} vs ${global.rooms[this.name].constructionTargets[object]} vs ${existing[object].length}`);
+                                //console.log(this.name + `: check ${object} : ${atPos.length} vs ${global.rooms[this.name].constructionTargets[object]} vs ${existing[object].length}`);
                                 if (atPos.length == 0 &&
                                     global.rooms[this.name].constructionTargets[object] != undefined &&
                                     global.rooms[this.name].constructionTargets[object] > existing[object].length) {
