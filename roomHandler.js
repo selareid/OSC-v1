@@ -31,7 +31,11 @@ module.exports = {
             console.log(err);
         }*/
         
-        if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier) {
+        if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier || !Memory.rooms[room].marketOrders) {
+
+            if (!Memory.rooms[room].marketOrders == undefined) {
+                Memory.rooms[room].marketOrders = {};
+            }
 
             if (Game.cpu.bucket < 2000) {
                 if (Game.time % 100 == 0) {
