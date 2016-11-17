@@ -54,7 +54,7 @@ module.exports = {
             else {
 
                 if (!creep.memory.container) {
-                    let foundContainer = creep.findContainer(room);
+                    let foundContainer = this.carrierFindContainer(room, creep);
                     if (foundContainer) {
                         creep.memory.container = foundContainer.id;
                         console.log('carrier recalculating container');
@@ -64,11 +64,16 @@ module.exports = {
                 var container = Game.getObjectById(creep.memory.container);
 
                 if (container) {
-                    if (container.store[RESOURCE_ENERGY] > 0) {
-
+                    var containerStore = _.sum(container.store);
+                    if (containerStore > 0) {
                         if (container) {
-                            if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(container, {reusePath: 10});
+                            for (let resourceType in container.store) {
+                                if (containerStore <= 0) {
+                                    break;
+                                }
+                                else if (creep.withdraw(container, resourceType) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(container, {reusePath: 10});
+                                }
                             }
                         }
                     }
@@ -85,6 +90,32 @@ module.exports = {
 
             }
 
+        }
+    },
+
+    carrierFindContainer: function (room, creep) {
+        var allContainersInRoom = room.find(FIND_STRUCTURES, {
+            filter: (s) => s.structureType == STRUCTURE_CONTAINER && _.sum(s.store) > 0
+        });
+
+        if (allContainersInRoom.length > 0) {
+
+            var container = creep.pos.findClosestByRange(allContainersInRoom);
+
+            if (container.store.energy > 0) {
+                allContainersInRoom = _.filter(allContainersInRoom, (c) => c.store.energy > 0);
+                container = _.max(allContainersInRoom, '.store.energy');
+            }
+
+            if (container) {
+                return container;
+            }
+            else {
+                return undefined;
+            }
+        }
+        else {
+            return undefined;
         }
     }
 };
