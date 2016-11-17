@@ -82,7 +82,7 @@ module.exports = {
                         roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
                         break;
                     case 'energyHelper':
-                        if (energyHelperFlag != undefined) {
+                        if (energyHelperFlag != undefined && energyHelperFlag.room != undefined) {
                             if (Game.cpu.bucket > 500) roleEnergyHelper.run(room, creep, energyHelperFlag);
                         }
                         else {
