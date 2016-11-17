@@ -144,15 +144,6 @@ module.exports = {
             else if (lowestDefenceHits > 50000) {
                       minimumNumberOfDefenceManagers = 3;
             }
-            else if (lowestDefenceHits > 30000) {
-                      minimumNumberOfDefenceManagers = 4;
-            }
-            else if (lowestDefenceHits > 10000) {
-                      minimumNumberOfDefenceManagers = 5;
-            }
-            else {
-                      minimumNumberOfDefenceManagers = 6;
-            }
 
             //set number of landlords
             var numberOfClaimFlags = _.sum(Game.flags, (f) => f.memory.type == 'claimFlag' && f.memory.room == room.name);
