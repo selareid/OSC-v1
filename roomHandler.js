@@ -33,7 +33,7 @@ module.exports = {
         
         if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier || !Memory.rooms[room].marketOrders) {
 
-            if (!Memory.rooms[room].marketOrders == undefined) {
+            if (Memory.rooms[room].marketOrders == undefined) {
                 Memory.rooms[room].marketOrders = {};
             }   
 
