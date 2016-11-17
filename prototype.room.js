@@ -98,17 +98,17 @@ module.exports = function () {
                  */
 
                 if (global.rooms == undefined || global.rooms[this.name] == undefined) {
-                    console.log(this.name + ': Setting Global.rooms');
+                    //console.log(this.name + ': Setting Global.rooms');
                     _.set(global, ['rooms', this.name, 'controllerLevel'], undefined);
                 }
 
                 if (global.rooms[this.name].controllerLevel != this.controller.level) {
                     _.set(global, ['rooms', this.name, 'constructionTargets'], _.transform(CONTROLLER_STRUCTURES, (r, v, k) => r[k] = v[this.controller.level]));
                     _.set(global, ['rooms', this.name, 'controllerLevel'], this.controller.level);
-                    console.log(this.name + ': global.rooms', JSON.stringify(global.rooms));
+                    //console.log(this.name + ': global.rooms', JSON.stringify(global.rooms));
                 }
 
-                console.log(this.name + ': Check room');
+                //console.log(this.name + ': Check room');
                 let sites = this.find(FIND_CONSTRUCTION_SITES);
                 let existing = {};
                 if (sites.length == 0) {
