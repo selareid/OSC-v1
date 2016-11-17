@@ -35,7 +35,7 @@ module.exports = {
 
             if (!Memory.rooms[room].marketOrders == undefined) {
                 Memory.rooms[room].marketOrders = {};
-            }
+            }   
 
             if (Game.cpu.bucket < 2000) {
                 if (Game.time % 100 == 0) {
