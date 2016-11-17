@@ -35,7 +35,7 @@ module.exports = {
 
             if (Memory.rooms[room].marketOrders == undefined) {
                 Memory.rooms[room].marketOrders = {};
-            }   
+            }
 
             if (Game.cpu.bucket < 2000) {
                 if (Game.time % 100 == 0) {
@@ -91,29 +91,37 @@ module.exports = {
         var isAttacking;
         var armySize;
 
-        var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
-        var otherRoomCreepsRoomToGoToPos;
-        if (otherRoomCreepsRoomToGoTo) {
-            if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) {
-            otherRoomCreepsRoomToGoTo.remove();
+        if (Game.cpu.bucket < 2000) {
+            var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
+            var otherRoomCreepsRoomToGoToPos;
+            if (otherRoomCreepsRoomToGoTo) {
+                if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) {
+                    otherRoomCreepsRoomToGoTo.remove();
+                }
+                otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
             }
-            otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
         }
 
-        var roomToStealFrom = room.findRoomToStealFrom();
-        var roomToStealFromPos;
-        if (roomToStealFrom) {
-            roomToStealFromPos = roomToStealFrom.pos.roomName
+        if (Game.cpu.bucket < 2000) {
+            var roomToStealFrom = room.findRoomToStealFrom();
+            var roomToStealFromPos;
+            if (roomToStealFrom) {
+                roomToStealFromPos = roomToStealFrom.pos.roomName
+            }
         }
 
         var remoteCreepFlags = room.getRemoteFlags();
 
-        if (flagToRallyAt) {
-            isAttacking = true;
-            armySize = flagToRallyAt.memory.armySize;
+        if (Game.cpu.bucket < 2000) {
+            if (flagToRallyAt) {
+                isAttacking = true;
+                armySize = flagToRallyAt.memory.armySize;
+            }
         }
 
-        var energyHelperFlag = room.getEnergyHelperFlags();
+        if (Game.cpu.bucket < 2000) {
+            var energyHelperFlag = room.getEnergyHelperFlags();
+        }
 
         if (Game.time % 3 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room);

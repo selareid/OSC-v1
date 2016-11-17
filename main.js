@@ -7,7 +7,10 @@ profiler.enable();
 global.resetGlobal = Game.time;
 
 if (Game.cpu.bucket > 300) module.exports.loop = function () {
-    if (Game.time == resetGlobal) console.log('reset!');
+    if (Game.time == resetGlobal) {
+        console.log('reset!');
+        console.log(Game.cpu.bucket);
+    }
 
     //screeps profiler wrapper
     profiler.wrap(function() {
