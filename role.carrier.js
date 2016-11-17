@@ -102,11 +102,6 @@ module.exports = {
 
             var container = creep.pos.findClosestByRange(allContainersInRoom);
 
-            if (container.store.energy > 0) {
-                allContainersInRoom = _.filter(allContainersInRoom, (c) => c.store.energy > 0);
-                container = _.max(allContainersInRoom, '.store.energy');
-            }
-
             if (container) {
                 return container;
             }
