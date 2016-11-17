@@ -125,7 +125,12 @@ module.exports = {
                 }
             }
             else {
-                minimumNumberOfCarriers = 3;
+                if (room.find(FIND_DROPPED_ENERGY)[0]) {
+                    minimumNumberOfCarriers = 3
+                }
+                else {
+                    minimumNumberOfCarriers = 2;
+                }
             }
 
             //set number of harvesters

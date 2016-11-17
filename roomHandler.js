@@ -53,7 +53,7 @@ module.exports = {
                     Memory.rooms[room].maxPartsForCarrier = 10;
                 }
                 else {
-                    Memory.rooms[room].maxPartsForCarrier = 4;
+                    Memory.rooms[room].maxPartsForCarrier = 12;
                 }
             }
 
