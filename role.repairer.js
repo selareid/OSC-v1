@@ -21,7 +21,7 @@ module.exports = {
                     creep.moveTo(structureToRepair, {
                         reusePath: 7, plainCost: 1, swampCost: 4,
                         costCallback: function (roomName) {
-                            if (roomName == this.memory.room) {
+                            if (roomName == creep.memory.room) {
                                 let room = Game.rooms[roomName];
 
                                 if (!room) return;
