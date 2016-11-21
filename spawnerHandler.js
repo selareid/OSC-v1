@@ -134,11 +134,16 @@ module.exports = {
             }
 
             //set number of harvesters
-            var numberOfSources = room.find(FIND_SOURCES).length;
-            var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name
-            && c.getActiveBodyparts(WORK) >= 5);
-            if (amountOfBigHarvesters >= numberOfSources) {
-                minimumNumberOfHarvesters = 2;
+            if (room.storage && _.sum(_.filter(room.storage.store, (r) => r.resourceType == RESOURCE_ENERGY)) >= 350000) {
+                minimumNumberOfHarvesters = 0;
+            }
+            else {
+                var numberOfSources = room.find(FIND_SOURCES).length;
+                var amountOfBigHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name
+                && c.getActiveBodyparts(WORK) >= 5);
+                if (amountOfBigHarvesters >= numberOfSources) {
+                    minimumNumberOfHarvesters = 2;
+                }
             }
 
             //set minimumNumberOfDefenceManagers
