@@ -6,12 +6,18 @@ const linkHandler = require ('linkHandler');
 const defenceHandler = require ('defenceHandler');
 const towerHandler = require ('towerHandler');
 const spawnerHandler = require ('spawnerHandler');
+const marketDealer = require ('marketDealer');
 
 module.exports = {
     run: function (room) {
         
-        /*try {
-            if (Game.time % 3 == 0) {
+        try {
+            if (Game.time % 7 == 0) {
+                var terminal = room.terminal;
+                if (terminal && _.sum(terminal.store)) {
+                    marketDealer.run(room, terminal);
+                }
+                /*
                 var ramparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART});
                 var creepss = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username)});
 
@@ -25,11 +31,12 @@ module.exports = {
                         rampart.setPublic(false);
                     }
                 }
+                */
             }
         }
         catch (err) {
             console.log(err);
-        }*/
+        }
         
         if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier || !Memory.rooms[room].marketOrders) {
 
