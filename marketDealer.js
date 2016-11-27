@@ -18,9 +18,18 @@ module.exports = {
 
                 if (resourceInTerm) {
                     var amountToDeal = terminal.store[order.resourceType];
+                    var costOfTrans = Game.market.calcTransactionCost(amountToDeal, room.name, order.roomName);
 
                     if (amountToDeal > order.amount) {
                         amountToDeal = order.amount;
+                    }
+
+                    var addedTogether = amountToDeal + costOfTrans;
+
+                    while (addedTogether > terminal.storeCapacity) {
+                        amountToDeal = amountToDeal - ((addedTogether - terminal.storeCapacity) - (addedTogether - terminal.storeCapacity)*0.5);
+                        costOfTrans = Game.market.calcTransactionCost(amountToDeal, room.name, order.roomName);
+                        addedTogether = amountToDeal + costOfTrans;
                     }
 
                     var result = Game.market.deal(order.id, amountToDeal, room.name);
@@ -29,7 +38,7 @@ module.exports = {
                 }
             }
             else {
-                delete Memory.rooms[room].market[0];
+                Memory.rooms[room].market.splice(0, 1);
             }
 
         }
