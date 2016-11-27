@@ -26,6 +26,7 @@ module.exports = {
         var numberOfEnergyThiefs = _.sum(Game.creeps, (c) => c.memory.role == 'energyThief' && c.memory.room == room.name);
         var numberOfEnergyHelpers = _.sum(Game.creeps, (c) => c.memory.role == 'energyHelper' && c.memory.room == room.name);
         var numberOfMiners = _.sum(Game.creeps, (c) => c.memory.role == 'miner' && c.memory.room == room.name);
+        var numberOfMarketMovers = _.sum(Game.creeps, (c) => c.memory.role == 'marketMover' && c.memory.room == room.name);
 
         // debugging
         // console.log('Harvesters ' + numberOfHarvesters);
@@ -74,6 +75,7 @@ module.exports = {
             var energyThiefsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyThief');
             var energyHelpersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyHelper');
             var minersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'miner');
+            var marketMoversInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'marketMover');
 
             //get number of each role in priority queue
             var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
@@ -100,6 +102,7 @@ module.exports = {
             var minimumNumberOfEnergyThiefs = Memory.rooms[room].populationGoal.energyThiefs;
             var minimumNumberOfEnergyHelpers = Memory.rooms[room].populationGoal.energyHelpers;
             var minimumNumberOfMiners = Memory.rooms[room].populationGoal.miners;
+            var minimumNumberOfMarketMovers = Memory.rooms[room].populationGoal.marketMovers;
 
             var maximumNumberOfWarriors = Memory.rooms[room].populationGoal.maxWarriors;
 
@@ -186,6 +189,16 @@ module.exports = {
                 minimumNumberOfMiners = 0;
             }
 
+            var terminal = room.terminal;
+            var orders = Memory.rooms[room].market;
+            var bucket = Game.cpu.bucket;
+            if (terminal && orders && bucket > 2000) {
+                minimumNumberOfMarketMovers = 1;
+            }
+            else {
+                minimumNumberOfMarketMovers = 0;
+            }
+
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
                 case 'normal':
@@ -201,6 +214,7 @@ module.exports = {
                     //minimumNumberOfRemoteHaulers = 0;
                     //minimumNumberOfOtherRoomCreeps = 0;
                     //minimumNumberOfEnergyThiefs = 0;
+                    minimumNumberOfMarketMovers = 0;
 
                     maximumNumberOfWarriors = 0;
                     break;
@@ -216,6 +230,7 @@ module.exports = {
                     minimumNumberOfOtherRoomCreeps = 0;
 //minimumNumberOfEnergyThiefs = 0;
                     minimumNumberOfMiners = 0;
+                    minimumNumberOfMarketMovers = 0;
 
                     maximumNumberOfWarriors = 0;
                     break;
@@ -362,6 +377,9 @@ module.exports = {
             else if (minimumNumberOfMiners > minersInQueue + numberOfMiners) {
                 creepToAddToQueue = 'miner';
             }
+            else if (minimumNumberOfMarketMovers > marketMoversInQueue + numberOfMarketMovers) {
+                creepToAddToQueue = 'marketMover';
+            }
 
             if (creepToAddToQueue) {
                 switch (queueToAddTo) {
@@ -455,6 +473,7 @@ module.exports = {
         Memory.rooms[room].populationGoal.energyThiefs = minimumNumberOfEnergyThiefs;
         Memory.rooms[room].populationGoal.energyHelpers = minimumNumberOfEnergyHelpers;
         Memory.rooms[room].populationGoal.miners = minimumNumberOfMiners;
+        Memory.rooms[room].populationGoal.marketMovers = minimumNumberOfMarketMovers;
 
         Memory.rooms[room].populationGoal.maxWarriors = maximumNumberOfWarriors;
 
@@ -547,6 +566,9 @@ module.exports = {
         }
         if (Memory.rooms[room].populationGoal.miners == undefined) {
             Memory.rooms[room].populationGoal.miners = 0;
+        }
+        if (Memory.rooms[room].populationGoal.marketMovers == undefined) {
+            Memory.rooms[room].populationGoal.marketMovers = 7;
         }
         if (Memory.rooms[room].populationGoal.maxWarriors == undefined) {
             Memory.rooms[room].populationGoal.maxWarriors = 7;

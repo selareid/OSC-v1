@@ -236,6 +236,18 @@ module.exports = function () {
                         }
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                case 'marketMover':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
+                    if (numberOfParts > 0) {
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(CARRY);
+                            body.push(CARRY);
+                            body.push(MOVE);
+                        }
+                    }
+                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }
