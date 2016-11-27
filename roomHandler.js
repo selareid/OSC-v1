@@ -12,7 +12,7 @@ module.exports = {
     run: function (room) {
         
         try {
-            if (Game.time % 7 == 0) {
+            if (Game.time % 7 == 0 && Game.cpu.bucket > 2000) {
                 var terminal = room.terminal;
                 if (terminal) {
                     marketDealer.run(room, terminal);
