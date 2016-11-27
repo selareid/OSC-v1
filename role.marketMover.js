@@ -2,7 +2,7 @@ require('global');
 require('prototype.creep')();
 
 module.exports = {
-    run: function (room, creep, energyOfTowers) {
+    run: function (room, creep) {
 
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
