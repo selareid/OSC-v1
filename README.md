@@ -28,3 +28,15 @@
 `occupyingCreep.say("sorry");`
 `this.creep.move(this.creep.pos.getDirectionTo(occupyingCreep));`
 `occupyingCreep.move(occupyingCreep.pos.getDirectionTo(this.creep))`
+*Teaching `room.find` to accept an array of things to look for:
+``let find = Room.prototype.find;
+ Room.prototype.find = function(c, opt) {
+     if(_.isArray(c)) {
+         return _(c)
+                 .map(x => find.call(this,x,opt))
+                 .flatten()
+                 .value();
+     } else
+         return find.apply(this, arguments);
+ }``
+*With that snippet you can call room find the normal way, or like so: `room.find([FIND_MY_CREEPS, FIND_MY_STRUCTURES])` and it'll return a single array with both.
