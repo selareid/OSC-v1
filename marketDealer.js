@@ -6,7 +6,16 @@ module.exports = {
         if (orders != undefined) {
             var order = Game.market.getOrderById(orders[0]);
             if (order && order.amount > 0) {
-                var resourceInTerm = _.filter(terminal.store, (r) => r.resourceType == order.resourceType);
+                var resourceInTerm = false;
+                var resourcesInTerm = [];
+                for (let resourceType in terminal.store) {
+                    resourcesInTerm.push(resourceType);
+                }
+
+                if (resourcesInTerm.includes(resourceInTerm)) {
+                    resourceInTerm = true;
+                }
+
                 if (resourceInTerm) {
                     var amountToDeal = resourceInTerm;
 
