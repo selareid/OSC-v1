@@ -27,7 +27,7 @@ module.exports = {
                     var addedTogether = amountToDeal + costOfTrans;
 
                     while (addedTogether > terminal.storeCapacity) {
-                        amountToDeal -= 1000;
+                        amountToDeal = amountToDeal * 0.5;
                         costOfTrans = Game.market.calcTransactionCost(amountToDeal, room.name, order.roomName);
                         addedTogether = amountToDeal + costOfTrans;
                     }
