@@ -9,7 +9,7 @@ module.exports = {
         creep.say('carry');
 
         if (_.sum(room.storage.store) < room.storage.storeCapacity) {
-            if (room.storage && _.sum(_.filter(room.storage.store, (r) => r.resourceType == RESOURCE_ENERGY)) >= 320000) {
+            if (room.storage && _.sum(_.filter(room.storage.store, (r) => r.resourceType == RESOURCE_ENERGY)) >= 350000) {
                 this.carrierFindContainerNoEnergy(room, creep);
             }
             else {
