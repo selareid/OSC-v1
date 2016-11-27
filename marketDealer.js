@@ -12,12 +12,12 @@ module.exports = {
                     resourcesInTerm.push(resourceType);
                 }
 
-                if (resourcesInTerm.includes(resourceInTerm)) {
+                if (resourcesInTerm.includes(order.resourceType)) {
                     resourceInTerm = true;
                 }
 
                 if (resourceInTerm) {
-                    var amountToDeal = resourceInTerm;
+                    var amountToDeal = terminal.store[order.resourceType];
 
                     if (amountToDeal > order.amount) {
                         amountToDeal = order.amount;
