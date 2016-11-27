@@ -23,7 +23,9 @@ module.exports = {
                         amountToDeal = order.amount;
                     }
 
-                    Game.market.deal(order.id, amountToDeal, room.name)
+                    var result = Game.market.deal(order.id, amountToDeal, room.name);
+
+                    console.log('Market Dealt Result = ' + result);
                 }
             }
             else {
