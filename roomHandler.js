@@ -14,7 +14,7 @@ module.exports = {
         try {
             if (Game.time % 7 == 0) {
                 var terminal = room.terminal;
-                if (terminal && _.sum(terminal.store)) {
+                if (terminal) {
                     marketDealer.run(room, terminal);
                 }
             }
