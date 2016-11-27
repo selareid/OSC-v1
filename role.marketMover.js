@@ -3,6 +3,7 @@ require('prototype.creep')();
 
 module.exports = {
     run: function (room, creep) {
+        var terminal = room.terminal;
 
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
@@ -12,7 +13,6 @@ module.exports = {
         }
 
         if (creep.memory.working == true) {
-            var terminal = room.terminal;
             if (terminal) {
                 if (_.sum(terminal.store) < terminal.storeCapacity) {
                     for (let resourceType in creep.carry) {
@@ -30,10 +30,13 @@ module.exports = {
                 if (orders != undefined) {
                     var order = Game.market.getOrderById(orders[0]);
                     if (order) {
-                        var resource = order.resourceType;
-                        if (_.filter(storage.store, (r) => r.resourceType == resource)) {
-                            if (creep.withdraw(storage, resource) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(storage);
+                        var costinEnergy = Game.market.calcTransactionCost(order.amount, room.name, order.roomName);
+                        if ((RESOURCE_ENERGY in terminal.store) && terminal.store[RESOURCE_ENERGY] >= costinEnergy) {
+                            var resource = order.resourceType;
+                            if (_.filter(storage.store, (r) => r.resourceType == resource)) {
+                                if (creep.withdraw(storage, resource) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(storage);
+                                }
                             }
                         }
                         else {
