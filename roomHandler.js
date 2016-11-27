@@ -17,25 +17,13 @@ module.exports = {
                 if (terminal && _.sum(terminal.store)) {
                     marketDealer.run(room, terminal);
                 }
-                /*
-                var ramparts = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_RAMPART});
-                var creepss = room.find(FIND_HOSTILE_CREEPS, {filter: (c) => Allies.includes(c.owner.username)});
-
-                if (creepss.length > 0) {
-                    for (let rampart of ramparts) {
-                        rampart.setPublic(true);
-                    }
-                }
-                else {
-                    for (let rampart of ramparts) {
-                        rampart.setPublic(false);
-                    }
-                }
-                */
             }
         }
         catch (err) {
-            console.log(err);
+            if (err !== null && err !== undefined) {
+                Game.notify("Error in every 7 tick room logic: \n" + err + "\n " + err.stack);
+                console.log("Error in every 7 tick room logic: \n" + err + "\n" + err.stack + " room: " + room.name);
+            }
         }
         
         if (Game.time % 20 == 0 || !Memory.rooms[room].maxPartsForCarrier || !Memory.rooms[room].marketOrders) {
