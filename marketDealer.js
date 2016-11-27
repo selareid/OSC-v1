@@ -23,7 +23,7 @@ module.exports = {
                         amountToDeal = order.amount;
                     }
 
-                    Game.market.deal(order, amountToDeal, room)
+                    Game.market.deal(order.id, amountToDeal, room.name)
                 }
             }
             else {
