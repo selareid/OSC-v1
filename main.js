@@ -3,7 +3,9 @@ require('global');
 const roomHandler = require ('roomHandler');
 const profiler = require('screeps-profiler');
 
+// https://github.com/gdborton/screeps-profiler
 profiler.enable();
+
 global.resetGlobal = Game.time;
 
 if (Game.cpu.bucket > 300) module.exports.loop = function () {
@@ -13,6 +15,7 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
     }
 
     //screeps profiler wrapper
+    // https://github.com/gdborton/screeps-profiler
     profiler.wrap(function() {
 
         //quick grafana check
