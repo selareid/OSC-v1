@@ -18,7 +18,7 @@ module.exports = {
             if (structureToBuild) {
                 if (creep.build(structureToBuild) == ERR_NOT_IN_RANGE) {
                     PathFinder.use(true);
-                    creep.moveTo(structureToRepair, {
+                    creep.moveTo(structureToBuild, {
                         reusePath: 7, plainCost: 1, swampCost: 4,
                         costCallback: function (roomName) {
                             if (roomName == creep.memory.room) {
