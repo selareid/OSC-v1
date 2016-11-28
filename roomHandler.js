@@ -82,7 +82,7 @@ module.exports = {
         var isAttacking;
         var armySize;
 
-        if (Game.cpu.bucket < 2000) {
+        if (Game.cpu.bucket > 2000) {
             var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
             var otherRoomCreepsRoomToGoToPos;
             if (otherRoomCreepsRoomToGoTo) {
@@ -93,24 +93,24 @@ module.exports = {
             }
         }
 
-        if (Game.cpu.bucket < 2000) {
+        if (Game.cpu.bucket > 2000) {
             var roomToStealFrom = room.findRoomToStealFrom();
             var roomToStealFromPos;
             if (roomToStealFrom) {
-                roomToStealFromPos = roomToStealFrom.pos.roomName
+                roomToStealFromPos = roomToStealFrom.pos.roomName;
             }
         }
 
         var remoteCreepFlags = room.getRemoteFlags();
 
-        if (Game.cpu.bucket < 2000) {
+        if (Game.cpu.bucket > 2000) {
             if (flagToRallyAt) {
                 isAttacking = true;
                 armySize = flagToRallyAt.memory.armySize;
             }
         }
 
-        if (Game.cpu.bucket < 2000) {
+        if (Game.cpu.bucket > 2000) {
             var energyHelperFlag = room.getEnergyHelperFlags();
         }
 
