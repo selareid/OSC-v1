@@ -305,12 +305,14 @@ module.exports = {
                         Memory.rooms[room].spawnQueue.normal.push(role);
                         break;
                     case 1:
-                        Memory.rooms[room].spawnQueue.priority.push(role);
+                        // Memory.rooms[room].spawnQueue.priority.splice(role);
+                        Memory.rooms[room].spawnQueue.priority.splice(0, 0, role);
                         break;
                     case 2:
                         Memory.rooms[room].spawnQueue.war.push(role);
                         break;
                 }
+
             }
 
             //add creep that needs to be added to queue to queue
