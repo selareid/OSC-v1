@@ -11,7 +11,8 @@ const roleWarrior = require ('role.warrior');
 const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
 const energyThief = require ('role.energyThief');
-const roleRemoteCreepHandler = require ('role.remoteCreepHandler');
+const roleRemoteHarvester = require ('role.remoteHarvester');
+const roleRemoteHauler = require ('role.remoteHauler');
 const roleEnergyHelper = require ('role.energyOtherRoomHelper');
 const roleMiner = require ('role.miner');
 const roleMarketMover = require ('role.marketMover');
@@ -77,10 +78,10 @@ module.exports = {
                         }
                         break;
                     case 'remoteHarvester':
-                        roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
+                        roleRemoteHarvester.run(room, creep, remoteCreepFlags);
                         break;
                     case 'remoteHauler':
-                        roleRemoteCreepHandler.run(room, creep, remoteCreepFlags);
+                        roleRemoteHauler.run(room, creep, remoteCreepFlags);
                         break;
                     case 'energyHelper':
                         if (energyHelperFlag != undefined && energyHelperFlag.room != undefined) {

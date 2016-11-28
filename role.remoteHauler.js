@@ -2,7 +2,54 @@ require('global');
 require('prototype.creep');
 
 module.exports = {
-    run: function (room, creep, remoteFlag) {
+    run: function (room, creep, remoteCreepFlags) {
+        creep.say('yeah');
+        if (remoteCreepFlags.length > 0) {
+
+            var creepRemoteFlag = creep.memory.remoteFlag;
+
+            if (!creepRemoteFlag) {
+                creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep, remoteCreepFlags);
+                creepRemoteFlag = creep.memory.remoteFlag;
+            }
+
+            var remoteFlag = Game.flags[creepRemoteFlag];
+
+            if (remoteFlag) {
+                this.realRun(room, creep, remoteFlag);
+            }
+            else {
+                creep.runInSquares();
+            }
+
+        }
+        else {
+            creep.runInSquares();
+        }
+    },
+
+    setRemoteFlagMemory: function (room, creep, remoteCreepFlags) {
+
+        var zeChosenFlag;
+
+                for (let flag of remoteCreepFlags) {
+                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room == room && c.memory.role == 'remoteHauler' && c.memory.flag && c.memory.flag == flag.id).length;
+                    if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHaulers) {
+                        zeChosenFlag = flag;
+                        break;
+                    }
+                }
+
+
+        if (zeChosenFlag) {
+            return zeChosenFlag.name;
+        }
+        else {
+            return undefined;
+        }
+    },
+
+    realRun: function (room, creep, remoteFlag) {
 
         creep.say('hauler remote');
 

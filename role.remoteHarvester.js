@@ -1,7 +1,61 @@
 require('global');
+require('prototype.creep');
 
 module.exports = {
-    run: function (room, creep) {
+
+    run: function (room, creep, remoteCreepFlags) {
+        creep.say('yeah');
+        if (remoteCreepFlags.length > 0) {
+
+            var creepRemoteFlag = creep.memory.remoteFlag;
+
+            if (!creepRemoteFlag) {
+                creep.memory.remoteFlag = this.setRemoteFlagMemory(room, creep, remoteCreepFlags);
+                creepRemoteFlag = creep.memory.remoteFlag;
+            }
+
+            var remoteFlag = Game.flags[creepRemoteFlag];
+
+            if (remoteFlag) {
+                if (creep.pos.roomName != remoteFlag.pos.roomName) {
+                    creep.moveTo(remoteFlag, {reusePath: 30, ignoreCreeps: true});
+                }
+                else {
+                    this.realRun(room, creep);
+                }
+            }
+            else {
+                creep.runInSquares();
+            }
+
+        }
+        else {
+            creep.runInSquares();
+        }
+    },
+
+    setRemoteFlagMemory: function (room, creep, remoteCreepFlags) {
+
+        var zeChosenFlag;
+
+                for (let flag of remoteCreepFlags) {
+                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room == room && c.memory.role == 'remoteHarvester' && c.memory.flag && c.memory.flag == flag.id).length;
+                    if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHarvesters) {
+                        zeChosenFlag = flag;
+                        break;
+                    }
+                }
+
+
+        if (zeChosenFlag) {
+            return zeChosenFlag.name;
+        }
+        else {
+            return undefined;
+        }
+    },
+
+    realRun: function (room, creep) {
 creep.say('harvester remote');
 
         //changes state
