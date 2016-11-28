@@ -17,7 +17,39 @@ module.exports = {
             var structureToBuild = this.findStructureToBuild(room, creep);
             if (structureToBuild) {
                 if (creep.build(structureToBuild) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(structureToBuild, {reusePath: 7});
+                    PathFinder.use(true);
+                    creep.moveTo(structureToRepair, {
+                        reusePath: 7, plainCost: 1, swampCost: 4,
+                        costCallback: function (roomName) {
+                            if (roomName == creep.memory.room) {
+                                let room = Game.rooms[roomName];
+
+                                if (!room) return;
+                                let costs = new PathFinder.CostMatrix;
+
+                                room.find(FIND_STRUCTURES).forEach(function (structure) {
+                                    if (structure.structureType === STRUCTURE_ROAD) {
+                                        // Avoid Roads
+                                        costs.set(structure.pos.x, structure.pos.y, 10);
+                                    } else if (structure.structureType !== STRUCTURE_CONTAINER &&
+                                        (structure.structureType !== STRUCTURE_RAMPART || !structure.my)) {
+                                        // Can't walk through non-walkable buildings
+                                        costs.set(structure.pos.x, structure.pos.y, 0xff);
+                                    }
+                                });
+
+                                // Avoid creeps in the room
+                                room.find(FIND_CREEPS).forEach(function (creep) {
+                                    costs.set(creep.pos.x, creep.pos.y, 0xff);
+                                });
+
+                                return costs;
+                            }
+                            else {
+                                return;
+                            }
+                        },
+                    });
                 }
             }
             else {
