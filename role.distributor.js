@@ -4,15 +4,6 @@ require('prototype.creep')();
 module.exports = {
     run: function (room, creep, energyOfTowers) {
 
-        if (!creep.pos.look(LOOK_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_ROAD})[0]) {
-            if (creep.pos.roomName === room.name) {
-                creep.pos.createFlag(undefined, COLOR_WHITE, COLOR_WHITE);
-            }
-            else {
-                creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-            }
-        }
-
         if (creep.memory.working == true && creep.carry.energy == 0) {
             creep.memory.working = false;
         }
