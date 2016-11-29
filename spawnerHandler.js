@@ -454,7 +454,7 @@ module.exports = {
                             Memory.rooms[room].spawnQueue.war.splice(0, 1);
                             break;
                     }
-                    console.log("Creating Creep " + name);
+                    console.log("Creating Creep " + name + ' Room ' + room.name);
                 }
             }
         }
