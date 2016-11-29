@@ -70,12 +70,27 @@ module.exports = {
                     creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
                 }
             }
-            else if (room.storage) {
-                if (_.sum(room.storage.store) >= room.storage.store) {
-                    creep.drop(RESOURCE_ENERGY);
+            else {
+                var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+                var storage = room.storage;
+
+                var arrayOfBoth = links;
+                arrayOfBoth.push(storage);
+
+                var closer = creep.pos.findClosestByRange(arrayOfBoth);
+
+                if (closer != storage) {
+                    if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closer, {reusePath: 10})
+                    }
                 }
-                else if (creep.transfer(room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(room.storage);
+                else if (room.storage) {
+                    if (_.sum(room.storage.store) >= room.storage.store) {
+                        creep.drop(RESOURCE_ENERGY);
+                    }
+                    else if (creep.transfer(room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(room.storage);
+                    }
                 }
             }
         }
