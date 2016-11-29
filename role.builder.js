@@ -38,6 +38,19 @@ module.exports = {
                                     }
                                 });
 
+                                for (x = 0; x < 50; y++) {
+                                    costs.set(x, 49, 10);
+                                }
+                                for (x = 0; x < 50; y++) {
+                                    costs.set(x, 0, 10);
+                                }
+                                for (y = 0; y < 50; y++) {
+                                    costs.set(49, y, 10);
+                                }
+                                for (y = 0; y < 50; y++) {
+                                    costs.set(0, y, 10);
+                                }
+
                                 // Avoid creeps in the room
                                 room.find(FIND_CREEPS).forEach(function (creep) {
                                     costs.set(creep.pos.x, creep.pos.y, 0xff);
