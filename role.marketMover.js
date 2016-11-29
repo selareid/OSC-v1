@@ -1,6 +1,8 @@
 require('global');
 require('prototype.creep')();
 
+const roleCarrier = require ('role.carrier');
+
 module.exports = {
     run: function (room, creep) {
         var terminal = room.terminal;
@@ -21,7 +23,9 @@ module.exports = {
                         }
                     }
                 }
+                else roleCarrier.run(room, creep);
             }
+            else roleCarrier.run(room, creep);
         }
         else {
             var storage = room.storage;
@@ -47,7 +51,9 @@ module.exports = {
                         this.collectEnergy(room, creep, storage);
                     }
                 }
+                else roleCarrier.run(room, creep);
             }
+            else roleCarrier.run(room, creep);
         }
     },
 
