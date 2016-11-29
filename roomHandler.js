@@ -12,11 +12,15 @@ module.exports = {
     run: function (room) {
         
         try {
-            if (Game.time % 7 == 0 && Game.cpu.bucket > 2000) {
-                var terminal = room.terminal;
-                if (terminal) {
-                    marketDealer.run(room, terminal);
+            if (Game.time % 7 == 0) {
+                if (Game.cpu.bucket > 2000) {
+                    var terminal = room.terminal;
+                    if (terminal) {
+                        marketDealer.run(room, terminal);
+                    }
                 }
+
+                linkHandler.run(room);
             }
         }
         catch (err) {
@@ -137,8 +141,6 @@ module.exports = {
                 towerHandler.repairRampart(room, tower);
             }
         }
-
-        linkHandler.run(room);
 
         try {
             spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);

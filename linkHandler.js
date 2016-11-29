@@ -2,23 +2,37 @@ require('global');
 
 module.exports = {
     run: function (room) {
+        var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
 
-        // if (Game.time % 20 == 0) {
-        //     var sourceLink = Game.getObjectById('57e1b8d9491fd2351f28b6ea');
-        //     var targetLink = Game.getObjectById('57e0d5dc07b9dd24411ea83f');
-        //     if (sourceLink && targetLink) {
-        //         if (sourceLink.energy >= 4) {
-        //             Memory.toll.paid = true;
-        //             if (sourceLink && targetLink && targetLink.energy < targetLink.energyCapacity - 5 && sourceLink.cooldown == 0) {
-        //                 let res = sourceLink.transferEnergy(targetLink, 4);
-        //                 console.log(`Link Xfer: ${res}`);
-        //             }
-        //         }
-        //         else {
-        //             Memory.toll.missedPayments += 1;
-        //             Memory.toll.paid = false;
-        //         }
-        //     }
-        // }
+        if (links.length > 0) {
+            var averageEn = _.sum(links, '.energy');
+            if (averageEn > 101) {
+
+                var linksOverAverage = [];
+                var linksUnderAverage = [];
+
+                for (let link of links) {
+                    var linkEn = link.energy;
+                    if (linkEn > averageEn + 100 && link.cooldown == 0) {
+                        linksOverAverage.push(link);
+                    }
+                    else if (linkEn < averageEn - 100) {
+                        linksUnderAverage.push(link);
+                    }
+                }
+
+                if (linksOverAverage.length > 0) {
+                    var linkMostOver = _.max(linksOverAverage, '.energy');
+                    var linkMostUnder = _.min(linksUnderAverage, '.energy');
+
+                    var amountToTransfer = linkMostOver.energy - averageEn;
+
+                    linkMostOver.transferEnergy(linkMostUnder, amountToTransfer);
+
+                }
+
+            }
+        }
+
     }
 };
