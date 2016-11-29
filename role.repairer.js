@@ -30,7 +30,7 @@ module.exports = {
                                 room.find(FIND_STRUCTURES).forEach(function (structure) {
                                     if (structure.structureType === STRUCTURE_ROAD) {
                                         // Avoid Roads
-                                        costs.set(structure.pos.x, structure.pos.y, 10);
+                                        costs.set(structure.pos.x, structure.pos.y, 8);
                                     } else if (structure.structureType !== STRUCTURE_CONTAINER &&
                                         (structure.structureType !== STRUCTURE_RAMPART || !structure.my)) {
                                         // Can't walk through non-walkable buildings
