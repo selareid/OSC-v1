@@ -63,5 +63,6 @@ module.exports = {
                 creep.moveTo(storage);
             }
         }
+        else roleCarrier.run(room, creep);
     }
 };
