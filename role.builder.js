@@ -65,8 +65,21 @@ module.exports = {
             }
 
             if (droppedEnergy.amount == undefined || droppedEnergy.amount < 1010) {
+
+                var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
                 var storage = room.storage;
-                if (storage && storage.store[RESOURCE_ENERGY] > 1000) {
+
+                var arrayOfBoth = links;
+                arrayOfBoth.push(storage);
+
+                var closer = creep.pos.findClosestByRange(arrayOfBoth);
+
+                if (closer != storage) {
+                    if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closer, {reusePath: 10})
+                    }
+                }
+                else if (storage && storage.store[RESOURCE_ENERGY] > 1000) {
                     if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(storage, {reusePath: 10})
                     }
