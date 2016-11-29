@@ -5,7 +5,7 @@ module.exports = {
         var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
 
         if (links.length > 0) {
-            var averageEn = _.sum(links, '.energy');
+            var averageEn = _.sum(links, '.energy')/links.length;
             if (averageEn > 101) {
 
                 var linksOverAverage = [];
