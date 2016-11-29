@@ -16,20 +16,26 @@ module.exports = {
                     creep.moveTo(roomPos2);
                 }
                 else {
-                    var spawn = room.find(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity})[0];
+                    var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+                    var storage = room.storage;
 
-                    if (spawn) {
-                        if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(spawn);
+                    var arrayOfBoth = links;
+                    arrayOfBoth.push(storage);
+
+                    var closer = creep.pos.findClosestByRange(arrayOfBoth);
+
+                    if (closer != storage) {
+                        if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(closer, {reusePath: 10})
+                        }
+                    }
+                    else if (storage && _.sum(storage.store) < storage.storeCapacity) {
+                        if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage, {reusePath: 10})
                         }
                     }
                     else {
-                        if (creep.pos.x == 12 && creep.pos.y == 25) {
-                            creep.drop(RESOURCE_ENERGY);
-                        }
-                        else {
-                            creep.moveTo(12, 25);
-                        }
+                        creep.drop(RESOURCE_ENERGY);
                     }
                 }
             }
