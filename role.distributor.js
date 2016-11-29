@@ -84,14 +84,20 @@ module.exports = {
             }
             else {
 
-                // link = Game.getObjectById('57e0d5dc07b9dd24411ea83f');
-                // if (link && link.energy > 100) {
-                //     if (creep.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                //         creep.moveTo(link);
-                //     }
-                // }
-                // else {
-                if (storage.store[RESOURCE_ENERGY] > 50) {
+                var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+                var storage = room.storage;
+
+                var arrayOfBoth = links;
+                arrayOfBoth.push(storage);
+
+                var closer = creep.pos.findClosestByRange(arrayOfBoth);
+
+                if (closer != storage) {
+                    if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(closer, {reusePath: 10})
+                    }
+                }
+                else if (storage.store[RESOURCE_ENERGY] > 50) {
                     if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(storage);
                     }
