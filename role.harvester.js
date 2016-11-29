@@ -24,8 +24,7 @@ module.exports = {
                 // else if container found put transfer energy to container
                 // if container full drop energy
 
-                var link = creep.pos.findInRange(FIND_STRUCTURES, 1, {filter: (s) => s.structureType == STRUCTURE_LINK
-                && s.energy < s.energyCapacity})[0];
+                var link = creep.pos.findInRange(global[room.name].links, 1, {filter: (l) => l.energy < l.energyCapacity})[0];
 
                 if (link) {
                     creep.creepSpeech(room, 'droppingEnergyLink');

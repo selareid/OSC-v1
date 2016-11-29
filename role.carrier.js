@@ -87,7 +87,7 @@ module.exports = {
                 }
                 else {
 
-                    var link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+                    var link = _.filter(global[room.name].links, (l) => l.energy > 0);
 
                     if (link) {
                         if (creep.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {

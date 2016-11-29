@@ -71,7 +71,7 @@ module.exports = {
                 }
             }
             else {
-                var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+                var links = _.filter(global[room.name].links, (l) => l.energy < l.energyCapacity);
                 var storage = room.storage;
 
                 var arrayOfBoth = links;
@@ -80,7 +80,7 @@ module.exports = {
                 var closer = creep.pos.findClosestByRange(arrayOfBoth);
 
                 if (closer != storage) {
-                    if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    if (creep.transfer(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(closer, {reusePath: 10})
                     }
                 }

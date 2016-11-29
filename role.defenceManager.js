@@ -33,7 +33,7 @@ module.exports = {
         }
         else {
 
-            var links = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+            var links = _.filter(global[room.name].links, (l) => l.energy > 0);
             var storage = room.storage;
 
             var arrayOfBoth = links;
