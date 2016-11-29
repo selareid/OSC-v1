@@ -38,10 +38,10 @@ module.exports = {
                                     }
                                 });
 
-                                for (x = 0; x < 50; y++) {
+                                for (x = 0; x < 50; x++) {
                                     costs.set(x, 49, 10);
                                 }
-                                for (x = 0; x < 50; y++) {
+                                for (x = 0; x < 50; x++) {
                                     costs.set(x, 0, 10);
                                 }
                                 for (y = 0; y < 50; y++) {
