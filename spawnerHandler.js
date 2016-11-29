@@ -121,7 +121,7 @@ module.exports = {
             if (!room.storage) {
                 minimumNumberOfCarriers = 0;
 
-                let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY, {filter: (e) => e.amount > 200}), '.amount').amount;
+                let maxDropEn = _.max(room.find(FIND_DROPPED_ENERGY), '.amount').amount;
 
                 if (maxDropEn) {
                         minimumNumberOfUpgraders = 2;
