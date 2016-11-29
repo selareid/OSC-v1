@@ -183,7 +183,13 @@ module.exports = {
             minimumNumberOfRemoteHaulers = tempRemoteHaulers;
 
             if (room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})[0]) {
-                minimumNumberOfMiners = 1;
+                var mineral = room.find(FIND_MINERALS)[0];
+                if (mineral.ticksToRegeneration < 500) {
+                    minimumNumberOfMiners = 1;
+                }
+                else {
+                    minimumNumberOfMiners = 0;
+                }
             }
             else {
                 minimumNumberOfMiners = 0;
