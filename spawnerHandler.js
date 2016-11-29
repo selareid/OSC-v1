@@ -275,51 +275,7 @@ module.exports = {
             }
 
             //add creeps close to death to queue
-            var creepAboutToDie = _.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role)[0];
-
-            if (creepAboutToDie) {
-                let role = creepAboutToDie.memory.role;
-                var whichQueue = 0; //0 is normal queue and 1 is priority 2 is war queue
-                switch (role) {
-                    case 'harvester':
-                        if (harvestersInPriorityQueue == 0) {
-                            whichQueue = 1;
-                        }
-                        break;
-                    case 'distributor':
-                        if (distributorsInPriorityQueue == 0) {
-                            whichQueue = 1;
-                        }
-                        break;
-                    case 'carrier':
-                        if (carriersInPriorityQueue == 0) {
-                            whichQueue = 1;
-                        }
-                        break;
-                    case 'warrior':
-                        if (warriorsInPriorityQueue == 0) {
-                            whichQueue = 1;
-                        }
-                        else if (warriorsInWarQueue == 0) {
-                            whichQueue = 2;
-                        }
-                        break;
-                }
-
-                switch (whichQueue) {
-                    case 0:
-                        Memory.rooms[room].spawnQueue.normal.push(role);
-                        break;
-                    case 1:
-                        // Memory.rooms[room].spawnQueue.priority.splice(role);
-                        Memory.rooms[room].spawnQueue.priority.splice(0, 0, role);
-                        break;
-                    case 2:
-                        Memory.rooms[room].spawnQueue.war.push(role);
-                        break;
-                }
-
-            }
+            this.addCreepsAboutToDieToQueue(room, harvestersInPriorityQueue, distributorsInPriorityQueue, carriersInPriorityQueue, warriorsInPriorityQueue, warriorsInWarQueue);
 
             //add creep that needs to be added to queue to queue
             var creepToAddToQueue;
@@ -611,5 +567,53 @@ module.exports = {
 
         return amountToReturn + _.sum(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == room && reserveFlags.includes(Game.flags[c.memory.flag]));
 
+    },
+
+    addCreepsAboutToDieToQueue: function (room, harvestersInPriorityQueue, distributorsInPriorityQueue, carriersInPriorityQueue, warriorsInPriorityQueue, warriorsInWarQueue) {
+        var creepAboutToDie = _.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role)[0];
+
+        if (creepAboutToDie) {
+            let role = creepAboutToDie.memory.role;
+            var whichQueue = 0; //0 is normal queue and 1 is priority 2 is war queue
+            switch (role) {
+                case 'harvester':
+                    if (harvestersInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                    break;
+                case 'distributor':
+                    if (distributorsInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                    break;
+                case 'carrier':
+                    if (carriersInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                    break;
+                case 'warrior':
+                    if (warriorsInPriorityQueue == 0) {
+                        whichQueue = 1;
+                    }
+                    else if (warriorsInWarQueue == 0) {
+                        whichQueue = 2;
+                    }
+                    break;
+            }
+
+            switch (whichQueue) {
+                case 0:
+                    Memory.rooms[room].spawnQueue.normal.push(role);
+                    break;
+                case 1:
+                    // Memory.rooms[room].spawnQueue.priority.splice(role);
+                    Memory.rooms[room].spawnQueue.priority.splice(0, 0, role);
+                    break;
+                case 2:
+                    Memory.rooms[room].spawnQueue.war.push(role);
+                    break;
+            }
+
+        }
     }
 };
