@@ -20,18 +20,31 @@ module.exports = {
             // if working if true do stuff or else mine
             if (creep.memory.working == true) {
 
-                //if container found put transfer energy to container if container full drop energy
+                //if link found transfer energy to it
+                // else if container found put transfer energy to container
+                // if container full drop energy
 
-                var container = creep.pos.findInRange(FIND_STRUCTURES, 1, {filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                && _.sum(s.store) < s.storeCapacity})[0];
+                var link = creep.pos.findInRange(FIND_STRUCTURES, 1, {filter: (s) => s.structureType == STRUCTURE_LINK
+                && s.energy < s.energyCapacity})[0];
 
-                if (container) {
-                    creep.creepSpeech(room, 'droppingEnergyContainer');
-                    creep.transfer(container, RESOURCE_ENERGY);
+                if (link) {
+                    creep.creepSpeech(room, 'droppingEnergyLink');
+                    creep.transfer(link, RESOURCE_ENERGY);
                 }
                 else {
-                    creep.creepSpeech(room, 'droppingEnergy');
-                    creep.drop(RESOURCE_ENERGY);
+                    var container = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+                        filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                        && _.sum(s.store) < s.storeCapacity
+                    })[0];
+
+                    if (container) {
+                        creep.creepSpeech(room, 'droppingEnergyContainer');
+                        creep.transfer(container, RESOURCE_ENERGY);
+                    }
+                    else {
+                        creep.creepSpeech(room, 'droppingEnergy');
+                        creep.drop(RESOURCE_ENERGY);
+                    }
                 }
             }
             else {
