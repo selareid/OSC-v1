@@ -22,7 +22,10 @@ module.exports = function () {
                     toSay = "Dropping DropDaBeat Ground".split(' ');
                     break;
                 case 'droppingEnergyContainer':
-                    toSay = "Container NotDGround".split(' ');
+                    toSay = "Container NotDGround1".split(' ');
+                    break;
+                case 'droppingEnergyLink':
+                    toSay = "Link NtDGround2".split(' ');
                     break;
                 case 'movingToEnergy':
                     toSay = "I Need To Get Some Energy To Do Some Things Around You See ...".split(' ');
