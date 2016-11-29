@@ -77,6 +77,14 @@ module.exports = function () {
                 }
             },
 
+        Room.prototype.cacheThingsInRoom =
+            function () {
+              //things is currently just links
+
+                global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType});
+
+            },
+
         Room.prototype.updateConstructionTargets =
             function () {
 
