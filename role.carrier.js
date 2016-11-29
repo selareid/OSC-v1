@@ -86,12 +86,21 @@ module.exports = {
                     }
                 }
                 else {
-                    var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name})[0];
-                    if (flagToGoTo) {
-                        creep.moveTo(flagToGoTo);
+
+                    var link = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK && s.energy > 0});
+
+                    if (link) {
+                        if (creep.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(link, {reusePath: 10})
+                        }
+                    }
+                    else {
+                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name})[0];
+                        if (flagToGoTo) {
+                            creep.moveTo(flagToGoTo);
+                        }
                     }
                 }
-
             }
 
         }
