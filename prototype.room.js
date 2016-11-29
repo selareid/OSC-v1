@@ -81,6 +81,9 @@ module.exports = function () {
             function () {
               //things is currently just links
 
+                if (global[this.name] == undefined) {
+                    global[this.name] = {};
+                }
                 global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType});
 
             },
