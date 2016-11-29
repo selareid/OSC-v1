@@ -96,19 +96,16 @@ module.exports = function () {
                     }
                     return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
                 case 'upgrader':
-                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 50) / 150);
                     if (numberOfParts > 0) {
 
                         if (Memory.rooms[room].energyMode == 'saving' && numberOfParts > 7) {
-                            numberOfParts = 7;
+                            numberOfParts = 10;
                         }
-                        else if (Memory.rooms[room].energyMode == 'ok' && numberOfParts > 15) {
-                            numberOfParts = 15;
-                        }
-                        else if (numberOfParts > 16) numberOfParts = 16;
-
-                        body.push(MOVE);
+                        else if (numberOfParts > 24) numberOfParts = 24;
+                        
                         for (let i = 0; i < numberOfParts; i++) {
+                            body.push(MOVE);
                             body.push(WORK);
                         }
                         body.push(CARRY);
