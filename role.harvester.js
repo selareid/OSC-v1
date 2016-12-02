@@ -26,19 +26,19 @@ module.exports = {
 
                 var link = creep.pos.findInRange(global[room.name].links, 1, {filter: (l) => l.energy < l.energyCapacity})[0];
 
-                if (link) {
-                    creep.creepSpeech(room, 'droppingEnergyLink');
-                    creep.transfer(link, RESOURCE_ENERGY);
+                var container = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER
+                    && _.sum(s.store) < s.storeCapacity
+                })[0];
+
+                if (container) {
+                    creep.creepSpeech(room, 'droppingEnergyContainer');
+                    creep.transfer(container, RESOURCE_ENERGY);
                 }
                 else {
-                    var container = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER
-                        && _.sum(s.store) < s.storeCapacity
-                    })[0];
-
-                    if (container) {
-                        creep.creepSpeech(room, 'droppingEnergyContainer');
-                        creep.transfer(container, RESOURCE_ENERGY);
+                    if (link) {
+                        creep.creepSpeech(room, 'droppingEnergyLink');
+                        creep.transfer(link, RESOURCE_ENERGY);
                     }
                     else {
                         creep.creepSpeech(room, 'droppingEnergy');
