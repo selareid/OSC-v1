@@ -132,12 +132,17 @@ module.exports = {
                     minimumNumberOfCarriers = 4;
                 }
                 else {
-                    var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
-                    if (minContEng > 1000) {
-                        minimumNumberOfCarriers = 3
+                    if (global[this.name].links.length > 4) {
+                        minimumNumberOfCarriers = 2;
                     }
                     else {
-                        minimumNumberOfCarriers = 2;
+                        var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
+                        if (minContEng > 1000) {
+                            minimumNumberOfCarriers = 3
+                        }
+                        else {
+                            minimumNumberOfCarriers = 2;
+                        }
                     }
                 }
             }
