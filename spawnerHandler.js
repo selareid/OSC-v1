@@ -132,7 +132,7 @@ module.exports = {
                     minimumNumberOfCarriers = 4;
                 }
                 else {
-                    if (global[this.name].links.length > 4) {
+                    if (global[room.name].links.length > 4) {
                         minimumNumberOfCarriers = 2;
                     }
                     else {
