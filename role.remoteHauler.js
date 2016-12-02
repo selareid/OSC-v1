@@ -77,7 +77,7 @@ module.exports = {
                 var arrayOfBoth = links;
                 arrayOfBoth.push(storage);
 
-                var closer = creep.pos.findClosestByRange(arrayOfBoth);
+                var closer = creep.pos.findClosestByPath(arrayOfBoth);
 
                 if (closer != storage) {
                     if (creep.transfer(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
