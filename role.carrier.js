@@ -183,7 +183,7 @@ module.exports = {
     },
 
     carrierFindContainer: function (room, creep) {
-        var allContainersInRoom = _.filter(global[this.name].containers, (c) => _.sum(c.store) > 0);
+        var allContainersInRoom = _.filter(global[room.name].containers, (c) => _.sum(c.store) > 0);
 
         if (allContainersInRoom.length > 0) {
 
@@ -202,7 +202,7 @@ module.exports = {
     },
 
     carrierFindContainerNoEnergy: function (room, creep) {
-        var allContainersInRoom = _.filter(global[this.name].containers, (c) => _.sum(_.filter(c.store, (r) => r.resourceType != RESOURCE_ENERGY)) > 0);
+        var allContainersInRoom = _.filter(global[room.name].containers, (c) => _.sum(_.filter(c.store, (r) => r.resourceType != RESOURCE_ENERGY)) > 0);
 
         if (allContainersInRoom.length > 0) {
 
