@@ -200,10 +200,10 @@ module.exports = {
                 minimumNumberOfMiners = 0;
             }
 
+
             var terminal = room.terminal;
-            var orders = Memory.rooms[room].market;
             var bucket = Game.cpu.bucket;
-            if (terminal && orders && bucket > 2000) {
+            if (terminal && bucket > 2000) {
                 minimumNumberOfMarketMovers = 1;
             }
             else {
