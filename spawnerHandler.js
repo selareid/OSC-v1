@@ -575,7 +575,7 @@ module.exports = {
     },
 
     addCreepsAboutToDieToQueue: function (room, harvestersInPriorityQueue, distributorsInPriorityQueue, carriersInPriorityQueue, warriorsInPriorityQueue, warriorsInWarQueue) {
-        var creepAboutToDie = _.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 150 && c.memory.role)[0];
+        var creepAboutToDie = _.filter(Game.creeps, (c) => c.memory.room == room && c.ticksToLive <= 400 && c.memory.role)[0];
 
         if (creepAboutToDie) {
             let role = creepAboutToDie.memory.role;
