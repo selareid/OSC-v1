@@ -367,7 +367,7 @@ module.exports = {
 
 
         //spawn next creep in queue
-        this.spawn(room);
+        this.spawn(room, numberOfHarvesters, minimumNumberOfHarvesters, numberOfDistributors, minimumNumberOfDistributors, numberOfCarriers);
 
         //memory "cleanup"
         Memory.rooms[room].populationGoal.harvesters = minimumNumberOfHarvesters;
@@ -565,7 +565,7 @@ module.exports = {
         }
     },
 
-    spawn: function (room) {
+    spawn: function (room, numberOfHarvesters, minimumNumberOfHarvesters, numberOfDistributors, minimumNumberOfDistributors, numberOfCarriers) {
         var spawns = room.find(FIND_MY_SPAWNS, {filter: (s) => s.spawning != true});
         var spawn = spawns[Game.time % spawns.length];
 
@@ -586,7 +586,7 @@ module.exports = {
                 }
                 else if ((numberOfHarvesters >= minimumNumberOfHarvesters)
                     && (numberOfDistributors >= minimumNumberOfDistributors)
-                    && (numberOfCarriers >= 2)) {
+                    && (numberOfCarriers > 0)) {
                     amountToSave = 0.15;
                 }
             }
