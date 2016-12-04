@@ -8,8 +8,12 @@ const roleCarrier = require ('role.carrier');
 module.exports = {
     run: function (room, creep) {
         var terminal = room.terminal;
+        var terminalStore = _.sum(terminal.store);
 
-        if (order) {
+        var orders = Memory.rooms[room].market;
+        var order = Game.market.getOrderById(orders[0]);
+
+        if (order || terminalStore == 0) {
             if (creep.memory.working == true && creep.carry.energy == 0) {
                 creep.memory.working = false;
             }
@@ -26,12 +30,9 @@ module.exports = {
             }
         }
 
-        var orders = Memory.rooms[room].market;
-        var order = Game.market.getOrderById(orders[0]);
-
         if (creep.memory.working == true) {
             if (terminal) {
-                if (order) {
+                if (order || terminalStore == 0) {
                     if (_.sum(terminal.store) < terminal.storeCapacity) {
                         this.putStuffIntoTerminal(room, creep, terminal);
                     }
@@ -47,7 +48,7 @@ module.exports = {
             var storage = room.storage;
             if (storage) {
                 if (orders != undefined) {
-                    if (order) {
+                    if (order || terminalStore == 0) {
                         var costinEnergy = Game.market.calcTransactionCost(order.amount, room.name, order.roomName);
                         if ((RESOURCE_ENERGY in terminal.store) && terminal.store[RESOURCE_ENERGY] >= costinEnergy) {
                             var resource = order.resourceType;
