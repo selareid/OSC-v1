@@ -128,21 +128,16 @@ module.exports = {
                 }
             }
             else {
-                if (room.find(FIND_DROPPED_ENERGY)[0]) {
-                    minimumNumberOfCarriers = 4;
+                if (global[room.name].links.length > 4) {
+                    minimumNumberOfCarriers = 2;
                 }
                 else {
-                    if (global[room.name].links.length > 4) {
-                        minimumNumberOfCarriers = 2;
+                    var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
+                    if (minContEng > 1000) {
+                        minimumNumberOfCarriers = 3
                     }
                     else {
-                        var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
-                        if (minContEng > 1000) {
-                            minimumNumberOfCarriers = 3
-                        }
-                        else {
-                            minimumNumberOfCarriers = 2;
-                        }
+                        minimumNumberOfCarriers = 2;
                     }
                 }
             }
