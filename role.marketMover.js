@@ -9,11 +9,21 @@ module.exports = {
     run: function (room, creep) {
         var terminal = room.terminal;
 
-        if (creep.memory.working == true && creep.carry.energy == 0) {
-            creep.memory.working = false;
+        if (order) {
+            if (creep.memory.working == true && creep.carry.energy == 0) {
+                creep.memory.working = false;
+            }
+            else if (creep.memory.working == false && _.sum(creep.carry) == creep.carryCapacity) {
+                creep.memory.working = true;
+            }
         }
-        else if (creep.memory.working == false && _.sum(creep.carry) == creep.carryCapacity) {
-            creep.memory.working = true;
+        else {
+            if (creep.memory.working == false && creep.carry.energy == 0) {
+                creep.memory.working = true;
+            }
+            else if (creep.memory.working == true && _.sum(creep.carry) == creep.carryCapacity) {
+                creep.memory.working = false;
+            }
         }
 
         var orders = Memory.rooms[room].market;
