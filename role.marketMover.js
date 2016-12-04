@@ -49,18 +49,21 @@ module.exports = {
             if (storage) {
                 if (orders != undefined) {
                     if (order || terminalStore == 0) {
-                        var costinEnergy = Game.market.calcTransactionCost(order.amount, room.name, order.roomName);
-                        if ((RESOURCE_ENERGY in terminal.store) && terminal.store[RESOURCE_ENERGY] >= costinEnergy) {
-                            var resource = order.resourceType;
-                            if (_.filter(storage.store, (r) => r.resourceType == resource)) {
-                                if (creep.withdraw(storage, resource) == ERR_NOT_IN_RANGE) {
-                                    creep.moveTo(storage);
+                        if (order) {
+                            var costinEnergy = Game.market.calcTransactionCost(order.amount, room.name, order.roomName);
+                            if ((RESOURCE_ENERGY in terminal.store) && terminal.store[RESOURCE_ENERGY] >= costinEnergy) {
+                                var resource = order.resourceType;
+                                if (_.filter(storage.store, (r) => r.resourceType == resource)) {
+                                    if (creep.withdraw(storage, resource) == ERR_NOT_IN_RANGE) {
+                                        creep.moveTo(storage);
+                                    }
                                 }
                             }
+                            else {
+                                this.collectEnergy(room, creep, storage);
+                            }
                         }
-                        else {
-                            this.collectEnergy(room, creep, storage);
-                        }
+                        else roleCarrier.run(room, creep);
                     }
                     else {
                         for (let resourceType in creep.carry) {
