@@ -18,7 +18,7 @@ module.exports = {
 
             if (remoteFlag) {
                 if (creep.pos.roomName != remoteFlag.pos.roomName) {
-                    creep.moveTo(remoteFlag, {reusePath: 30, ignoreCreeps: true});
+                    creep.moveTo(remoteFlag, {reusePath: 37, ignoreCreeps: true});
                 }
                 else {
                     this.realRun(room, creep);
@@ -108,7 +108,7 @@ creep.say('harvester remote');
                     switch (creep.harvest(source)) {
                         case ERR_NOT_IN_RANGE:
                             creep.creepSpeech(room, 'movingToSource');
-                            creep.moveTo(source, {reusePath: 10});
+                            creep.moveTo(source, {reusePath: 37});
                             break;
                         case OK:
                             creep.creepSpeech(room, 'harvesting');

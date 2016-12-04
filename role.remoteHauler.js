@@ -67,7 +67,7 @@ module.exports = {
                     creep.build(constructionSitesInRange[0]);
                 }
                 else {
-                    creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 10});
+                    creep.moveTo(Game.rooms[creep.memory.room].find(FIND_MY_SPAWNS)[0], {reusePath: 37});
                 }
             }
             else {
@@ -96,7 +96,7 @@ module.exports = {
         }
         else {
             if (creep.pos.roomName != remoteFlag.pos.roomName) {
-                creep.moveTo(remoteFlag.pos, {reusePath: 20});
+                creep.moveTo(remoteFlag.pos, {reusePath: 37});
             }
             else {
 
