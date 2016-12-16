@@ -43,7 +43,7 @@ module.exports = {
             var costOfTrans = Game.market.calcTransactionCost(amountToDeal, room.name, order.roomName);
             var energyNeeded = costOfTrans;
             var amountOver;
-            
+
             if (amountToDeal > order.amount) {
                 amountToDeal = order.amount;
             }
@@ -51,13 +51,11 @@ module.exports = {
             if (order.resourceType == RESOURCE_ENERGY) {
                 energyNeeded = costOfTrans + amountToDeal;
                 if (energyNeeded > terminal.store[RESOURCE_ENERGY]) {
-                    amountOver = energyNeeded - terminal.store[RESOURCE_ENERGY];
-                    amountToDeal = amountToDeal - amountOver;
+                    amountToDeal = 100;
                 }
             }
             else if (energyNeeded > terminal.store[RESOURCE_ENERGY]) {
-                amountOver = energyNeeded - terminal.store[RESOURCE_ENERGY];
-                amountToDeal = amountToDeal - amountOver;
+                amountToDeal = 100;
             }
 
             var result = Game.market.deal(order.id, amountToDeal, room.name);
