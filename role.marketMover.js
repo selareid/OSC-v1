@@ -39,7 +39,10 @@ module.exports = {
                     else roleCarrier.run(room, creep);
                 }
                 else {
-                    this.pullStuffFromTerminal(room, creep, terminal);
+                    if (room.storage.store[RESOURCE_ENERGY] > 600000) {
+                        this.putStuffIntoTerminal(room, creep, terminal);
+                    }
+                    else this.pullStuffFromTerminal(room, creep, terminal);
                 }
             }
             else roleCarrier.run(room, creep);
@@ -63,7 +66,12 @@ module.exports = {
                                 this.collectEnergy(room, creep, storage);
                             }
                         }
-                        else roleCarrier.run(room, creep);
+                        else {
+                            if (room.storage.store[RESOURCE_ENERGY] > 600000) {
+                                this.collectEnergy(room, creep, storage);
+                            }
+                            else roleCarrier.run(room, creep);
+                        }
                     }
                     else {
                         for (let resourceType in creep.carry) {
