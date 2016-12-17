@@ -66,18 +66,18 @@ module.exports = {
                                 this.collectEnergy(room, creep, storage);
                             }
                         }
-                        else {
-                            if (room.storage.store[RESOURCE_ENERGY] > 600000) {
-                                this.collectEnergy(room, creep, storage);
-                            }
-                            else roleCarrier.run(room, creep);
-                        }
+                        else roleCarrier.run(room, creep);
                     }
                     else {
-                        for (let resourceType in creep.carry) {
-                            if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(storage);
-                                break;
+                        if (room.storage.store[RESOURCE_ENERGY] > 600000) {
+                            this.putStuffIntoTerminal(room, creep, terminal);
+                        }
+                        else {
+                            for (let resourceType in creep.carry) {
+                                if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(storage);
+                                    break;
+                                }
                             }
                         }
                     }
