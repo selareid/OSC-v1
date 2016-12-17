@@ -19,6 +19,7 @@ module.exports = {
             }
             else {
                 Memory.rooms[room].market.splice(0, 1);
+                console.log('removed order');
             }
 
         }
