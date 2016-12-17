@@ -128,8 +128,11 @@ module.exports = {
                 }
             }
             else {
-                if (global[room.name].links.length > 4) {
-                    minimumNumberOfCarriers = 2;
+                if (global[room.name].links[0]) {
+                    if (room.storage.store[RESOURCE_ENERGY] > 600000) {
+                        minimumNumberOfCarriers = 1;
+                    }
+                    else minimumNumberOfCarriers = 2;
                 }
                 else {
                     var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
@@ -144,7 +147,7 @@ module.exports = {
 
             //set number of harvesters
             var storage = room.storage;
-            if (storage && storage[RESOURCE_ENERGY] >= 350000) {
+            if (storage && storage.store[RESOURCE_ENERGY] >= 350000) {
                 minimumNumberOfHarvesters = 0;
             }
             else {
