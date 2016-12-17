@@ -60,7 +60,7 @@ module.exports = {
 
             var result = Game.market.deal(order.id, amountToDeal, room.name);
 
-            console.log('Market Sell Order Dealt Result = ' + result + ' Room = ' + room.name);
+            console.log('Market Sell Order Dealt Result = ' + result + ' Room = ' + room.name + ' Amount = ' + amountToDeal);
         }
     },
 
