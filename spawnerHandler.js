@@ -143,7 +143,8 @@ module.exports = {
             }
 
             //set number of harvesters
-            if (room.storage && _.sum(_.filter(room.storage.store, (r) => r.resourceType == RESOURCE_ENERGY)) >= 350000) {
+            var storage = room.storage;
+            if (storage && storage[RESOURCE_ENERGY] >= 350000) {
                 minimumNumberOfHarvesters = 0;
             }
             else {
