@@ -39,7 +39,7 @@ module.exports = {
         if (isUnderAttack === true) {
             if (creep.room.name != room.name) {
                 creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(room)),
-                    {ignoreCreeps: true, ignoreRoads: true});
+                    {ignoreRoads: true});
                 return false;
             }
             else {
@@ -79,7 +79,7 @@ module.exports = {
             else {
                 if (creep.room.name != roomToAttack) {
                     creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(roomToAttack)),
-                        {ignoreCreeps: true, ignoreRoads: true});
+                        {ignoreRoads: true});
                     return false;
                 }
                 else {
@@ -112,7 +112,6 @@ module.exports = {
                 if (rampart) {
                     if (creep.pos != rampart.pos) {
                         creep.moveTo(rampart, {
-                            ignoreCreeps: true,
                             ignoreRoads: true
                         });
                     }
@@ -129,7 +128,6 @@ module.exports = {
                     if (creep.getActiveBodyparts(ATTACK) >= 1) {
                         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {
-                                ignoreCreeps: true,
                                 ignoreRoads: true
                             });
                         }
@@ -137,7 +135,6 @@ module.exports = {
                     else {
                         if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {
-                                ignoreCreeps: true,
                                 ignoreRoads: true
                             });
                         }
@@ -160,7 +157,6 @@ module.exports = {
 
                         creep.moveTo(objectTarget,
                             {
-                                ignoreCreeps: true,
                                 ignoreRoads: true
                             });
 
@@ -168,7 +164,6 @@ module.exports = {
                     else if (creep.rangedAttack(objectTarget) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(objectTarget,
                             {
-                                ignoreCreeps: true,
                                 ignoreRoads: true
                             });
                     }
@@ -194,7 +189,6 @@ module.exports = {
 
                 creep.moveTo(targetSpawn,
                     {
-                        ignoreCreeps: true,
                         ignoreRoads: true
                     });
 
@@ -202,7 +196,6 @@ module.exports = {
             else if (creep.rangedAttack(targetSpawn) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targetSpawn,
                     {
-                        ignoreCreeps: true,
                         ignoreRoads: true
                     });
             }
@@ -212,7 +205,6 @@ module.exports = {
 
                 creep.moveTo(target,
                     {
-                        ignoreCreeps: true,
                         ignoreRoads: true
                     });
 
@@ -220,7 +212,6 @@ module.exports = {
             else if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target,
                     {
-                        ignoreCreeps: true,
                         ignoreRoads: true
                     });
             }
@@ -240,7 +231,7 @@ module.exports = {
 
             if (creep.heal(healTarget) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(healTarget,
-                    {ignoreCreeps: true, ignoreRoads: true});
+                    {ignoreRoads: true});
             }
 
     },
