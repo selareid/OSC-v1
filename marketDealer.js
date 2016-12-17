@@ -8,7 +8,6 @@ module.exports = {
         if (orders != undefined) {
             if (orders.length > 0) {
                 var order = Game.market.getOrderById(orders[0]);
-                console.log(order + ' ' + order.amount);
                 if (order && order.amount > 0) {
                     switch (order.type) {
                         case ORDER_BUY:
@@ -63,7 +62,7 @@ module.exports = {
 
             var result = Game.market.deal(order.id, amountToDeal, room.name);
 
-            console.log('Market Sell Order Dealt Result = ' + result + ' Room = ' + room.name + ' Amount = ' + amountToDeal);
+            console.log('Market Sell Order Dealt Result = ' + result + ' Room = ' + room.name + ' Amount = ' + amountToDeal + 'Amount In Order = ' + order.amount);
         }
     },
 
