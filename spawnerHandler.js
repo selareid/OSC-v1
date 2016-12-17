@@ -190,7 +190,7 @@ module.exports = {
 
                 if (room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTRACTOR})[0]) {
                     var mineral = room.find(FIND_MINERALS)[0];
-                    if (mineral.ticksToRegeneration < 500) {
+                    if (!mineral.ticksToRegeneration || mineral.ticksToRegeneration < 500) {
                         minimumNumberOfMiners = 1;
                     }
                     else {
