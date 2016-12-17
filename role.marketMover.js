@@ -70,7 +70,7 @@ module.exports = {
                     }
                     else {
                         if (room.storage.store[RESOURCE_ENERGY] > 600000) {
-                            this.putStuffIntoTerminal(room, creep, terminal);
+                            this.collectEnergy(room, creep, storage);
                         }
                         else {
                             for (let resourceType in creep.carry) {
