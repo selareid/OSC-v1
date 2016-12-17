@@ -6,22 +6,24 @@ module.exports = {
     run: function (room, terminal) {
         var orders = Memory.rooms[room].market;
         if (orders != undefined) {
-            var order = Game.market.getOrderById(orders[0]);
-            if (order && order.amount > 0) {
-                switch (order.type) {
-                    case ORDER_SELL:
-                        this.sell(room, terminal, order);
-                        break;
-                    case ORDER_BUY:
-                        this.buy(room, terminal, order);
-                        break;
+            if (orders.length > 0) {
+                var order = Game.market.getOrderById(orders[0]);
+                console.log(order + ' ' + order.amount);
+                if (order && order.amount > 0) {
+                    switch (order.type) {
+                        case ORDER_BUY:
+                            this.sell(room, terminal, order);
+                            break;
+                        case ORDER_SELL:
+                            this.buy(room, terminal, order);
+                            break;
+                    }
+                }
+                else {
+                    Memory.rooms[room].market.splice(0, 1);
+                    console.log('removed order');
                 }
             }
-            else {
-                Memory.rooms[room].market.splice(0, 1);
-                console.log('removed order');
-            }
-
         }
         else {
             Memory.rooms[room].market = [];
