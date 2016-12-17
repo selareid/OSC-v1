@@ -79,7 +79,7 @@ module.exports = {
             else {
                 if (creep.room.name != roomToAttack) {
                     creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(roomToAttack)),
-                        {ignoreDestructibleStructures:  true, ignoreCreeps: true, ignoreRoads: true});
+                        {ignoreCreeps: true, ignoreRoads: true});
                     return false;
                 }
                 else {
@@ -112,7 +112,6 @@ module.exports = {
                 if (rampart) {
                     if (creep.pos != rampart.pos) {
                         creep.moveTo(rampart, {
-                            ignoreDestructibleStructures: true,
                             ignoreCreeps: true,
                             ignoreRoads: true
                         });
@@ -130,7 +129,6 @@ module.exports = {
                     if (creep.getActiveBodyparts(ATTACK) >= 1) {
                         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {
-                                ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
                             });
@@ -139,7 +137,6 @@ module.exports = {
                     else {
                         if (creep.rangedAttack(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target, {
-                                ignoreDestructibleStructures: true,
                                 ignoreCreeps: true,
                                 ignoreRoads: true
                             });
@@ -243,7 +240,7 @@ module.exports = {
 
             if (creep.heal(healTarget) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(healTarget,
-                    {ignoreDestructibleStructures: true, ignoreCreeps: true, ignoreRoads: true});
+                    {ignoreCreeps: true, ignoreRoads: true});
             }
 
     },
