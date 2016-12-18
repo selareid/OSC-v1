@@ -129,7 +129,7 @@ creep.say('harvester remote');
             return source;
         }
         else {
-            return creep.pos.findClosestByPath(FIND_SOURCES);
+            return creep.pos.findClosestByRange(FIND_SOURCES);
         }
 
     }
