@@ -3,7 +3,7 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, isUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomFlag, roomToStealFromFlag, energyHelperFlag) {
+    run: function (room, areWeUnderAttack, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag) {
 
         //make sure memory is set
         if (!Memory.rooms[room].spawnQueue || Game.time % 50 == 0) {

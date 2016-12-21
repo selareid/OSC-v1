@@ -1,7 +1,7 @@
 require('global');
 
 module.exports = {
-    run: function (room, creep, guardStationFlag) {
+    run: function (room, creep) {
 
 
 

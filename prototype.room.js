@@ -1,31 +1,4 @@
 module.exports = function () {
-    Room.prototype.findAttackFlag =
-        function () {
-
-            var rallyFlag = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(this.name)
-            && f.memory.whenToAttack != undefined && f.memory.whenToRally != undefined && f.memory.whereToAttack != undefined && f.memory.armySize > 0)[0];
-
-            if (rallyFlag) {
-                return rallyFlag;
-            }
-            else {
-                return undefined;
-            }
-
-        },
-
-        Room.prototype.findBeforeRallyFlag =
-            function () {
-                var Flag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == this.name)[0];
-
-                if (Flag) {
-                    return Flag;
-                }
-                else {
-                    return undefined;
-                }
-            },
-
         Room.prototype.findOtherRoomToGoTo =
             function () {
                 var otherRoomFlag = _.filter(Game.flags, f => f.memory.type == 'otherRoomToGoTo' && f.memory.room == this.name && f.memory.numberOfCreeps > 0)[0];

@@ -82,30 +82,6 @@ module.exports = {
 
         }
 
-        //attack, rallyFlag stuff starts
-        var getFlagToRallyAt = function () {
-            if (Game.time % 3 == 0 || global[room.name].cachedAttackFlag == undefined) {
-                var newAttackFlag = room.findAttackFlag(); //get flag
-                global[room.name].cachedAttackFlag = newAttackFlag; // cache
-                return newAttackFlag; //return flag
-            }
-            else {
-                return global[room.name].cachedAttackFlag; //use cached flag
-            }
-        };
-        var flagToRallyAt = getFlagToRallyAt(); //because getFlagToRallyAt() is always a "truthy"
-
-        var isAttacking;
-        var armySize;
-
-        if (Game.cpu.bucket > 2000) {
-            if (flagToRallyAt) { // if rally flag is a thing
-                isAttacking = true;
-                armySize = flagToRallyAt.memory.armySize; // armySize is in the flags memory
-            }
-        }
-        //attack, rallyFlag stuff ends
-
         // otherRoomCreep stuff starts
         // other room creeps are creeps that start new rooms (build spawns, upgrade controller, etc)
         if (Game.cpu.bucket > 2000) {
@@ -194,7 +170,7 @@ module.exports = {
         //tower stuff ends
 
         try {
-            spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
+            spawnerHandler.run(room, areWeUnderAttack, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
         }
         catch (err) {
             if (err !== null && err !== undefined) {
@@ -203,7 +179,7 @@ module.exports = {
             }
         }
 
-        creepHandler.run(room, areWeUnderAttack, isAttacking, flagToRallyAt, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
+        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
 
         //grafana room stuff
         Memory.stats['room.' + room.name + '.myRoom'] = 1;
