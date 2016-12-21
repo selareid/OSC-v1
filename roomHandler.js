@@ -192,7 +192,7 @@ module.exports = {
             }
         }
         //tower stuff ends
-        
+
         try {
             spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
         }
