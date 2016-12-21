@@ -44,6 +44,11 @@ module.exports = {
                 global[creep.name] = {};
             }
 
+            var getRole = function (creepName) {
+                var creepNameAsArray = creepName.split('-');
+                return creepNameAsArray[0];
+            };
+
             switch (creep.memory.role) {
                 case 'harvester':
                     roleHarvester.run(room, creep);
@@ -120,7 +125,7 @@ module.exports = {
                 default:
                     creep.say('ERROR!!!', true);
                     console.log('Unknown Creep Role ' + creep.memory.role);
-                    creep.memory.role = 'upgrader';
+                    creep.memory.role = getRole(creep.name);
                     break;
             }
 
