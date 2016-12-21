@@ -253,6 +253,7 @@ module.exports = {
                     break;
             }
 
+            var isUnderAttack = Memory.rooms[room].isUnderAttack;
             //if under attack over ride everything
             if (isUnderAttack === true) {
                 let numberOfHostiles = room.find(FIND_HOSTILE_CREEPS, {
