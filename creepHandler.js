@@ -75,7 +75,7 @@ module.exports = {
                     roleRepairer.run(room, creep);
                     break;
                 case 'defenceManager':
-                    roleDefenceManager.run(room, creep, isUnderAttack);
+                    roleDefenceManager.run(room, creep, Memory.rooms[room].isUnderAttack);
                     break;
                 case 'landlord':
                     roleLandlord.run(room, creep);
