@@ -22,41 +22,15 @@ module.exports = {
                         reusePath: 7, plainCost: 1, swampCost: 4,
                         costCallback: function (roomName) {
                             if (roomName == creep.memory.room) {
-                                let room = Game.rooms[roomName];
-
-                                if (!room) return;
-                                let costs = new PathFinder.CostMatrix;
-
-                                room.find(FIND_STRUCTURES).forEach(function (structure) {
-                                    if (structure.structureType === STRUCTURE_ROAD) {
-                                        // Avoid Roads
-                                        costs.set(structure.pos.x, structure.pos.y, 8);
-                                    } else if (structure.structureType !== STRUCTURE_CONTAINER &&
-                                        (structure.structureType !== STRUCTURE_RAMPART || !structure.my)) {
-                                        // Can't walk through non-walkable buildings
-                                        costs.set(structure.pos.x, structure.pos.y, 0xff);
-                                    }
-                                });
-
-                                for (x = 0; x < 50; x++) {
-                                    costs.set(x, 49, 10);
+                                var cachedMatrix = PathFinder.CostMatrix.deserialize(global[creep.name].costMatrix);
+                                if (cachedMatrix) {
+                                    return cachedMatrix
                                 }
-                                for (x = 0; x < 50; x++) {
-                                    costs.set(x, 0, 10);
+                                else {
+                                    var newMatrix = this.getCostMatrix(room, creep);
+                                    global[creep.name].costMatrix = newMatrix.serialize();
+                                    return newMatrix;
                                 }
-                                for (y = 0; y < 50; y++) {
-                                    costs.set(49, y, 10);
-                                }
-                                for (y = 0; y < 50; y++) {
-                                    costs.set(0, y, 10);
-                                }
-
-                                // Avoid creeps in the room
-                                room.find(FIND_CREEPS).forEach(function (creep) {
-                                    costs.set(creep.pos.x, creep.pos.y, 0xff);
-                                });
-
-                                return costs;
                             }
                             else {
                                 return;
@@ -122,5 +96,43 @@ module.exports = {
     findStructureToBuild: function (room, creep) {
         var structureToRepair = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
         return structureToRepair;
+    },
+
+    getCostMatrix: function (room, creep) {
+        let room = Game.rooms[roomName];
+
+        if (!room) return;
+        let costs = new PathFinder.CostMatrix;
+
+        room.find(FIND_STRUCTURES).forEach(function (structure) {
+            if (structure.structureType === STRUCTURE_ROAD) {
+                // Avoid Roads
+                costs.set(structure.pos.x, structure.pos.y, 8);
+            } else if (structure.structureType !== STRUCTURE_CONTAINER &&
+                (structure.structureType !== STRUCTURE_RAMPART || !structure.my)) {
+                // Can't walk through non-walkable buildings
+                costs.set(structure.pos.x, structure.pos.y, 0xff);
+            }
+        });
+
+        for (x = 0; x < 50; x++) {
+            costs.set(x, 49, 10);
+        }
+        for (x = 0; x < 50; x++) {
+            costs.set(x, 0, 10);
+        }
+        for (y = 0; y < 50; y++) {
+            costs.set(49, y, 10);
+        }
+        for (y = 0; y < 50; y++) {
+            costs.set(0, y, 10);
+        }
+
+        // Avoid creeps in the room
+        room.find(FIND_CREEPS).forEach(function (creep) {
+            costs.set(creep.pos.x, creep.pos.y, 0xff);
+        });
+
+        return costs;
     }
 };

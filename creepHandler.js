@@ -40,6 +40,10 @@ module.exports = {
     creepActions: function (room, creep, isUnderAttack, isAttacking, flagToRallyAt, roomToGoTo, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
         if (creep.memory.room == room.name && creep.spawning === false) {
 
+            if (!global[creep.name]) {
+                global[creep.name] = {};
+            }
+
             switch (creep.memory.role) {
                 case 'harvester':
                     roleHarvester.run(room, creep);
