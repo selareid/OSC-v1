@@ -24,7 +24,7 @@ module.exports = {
             for (let name in Game.creeps) {
                 let creep = Game.creeps[name];
 
-                this.creepActions(room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag);
+                this.creepActions(room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag, otherRoomCreepsRoomToGoToPos);
 
             }
         }
@@ -37,7 +37,7 @@ module.exports = {
 
     },
 
-    creepActions: function (room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
+    creepActions: function (room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag, roomToGoTo) {
         if (creep.memory.room == room.name && creep.spawning === false) {
 
             if (!global[creep.name]) {
