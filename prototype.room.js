@@ -82,6 +82,8 @@ module.exports = function () {
                     global[this.name] = {};
                 }
 
+                //hostile creeps
+                global[this.name].creepsNotMine = this.find(FIND_HOSTILE_CREEPS);
                 //links
                 global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
                 //containers
