@@ -82,6 +82,15 @@ module.exports = {
 
         }
 
+        //guard station flag stuff starts
+        var setGuardStationFlagInGlobal = function() {
+            if (global[room.name].guardStationFlag == undefined) {
+                var newGuardStationFlag = room.getGuardStationFlag(); //get guard station flag (yes it's a redundant variable)
+                global[room.name].guardStationFlag = newGuardStationFlag; // cache guard station flag
+            }
+        };
+        //guard station flag stuff ends
+
         // otherRoomCreep stuff starts
         // other room creeps are creeps that start new rooms (build spawns, upgrade controller, etc)
         if (Game.cpu.bucket > 2000) {
