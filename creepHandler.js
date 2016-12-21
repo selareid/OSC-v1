@@ -15,6 +15,7 @@ const roleRemoteHauler = require ('role.remoteHauler');
 const roleEnergyHelper = require ('role.energyOtherRoomHelper');
 const roleMiner = require ('role.miner');
 const roleMarketMover = require ('role.marketMover');
+const roleGuard = require ('role.guard');
 
 module.exports = {
     run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag) {
@@ -76,9 +77,6 @@ module.exports = {
                 case 'defenceManager':
                     roleDefenceManager.run(room, creep, isUnderAttack);
                     break;
-                case 'warrior':
-                    roleWarrior.run(room, creep, isUnderAttack, isAttacking, flagToRallyAt);
-                    break;
                 case 'landlord':
                     roleLandlord.run(room, creep);
                     break;
@@ -117,6 +115,9 @@ module.exports = {
                     break;
                 case 'marketMover':
                     if (Game.cpu.bucket > 2000) roleMarketMover.run(room, creep);
+                    break;
+                case 'guard':
+                    roleGuard.run(room, creep);
                     break;
                 case '':
                     creep.say('ERROR!!!', true);
