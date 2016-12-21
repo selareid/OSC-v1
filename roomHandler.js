@@ -82,18 +82,16 @@ module.exports = {
 
         }
 
-        var flagToRallyAtFunc = function () {
-            if (Game.time % 3 == 0 || global[this.name].cachedAttackFlag == undefined) {
+        var flagToRallyAt = function () {
+            if (Game.time % 3 == 0 || global[room.name].cachedAttackFlag == undefined) {
                 var newAttackFlag = room.findAttackFlag();
-                global[this.name].cachedAttackFlag = newAttackFlag;
+                global[room.name].cachedAttackFlag = newAttackFlag;
                 return newAttackFlag;
             }
             else {
-                return global[this.name].cachedAttackFlag;
+                return global[room.name].cachedAttackFlag;
             }
         };
-
-        var flagToRallyAt = flagToRallyAtFunc();
 
         var isAttacking;
         var armySize;
