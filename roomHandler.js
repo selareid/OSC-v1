@@ -126,12 +126,14 @@ module.exports = {
             if (otherRoomCreepsRoomToGoTo) { //if otherRoomCreepsRoomToGoTo is a thing
                 if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) { // if it has a spawn in it
                     otherRoomCreepsRoomToGoTo.remove(); // remove the flag
+                    global[room.name].cachedOtherRoomCreepsRoomToGoTo = undefined;
                 }
                 otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName; // set room var to roomName
             }
         }
         // otherRoomCreep stuff ends
 
+        //room to steal from stuff starts
         if (Game.cpu.bucket > 2000) {
             var roomToStealFrom = room.findRoomToStealFrom();
             var roomToStealFromPos;
@@ -139,13 +141,29 @@ module.exports = {
                 roomToStealFromPos = roomToStealFrom.pos.roomName;
             }
         }
+        //room to steal from stuff ends
 
-        var remoteCreepFlags = room.getRemoteFlags();
+        //remote flag stuff starts
+        var getRemoteCreepFlags = function () {
+            if (Game.time % 23 == 0 || global[room.name].cachedRemoteCreepFlags == undefined) {
+                var newRemoteCreepFlags = room.getRemoteFlags(); // get remote flags
+                global[room.name].cachedRemoteCreepFlags = newRemoteCreepFlags; //cache remote flags
+                return newRemoteCreepFlags; // use new remote flags
+            }
+            else {
+                return global[room.name].cachedRemoteCreepFlags; //used cached remote flags
+            }
+        };
+        var remoteCreepFlags = getRemoteCreepFlags(); //because getRemoteCreepFlags() is always a "truthy"
+        //remote flag stuff ends
 
+        //energyHelperFlag stuff starts
         if (Game.cpu.bucket > 2000) {
             var energyHelperFlag = room.getEnergyHelperFlags();
         }
+        //energyHelperFlag stuff ends
 
+        //check if we're under attack starts
         if (Game.time % 3 == 0) {
             var underAttack = defenceHandler.isUnderAttack(room);
             if (underAttack === false) {
@@ -158,18 +176,23 @@ module.exports = {
 
 
         var areWeUnderAttack = Memory.rooms[room].isUnderAttack;
+        //check if we're under attack ends
 
-        if (areWeUnderAttack == true) {
-            defenceHandler.run(room);
+        //defenceHandler stuff starts
+        if (areWeUnderAttack == true) { //if we are under attack
+            defenceHandler.run(room); //run defence handler
         }
+        //defenceHandler stuff ends
 
-        var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
+        //tower stuff starts
+        var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER}); // get towers in room
         for (let tower of towers) {
-            if (tower.energy > 500) {
-                towerHandler.repairRampart(room, tower);
+            if (tower.energy > 500) { // if energy in tower is greater than x
+                towerHandler.repairRampart(room, tower); // tower repairs ramparts
             }
         }
-
+        //tower stuff ends
+        
         try {
             spawnerHandler.run(room, areWeUnderAttack, isAttacking, armySize, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
         }
