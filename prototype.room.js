@@ -81,14 +81,14 @@ module.exports = function () {
             function () {
               //things is currently just links
 
-                if (global[this.name] == undefined) {
-                    global[this.name] = {};
+                if (global.rooms[this.name] == undefined) {
+                    global.rooms[this.name] = {};
                 }
 
                 //links
-                global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
+                global.rooms[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
                 //containers
-                global[this.name].containers = this.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER});
+                global.rooms[this.name].containers = this.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER});
 
             },
 
