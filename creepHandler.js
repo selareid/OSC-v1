@@ -7,7 +7,6 @@ const roleUpgrader = require ('role.upgrader');
 const roleBuilder = require ('role.builder');
 const roleRepairer = require ('role.repairer');
 const roleDefenceManager = require ('role.defenceManager');
-const roleWarrior = require ('role.warrior');
 const roleLandlord = require ('role.landlord');
 const otherRoomCreep = require ('role.otherRoomCreep');
 const energyThief = require ('role.energyThief');
