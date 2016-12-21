@@ -27,7 +27,7 @@ module.exports = {
                                     return cachedMatrix
                                 }
                                 else {
-                                    var newMatrix = this.getCostMatrix(room, creep);
+                                    var newMatrix = this.getCostMatrix(roomName);
                                     global[creep.name].costMatrix = newMatrix.serialize();
                                     return newMatrix;
                                 }
@@ -98,7 +98,7 @@ module.exports = {
         return structureToRepair;
     },
 
-    getCostMatrix: function (room, creep) {
+    getCostMatrix: function (roomName) {
         let room = Game.rooms[roomName];
 
         if (!room) return;
