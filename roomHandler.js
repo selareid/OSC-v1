@@ -144,7 +144,10 @@ module.exports = {
 
         //energyHelperFlag stuff starts
         if (Game.cpu.bucket > 2000) {
-            var energyHelperFlag = room.getEnergyHelperFlags();
+                if (Game.time % 7 == 0 || global[room.name].cachedEnergyHelperFlags == undefined) {
+                    var newEnergyHelperFlags = room.getEnergyHelperFlags(); // get remote flags
+                    global[room.name].cachedEnergyHelperFlags = newEnergyHelperFlags; //cache remote flags
+                }
         }
         //energyHelperFlag stuff ends
 
@@ -179,7 +182,7 @@ module.exports = {
         //tower stuff ends
 
         try {
-            spawnerHandler.run(room, areWeUnderAttack, remoteCreepFlags, otherRoomCreepsRoomToGoTo, roomToStealFrom, energyHelperFlag);
+            spawnerHandler.run(room, remoteCreepFlags, roomToStealFrom);
         }
         catch (err) {
             if (err !== null && err !== undefined) {
@@ -188,7 +191,7 @@ module.exports = {
             }
         }
 
-        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
+        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos);
 
         //grafana room stuff
         Memory.stats['room.' + room.name + '.myRoom'] = 1;

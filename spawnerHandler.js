@@ -3,7 +3,7 @@ require('global');
 require('prototype.spawn')();
 
 module.exports = {
-    run: function (room, areWeUnderAttack, remoteCreepFlags) {
+    run: function (room, remoteCreepFlags, roomToStealFrom) {
 
         //make sure memory is set
         if (!Memory.rooms[room].spawnQueue || Game.time % 50 == 0) {
@@ -109,9 +109,10 @@ module.exports = {
                 if (otherRoomFlag && otherRoomFlag.memory != undefined) {
                     minimumNumberOfOtherRoomCreeps = otherRoomFlag.memory.numberOfCreeps;
                 }
-                if (roomToStealFromFlag && roomToStealFromFlag.memory != undefined) {
-                    minimumNumberOfEnergyThiefs = roomToStealFromFlag.memory.numberOfCreeps;
+                if (roomToStealFrom && roomToStealFrom.memory != undefined) {
+                    minimumNumberOfEnergyThiefs = roomToStealFrom.memory.numberOfCreeps;
                 }
+                var energyHelperFlag = global[room.name].cachedEnergyHelperFlags;
                 if (energyHelperFlag && energyHelperFlag.memory != undefined) {
                     minimumNumberOfEnergyHelpers = energyHelperFlag.memory.numberOfCreeps;
                 }

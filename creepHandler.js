@@ -18,7 +18,7 @@ const roleMarketMover = require ('role.marketMover');
 const roleGuard = require ('role.guard');
 
 module.exports = {
-    run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag) {
+    run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToTakeFrom) {
 
         try {
             for (let name in Game.creeps) {
