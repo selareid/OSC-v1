@@ -10,7 +10,7 @@ module.exports = function () {
             var spawn = this;
 
             var creepName = function (roleName) {
-                var name = roleName + ' ' + Game.time % 100000 + ' ' + spawn.pos.x + spawn.pos.y;
+                var name = roleName + '-' + Game.time % 100000 + '-' + spawn.pos.x + spawn.pos.y;
                 return name;
             };
 
