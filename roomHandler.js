@@ -82,7 +82,7 @@ module.exports = {
 
         }
 
-        var flagToRallyAt = function () {
+        var getFlagToRallyAt = function () {
             if (Game.time % 3 == 0 || global[room.name].cachedAttackFlag == undefined) {
                 var newAttackFlag = room.findAttackFlag();
                 global[room.name].cachedAttackFlag = newAttackFlag;
@@ -92,6 +92,7 @@ module.exports = {
                 return global[room.name].cachedAttackFlag;
             }
         };
+        var flagToRallyAt = getFlagToRallyAt();
 
         var isAttacking;
         var armySize;
