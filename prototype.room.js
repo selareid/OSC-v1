@@ -1,25 +1,11 @@
 module.exports = function () {
-    Room.prototype.findAttackFlag =
-        function () {
 
-            var rallyFlag = _.filter(Game.flags, f => f.memory.type == 'rallyFlag' && f.memory.roomsToAttackFrom.includes(this.name)
-            && f.memory.whenToAttack != undefined && f.memory.whenToRally != undefined && f.memory.whereToAttack != undefined && f.memory.armySize > 0)[0];
-
-            if (rallyFlag) {
-                return rallyFlag;
-            }
-            else {
-                return undefined;
-            }
-
-        },
-
-        Room.prototype.findBeforeRallyFlag =
+        Room.prototype.getGuardStationFlag =
             function () {
-                var Flag = _.filter(Game.flags, f => f.memory.type == 'beforeRallyFlag' && f.memory.room == this.name)[0];
+                var guardStationFlag = _.filter(Game.flags, f => f.memory.type == 'guardStationFlag' && f.memory.room == this.name)[0];
 
-                if (Flag) {
-                    return Flag;
+                if (guardStationFlag) {
+                    return guardStationFlag;
                 }
                 else {
                     return undefined;
@@ -82,6 +68,8 @@ module.exports = function () {
                     global[this.name] = {};
                 }
 
+                //hostile creeps
+                global[this.name].creepsNotMine = this.find(FIND_HOSTILE_CREEPS);
                 //links
                 global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
                 //containers

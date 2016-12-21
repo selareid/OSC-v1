@@ -21,7 +21,7 @@ module.exports = {
 
         var towerTarget;
 
-        towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => !Allies.includes(c)});
+        towerTarget = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => !Allies.includes(c.owner.username)});
         return towerTarget;
     },
 
@@ -34,7 +34,7 @@ module.exports = {
     },
 
     repairRampart: function (room, tower) {
-        var towerRepair = tower.pos.findClosestByRange(FIND_MY_STRUCTURES, {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits <= 1000});
+        var towerRepair = tower.pos.findClosestByRange(FIND_STRUCTURES, {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits <= 1000});
         if (towerRepair) {
             tower.repair(towerRepair)
         }
