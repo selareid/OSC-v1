@@ -81,6 +81,9 @@ module.exports = function () {
             function () {
               //things is currently just links
 
+                if (global.rooms == undefined) {
+                    global.rooms = {};
+                }
                 if (global.rooms[this.name] == undefined) {
                     global.rooms[this.name] = {};
                 }
