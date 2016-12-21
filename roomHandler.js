@@ -148,6 +148,7 @@ module.exports = {
                     var newEnergyHelperFlags = room.getEnergyHelperFlags(); // get remote flags
                     global[room.name].cachedEnergyHelperFlags = newEnergyHelperFlags; //cache remote flags
                 }
+                var energyHelperFlag = global[room.name].cachedEnergyHelperFlags;
         }
         //energyHelperFlag stuff ends
 
@@ -191,7 +192,7 @@ module.exports = {
             }
         }
 
-        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos);
+        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
 
         //grafana room stuff
         Memory.stats['room.' + room.name + '.myRoom'] = 1;
