@@ -95,7 +95,7 @@ module.exports = {
         // };
         //
         // var flagToRallyAt = flagToRallyAtFunc();
-
+var flagToRallyAt;
         var isAttacking;
         var armySize;
 
