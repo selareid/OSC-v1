@@ -11,6 +11,10 @@ const marketDealer = require ('marketDealer');
 module.exports = {
     run: function (room) {
 
+        if (global[this.name] == undefined) {
+            global[this.name] = {};
+        }
+
         room.cacheThingsInRoom();
 
         try {
@@ -93,7 +97,7 @@ module.exports = {
                 return global[this.name].cachedAttackFlag;
             }
         };
-        
+
         var flagToRallyAt = flagToRallyAtFunc();
 
         var isAttacking;
