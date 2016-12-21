@@ -1,5 +1,3 @@
-require('global');
-
 module.exports = function () {
     Room.prototype.findAttackFlag =
         function () {
