@@ -1,6 +1,6 @@
 module.exports = {
     run: function (room, creep) {
-        Pathfinder.use(true);
+        PathFinder.use(true);
 
         if (Memory.rooms[room].isUnderAttack == true) {
             var target = this.getTarget(room, creep);
