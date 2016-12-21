@@ -273,9 +273,6 @@ module.exports = {
                 minimumNumberOfEnergyHelpers = 0;
                 minimumNumberOfMiners = 0;
             }
-            else if (isAttacking === true) {
-                //put stuff here
-            }
 
             //add creeps close to death to queue
             if (Game.time % 6 == 0) this.addCreepsAboutToDieToQueue(room, harvestersInPriorityQueue, distributorsInPriorityQueue, carriersInPriorityQueue);
