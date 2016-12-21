@@ -26,6 +26,7 @@ module.exports = {
         var minimumNumberOfEnergyHelpers = Memory.rooms[room].populationGoal[12];
         var minimumNumberOfMiners = Memory.rooms[room].populationGoal[13];
         var minimumNumberOfMarketMovers = Memory.rooms[room].populationGoal[14];
+        var minimumNumberOfGuards = Memory.rooms[room].populationGoal[15];
 
         //get number of each creeps of each role
         var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
@@ -43,6 +44,7 @@ module.exports = {
         var numberOfEnergyHelpers = _.sum(Game.creeps, (c) => c.memory.role == 'energyHelper' && c.memory.room == room.name);
         var numberOfMiners = _.sum(Game.creeps, (c) => c.memory.role == 'miner' && c.memory.room == room.name);
         var numberOfMarketMovers = _.sum(Game.creeps, (c) => c.memory.role == 'marketMover' && c.memory.room == room.name);
+        var numberOfGuards = _.sum(Game.creeps, (c) => c.memory.role == 'guard' && c.memory.room == room.name);
 
         // debugging
         // console.log('Harvesters ' + numberOfHarvesters);
@@ -91,6 +93,7 @@ module.exports = {
                 var energyHelpersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'energyHelper');
                 var minersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'miner');
                 var marketMoversInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'marketMover');
+                var guardsInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'guard');
 
                 //get number of each role in priority queue
                 var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
@@ -98,6 +101,7 @@ module.exports = {
                 var carriersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'carrier');
 
                 //get number of each role in war queue
+                var guardsInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'guard');
                 //nothing here
 
                 //get flag for other room creep and if it exists set minimumNumberOfOtherRoomCreeps to the numberOfCreeps in flag memory, same for energy thief flag
@@ -204,6 +208,8 @@ module.exports = {
                 }
             }
 
+            minimumNumberOfGuards = 3;
+
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
                 case 'normal':
@@ -232,6 +238,7 @@ module.exports = {
 //minimumNumberOfEnergyThiefs = 0;
                     minimumNumberOfMiners = 0;
                     minimumNumberOfMarketMovers = 0;
+                    minimumNumberOfGuards = 1;
                     break;
                 case 'upgrading':
                     minimumNumberOfHarvesters = 5;
@@ -251,7 +258,7 @@ module.exports = {
                     || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
                 }).length;
 
-                //minimumNumberOfWarriors = Math.round(numberOfHostiles * 2.10); needs to be changed to guards instead of warriors
+                minimumNumberOfGuards = Math.round(numberOfHostiles * 2.10);
                 minimumNumberOfUpgraders = 0;
                 minimumNumberOfBuilders = 1;
                 minimumNumberOfRepairers = 1;
@@ -328,6 +335,12 @@ module.exports = {
             else if (minimumNumberOfMarketMovers > marketMoversInQueue + numberOfMarketMovers) {
                 creepToAddToQueue = 'marketMover';
             }
+            else if (minimumNumberOfGuards > guardsInQueue + numberOfGuards) {
+                if (!guardsInWarQueue > 2) {
+                    queueToAddTo = 2;
+                }
+                creepToAddToQueue = 'guard';
+            }
 
             if (creepToAddToQueue) {
                 switch (queueToAddTo) {
@@ -364,6 +377,7 @@ module.exports = {
         Memory.rooms[room].populationGoal[12] = minimumNumberOfEnergyHelpers;
         Memory.rooms[room].populationGoal[13] = minimumNumberOfMiners;
         Memory.rooms[room].populationGoal[14] = minimumNumberOfMarketMovers;
+        Memory.rooms[room].populationGoal[15] = minimumNumberOfGuards;
 
         //grafana population stats stuff
         // Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
@@ -409,56 +423,69 @@ module.exports = {
             Memory.rooms[room].populationGoal = [];
         }
 
+        //harvesters
         if (Memory.rooms[room].populationGoal[0] == undefined) {
-            Memory.rooms[room].populationGoal[0] = 3;
+            Memory.rooms[room].populationGoal[0] = 2;
         }
+        //carriers
         if (Memory.rooms[room].populationGoal[1] == undefined) {
-            Memory.rooms[room].populationGoal[1] = 2;
+            Memory.rooms[room].populationGoal[1] = 0;
         }
+        //distributors
         if (Memory.rooms[room].populationGoal[2] == undefined) {
             Memory.rooms[room].populationGoal[2] = 1;
         }
+        //upgraders
         if (Memory.rooms[room].populationGoal[3] == undefined) {
-            Memory.rooms[room].populationGoal[3] = 2;
+            Memory.rooms[room].populationGoal[3] = 1;
         }
+        //builders
         if (Memory.rooms[room].populationGoal[4] == undefined) {
             Memory.rooms[room].populationGoal[4] = 1;
         }
+        //repairers
         if (Memory.rooms[room].populationGoal[5] == undefined) {
             Memory.rooms[room].populationGoal[5] = 1;
         }
+        //defenceManagers
         if (Memory.rooms[room].populationGoal[6] == undefined) {
             Memory.rooms[room].populationGoal[6] = 1;
         }
+        //landlords
         if (Memory.rooms[room].populationGoal[7] == undefined) {
-            Memory.rooms[room].populationGoal[7] = 3;
+            Memory.rooms[room].populationGoal[7] = 0;
         }
+        //remoteHarvesters
         if (Memory.rooms[room].populationGoal[8] == undefined) {
             Memory.rooms[room].populationGoal[8] = 0;
         }
+        //remoteHaulers
         if (Memory.rooms[room].populationGoal[9] == undefined) {
             Memory.rooms[room].populationGoal[9] = 0;
         }
+        //otherRoomCreeps
         if (Memory.rooms[room].populationGoal[10] == undefined) {
             Memory.rooms[room].populationGoal[10] = 0;
         }
+        //energyThiefs
         if (Memory.rooms[room].populationGoal[11] == undefined) {
             Memory.rooms[room].populationGoal[11] = 0;
         }
+        //energyHelpers
         if (Memory.rooms[room].populationGoal[12] == undefined) {
             Memory.rooms[room].populationGoal[12] = 0;
         }
+        //miners
         if (Memory.rooms[room].populationGoal[13] == undefined) {
             Memory.rooms[room].populationGoal[13] = 0;
         }
+        //marketMovers
         if (Memory.rooms[room].populationGoal[14] == undefined) {
             Memory.rooms[room].populationGoal[14] = 0;
         }
+        //guards
         if (Memory.rooms[room].populationGoal[15] == undefined) {
-            Memory.rooms[room].populationGoal[15] = 7;
-        }
-        if (Memory.rooms[room].populationGoal[16] == undefined) {
-            Memory.rooms[room].populationGoal[16] = 7;
+            Memory.rooms[room].populationGoal[15] = 3;
         }
     },
 
