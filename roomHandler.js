@@ -106,16 +106,31 @@ module.exports = {
         }
         //attack, rallyFlag stuff ends
 
+        // otherRoomCreep stuff starts
+        // other room creeps are creeps that start new rooms (build spawns, upgrade controller, etc)
         if (Game.cpu.bucket > 2000) {
-            var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
-            var otherRoomCreepsRoomToGoToPos;
-            if (otherRoomCreepsRoomToGoTo) {
-                if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) {
-                    otherRoomCreepsRoomToGoTo.remove();
+
+            var getOtherRoomCreepsRoomToGoTo = function () {
+                if (Game.time % 7 == 0 || global[room.name].cachedOtherRoomCreepsRoomToGoTo == undefined) {
+                    var newOtherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo(); // get data
+                    global[room.name].cachedOtherRoomCreepsRoomToGoTo = newOtherRoomCreepsRoomToGoTo; // cache data
+                    return newOtherRoomCreepsRoomToGoTo; // return data
                 }
-                otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName
+                else {
+                    return global[room.name].cachedOtherRoomCreepsRoomToGoTo; // use cached data
+                }
+            };
+            var otherRoomCreepsRoomToGoTo = getOtherRoomCreepsRoomToGoTo(); //because getOtherRoomCreepsRoomToGoTo() is always a "truthy"
+
+            var otherRoomCreepsRoomToGoToPos;
+            if (otherRoomCreepsRoomToGoTo) { //if otherRoomCreepsRoomToGoTo is a thing
+                if (otherRoomCreepsRoomToGoTo.room && otherRoomCreepsRoomToGoTo.room.find(FIND_MY_SPAWNS)[0]) { // if it has a spawn in it
+                    otherRoomCreepsRoomToGoTo.remove(); // remove the flag
+                }
+                otherRoomCreepsRoomToGoToPos = otherRoomCreepsRoomToGoTo.pos.roomName; // set room var to roomName
             }
         }
+        // otherRoomCreep stuff ends
 
         if (Game.cpu.bucket > 2000) {
             var roomToStealFrom = room.findRoomToStealFrom();
