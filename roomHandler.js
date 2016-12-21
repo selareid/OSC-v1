@@ -82,20 +82,29 @@ module.exports = {
 
         }
 
+        //attack, rallyFlag stuff starts
         var getFlagToRallyAt = function () {
             if (Game.time % 3 == 0 || global[room.name].cachedAttackFlag == undefined) {
-                var newAttackFlag = room.findAttackFlag();
-                global[room.name].cachedAttackFlag = newAttackFlag;
-                return newAttackFlag;
+                var newAttackFlag = room.findAttackFlag(); //get flag
+                global[room.name].cachedAttackFlag = newAttackFlag; // cache
+                return newAttackFlag; //return flag
             }
             else {
-                return global[room.name].cachedAttackFlag;
+                return global[room.name].cachedAttackFlag; //use cached flag
             }
         };
-        var flagToRallyAt = getFlagToRallyAt();
+        var flagToRallyAt = getFlagToRallyAt(); //because getFlagToRallyAt() is always a "truthy"
 
         var isAttacking;
         var armySize;
+
+        if (Game.cpu.bucket > 2000) {
+            if (flagToRallyAt) { // if rally flag is a thing
+                isAttacking = true;
+                armySize = flagToRallyAt.memory.armySize; // armySize is in the flags memory
+            }
+        }
+        //attack, rallyFlag stuff ends
 
         if (Game.cpu.bucket > 2000) {
             var otherRoomCreepsRoomToGoTo = room.findOtherRoomToGoTo();
@@ -117,13 +126,6 @@ module.exports = {
         }
 
         var remoteCreepFlags = room.getRemoteFlags();
-
-        if (Game.cpu.bucket > 2000) {
-            if (flagToRallyAt) {
-                isAttacking = true;
-                armySize = flagToRallyAt.memory.armySize;
-            }
-        }
 
         if (Game.cpu.bucket > 2000) {
             var energyHelperFlag = room.getEnergyHelperFlags();
