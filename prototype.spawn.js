@@ -8,7 +8,7 @@ module.exports = function () {
             var body = [];
 
             var creepName = function (roleName) {
-                var name = roleName + ' ' + Game.time % 100000 + ' ' + this.pos.x + this.pos.y;
+                var name = roleName + ' ' + Game.time % 100000 + ' ' + room.name;
                 return name;
             };
 
