@@ -80,6 +80,10 @@ module.exports = function () {
         Room.prototype.cacheThingsInRoom =
             function () {
 
+                if (global[this.name] == undefined) {
+                    global[this.name] = {};
+                }
+
                 //links
                 global[this.name].links = this.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LINK});
                 //containers
