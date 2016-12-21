@@ -11,10 +11,6 @@ const marketDealer = require ('marketDealer');
 module.exports = {
     run: function (room) {
 
-        if (global[this.name] == undefined) {
-            global[this.name] = {};
-        }
-
         room.cacheThingsInRoom();
 
         try {
@@ -87,18 +83,18 @@ module.exports = {
 
         }
 
-        var flagToRallyAtFunc = function () {
-            if (Game.time % 3 == 0 || global[this.name].cachedAttackFlag == undefined) {
-                var newAttackFlag = room.findAttackFlag();
-                global[this.name].cachedAttackFlag = newAttackFlag;
-                return newAttackFlag;
-            }
-            else {
-                return global[this.name].cachedAttackFlag;
-            }
-        };
-
-        var flagToRallyAt = flagToRallyAtFunc();
+        // var flagToRallyAtFunc = function () {
+        //     if (Game.time % 3 == 0 || global[this.name].cachedAttackFlag == undefined) {
+        //         var newAttackFlag = room.findAttackFlag();
+        //         global[this.name].cachedAttackFlag = newAttackFlag;
+        //         return newAttackFlag;
+        //     }
+        //     else {
+        //         return global[this.name].cachedAttackFlag;
+        //     }
+        // };
+        //
+        // var flagToRallyAt = flagToRallyAtFunc();
 
         var isAttacking;
         var armySize;
