@@ -7,6 +7,11 @@ module.exports = function () {
             var numberOfParts;
             var body = [];
 
+            var creepName = function (roleName) {
+                var name = roleName + ' ' + Game.time % 100000 + ' ' + this.pos.x + this.pos.y;
+                return name;
+            };
+
             switch (roleName) {
                 case 'harvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
@@ -21,7 +26,7 @@ module.exports = function () {
                             body.push(WORK);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'distributor':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
                     if (numberOfParts > 0) {
@@ -33,7 +38,7 @@ module.exports = function () {
                                 body.push(MOVE);
                             }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'carrier':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
                     if (numberOfParts > 0) {
@@ -48,7 +53,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'warrior':
                     var numberOfRanged = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(RANGED_ATTACK) >= 1);
                     var numberOfAttack = _.sum(Game.creeps, (c) => c.memory.role == 'warrior' && c.memory.room == room.name && c.getActiveBodyparts(ATTACK) >= 1);
@@ -94,7 +99,7 @@ module.exports = function () {
                             }
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'upgrader':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 50) / 150);
                     if (numberOfParts > 0) {
@@ -110,7 +115,7 @@ module.exports = function () {
                         }
                         body.push(CARRY);
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'builder':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
                     if (numberOfParts > 0) {
@@ -122,7 +127,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'repairer':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
                     if (numberOfParts > 0) {
@@ -134,7 +139,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'defenceManager':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
                     if (numberOfParts > 0) {
@@ -146,7 +151,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'landlord':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 650);
                     if (numberOfParts > 0) {
@@ -157,7 +162,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'remoteHarvester':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 150);
                     if (numberOfParts > 0) {
@@ -171,7 +176,7 @@ module.exports = function () {
                             body.push(WORK);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'remoteHauler':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 150) / 150);
                     if (numberOfParts > 0) {
@@ -185,7 +190,7 @@ module.exports = function () {
                             body.push(CARRY);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, goingHome: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, goingHome: false});
                 case 'otherRoomCreep':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
                     if (numberOfParts > 0) {
@@ -197,7 +202,7 @@ module.exports = function () {
                             body.push(CARRY);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'energyThief':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
                     if (numberOfParts > 0) {
@@ -208,7 +213,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'energyHelper':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 100);
                     if (numberOfParts > 0) {
@@ -219,7 +224,7 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'miner':
                     numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 50) / 250);
 
@@ -232,7 +237,7 @@ module.exports = function () {
                             body.push(WORK);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'marketMover':
                     numberOfParts = Math.floor((energy - (energy * amountToSave)) / 150);
                     if (numberOfParts > 0) {
@@ -244,10 +249,10 @@ module.exports = function () {
                             body.push(MOVE);
                         }
                     }
-                    return this.createCreep(body, undefined, {role: roleName, room: room.name, working: false});
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }
-
+            
         }
 };
