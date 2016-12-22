@@ -12,6 +12,7 @@ module.exports = {
                         creep.moveTo(target, {reusePath: 3, ignoreRoads: true});
                         break;
                     case 0: // returns OK
+                        this.kite(room, creep, target);
                         //creep.say something here using prototype.creepSpeech.js
                         break;
                     default:
@@ -35,6 +36,16 @@ module.exports = {
         else {
             Memory.rooms[room].isUnderAttack = false;
             return;
+        }
+    },
+
+    kite: function (room, creep, target) {
+        var directionToTarget = creep.pos.getDirectionTo(target);
+        if (creep.pos.getRangeTo(target) <= 2) {
+            creep.move(global.REVERSE_DIR[directionToTarget]);
+        }
+        else {
+            creep.move(directionToTarget);
         }
     }
 };
