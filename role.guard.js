@@ -27,7 +27,7 @@ module.exports = {
     },
 
     getTarget: function (room, creep) {
-        var targets = _.filter(global[this.name].creepsNotMine, (c) => global.Allies.includes(c.owner.username) == false);
+        var targets = _.filter(global[room.name].creepsNotMine, (c) => global.Allies.includes(c.owner.username) == false);
 
         if (targets.length > 0) {
             return creep.pos.findClosestByRange(targets);
