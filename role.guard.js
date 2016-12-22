@@ -5,7 +5,7 @@ module.exports = {
         if (Memory.rooms[room].isUnderAttack == true) {
             var target = this.getTarget(room, creep);
             if (target) {
-                var attackResult = creep.attack(target);
+                var attackResult = creep.rangedAttack(target);
 
                 switch (attackResult) {
                     case -9: // returns ERR_NOT_IN_RANGE
