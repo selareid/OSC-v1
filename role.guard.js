@@ -52,6 +52,9 @@ module.exports = {
                 else if (look[0].structure && look[0].structure.structureType == STRUCTURE_ROAD) {
                     creep.move(oppositeDir);
                 }
+                else {
+                    creep.moveTo(room.find(FIND_MINERALS)[0], {reusePath: 2});
+                }
             }
         }
         else {
