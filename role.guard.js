@@ -8,10 +8,10 @@ module.exports = {
                 var attackResult = creep.attack(target);
 
                 switch (attackResult) {
-                    case ERROR_NOT_IN_RANGE:
+                    case -9: // returns ERR_NOT_IN_RANGE
                         creep.moveTo(target, {reusePath: 3, ignoreRoads: true});
                         break;
-                    case OK:
+                    case 0: // returns OK
                         //creep.say something here using prototype.creepSpeech.js
                         break;
                     default:
