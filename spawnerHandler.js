@@ -109,12 +109,21 @@ module.exports = {
                 if (otherRoomFlag && otherRoomFlag.memory != undefined) {
                     minimumNumberOfOtherRoomCreeps = otherRoomFlag.memory.numberOfCreeps;
                 }
+                else {
+                    minimumNumberOfOtherRoomCreeps = 0;
+                }
                 if (roomToStealFrom && roomToStealFrom.memory != undefined) {
                     minimumNumberOfEnergyThiefs = roomToStealFrom.memory.numberOfCreeps;
+                }
+                else {
+                    minimumNumberOfEnergyThiefs = 0;
                 }
                 var energyHelperFlag = global[room.name].cachedEnergyHelperFlags;
                 if (energyHelperFlag && energyHelperFlag.memory != undefined) {
                     minimumNumberOfEnergyHelpers = energyHelperFlag.memory.numberOfCreeps;
+                }
+                else {
+                    minimumNumberOfEnergyHelpers = 0;
                 }
 
                 //if there's no storage you don't need carriers
