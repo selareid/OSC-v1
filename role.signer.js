@@ -11,6 +11,10 @@ module.exports = {
             creep.memory.roomsBeenIn = [];
         }
 
+        if (!creep.memory.roomsBeenIn.includes(creep.pos.roomName)) {
+            creep.memory.roomsBeenIn.push(creep.pos.roomName);
+        }
+
         var currentRoom = creep.room;
         var roomController = currentRoom.controller;
         if (!roomController || (roomController.sign && roomController.sign.username == creep.owner.username)) {
