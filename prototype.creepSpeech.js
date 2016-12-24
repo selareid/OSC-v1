@@ -42,6 +42,9 @@ module.exports = function () {
                         if (date == 2) {
                             return MY_BIRTHDAY;
                         }
+                        else if (date > 20) {
+                            return CHRISTMAS;
+                        }
                         break;
                     case 12:
                         if (date <= 26) {
