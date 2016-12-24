@@ -4,6 +4,8 @@ require('prototype.creepSpeech')();
 
 module.exports = {
     run: function (room, creep) {
+        
+        creep.creepSpeech(room);
 
         if (!creep.memory.roomsBeenIn) {
             creep.memory.roomsBeenIn = [];
