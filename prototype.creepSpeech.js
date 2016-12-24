@@ -1,8 +1,8 @@
 require('global');
 
-global.CHRISTMAS = 'Merry Christmas';
-global.NEW_YEAR = 'Happy New Year';
-global.MY_BIRTHDAY = "It's My BirthDay";
+global.CHRISTMAS = 'Merry Christmas'.split(' ');
+global.NEW_YEAR = 'Happy New Year'.split(' ');
+global.MY_BIRTHDAY = "It's My BirthDay".split(' ');
 
 module.exports = function () {
     Creep.prototype.creepSpeech = function (room, doingWhat) {
