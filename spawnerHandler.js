@@ -219,7 +219,7 @@ module.exports = {
                 }
             }
 
-            minimumNumberOfGuards = 3;
+            minimumNumberOfGuards = 1;
 
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
@@ -270,7 +270,7 @@ module.exports = {
                     || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
                 }).length;
 
-                minimumNumberOfGuards = Math.round(numberOfHostiles * 2.10);
+                minimumNumberOfGuards = numberOfHostiles * 4;
                 minimumNumberOfUpgraders = 0;
                 minimumNumberOfBuilders = 1;
                 minimumNumberOfRepairers = 1;
