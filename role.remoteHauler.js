@@ -33,7 +33,7 @@ module.exports = {
         var zeChosenFlag;
 
                 for (let flag of remoteCreepFlags) {
-                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room == room.name && c.memory.role == 'remoteHauler' && c.memory.flag && c.memory.flag == flag.name).length;
+                    var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room == room.name && c.memory.role == 'remoteHauler' && c.memory.remoteFlag == flag.name).length;
                     if (amountOfCreepsAssignedToThisFlag < flag.memory.numberOfRemoteHaulers) {
                         zeChosenFlag = flag;
                         break;
