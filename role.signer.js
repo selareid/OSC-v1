@@ -30,9 +30,6 @@ module.exports = {
         if (result == -9) {
             creep.moveTo(controller);
         }
-        else if (result == 0) {
-            creep.memory.roomsBeenIn.push(controller.pos.roomName);
-        }
     },
 
     moveToOtherRoom: function (room, creep) {
