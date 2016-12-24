@@ -4,7 +4,7 @@ require('prototype.creepSpeech')();
 
 module.exports = {
     run: function (room, creep) {
-        
+
         creep.creepSpeech(room);
 
         if (!creep.memory.roomsBeenIn) {
@@ -14,7 +14,7 @@ module.exports = {
         var currentRoom = creep.room;
         var roomController = currentRoom.controller;
         if (roomController.sign && roomController.sign.username == creep.owner.username) {
-
+            this.moveToOtherRoom(creep);
         }
         else {
             this.signController(creep, roomController)
