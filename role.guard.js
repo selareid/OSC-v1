@@ -40,25 +40,38 @@ module.exports = {
     },
 
     kite: function (room, creep, target) {
-        var directionToTarget = creep.pos.getDirectionTo(target);
-        if (creep.pos.getRangeTo(target) <= 2) {
-            var oppositeDir = global.REVERSE_DIR[directionToTarget];
-            var virtualMoveResult = this.virtualMove(creep.pos, oppositeDir);
-            if (virtualMoveResult) {
-                var look = virtualMoveResult.look();
-                if (look[0].terrain && look[0].terrain != 'wall') {
-                    creep.move(oppositeDir);
+        var targetDangerous = false;
+        if (target.getActiveBodyparts(ATTACK) > 0 || target.getActiveBodyparts(RANGED_ATTACK) > 0) {
+            targetDangerous = true;
+        }
+
+        if (targetDangerous) {
+            var directionToTarget = creep.pos.getDirectionTo(target);
+            if (creep.pos.getRangeTo(target) <= 2) {
+                var oppositeDir = global.REVERSE_DIR[directionToTarget];
+                var virtualMoveResult = this.virtualMove(creep.pos, oppositeDir);
+                if (virtualMoveResult) {
+                    var look = virtualMoveResult.look();
+                    if (look[0].terrain && look[0].terrain != 'wall') {
+                        creep.move(oppositeDir);
+                    }
+                    else if (look[0].structure && look[0].structure.structureType == STRUCTURE_ROAD) {
+                        creep.move(oppositeDir);
+                    }
+                    else {
+                        creep.moveTo(room.find(FIND_MINERALS)[0], {reusePath: 2});
+                    }
                 }
-                else if (look[0].structure && look[0].structure.structureType == STRUCTURE_ROAD) {
-                    creep.move(oppositeDir);
-                }
-                else {
-                    creep.moveTo(room.find(FIND_MINERALS)[0], {reusePath: 2});
+            }
+            else {
+                creep.move(directionToTarget);
+                if (creep.getActiveBodyparts(ATTACK) > 0) {
+                    creep.attack(target);
                 }
             }
         }
         else {
-            creep.move(directionToTarget);
+            creep.moveTo(target, {reusePath: 2})
         }
     },
     
