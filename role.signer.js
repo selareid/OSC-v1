@@ -35,7 +35,7 @@ module.exports = {
     moveToOtherRoom: function (room, creep) {
         var roomToMoveTo = this.getRoomToGoTo(room, creep);
 
-        creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(roomToMoveTo)), {reusePath: 10});
+        creep.moveTo(creep.pos.findClosestByPath(creep.room.findExitTo(roomToMoveTo)), {reusePath: 10});
     },
     
     getRoomToGoTo: function (room, creep) {
