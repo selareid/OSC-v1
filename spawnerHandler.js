@@ -353,9 +353,7 @@ module.exports = {
                 creepToAddToQueue = 'marketMover';
             }
             else if (minimumNumberOfGuards > guardsInQueue + numberOfGuards) {
-                if (!guardsInWarQueue > 2) {
                     queueToAddTo = 2;
-                }
                 creepToAddToQueue = 'guard';
             }
 
@@ -557,6 +555,9 @@ module.exports = {
                     if (carriersInPriorityQueue == 0) {
                         whichQueue = 1;
                     }
+                    break;
+                case 'guard':
+                    whichQueue = 2;
                     break;
             }
 
