@@ -1,7 +1,11 @@
+require ('prototype.creepSpeech');
+
 module.exports = {
     run: function (room, creep) {
         PathFinder.use(true);
 
+        creep.creepSpeech(room);
+        
         if (Memory.rooms[room].isUnderAttack == true) {
             var target = this.getTarget(room, creep);
             if (target) {
