@@ -39,7 +39,12 @@ module.exports = {
     },
     
     getRoomToGoTo: function (room, creep) {
-        var exit = _.filter(Game.map.describeExits(creep.pos.roomName), (e) => !creep.memory.roomsBeenIn.includes(e) && !Game.rooms[e])[0];
+        var exits = Game.map.describeExits(creep.pos.roomName);
+        var exit = _.filter(exits, (e) => !creep.memory.roomsBeenIn.includes(e) && !Game.rooms[e])[0];
+
+        if (Game.time % 20) {
+
+        }
 
         return exit;
     }
