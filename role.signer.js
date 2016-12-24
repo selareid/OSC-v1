@@ -14,7 +14,7 @@ module.exports = {
         var currentRoom = creep.room;
         var roomController = currentRoom.controller;
         if (roomController.sign && roomController.sign.username == creep.owner.username) {
-            this.moveToOtherRoom(creep);
+            this.moveToOtherRoom(room, creep);
         }
         else {
             this.signController(creep, roomController)
@@ -31,7 +31,7 @@ module.exports = {
         }
     },
 
-    moveToOtherRoom: function (creep) {
+    moveToOtherRoom: function (room, creep) {
         var roomToMoveTo = this.getRoomToGoTo(room);
 
         creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(roomToMoveTo)), {reusePath: 10});
