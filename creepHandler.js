@@ -16,6 +16,7 @@ const roleEnergyHelper = require ('role.energyOtherRoomHelper');
 const roleMiner = require ('role.miner');
 const roleMarketMover = require ('role.marketMover');
 const roleGuard = require ('role.guard');
+const roleSigner = require ('role.signer');
 
 module.exports = {
     run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
@@ -118,6 +119,9 @@ module.exports = {
                     break;
                 case 'guard':
                     roleGuard.run(room, creep);
+                    break;
+                case 'signer':
+                    roleSigner.run(room, creep);
                     break;
                 case '':
                     creep.say('ERROR!!!', true);
