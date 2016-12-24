@@ -1,12 +1,62 @@
 require('global');
 
+global.CHRISTMAS = 'Merry Christmas';
+global.NEW_YEAR = 'Happy New Year';
+global.MY_BIRTHDAY = "It's My BirthDay";
+
 module.exports = function () {
     Creep.prototype.creepSpeech = function (room, doingWhat) {
 
         if (Game.cpu.bucket > 3000) {
 
+            var timeOfYear = function () {
+                var fullDate = new Date;
+                var month = fullDate.getUTCMonth();
+                var date = fullDate.getUTCDate();
+
+                switch (month) {
+                    case 1:
+                        if (date < 5) {
+                            return NEW_YEAR;
+                        }
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+                        if (date == 2) {
+                            return MY_BIRTHDAY;
+                        }
+                        break;
+                    case 12:
+                        if (date <= 26) {
+                            return CHRISTMAS;
+                        }
+                        else {
+                            return NEW_YEAR;
+                        }
+                        break;
+                }
+            };
+
             var toSay;
             var partToSay;
+            var isFestive = timeOfYear();
 
             switch (doingWhat) {
                 case 'movingToSource':
@@ -34,7 +84,12 @@ module.exports = function () {
                     toSay = "The GCl Needs Pumped The RCl Needs Pumped LUN Needs Praise Cause It Is Great ...".split(' ');
                     break;
                 default:
-                    toSay = "Praise LUN The Luranian United Nations Find It On SLACK and the LOAN Alliance Website ...".split(' ');
+                    if (isFestive) {
+                    toSay = isFestive;
+                    }
+                    else {
+                        toSay = "Praise LUN The Luranian United Nations Find It On SLACK and the LOAN Alliance Website ...".split(' ');
+                    }
                     break;
             }
 
