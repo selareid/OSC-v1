@@ -65,13 +65,14 @@ module.exports = {
             }
             else {
                 creep.move(directionToTarget);
-                if (creep.getActiveBodyparts(ATTACK) > 0) {
-                    creep.attack(target);
-                }
             }
         }
         else {
             creep.moveTo(target, {reusePath: 2})
+        }
+
+        if (creep.getActiveBodyparts(ATTACK) > 0) {
+            creep.attack(target);
         }
     },
     
