@@ -223,7 +223,15 @@ module.exports = {
 
             //set number of some creep roles depending on energy mode
             switch (Memory.rooms[room].energyMode) {
+                case 'spendy':
+                    minimumNumberOfUpgraders = 1;
+                    minimumNumberOfBuilders = 1;
+                    minimumNumberOfRepairers = 1;
+                    break;
                 case 'normal':
+                    minimumNumberOfUpgraders = 1;
+                    minimumNumberOfBuilders = 1;
+                    minimumNumberOfRepairers = 1;
                     break;
                 case 'ok':
                     minimumNumberOfUpgraders = 1;
@@ -243,8 +251,8 @@ module.exports = {
                     minimumNumberOfRepairers = 1;
                     //minimumNumberOfDefenceManagers = 1;
                     minimumNumberOfLandlords = 0;
-                    minimumNumberOfRemoteHarvesters = 0;
-                    minimumNumberOfRemoteHaulers = 0;
+                    // minimumNumberOfRemoteHarvesters = 0;
+                    // minimumNumberOfRemoteHaulers = 0;
                     minimumNumberOfOtherRoomCreeps = 0;
 //minimumNumberOfEnergyThiefs = 0;
                     minimumNumberOfMiners = 0;
