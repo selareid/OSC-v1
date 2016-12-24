@@ -15,9 +15,13 @@ module.exports = {
             creep.memory.roomsBeenIn.push(creep.pos.roomName);
         }
 
+        if (!creep.memory.directionWays) {
+            creep.memory.directionWays = [];
+        }
+
         var currentRoom = creep.room;
         var roomController = currentRoom.controller;
-        if (!roomController || (roomController.sign && roomController.sign.username == creep.owner.username)) {
+        if (!roomController || (roomController.sign)) {
             this.moveToOtherRoom(room, creep);
         }
         else {
