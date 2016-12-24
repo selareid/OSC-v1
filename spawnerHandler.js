@@ -352,7 +352,7 @@ module.exports = {
             else if (minimumNumberOfMarketMovers > marketMoversInQueue + numberOfMarketMovers) {
                 creepToAddToQueue = 'marketMover';
             }
-            else if (minimumNumberOfGuards > guardsInQueue + numberOfGuards) {
+            else if (minimumNumberOfGuards > guardsInQueue + guardsInWarQueue + numberOfGuards) {
                     queueToAddTo = 2;
                 creepToAddToQueue = 'guard';
             }
