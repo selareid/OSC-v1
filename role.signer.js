@@ -38,7 +38,7 @@ module.exports = {
     getRoomToGoTo: function (room) {
         var exits = Game.map.describeExits(room.name);
 
-        var exit = _.filter(exits, (e) => !creep.memory.roomsBeenIn.includes(e))[0];
+        var exit = _.filter(exits, (e) => !creep.memory.roomsBeenIn.includes(e) && !Game.rooms[e])[0];
 
         if (exit) return exit;
         else return exits[0];
