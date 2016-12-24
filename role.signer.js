@@ -32,12 +32,12 @@ module.exports = {
     },
 
     moveToOtherRoom: function (room, creep) {
-        var roomToMoveTo = this.getRoomToGoTo(room);
+        var roomToMoveTo = this.getRoomToGoTo(room, creep);
 
         creep.moveTo(creep.pos.findClosestByRange(creep.room.findExitTo(roomToMoveTo)), {reusePath: 10});
     },
     
-    getRoomToGoTo: function (room) {
+    getRoomToGoTo: function (room, creep) {
         var exits = Game.map.describeExits(room.name);
 
         var exit = _.filter(exits, (e) => !creep.memory.roomsBeenIn.includes(e) && !Game.rooms[e])[0];
