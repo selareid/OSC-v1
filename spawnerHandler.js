@@ -278,7 +278,7 @@ module.exports = {
                     || c.getActiveBodyparts(HEAL) >= 1 || c.getActiveBodyparts(WORK) >= 1
                 }).length;
 
-                minimumNumberOfGuards = numberOfHostiles * 4;
+                minimumNumberOfGuards = Math.round(numberOfHostiles * 2.6);
                 minimumNumberOfUpgraders = 0;
                 minimumNumberOfBuilders = 1;
                 minimumNumberOfRepairers = 1;
