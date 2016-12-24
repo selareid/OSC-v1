@@ -15,10 +15,12 @@ module.exports = function () {
                 var date = fullDate.getUTCDate();
 
                 switch (month) {
-                    case 1:
+                    case 0:
                         if (date < 5) {
                             return NEW_YEAR;
                         }
+                        break;
+                    case 1:
                         break;
                     case 2:
                         break;
@@ -37,16 +39,11 @@ module.exports = function () {
                     case 9:
                         break;
                     case 10:
-                        break;
-                    case 11:
                         if (date == 2) {
                             return MY_BIRTHDAY;
                         }
-                        else if (date > 20) {
-                            return CHRISTMAS;
-                        }
                         break;
-                    case 12:
+                    case 11:
                         if (date <= 26) {
                             return CHRISTMAS;
                         }
