@@ -175,7 +175,9 @@ module.exports = {
         var towers = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER}); // get towers in room
         for (let tower of towers) {
             if (tower.energy > 500) { // if energy in tower is greater than x
-                towerHandler.repairRampart(room, tower); // tower repairs ramparts
+                if (towerHandler.run(room, tower) == 'no thing to heal') {
+                    towerHandler.repairRampart(room, tower); // tower repairs ramparts
+                }
             }
         }
         //tower stuff ends

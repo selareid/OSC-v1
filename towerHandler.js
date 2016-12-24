@@ -14,6 +14,9 @@ module.exports = {
             if (towerHeal) {
                 tower.heal(towerHeal)
             }
+            else {
+                return 'no thing to heal';
+            }
         }
     },
 
