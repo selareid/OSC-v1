@@ -1,4 +1,5 @@
 require('global');
+require('prototype.creepSpeech')();
 
 var type1 = require ('role.type1');
 

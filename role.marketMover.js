@@ -2,6 +2,7 @@
 
 require('global');
 require('prototype.creep')();
+require('prototype.creepSpeech')();
 
 const roleCarrier = require ('role.carrier');
 

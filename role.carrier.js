@@ -1,5 +1,6 @@
 require('global');
 require('prototype.creep')();
+require('prototype.creepSpeech')();
 
 var roleDistributor = require ('role.distributor');
 

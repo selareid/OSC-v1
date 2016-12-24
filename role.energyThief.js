@@ -1,4 +1,5 @@
 require('global');
+require('prototype.creepSpeech')();
 
 module.exports = {
     run: function(room, creep, roomToGoTo) {
