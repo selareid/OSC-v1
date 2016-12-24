@@ -253,14 +253,18 @@ module.exports = function () {
                     }
                     return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 case 'guard':
-                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 200);
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
                     if (numberOfParts > 0) {
-                        if (numberOfParts > 25) numberOfParts = 25;
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        numberOfParts = numberOfParts / 2;
 
                         for (let i = 0; i < numberOfParts; i++) {
                             body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
                             body.push(MOVE);
                         }
+
                     }
                     return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 default:
