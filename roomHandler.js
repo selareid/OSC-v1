@@ -13,23 +13,6 @@ module.exports = {
 
         room.cacheThingsInRoom();
 
-        //lab stuff starts
-        try {
-            if (!Memory.rooms[room].labQueue) {
-                Memory.rooms[room].labQueue = [];
-            }
-            if (Game.cpu.bucket > 2000) {
-                if (Game.time % 3 == 0) labHandler.run(room);
-            }
-        }
-        catch (err) {
-            if (err !== null && err !== undefined) {
-                Game.notify("Error in lab logic: \n" + err + "\n " + err.stack);
-                console.log("Error in lab logic: \n" + err + "\n" + err.stack + " room: " + room.name);
-            }
-        }
-        //lab stuff ends
-
         try {
             if (Game.time % 7 == 0) {
                 if (Game.cpu.bucket > 2000) {
@@ -99,6 +82,23 @@ module.exports = {
             }
 
         }
+
+        //lab stuff starts
+        try {
+            if (!Memory.rooms[room].labQueue) {
+                Memory.rooms[room].labQueue = [];
+            }
+            if (Game.cpu.bucket > 2000) {
+                if (Game.time % 3 == 0) labHandler.run(room);
+            }
+        }
+        catch (err) {
+            if (err !== null && err !== undefined) {
+                Game.notify("Error in lab logic: \n" + err + "\n " + err.stack);
+                console.log("Error in lab logic: \n" + err + "\n" + err.stack + " room: " + room.name);
+            }
+        }
+        //lab stuff ends
 
         //guard station flag stuff starts
             if (global[room.name].guardStationFlag == undefined) {
