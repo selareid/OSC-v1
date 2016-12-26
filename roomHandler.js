@@ -119,10 +119,6 @@ module.exports = {
         //room to steal from stuff starts
         if (Game.cpu.bucket > 2000) {
             var roomToStealFrom = room.findRoomToStealFrom();
-            var roomToStealFromPos;
-            if (roomToStealFrom) {
-                roomToStealFromPos = roomToStealFrom.pos.roomName;
-            }
         }
         //room to steal from stuff ends
 
@@ -192,7 +188,7 @@ module.exports = {
             }
         }
 
-        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFromPos, energyHelperFlag);
+        creepHandler.run(room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToStealFrom, energyHelperFlag);
 
         //grafana room stuff
         Memory.stats['room.' + room.name + '.myRoom'] = 1;

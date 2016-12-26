@@ -19,13 +19,13 @@ const roleGuard = require ('role.guard');
 const roleSigner = require ('role.signer');
 
 module.exports = {
-    run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, roomToTakeFrom, energyHelperFlag) {
+    run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, energyThiefFlag, energyHelperFlag) {
 
         try {
             for (let name in Game.creeps) {
                 let creep = Game.creeps[name];
 
-                this.creepActions(room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag, otherRoomCreepsRoomToGoToPos);
+                this.creepActions(room, creep, remoteCreepFlags, energyThiefFlag, energyHelperFlag, otherRoomCreepsRoomToGoToPos);
 
             }
         }
@@ -38,7 +38,7 @@ module.exports = {
 
     },
 
-    creepActions: function (room, creep, remoteCreepFlags, roomToTakeFrom, energyHelperFlag, roomToGoTo) {
+    creepActions: function (room, creep, remoteCreepFlags, energyThiefFlag, energyHelperFlag, roomToGoTo) {
         if (creep.memory.room == room.name && creep.spawning === false) {
 
             if (!global[creep.name]) {
@@ -90,8 +90,8 @@ module.exports = {
                     }
                     break;
                 case 'energyThief':
-                    if (roomToTakeFrom != undefined) {
-                        if (Game.cpu.bucket > 500) energyThief.run(room, creep, roomToTakeFrom);
+                    if (energyThiefFlag) {
+                        if (Game.cpu.bucket > 1000) energyThief.run(room, creep, energyThiefFlag);
                     }
                     else {
                         creep.memory.role = 'carrier';
