@@ -70,18 +70,17 @@ module.exports = {
             minDefenceLevel = 100000;
         }
 
-        var structure = creep.pos.findClosestByRange(FIND_STRUCTURES,
+        var structures = room.find(FIND_STRUCTURES,
             {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits < minDefenceLevel});
 
-        if (structure) {
-            return structure;
+        var structure = creep.pos.findClosestByRange(structures);
+
+        if (!structure) {
+            Memory.rooms[room].minDefenceLevel = minDefenceLevel + 10000;
+            return;
         }
-        else {
-            var maxStructure = _.max(structures, 'hits');
-            if (maxStructure) {
-                Memory.rooms[room].minDefenceLevel = maxStructure.hits + 10000;
-            }
-        }
+
+        return structure;
     },
 
     getTowerToRefill: function (room) {
