@@ -1,4 +1,4 @@
-require('global');
+    require('global');
 
 const roomHandler = require ('roomHandler');
 const profiler = require('screeps-profiler');
@@ -26,9 +26,7 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
         try {
             //memory stuff
             if (Game.time % 13 == 0) {
-                for (let name in Game.creeps) {
-                    let creep = Game.creeps[name];
-
+                for (let name in Memory.creeps) {
                     if (!Game.creeps[name]) {
                         delete Memory.creeps[name];
                     }
