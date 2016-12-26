@@ -15,7 +15,7 @@ module.exports = {
         if (creep.memory.working == true) {
             var towerLowerThan = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER && s.energy < 210});
             if (isUnderAttack === true || towerLowerThan.length > 0) {
-                var tower = this.getTowerToRefill(room, creep);
+                var tower = this.getTowerToRefill(room);
                 if (tower) {
                     if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(tower);
@@ -23,7 +23,7 @@ module.exports = {
                 }
             }
             else {
-                var defenceToRepair = this.findDefence(room);
+                var defenceToRepair = this.findDefence(room, creep);
 
                 if (defenceToRepair) {
                     if (creep.repair(defenceToRepair) == ERR_NOT_IN_RANGE) {
@@ -63,7 +63,7 @@ module.exports = {
         }
     },
 
-    findDefence: function (room) {
+    findDefence: function (room, creep) {
         var minDefenceLevel = Memory.rooms[room].minDefenceLevel;
         if (!Memory.rooms[room].minDefenceLevel) {
             Memory.rooms[room].minDefenceLevel = 100000;
@@ -84,7 +84,7 @@ module.exports = {
         }
     },
 
-    getTowerToRefill: function (room, creep) {
+    getTowerToRefill: function (room) {
         var towers = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_TOWER});
 
         if (towers.length > 0) {
