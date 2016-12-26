@@ -16,36 +16,27 @@ module.exports = {
 
         if (creep.memory.working == true) {
 
-            var spawn = this.findSpawn(room, creep);
+            var spawnExtension = this.findSpawnExtension(room, creep);
 
-            if (spawn) {
-                if (creep.transfer(spawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(spawn);
+            if (spawnExtension) {
+                if (creep.transfer(spawnExtension, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(spawnExtension);
                 }
             }
             else {
-                var extension = this.findExtension(room, creep);
-                if (extension) {
-                    if (creep.transfer(extension, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(extension);
+                var tower = this.findTower(room, energyOfTowers);
+                if (tower) {
+                    if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(tower);
                     }
                 }
                 else {
-                    var tower = this.findTower(room, energyOfTowers);
-                    if (tower) {
-                        if (creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(tower);
-                        }
-                    }
-                    else {
-                        var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name})[0];
-                        if (flagToGoTo) {
-                            creep.moveTo(flagToGoTo);
-                        }
+                    var flagToGoTo = room.find(FIND_FLAGS, {filter: (f) => f.memory.type == 'distributorGoTo' && f.memory.room == creep.room.name})[0];
+                    if (flagToGoTo) {
+                        creep.moveTo(flagToGoTo);
                     }
                 }
             }
-
         }
         else {
 
@@ -125,17 +116,10 @@ module.exports = {
         }
     },
 
-    findSpawn: function (room, creep) {
-        var spawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
-        return spawn;
-    },
-
-    findExtension: function (room, creep) {
-        var extension = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
-            filter: (s) => s.structureType == STRUCTURE_EXTENSION
-            && s.energy < s.energyCapacity
-        });
-        return extension;
+    findSpawnExtension: function (room, creep) {
+        var spawns = room.find(FIND_MY_SPAWNS, {filter: (s) => s.energy < s.energyCapacity});
+        var extensions = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_EXTENSION && s.energy < s.energyCapacity});
+        return creep.pos.findClosestByRange(spawns.concat(extensions));
     },
 
     findTower: function (room, energyOfTowers) {
