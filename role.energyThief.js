@@ -2,56 +2,49 @@ require('global');
 require('prototype.creepSpeech')();
 
 module.exports = {
-    run: function(room, creep, roomToGoTo) {
-        if (roomToGoTo) {
-            if (creep.memory.working == true && creep.carry.energy == 0) {
+    run: function (room, creep, energyThiefFlag) {
+        if (energyThiefFlag) {
+
+            if (creep.memory.working == true && _.sum(creep.carry) == 0) {
                 creep.memory.working = false;
             }
-            else if (creep.memory.working == false && creep.carry.energy == creep.carryCapacity) {
+            else if (creep.memory.working == false && _.sum(creep.carry) == creep.carryCapacity) {
                 creep.memory.working = true;
             }
 
             if (creep.memory.working == true) {
-                if (creep.room.name != room.name) {
-                    let roomPos2 = new RoomPosition(12, 25, room.name);
-                    creep.moveTo(roomPos2);
+                if (creep.pos.roomName != room.name) {
+                    creep.moveTo(room.storage, {reusePath: 20});
                 }
                 else {
-                    var links = _.filter(global[room.name].links, (l) => l.energy > 0);
                     var storage = room.storage;
-
-                    var arrayOfBoth = links;
-                    arrayOfBoth.push(storage);
-
-                    var closer = creep.pos.findClosestByRange(arrayOfBoth);
-
-                    if (closer != storage) {
-                        if (creep.withdraw(closer, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(closer, {reusePath: 10})
-                        }
-                    }
-                    else if (storage && _.sum(storage.store) < storage.storeCapacity) {
-                        if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(storage, {reusePath: 10})
+                    if (_.sum(storage.store) < storage.storeCapacity) {
+                        for (let resourceType in creep.carry) {
+                            if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(storage, {reusePath: 19});
+                            }
                         }
                     }
                     else {
-                        creep.drop(RESOURCE_ENERGY);
+                        console.log('Storage Full In Room ' + room.name);
                     }
                 }
             }
             else {
-                if (creep.room.name != roomToGoTo) {
-                    let roomPos1 = new RoomPosition(26, 20, roomToGoTo);
-                    creep.moveTo(roomPos1);
+                if (creep.pos.roomName != energyThiefFlag.pos.roomName) {
+                    creep.moveTo(energyThiefFlag, {reusePath: 20});
                 }
                 else {
-                    var storage = creep.room.storage;
-
-                    if (storage && storage.store[RESOURCE_ENERGY] > 0) {
-                        if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(storage);
+                    var storageInThisRoom = energyThiefFlag.room.storage;
+                    if (_.sum(storageInThisRoom.store) < storageInThisRoom.storeCapacity) {
+                        for (let resourceType in storageInThisRoom.store) {
+                            if (creep.withdraw(storageInThisRoom, resourceType) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(storageInThisRoom, {reusePath: 19});
+                            }
                         }
+                    }
+                    else {
+                        energyThiefFlag.remove();
                     }
                 }
             }
