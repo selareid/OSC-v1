@@ -55,6 +55,7 @@ module.exports = function () {
 
     Creep.prototype.runInSquares =
         function () {
+        var creep = this;
             switch (creep.memory.lastMove) {
                 case TOP:
                     creep.memory.lastMove = LEFT;
