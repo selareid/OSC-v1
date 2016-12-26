@@ -22,39 +22,39 @@ module.exports = function () {
                     }
                 }
             }
-        },
+        };
 
-        Creep.prototype.findContainer =
-            function (room) {
-                var allContainersInRoom = room.find(FIND_STRUCTURES, {
-                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0
+    Creep.prototype.findContainer =
+        function (room) {
+            var allContainersInRoom = room.find(FIND_STRUCTURES, {
+                filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY] > 0
+            });
+
+            if (allContainersInRoom.length > 0) {
+
+                var containerEnergy = _.max(allContainersInRoom, '.store.energy').store.energy - 400;
+
+
+                var container = this.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY]
+                    && s.store[RESOURCE_ENERGY] >= containerEnergy
                 });
 
-                if (allContainersInRoom.length > 0) {
 
-                    var containerEnergy = _.max(allContainersInRoom, '.store.energy').store.energy - 400;
-
-
-                    var container = this.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (s) => s.structureType == STRUCTURE_CONTAINER && s.store[RESOURCE_ENERGY]
-                        && s.store[RESOURCE_ENERGY] >= containerEnergy
-                    });
-
-
-                    if (container) {
-                        return container;
-                    }
-                    else {
-                        return undefined;
-                    }
+                if (container) {
+                    return container;
                 }
                 else {
                     return undefined;
                 }
-            },
+            }
+            else {
+                return undefined;
+            }
+        };
 
-        Creep.prototype.runInSquares =
-            function () {
+    Creep.prototype.runInSquares =
+        function () {
             switch (creep.memory.lastMove) {
                 case TOP:
                     creep.memory.lastMove = LEFT;
@@ -76,5 +76,34 @@ module.exports = function () {
                     creep.memory.lastMove = TOP;
                     creep.move(TOP);
             }
+        };
+
+    /**
+     * Creep method optimizations "getActiveBodyparts"
+     */
+    Creep.prototype.getActiveBodyparts = function (type) {
+        var count = 0;
+        for (var i = this.body.length; i-- > 0;) {
+            if (this.body[i].hits > 0) {
+                if (this.body[i].type === type) {
+                    count++;
+                }
+            } else break;
         }
+        return count;
+    };
+
+    /**
+     * Fast check if bodypart exists
+     */
+    Creep.prototype.hasActiveBodyparts = function (type) {
+        for (var i = this.body.length; i-- > 0;) {
+            if (this.body[i].hits > 0) {
+                if (this.body[i].type === type) {
+                    return true;
+                }
+            } else break;
+        }
+        return false;
+    };
 };

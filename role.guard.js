@@ -45,7 +45,7 @@ module.exports = {
 
     kite: function (room, creep, target) {
         var targetDangerous = false;
-        if (target.getActiveBodyparts(ATTACK) > 0 || target.getActiveBodyparts(RANGED_ATTACK) > 0) {
+        if (target.hasActiveBodyparts(ATTACK) || target.hasActiveBodyparts(RANGED_ATTACK)) {
             targetDangerous = true;
         }
 
@@ -75,7 +75,7 @@ module.exports = {
             creep.moveTo(target, {reusePath: 2})
         }
 
-        if (creep.getActiveBodyparts(ATTACK) > 0) {
+        if (creep.hasActiveBodyparts(ATTACK)) {
             creep.attack(target);
         }
     },
