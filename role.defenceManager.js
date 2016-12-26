@@ -64,12 +64,24 @@ module.exports = {
     },
 
     findDefence: function (room) {
-        var structures = room.find(FIND_STRUCTURES,
-            {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits < s.hitsMax});
+        var minDefenceLevel = Memory.rooms[room].minDefenceLevel;
+        if (!Memory.rooms[room].minDefenceLevel) {
+            Memory.rooms[room].minDefenceLevel = 100000;
+            minDefenceLevel = 100000;
+        }
 
-        var structure = _.min(structures, 'hits');
+        var structure = creep.pos.findClosestByRange(FIND_STRUCTURES,
+            {filter: (s) => (s.structureType == STRUCTURE_RAMPART || s.structureType == STRUCTURE_WALL) && s.hits < minDefenceLevel});
 
-        return structure;
+        if (structure) {
+            return structure;
+        }
+        else {
+            var maxStructure = _.max(structures, 'hits');
+            if (maxStructure) {
+                Memory.rooms[room].minDefenceLevel = maxStructure.hits + 10000;
+            }
+        }
     },
 
     getTowerToRefill: function (room, creep) {
