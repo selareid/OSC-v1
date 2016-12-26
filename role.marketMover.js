@@ -8,6 +8,11 @@ const roleCarrier = require ('role.carrier');
 
 module.exports = {
     run: function (room, creep) {
+        this.normalRun(room, creep);
+    },
+
+    normalRun: function (room, creep) {
+
         var terminal = room.terminal;
         var terminalStore = _.sum(terminal.store);
 
