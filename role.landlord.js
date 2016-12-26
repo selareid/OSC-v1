@@ -76,19 +76,35 @@ module.exports = {
             }
         }
         for (let flag of reserveFlags) {
-            let flagRoom = flag.room;
-            if (Game.rooms[flagRoom]) {
-                let numberOfMyCreepsNearby = _.filter(Game.creeps, (c) => c.memory.role == 'landlord' && c.memory.room == flag.memory.room && c.memory.flag == flag.name).length;
-
-                if (numberOfMyCreepsNearby <= 2) {
-                    return flag.name;
-
+            var amountOfCreepsAssignedToThisFlag = _.filter(Game.creeps, (c) => c.memory.room == room.name && c.memory.role == 'landlord' && c.memory.flag == flag.name).length;
+            if (flag.room) {
+                var controller = flag.room.controller;
+                if (controller) {
+                    if (controller.reservation) {
+                        if (controller.reservation.ticksToEnd > 2500) {
+                            if (amountOfCreepsAssignedToThisFlag < 1) {
+                                return flag.name;
+                            }
+                        }
+                        else {
+                            if (amountOfCreepsAssignedToThisFlag < 2) {
+                                return flag.name;
+                            }
+                        }
+                    }
+                    else {
+                        if (amountOfCreepsAssignedToThisFlag < 2) {
+                            return flag.name;
+                        }
+                    }
+                }
+                else {
+                    flag.remove();
                 }
             }
             else {
                 return flag.name;
             }
-
         }
     }
 };
