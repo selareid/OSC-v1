@@ -40,10 +40,9 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
                     }
                 }
                 for (let flag in Memory.flags) {
-                    if (!Game.flags[flag]) {
-                        delete Memory.spawns[flag];
+                    if (Game.flags[flag] == undefined) {
+                        delete Memory.flags[flag];
                     }
-
                 }
             }
         }
