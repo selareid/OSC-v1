@@ -80,6 +80,7 @@ module.exports = function () {
 
     /**
      * Creep method optimizations "getActiveBodyparts"
+     * credits to proximo
      */
     Creep.prototype.getActiveBodyparts = function (type) {
         var count = 0;
@@ -95,6 +96,7 @@ module.exports = function () {
 
     /**
      * Fast check if bodypart exists
+     * credits to proximo
      */
     Creep.prototype.hasActiveBodyparts = function (type) {
         for (var i = this.body.length; i-- > 0;) {
