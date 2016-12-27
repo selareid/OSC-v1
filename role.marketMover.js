@@ -104,7 +104,7 @@ module.exports = {
         var storage = room.storage;
         var nextReaction = labQueue[0].split(',');
 
-        if (storage.store[nextReaction][0] && storage.store[nextReaction][1]) { //storage has needed resources
+        if (storage.store[nextReaction[0]] && storage.store[nextReaction[1]]) { //storage has needed resources
 
             if (creep.memory.working == true && creep.carry.energy == 0) {
                 creep.memory.working = false;
