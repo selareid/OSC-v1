@@ -4,7 +4,9 @@ module.exports = function () {
     Creep.prototype.basicRangedHandler =
         function (target) {
             if (target) {
-                this.rangedAttack(target);
+                if (this.hasActiveBodyparts(RANGED_ATTACK)) {
+                    this.rangedAttack(target);
+                }
             }
         };
 
