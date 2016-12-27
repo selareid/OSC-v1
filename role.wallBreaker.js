@@ -67,14 +67,14 @@ module.exports = {
             }
         }
         else {
-            console.log('structureDestroyer creep ' + creep.name + ' needs a team');
+            console.log('wallBreaker creep ' + creep.name + ' needs a team');
             creep.moveTo(global[room.name].guardStationFlag);
         }
 
     },
 
     getTargetStructure: function (creep) {
-        return creep.pos.findClosestByRange(FIND_STRUCTURES);
+        return _.min(creep.room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART}), '.hits');
     }
 };
 
