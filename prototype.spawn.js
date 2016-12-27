@@ -278,6 +278,122 @@ module.exports = function () {
 
                     }
                     return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'creepHarasser':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 340);
+                    if (numberOfParts > 1) {
+                        if (numberOfParts > 10) numberOfParts = 10;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(TOUGH);
+                            body.push(MOVE);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'spawnSmasher':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 340);
+                    if (numberOfParts > 1) {
+                        if (numberOfParts > 10) numberOfParts = 10;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(TOUGH);
+                            body.push(MOVE);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'structureDestroyer':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 340);
+                    if (numberOfParts > 1) {
+                        if (numberOfParts > 10) numberOfParts = 10;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(TOUGH);
+                            body.push(MOVE);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'wallBreaker':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 340);
+                    if (numberOfParts > 1) {
+                        if (numberOfParts > 10) numberOfParts = 10;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(TOUGH);
+                            body.push(MOVE);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(RANGED_ATTACK);
+                            body.push(ATTACK);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'warHealer':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 300);
+                    if (numberOfParts > 0) {
+                        if (numberOfParts > 25) numberOfParts = 25;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(HEAL);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }
