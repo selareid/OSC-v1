@@ -94,7 +94,7 @@ module.exports = {
     },
 
     getTargetCreep: function (creep) {
-        creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: (c) => !global.Allies.includes(c.owner.username)});
+        return creep.pos.findInRange(FIND_HOSTILE_CREEPS, 3, {filter: (c) => !global.Allies.includes(c.owner.username)});
     },
     
     isTargetSpawnInRange: function (targetSpawn) {

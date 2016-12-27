@@ -74,7 +74,7 @@ module.exports = {
     },
 
     getTargetCreep: function (creep) {
-        creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => !global.Allies.includes(c.owner.username)});
+        return creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {filter: (c) => !global.Allies.includes(c.owner.username)});
     }
 };
 
