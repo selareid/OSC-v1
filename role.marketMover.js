@@ -117,28 +117,60 @@ module.exports = {
                 var labs = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB && Memory.rooms[room].labs[s.id].type == 0});
 
                 if (labs.length == 2) {
-                    if (labs[0].mineralAmount > 0 && creep.carry[labs[0].mineralType] != undefined) {
-                        if (creep.transfer(labs[0], labs[0].mineralType) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(labs[0]);
-                        }
-                    }
-                    else if (labs[1].mineralAmount > 0 && creep.carry[labs[1].mineralType] != undefined) {
-                        if (creep.transfer(labs[1], labs[1].mineralType) == ERR_NOT_IN_RANGE) {
-                            creep.moveTo(labs[1]);
-                        }
-                    }
-                    else { //none of the labs have minerals or not the minerals we need
-                        if (labs[0].mineralType == undefined) {
-                            if (creep.transfer(labs[0], nextReaction[0]) == ERR_NOT_IN_RANGE) {
+
+                    if (creep.memory.lab == 1) {
+                        creep.memory.lab = 0;
+
+                        if (labs[0].mineralAmount > 0 && creep.carry[labs[0].mineralType] != undefined) {
+                            if (creep.transfer(labs[0], labs[0].mineralType) == ERR_NOT_IN_RANGE) {
                                 creep.moveTo(labs[0]);
                             }
                         }
-                        if (labs[1].mineralType == undefined) {
-                            if (creep.transfer(labs[1], nextReaction[1]) == ERR_NOT_IN_RANGE) {
+                        else if (labs[1].mineralAmount > 0 && creep.carry[labs[1].mineralType] != undefined) {
+                            if (creep.transfer(labs[1], labs[1].mineralType) == ERR_NOT_IN_RANGE) {
                                 creep.moveTo(labs[1]);
                             }
                         }
+                        else { //none of the labs have minerals or not the minerals we need
+                            if (labs[0].mineralType == undefined) {
+                                if (creep.transfer(labs[0], nextReaction[0]) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(labs[0]);
+                                }
+                            }
+                            if (labs[1].mineralType == undefined) {
+                                if (creep.transfer(labs[1], nextReaction[1]) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(labs[1]);
+                                }
+                            }
+                        }
                     }
+                    else {
+                        creep.memory.lab = 1;
+
+                        if (labs[1].mineralAmount > 0 && creep.carry[labs[1].mineralType] != undefined) {
+                            if (creep.transfer(labs[1], labs[1].mineralType) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(labs[1]);
+                            }
+                        }
+                        else if (labs[0].mineralAmount > 0 && creep.carry[labs[0].mineralType] != undefined) {
+                            if (creep.transfer(labs[0], labs[0].mineralType) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(labs[0]);
+                            }
+                        }
+                        else { //none of the labs have minerals or not the minerals we need
+                            if (labs[1].mineralType == undefined) {
+                                if (creep.transfer(labs[1], nextReaction[1]) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(labs[1]);
+                                }
+                            }
+                            if (labs[0].mineralType == undefined) {
+                                if (creep.transfer(labs[0], nextReaction[0]) == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(labs[0]);
+                                }
+                            }
+                        }
+                    }
+
                 }
 
             }
