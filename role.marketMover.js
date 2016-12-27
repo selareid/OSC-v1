@@ -8,7 +8,13 @@ const roleCarrier = require ('role.carrier');
 
 module.exports = {
     run: function (room, creep) {
-        this.normalRun(room, creep);
+        var labQueueFirst = Memory.rooms[room].labQueue[0];
+        if (labQueueFirst && labQueueFirst.split(',').length == 2) {
+            this.labRun(room, creep, Memory.rooms[room].labQueue)
+        }
+        else {
+            this.normalRun(room, creep);
+        }
     },
 
     normalRun: function (room, creep) {
@@ -92,6 +98,70 @@ module.exports = {
             }
             else roleCarrier.run(room, creep);
         }
+    },
+
+    labRun: function (room, creep, labQueue) {
+        var storage = room.storage;
+        var nextReaction = labQueue[0].splice(',');
+
+        if (storage.store[nextReaction][0] && storage.store[nextReaction][1]) { //storage has needed resources
+
+            if (creep.memory.working == true && creep.carry.energy == 0) {
+                creep.memory.working = false;
+            }
+            else if (creep.memory.working == false && _.sum(creep.carry) == creep.carryCapacity) {
+                creep.memory.working = true;
+            }
+
+            if (creep.memory.working == true) {
+                var labs = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB && Memory.rooms[room].labs[s.id].type == 0});
+
+                if (labs.length > 2) {
+                    if (labs[0].mineralAmount > 0 && creep.carry[labs[0].mineralType] != undefined) {
+                        if (creep.transfer(labs[0], labs[0].mineralType) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(labs[0]);
+                        }
+                    }
+                    else if (labs[1].mineralAmount > 0 && creep.carry[labs[1].mineralType] != undefined) {
+                        if (creep.transfer(labs[1], labs[1].mineralType) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(labs[1]);
+                        }
+                    }
+                    else { //none of the labs have minerals or not the minerals we need
+                        if (labs[0].mineralType == undefined) {
+                            if (creep.transfer(labs[0], nextReaction[0]) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(labs[0]);
+                            }
+                        }
+                        if (labs[1].mineralType == undefined) {
+                            if (creep.transfer(labs[1], nextReaction[1]) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(labs[1]);
+                            }
+                        }
+                    }
+                }
+
+            }
+            else {
+                switch (Game.time % 2) {
+                    case 1:
+                        if (creep.withdraw(storage, nextReaction[0], creep.carryCapacity / 2) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage);
+                        }
+                        break;
+                    default:
+                        if (creep.withdraw(storage, nextReaction[1], creep.carryCapacity / 2) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(storage);
+                        }
+                        break;
+                }
+            }
+
+        }
+        else {
+            Memory.rooms[room].labQueue.splice(0, 1);
+        }
+
     },
 
     collectEnergy: function (room, creep, storage) {
