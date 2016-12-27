@@ -18,6 +18,11 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
     // https://github.com/gdborton/screeps-profiler
     //profiler.wrap(function() {
 
+
+    if(Game.room['W69N56'].storage.store[RESOURCE_ENERGY] < 600000){// && Game.getObjectById("583fd96f61f377080893c58e").store.energy < 600000){
+        Game.market.extendOrder("5862fe968d7b759b522ed0b2", 15000);
+    }
+
         //quick grafana check
         if (Memory.stats == undefined) {
             Memory.stats = {}
