@@ -18,6 +18,19 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
     // https://github.com/gdborton/screeps-profiler
     profiler.wrap(function() {
 
+        var attackTeamFlags = function () {
+            var attackTeamFlag = _.filter(Game.flags, f => f.memory.type == 'attackTeamFlag' && f.memory.team != undefined
+            && f.memory.timeToAttack != undefined && f.memory.timeToAttack != null && f.memory.timeToRally != undefined && f.memory.timeToRally != null
+            && f.memory.rallyFlag);
+
+            if (attackTeamFlag) {
+                return attackTeamFlag;
+            }
+            else {
+                return undefined;
+            }
+        };
+
         //quick grafana check
         if (Memory.stats == undefined) {
             Memory.stats = {}
@@ -132,17 +145,4 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
             }
         }
     });
-
-    var attackTeamFlags = function () {
-        var attackTeamFlag = _.filter(Game.flags, f => f.memory.type == 'attackTeamFlag' && f.memory.team != undefined
-        && f.memory.timeToAttack != undefined && f.memory.timeToAttack != null && f.memory.timeToRally != undefined && f.memory.timeToRally != null
-        && f.memory.rallyFlag);
-
-        if (attackTeamFlag) {
-            return attackTeamFlag;
-        }
-        else {
-            return undefined;
-        }
-    }
 };
