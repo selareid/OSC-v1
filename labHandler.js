@@ -18,7 +18,7 @@ module.exports = {
 
             if (!lab.cooldown > 0) {
                 if (Memory.rooms[room].labs[lab.id].type == 1) { // a lab that does the reactions
-                    var labsInRange = lab.findInRange(labs, 2, {filter: (l) => l.id !== lab.id && Memory.rooms[room].labs[l.id].type == 0});
+                    var labsInRange = lab.pos.findInRange(labs, 2, {filter: (l) => l.id !== lab.id && Memory.rooms[room].labs[l.id].type == 0});
                     var resourcesAvailable = [];
                     _.forEach(labsInRange, function (l) {
                         if (l.mineralAmount > 0) {
