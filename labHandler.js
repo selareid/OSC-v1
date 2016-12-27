@@ -17,7 +17,7 @@ module.exports = {
                 Memory.rooms[room].labs[lab.id].type = 0; // 0 is a lab that is used
             }
 
-            if (lab.cooldown) {
+            if (!lab.cooldown > 0) {
                 if (Memory.rooms[room].labs[lab.id].type == 1) { // a lab that does the reactions
                     if (lab.mineralAmount < lab.mineralCapacity - 5) {
                         if (global[room.name].resourcesAvailable.length >= 2) {
