@@ -46,22 +46,7 @@ module.exports = {
                         }
                     }
                     else {
-                        var timeToRally = Game.time >= teamGlobal.timeToAttack;
-                        if (timeToRally != undefined && timeToRally != null) {
-                            if (Game.time >= timeToRally) {
-                                var rallyFlag = teamGlobal.rallyFlag;
-                                if (rallyFlag) {
-                                    creep.moveTo(rallyFlag, {ignoreRoads: true});
-                                }
-                                else {
-                                    // something here
-                                    creep.moveTo(global[room.name].guardStationFlag);
-                                }
-                            }
-                            else {
-                                creep.moveTo(global[room.name].guardStationFlag);
-                            }
-                        }
+                        creep.beforeRally(room, teamGlobal);
                     }
                 }
             }

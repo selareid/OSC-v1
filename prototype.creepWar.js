@@ -18,4 +18,24 @@ module.exports = function () {
                 }
             }
         };
+
+        Creep.prototype.beforeRally =
+        function (room, teamGlobal) {
+            var timeToRally = Game.time >= teamGlobal.timeToRally;
+            if (timeToRally != undefined && timeToRally != null) {
+                if (Game.time >= timeToRally) {
+                    var rallyFlag = teamGlobal.rallyFlag;
+                    if (rallyFlag) {
+                        creep.moveTo(rallyFlag, {ignoreRoads: true});
+                    }
+                    else {
+                        // something here
+                        creep.moveTo(global[room.name].guardStationFlag);
+                    }
+                }
+                else {
+                    creep.moveTo(global[room.name].guardStationFlag);
+                }
+            }
+        };
 };
