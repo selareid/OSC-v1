@@ -72,9 +72,8 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
         if (global['warCache']) {
             global['warCache'] = {};
         }
-
-        var varAttackTeamFlags = attackTeamFlags;
-        for (let flag of varAttackTeamFlags) {
+        
+        for (let flag of attackTeamFlags) {
             if (global['warCache'][flag.memory.team] == undefined || Game.time % 3 == 0) {
                 global['warCache'][flag.memory.team] = {};
                 global['warCache'][flag.memory.team].flag = flag;
