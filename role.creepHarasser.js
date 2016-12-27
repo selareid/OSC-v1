@@ -36,7 +36,6 @@ module.exports = {
 
                                     creep.basicRangedHandler(targetCreep);
 
-
                                 }
                                 else {
                                     //maybe add a role changing mechanic here ?

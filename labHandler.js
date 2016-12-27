@@ -1,7 +1,6 @@
 require('global');
 
 module.exports = {
-
     run: function (room) {
 
         if (!Memory.rooms[room].labs) {
