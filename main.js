@@ -4,7 +4,7 @@ const roomHandler = require ('roomHandler');
 const profiler = require('screeps-profiler');
 
 // https://github.com/gdborton/screeps-profiler
-profiler.enable();
+//profiler.enable();
 
 global.resetGlobal = Game.time;
 
@@ -16,7 +16,7 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
 
     //screeps profiler wrapper
     // https://github.com/gdborton/screeps-profiler
-    profiler.wrap(function() {
+    //profiler.wrap(function() {
 
         var attackTeamFlags = function () {
             var attackTeamFlag = _.filter(Game.flags, f => f.memory.type == 'attackTeamFlag' && f.memory.team != undefined
@@ -72,8 +72,9 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
         if (global['warCache']) {
             global['warCache'] = {};
         }
-        
-        for (let flag of attackTeamFlags) {
+
+        var varAttackTeamFlags = attackTeamFlags;
+        for (let flag of varAttackTeamFlags) {
             if (global['warCache'][flag.memory.team] == undefined || Game.time % 3 == 0) {
                 global['warCache'][flag.memory.team] = {};
                 global['warCache'][flag.memory.team].flag = flag;
@@ -143,5 +144,5 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
                 console.log("Error in Grafana stuff: \n" + err + "\n" + err.stack);
             }
         }
-    });
+    /*}*/);
 };
