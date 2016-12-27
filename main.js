@@ -19,7 +19,7 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
     //profiler.wrap(function() {
 
 
-    if(Game.room['W69N56'].storage.store[RESOURCE_ENERGY] < 600000 && Game.market.getOrderById('5862fe968d7b759b522ed0b2').amount < 300000){// && Game.getObjectById("583fd96f61f377080893c58e").store.energy < 600000){
+    if(Game.rooms['W69N56'].storage.store[RESOURCE_ENERGY] < 600000 && Game.market.getOrderById('5862fe968d7b759b522ed0b2').amount < 300000){// && Game.getObjectById("583fd96f61f377080893c58e").store.energy < 600000){
         Game.market.extendOrder("5862fe968d7b759b522ed0b2", 15000);
     }
 
