@@ -5,6 +5,4 @@ module.exports = function () {
                 this.rangedAttack(target);
             }
         };
-
-
 };
