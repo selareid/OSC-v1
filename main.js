@@ -144,5 +144,5 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
                 console.log("Error in Grafana stuff: \n" + err + "\n" + err.stack);
             }
         }
-    /*}*/);
+    /*});*/
 };
