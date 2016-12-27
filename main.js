@@ -54,6 +54,25 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
         }
 
         //do actual stuff
+
+        //attack team flag stuff and global starts
+        if (global['warCache']) {
+            global['warCache'] = {};
+        }
+
+        var varAttackTeamFlags = attackTeamFlags;
+        for (let flag of varAttackTeamFlags) {
+            if (global['warCache'][flag.memory.team] == undefined || Game.time % 3 == 0) {
+                global['warCache'][flag.memory.team] = {};
+                global['warCache'][flag.memory.team].flag = flag;
+                global['warCache'][flag.memory.team].rallyFlag = flag.memory.rallyFlag;
+                global['warCache'][flag.memory.team].targetRoom = flag.pos.roomName;
+                global['warCache'][flag.memory.team].timeToAttack = flag.memory.timeToAttack;
+                global['warCache'][flag.memory.team].timeToRally = flag.memory.timeToRally;
+            }
+        }
+        //attack team flag stuff and global ends
+
         for (let room_it in Game.rooms) {
             var room = Game.rooms[room_it];
             var controller = room.controller;
@@ -113,4 +132,17 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
             }
         }
     });
+
+    var attackTeamFlags = function () {
+        var attackTeamFlag = _.filter(Game.flags, f => f.memory.type == 'attackTeamFlag' && f.memory.team != undefined
+        && f.memory.timeToAttack != undefined && f.memory.timeToAttack != null && f.memory.timeToRally != undefined && f.memory.timeToRally != null
+        && f.memory.rallyFlag);
+
+        if (attackTeamFlag) {
+            return attackTeamFlag;
+        }
+        else {
+            return undefined;
+        }
+    }
 };
