@@ -116,7 +116,7 @@ module.exports = {
             if (creep.memory.working == true) {
                 var labs = room.find(FIND_MY_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_LAB && Memory.rooms[room].labs[s.id].type == 0});
 
-                if (labs.length > 2) {
+                if (labs.length == 2) {
                     if (labs[0].mineralAmount > 0 && creep.carry[labs[0].mineralType] != undefined) {
                         if (creep.transfer(labs[0], labs[0].mineralType) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(labs[0]);
