@@ -102,7 +102,7 @@ module.exports = {
 
     labRun: function (room, creep, labQueue) {
         var storage = room.storage;
-        var nextReaction = labQueue[0].splice(',');
+        var nextReaction = labQueue[0].split(',');
 
         if (storage.store[nextReaction][0] && storage.store[nextReaction][1]) { //storage has needed resources
 
