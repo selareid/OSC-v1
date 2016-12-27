@@ -1,4 +1,5 @@
 require('prototype.creepSpeech')();
+require('prototype.creepWar')();
 
 module.exports = {
     run: function (room, creep) {
@@ -33,7 +34,7 @@ module.exports = {
                                             console.log('Error with creep: ' + creep.name + '' + ' Attack Error: ' + attackCreepResult);
                                     }
 
-                                    this.rangedHandler(creep, targetCreep);
+                                    creep.basicRangedHandler(targetCreep);
 
 
                                 }
@@ -70,12 +71,6 @@ module.exports = {
             creep.moveTo(global[room.name].guardStationFlag);
         }
 
-    },
-
-    rangedHandler: function (creep, targetCreep) {
-        if (targetCreep) {
-            creep.rangedAttack(targetCreep);
-        }
     },
 
     getTargetCreep: function (creep) {

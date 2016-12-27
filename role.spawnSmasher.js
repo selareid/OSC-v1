@@ -1,4 +1,5 @@
 require('prototype.creepSpeech')();
+require('prototype.creepWar')();
 
 module.exports = {
     run: function (room, creep) {
