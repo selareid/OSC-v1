@@ -56,7 +56,7 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
         //do actual stuff
 
         //attack team flag stuff and global starts
-        if (global['warCache']) {
+        if (global['warCache'] == undefined) {
             global['warCache'] = {};
         }
 
