@@ -32,15 +32,15 @@ module.exports = function () {
                 if (Game.time >= timeToRally) {
                     var rallyFlag = teamGlobal.rallyFlag;
                     if (rallyFlag) {
-                        creep.moveTo(rallyFlag, {ignoreRoads: true});
+                        this.moveTo(rallyFlag, {ignoreRoads: true});
                     }
                     else {
                         // something here
-                        creep.moveTo(global[room.name].guardStationFlag);
+                        this.moveTo(global[room.name].guardStationFlag);
                     }
                 }
                 else {
-                    creep.moveTo(global[room.name].guardStationFlag);
+                    this.moveTo(global[room.name].guardStationFlag);
                 }
             }
         };
