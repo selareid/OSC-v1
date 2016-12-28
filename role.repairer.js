@@ -119,10 +119,10 @@ module.exports = {
     },
 
     findStructureToRepair: function (room, creep) {
-        var structure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        var structure = creep.pos.findClosestByRange(room.find(FIND_STRUCTURES, {
             filter: (s) => s.hits < s.hitsMax
             && s.structureType != STRUCTURE_WALL && s.structureType != STRUCTURE_RAMPART
-        });
+        }));
         return structure;
     }
 };
