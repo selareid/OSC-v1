@@ -4,6 +4,9 @@ module.exports = function () {
     Creep.prototype.needTeam =
         function (room) {
             console.log(this.memory.role + ' creep ' + this.name + ' At pos ' + this.pos + ' needs a team');
+
+            if (this.memory.team == undefined) this.memory.team = null;
+
             this.moveTo(global[room.name].guardStationFlag);
         };
 
