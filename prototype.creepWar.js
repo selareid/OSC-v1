@@ -30,7 +30,7 @@ module.exports = function () {
             var timeToRally = Game.time >= teamGlobal.timeToRally;
             if (timeToRally != undefined && timeToRally != null) {
                 if (Game.time >= timeToRally) {
-                    var rallyFlag = teamGlobal.rallyFlag;
+                    var rallyFlag = Game.flags[teamGlobal.rallyFlag];
                     if (rallyFlag) {
                         this.moveTo(rallyFlag, {ignoreRoads: true});
                     }
