@@ -121,7 +121,7 @@ module.exports = {
     },
 
     findStructureToBuild: function (room, creep) {
-        var structureToRepair = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
+        var structureToRepair = creep.pos.findClosestByRange(room.find(FIND_MY_CONSTRUCTION_SITES));
         return structureToRepair;
     }
 };
