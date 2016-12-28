@@ -66,12 +66,13 @@ if (Game.cpu.bucket > 300) module.exports.loop = function () {
     
         for (let flag of attackTeamFlags) {
             if (global['warCache'][flag.memory.team] == undefined || Game.time % 3 == 0) {
-                global['warCache'][flag.memory.team] = {};
-                global['warCache'][flag.memory.team].flag = flag;
-                global['warCache'][flag.memory.team].rallyFlag = flag.memory.rallyFlag;
-                global['warCache'][flag.memory.team].targetRoom = flag.pos.roomName;
-                global['warCache'][flag.memory.team].timeToAttack = flag.memory.timeToAttack;
-                global['warCache'][flag.memory.team].timeToRally = flag.memory.timeToRally;
+                global['warCache'][flag.memory.team] = {
+                    flag: flag,
+                    rallyFlag: flag.memory.rallyFlag,
+                    targetRoom: flag.pos.roomName,
+                    timeToAttack: flag.memory.timeToAttack,
+                    timeToRally: flag.memory.timeToRally
+                };
             }
         }
         //attack team flag stuff and global ends
