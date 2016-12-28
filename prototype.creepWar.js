@@ -2,7 +2,7 @@ require('prototype.creep')();
 
 module.exports = function () {
     Creep.prototype.needTeam =
-        function () {
+        function (room) {
             console.log(this.memory.role + ' creep ' + this.name + ' At pos ' + this.pos + ' needs a team');
             this.moveTo(global[room.name].guardStationFlag);
         };

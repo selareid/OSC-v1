@@ -49,7 +49,7 @@ module.exports = {
             }
         }
         else {
-            creep.needTeam();
+            creep.needTeam(room);
         }
 
     },
