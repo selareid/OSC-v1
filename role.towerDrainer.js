@@ -36,8 +36,7 @@ module.exports = {
             }
         }
         else {
-            console.log('tower drainer creep ' + creep.name + ' needs a team');
-            creep.moveTo(global[room.name].guardStationFlag);
+            creep.needTeam();
         }
 
     }

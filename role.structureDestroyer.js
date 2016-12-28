@@ -52,8 +52,7 @@ module.exports = {
             }
         }
         else {
-            console.log('structureDestroyer creep ' + creep.name + ' needs a team');
-            creep.moveTo(global[room.name].guardStationFlag);
+            creep.needTeam();
         }
 
     },

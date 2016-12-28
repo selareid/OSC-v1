@@ -51,8 +51,7 @@ module.exports = {
             }
         }
         else {
-            console.log('creepHarasser creep ' + creep.name + ' needs a team');
-            creep.moveTo(global[room.name].guardStationFlag);
+            creep.needTeam();
         }
 
     },
