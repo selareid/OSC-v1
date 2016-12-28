@@ -32,6 +32,7 @@ module.exports = {
         var minimumNumberOfStructureDestroyers = Memory.rooms[room].populationGoal[18];
         var minimumNumberOfWallBreakers = Memory.rooms[room].populationGoal[19];
         var minimumNumberOfWarHealers = Memory.rooms[room].populationGoal[20];
+        var minimumNumberOfTowerDrainers = Memory.rooms[room].populationGoal[21];
 
         //get number of each creeps of each role
         var numberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.room == room.name);
@@ -55,6 +56,7 @@ module.exports = {
         var numberOfStructureDestroyers = _.sum(Game.creeps, (c) => c.memory.role == 'structureDestroyer' && c.memory.room == room.name);
         var numberOfWallBreakers = _.sum(Game.creeps, (c) => c.memory.role == 'wallBreaker' && c.memory.room == room.name);
         var numberOfWarHealers = _.sum(Game.creeps, (c) => c.memory.role == 'warHealer' && c.memory.room == room.name);
+        var numberOfTowerDrainers = _.sum(Game.creeps, (c) => c.memory.role == 'towerDrainer' && c.memory.room == room.name);
 
         // debugging
         // console.log('Harvesters ' + numberOfHarvesters);
@@ -109,6 +111,7 @@ module.exports = {
                 var structureDestroyersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'structureDestroyer');
                 var wallBreakersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'wallBreaker');
                 var warHealersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'warHealer');
+                var towerDrainersInQueue = _.sum(Memory.rooms[room].spawnQueue.normal, (r) => r == 'towerDrainer');
 
                 //get number of each role in priority queue
                 var harvestersInPriorityQueue = _.sum(Memory.rooms[room].spawnQueue.priority, (r) => r == 'harvester');
@@ -122,6 +125,7 @@ module.exports = {
                 var structureDestroyersInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'structureDestroyer');
                 var wallBreakersInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'wallBreaker');
                 var warHealersInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'warHealer');
+                var towerDrainersInWarQueue = _.sum(Memory.rooms[room].spawnQueue.war, (r) => r == 'towerDrainer');
                 //nothing here
 
                 //get flag for other room creep and if it exists set minimumNumberOfOtherRoomCreeps to the numberOfCreeps in flag memory, same for energy thief flag
@@ -396,6 +400,10 @@ module.exports = {
                     queueToAddTo = 2;
                 creepToAddToQueue = 'warHealer';
             }
+            else if (minimumNumberOfTowerDrainers > towerDrainersInQueue + towerDrainersInWarQueue + numberOfTowerDrainers) {
+                    queueToAddTo = 2;
+                creepToAddToQueue = 'towerDrainer';
+            }
 
             if (creepToAddToQueue) {
                 switch (queueToAddTo) {
@@ -438,6 +446,7 @@ module.exports = {
         Memory.rooms[room].populationGoal[18] = minimumNumberOfStructureDestroyers;
         Memory.rooms[room].populationGoal[19] = minimumNumberOfWallBreakers;
         Memory.rooms[room].populationGoal[20] = minimumNumberOfWarHealers;
+        Memory.rooms[room].populationGoal[21] = minimumNumberOfTowerDrainers;
 
         //grafana population stats stuff
         // Memory.stats['room.' + room.name + '.creeps' + '.numberOfHarvesters'] = numberOfHarvesters;
@@ -566,6 +575,10 @@ module.exports = {
         //war healer
         if (Memory.rooms[room].populationGoal[20] == undefined) {
             Memory.rooms[room].populationGoal[20] = 0;
+        }
+        //tower drainer
+        if (Memory.rooms[room].populationGoal[21] == undefined) {
+            Memory.rooms[room].populationGoal[21] = 0;
         }
     },
 

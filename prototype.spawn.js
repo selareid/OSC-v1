@@ -394,6 +394,29 @@ module.exports = function () {
 
                     }
                     return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
+                case 'towerDrainer':
+                    numberOfParts = Math.floor((energy - (energy * amountToSave)) / 310);
+                    if (numberOfParts > 1) {
+                        if (numberOfParts > 16) numberOfParts = 16;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(TOUGH);
+                            body.push(HEAL);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    else {
+                        numberOfParts = Math.floor((energy - (energy * amountToSave)) / 280);
+                        if (numberOfParts > 25) numberOfParts = 25;
+
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(HEAL);
+                            body.push(MOVE);
+                        }
+
+                    }
+                    return this.createCreep(body, creepName(roleName), {role: roleName, room: room.name, working: false});
                 default:
                     return undefined;
             }

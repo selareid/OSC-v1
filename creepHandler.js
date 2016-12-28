@@ -22,6 +22,7 @@ const rolespawnSmasher = require ('role.spawnSmasher');
 const roleStructureDestroyer = require ('role.structureDestroyer');
 const roleWallBreaker = require ('role.wallBreaker');
 const roleWarHealer = require ('role.warHealer');
+const roleTowerDrainer = require ('role.towerDrainer');
 
 module.exports = {
     run: function (room, areWeUnderAttack, otherRoomCreepsRoomToGoToPos, remoteCreepFlags, energyThiefFlag, energyHelperFlag) {
@@ -142,6 +143,9 @@ module.exports = {
                     break;
                 case 'warHealer':
                     roleWarHealer.run(room, creep);
+                    break;
+                case 'towerDrainer':
+                    roleTowerDrainer.run(room, creep);
                     break;
                 case '':
                     creep.say('ERROR!!!', true);
