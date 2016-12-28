@@ -3,8 +3,8 @@ require('prototype.creep')();
 module.exports = function () {
     Creep.prototype.needTeam =
         function () {
-            console.log(creep.memory.role + ' creep ' + this.name + ' At pos ' + this.pos + ' needs a team');
-            creep.moveTo(global[room.name].guardStationFlag);
+            console.log(this.memory.role + ' creep ' + this.name + ' At pos ' + this.pos + ' needs a team');
+            this.moveTo(global[room.name].guardStationFlag);
         };
 
     Creep.prototype.basicRangedHandler =
