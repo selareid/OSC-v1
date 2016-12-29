@@ -29,12 +29,14 @@ module.exports = function () {
 
             switch (roleName) {
                 case 'harvester':
-                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 100) / 100);
+                    numberOfParts = Math.floor(((energy - (energy * amountToSave)) - 200) / 100);
 
                     if (numberOfParts > 0) {
                         if (numberOfParts > 6) {
                             numberOfParts = 6;
                         }
+                        body.push(MOVE);
+                        body.push(MOVE);
                         body.push(MOVE);
                         body.push(CARRY);
                         for (let i = 0; i < numberOfParts; i++) {
