@@ -253,7 +253,7 @@ module.exports = {
                             minimumNumberOfUpgraders = 5;
                         }
                         else {
-                            minimumNumberOfUpgraders = 10;
+                            minimumNumberOfUpgraders = 15;
                         }
                     }
                     else {
