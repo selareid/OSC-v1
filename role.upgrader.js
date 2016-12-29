@@ -35,10 +35,12 @@ module.exports = {
 
             if (droppedEnergy.amount == undefined || droppedEnergy.amount < 1010) {
                 var links = _.filter(global[room.name].links, (l) => l.energy > 0);
+                var containers = _.filter(global[room.name].containers, (c) => c.store[RESOURCE_ENERGY] > 0);
                 var storage = room.storage;
 
                 var arrayOfBoth = links;
                 arrayOfBoth.push(storage);
+                arrayOfBoth.concat(containers);
 
                 var closer = creep.pos.findClosestByRange(arrayOfBoth);
 
@@ -53,7 +55,7 @@ module.exports = {
                     }
                 }
                 else {
-                    var container = creep.findContainer(room);
+                    var container = creep.pos.findClosestByRange(containers);
                     if (container) {
                         if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(container)
