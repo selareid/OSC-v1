@@ -46,7 +46,7 @@ module.exports = {
 
     creepActions: function (room, creep, remoteCreepFlags, energyThiefFlag, energyHelperFlag, roomToGoTo) {
         if (creep.memory.room == room.name && creep.spawning === false) {
-
+            var energyOfTowers = this.getEnergyOfTower(room);
             if (!global[creep.name]) {
                 global[creep.name] = {};
             }
@@ -62,14 +62,19 @@ module.exports = {
                     break;
                 case 'carrier':
                     if (room.storage) {
-                        roleCarrier.run(room, creep);
+                        var numberOfDistributors = _.sum(Game.creeps, (c) => c.memory.role == 'distributor' && c.memory.room == room.name);
+                        if (numberOfDistributors <= 0) {
+                            roleDistributor.run(room, creep, energyOfTowers);
+                        }
+                        else {
+                            roleCarrier.run(room, creep);
+                        }
                     }
                     else {
                         creep.memory.role = 'distributor';
                     }
                     break;
                 case 'distributor':
-                    var energyOfTowers = this.getEnergyOfTower(room);
                     roleDistributor.run(room, creep, energyOfTowers);
                     break;
                 case 'upgrader':
