@@ -59,15 +59,15 @@ module.exports = {
             filter: (s) => s.structureType == STRUCTURE_CONTAINER
             && _.sum(s.store) < s.storeCapacity
         })[0];
-
-        if (link) {
-            creep.creepSpeech(room, 'droppingEnergyLink');
-            creep.transfer(link, RESOURCE_ENERGY);
+        
+        if (container) {
+            creep.creepSpeech(room, 'droppingEnergyContainer');
+            creep.transfer(container, RESOURCE_ENERGY);
         }
         else {
-            if (container) {
-                creep.creepSpeech(room, 'droppingEnergyContainer');
-                creep.transfer(container, RESOURCE_ENERGY);
+            if (link) {
+                creep.creepSpeech(room, 'droppingEnergyLink');
+                creep.transfer(link, RESOURCE_ENERGY);
             }
             else {
                 creep.creepSpeech(room, 'droppingEnergy');
