@@ -249,7 +249,12 @@ module.exports = {
             switch (Memory.rooms[room].energyMode) {
                 case 'spendy':
                     if (room.controller.level < 8) {
-                        minimumNumberOfUpgraders = 5;
+                        if (room.controller.level < 5) {
+                            minimumNumberOfUpgraders = 5;
+                        }
+                        else {
+                            minimumNumberOfUpgraders = 10;
+                        }
                     }
                     else {
                         minimumNumberOfUpgraders = 1;
