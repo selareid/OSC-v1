@@ -10,12 +10,7 @@ module.exports = {
         creep.say('carry');
 
         if (_.sum(room.storage.store) < room.storage.storeCapacity) {
-            if (room.storage && _.sum(_.filter(room.storage.store, (r) => r.resourceType == RESOURCE_ENERGY)) >= 350000) {
-                this.carrierFindContainerNoEnergy(room, creep);
-            }
-            else {
                 this.normalCarrierCode(room, creep);
-            }
         }
         else {
             roleDistributor.run(room, creep, this.getEnergyOfTower(room));
@@ -88,7 +83,7 @@ module.exports = {
                 }
                 else {
 
-                    var link = _.filter(global[room.name].links, (l) => l.energy > 0);
+                    var link = creep.pos.findClosestByRange(_.filter(global[room.name].links, (l) => l.energy > 0));
 
                     if (link) {
                         if (creep.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
