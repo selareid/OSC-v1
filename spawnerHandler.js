@@ -168,8 +168,8 @@ module.exports = {
                         else minimumNumberOfCarriers = 2;
                     }
                     else {
-                        var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy').store.energy;
-                        if (minContEng > 1000) {
+                        var minContEng = _.max(room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_CONTAINER}), '.store.energy');
+                        if (minContEng && minContEng.store && minContEng.store.energy > 1000) {
                             minimumNumberOfCarriers = 3
                         }
                         else {
