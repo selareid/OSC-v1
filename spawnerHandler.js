@@ -683,6 +683,10 @@ module.exports = {
 
             if (room.energyAvailable >= 300) {
 
+                if (energy < 300) {
+                    energy = room.energyAvailable;
+                }
+
                 if (!Memory.rooms[room].spawnQueue.war || !Memory.rooms[room].spawnQueue.war.length > 0 || Game.time % 5 == 0 || Game.time % 5 == 1) {
                     if (!Memory.rooms[room].spawnQueue.priority.length > 0 || Game.time % 3 == 0 || Game.time % 3 == 1) {
                         name = spawn.createCustomCreep(room, energy, Memory.rooms[room].spawnQueue.normal[0], amountToSave);
