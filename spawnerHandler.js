@@ -250,10 +250,10 @@ module.exports = {
                 case 'spendy':
                     if (room.controller.level < 8) {
                         if (room.controller.level < 5) {
-                            minimumNumberOfUpgraders = 5;
+                            minimumNumberOfUpgraders = 7;
                         }
                         else {
-                            minimumNumberOfUpgraders = 15;
+                            minimumNumberOfUpgraders = 10;
                         }
                     }
                     else {
